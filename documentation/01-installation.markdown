@@ -11,7 +11,7 @@ Propel is available as a [PEAR](http://pear.php.net/manual/en/installation.getti
 
 Propel runs on most PHP platforms. It just requires:
 
-* [PHP 5.2.4](http://www.php.net/ PHP 5.2.4) or newer, with the DOM (libxml2) module enabled
+* [PHP 5.2.4](http://www.php.net/) or newer, with the DOM (libxml2) module enabled
 * A supported database (MySQL, MS SQL Server, PostgreSQL, SQLite, Oracle)
 
 >**Tip**<br />Propel uses the PDO and SPL components, which are bundled and enabled by default in PHP5.
@@ -26,16 +26,14 @@ myproject/
   vendor/ <= This is where third-party libraries usually go
 {% endhighlight %}
 
-To install Propel there using Subversion, type:
+To install Propel there using Git, type:
 
 {% highlight bash %}
 cd myproject/vendor
-svn checkout http://svn.propelorm.org/branches/1.6 propel
+git clone https://github.com/propelorm/Propel.git propel
 {% endhighlight %}
 
 This will export the propel library to a local `myproject/vendor/propel/` directory.
-
->**Tip**<br />Don't use the `trunk` from the Propel SVN repository. `branches/1.6` is the most up to date version.
 
 Alternatively, to use a tarball, type the following commands on *nix platforms:
 

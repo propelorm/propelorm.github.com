@@ -5,44 +5,47 @@ title: The Cookbook
 
 # The Cookbook #
 
-[Add Custom SQL](add-custom-sql)
+### Common Tasks ###
 
-[Advanced Column Types](advanced-column-types)
+* [Adding Additional SQL files](adding-additional-sql-files.html)
 
-[Copying Objects](copying-objects)
+* [Copying Persisted Objects](copying-persisted-objects.html)
 
-[Customizing build](customizing-build)
+* [Customizing build](customizing-build.html)
 
-[DB Designer](dbdesigner)
+* [How to Create A Schema Based On A DBDesigner Model](dbdesigner.html)
 
-[Working With Existing Databases](existing-database)
+* [How to Use PHP 5.3 Namespaces](namespaces.html)
 
-[Replication](master-slave)
+* [Model Introspection At Runtime](runtime-introspection.html)
 
-[Multi-Component Data Model](multi-component)
+* [Multi-Component Data Model](multi-component-data-model.html)
 
-[How to Use PHP 5.3 Namespaces](namespaces)
+* [Replication](replication.html)
 
-[Model Introspection At Runtime](runtime-introspection)
+* [Using Propel With MSSQL Server](using-mssql-server.html)
 
-[Using Propel With MSSQL Server](using-mssql-server)
+* [Using SQL Schemas](using-sql-schemas.html)
 
-[Using SQL Schemas](using-sql-schemas)
+* [Working With Advanced Column Types](working-with-advanced-column-types.html)
+
+* [Working With Existing Databases](working-with-existing-databases.html)
+
 
 ### Extending Propel ###
 
-* [How to Write A Behavior](writing-behavior)
+* [How to Write A Behavior](writing-behavior.html)
 
 
 ### Working with symfony 1.4 ###
 
-* [Init A Symfony Project With Propel As Default ORM - The Git Way](symfony1/init-a-Symfony-project-with-Propel-git-way)
+* [Init A Symfony Project With Propel As Default ORM - The Git Way](symfony1/init-a-Symfony-project-with-Propel-git-way.html)
 
-* [How To Use Propel i18n Behavior With Symfony 1.4](symfony1/how-to-use-Propel i18n-behavior-with-sf1.4)
+* [How To Use Propel i18n Behavior With Symfony 1.4](symfony1/how-to-use-old-SfPropelBehaviori18n-with-sf1.4.html)
 
-* [How To Use Old SfPropelBehaviori18n (Aka symfony_i18n) With Symfony 1.4](symfony1/how-to-use-old-SfPropelBehaviori18n-with-sf1.4)
+* [How To Use Old SfPropelBehaviori18n (Aka symfony_i18n) With Symfony 1.4](symfony1/how-to-use-old-SfPropelBehaviori18n-with-sf1.4.html)
 
 
 ### Working with Symfony2 ###
 
-* [Working with Symfony2 (Introduction)](working-with-symfony2)
+* [Working with Symfony2 (Introduction)](working-with-symfony2.html)
