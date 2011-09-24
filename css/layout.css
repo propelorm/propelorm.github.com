@@ -295,10 +295,6 @@ h1.no_margin_bottom {
   list-style-type: none;
 }
 
-.toc > li:first-child {
-  display: none;
-}
-
 .toc li ul li {
   margin-left: 10px;
 }
@@ -309,4 +305,18 @@ h1.no_margin_bottom {
 
 .toc a:hover {
   color: #fff;
+}
+
+.fork_and_edit {
+    text-align: center;
+    font-style: italic;
+    background: transparent url(../images/github.gif) no-repeat  0 0;
+    height: 30px;
+    margin: 0 auto;
+    padding-top: 5px;
+    width: 670px;
+}
+
+.fork_and_edit a {
+    text-decoration: underline;
 }

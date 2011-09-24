@@ -35,12 +35,12 @@ For one-to-many relationships - meaning, from the other side of a many-to-one re
 <?php
 $book = new Book();
 $book->setTitle("War & Peace");
-// associate the $author object with the current $book
 $book->save();
 
 $author = new Author();
 $author->setFirstName("Leo");
 $author->setLastName("Tolstoy");
+// associate the $book object with the current $author
 $author->addBook($book);
 $author->save();
 {% endhighlight %}
@@ -64,7 +64,7 @@ $author->setLastName("Tolstoy");
 
 $publisher = new Publisher();
 $publisher->setName("Viking Press");
-// no need to the publisher yet
+// no need to save the publisher yet
 
 $book = new Book();
 $book->setTitle("War & Peace");
@@ -266,7 +266,7 @@ Because the primary key of the `bookstore_employee_account` is also a foreign ke
 
 ## On-Update and On-Delete Triggers #
 
-Propel also supports the _ON UPDATE_ and _ON DELETE_ aspect of foreign keys. These properties can be specified in the `<foreign-key>` tag using the `onUpdate` and `onDelete` attributes. Propel supports values of `CASCADE`, `SETNULL`, and `RESTRICT` for these attributes. For databases that have native foreign key support, these trigger events will be specified at the datbase level when the foreign keys are created. For databases that do not support foreign keys, this functionality will be emulated by Propel.
+Propel also supports the _ON UPDATE_ and _ON DELETE_ aspect of foreign keys. These properties can be specified in the `<foreign-key>` tag using the `onUpdate` and `onDelete` attributes. Propel supports values of `CASCADE`, `SETNULL`, and `RESTRICT` for these attributes. For databases that have native foreign key support, these trigger events will be specified at the database level when the foreign keys are created. For databases that do not support foreign keys, this functionality will be emulated by Propel.
 
 {% highlight xml %}
 <table name="review">
@@ -295,7 +295,7 @@ $book = BookQuery::create()
 $author = $book->getAuthor();  // Needs another database query
 {% endhighlight %}
 
-Propel allows you to retrieve the main object together with related objects in a single query. You just the `with()` method to specify which objects the main object should be hydrated with.
+Propel allows you to retrieve the main object together with related objects in a single query. You just use the `with()` method to specify which objects the main object should be hydrated with.
 
 {% highlight php %}
 <?php
@@ -336,7 +336,7 @@ $publisher = $book->getPublisher(); // No additional query needed
 
 So `with()` is very useful to minimize the number of database queries. As soon as you see that the number of queries necessary to perform an action is proportional to the number of results, adding a `with()` call is the trick to get down to a more reasonnable query count.
 
->**Tip**<br />`with()` also works for left joins on one-to-many relationships, but you musn't use a `limit()` in the query in this case. This is because Propel has no way to determine the actual number of rows of the main object in such a case.
+>**Tip**<br />`with()` also works for left joins on one-to-many relationships, but you mustn't use a `limit()` in the query in this case. This is because Propel has no way to determine the actual number of rows of the main object in such a case.
 
 {% highlight php %}
 <?php
@@ -360,9 +360,9 @@ $authors = AuthorQuery::create()
   ->find();
 // $authors is a PropelObjectCollection
 $authors->populateRelation('Book');
-// now you can iterate over each author's book without further queries
 foreach ($authors as $author) {
-  foreach ($authors->getBooks() as $book) {  // no database query, the author already has a Books collection
+  // now you can iterate over each author's book without further queries
+  foreach ($author->getBooks() as $book) {  // no database query, the author already has a Books collection
     // do stuff with $book and $author
   }
 }

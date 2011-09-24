@@ -70,7 +70,7 @@ $account->save();
 echo $account->getEmail(); // francois@example.com
 {% endhighlight %}
 
-Getter an setter methods for delegate columns don't exist on the main object ; the delegation is handled by the magical `__call()` method. Therefore, the delegation also works for custom methods in the delegate table.
+Getter and setter methods for delegate columns don't exist on the main object ; the delegation is handled by the magical `__call()` method. Therefore, the delegation also works for custom methods in the delegate table.
 
 {% highlight php %}
 <?php
@@ -140,7 +140,7 @@ echo $basketballer->getFirstName(); // Michael
 
 And since several models can delegate to the same player object, that means that a single player can have both basketball and soccer stats!
 
->**Tip**<br />In this example, table delegation is used to implement [Class Table Inheritance](http://martinfowler.com/eaaCatalog/classTableInheritance.html). See how Propel implements this inheritance type, and others, in the [inheritance chapter]().
+>**Tip**<br />In this example, table delegation is used to implement [Class Table Inheritance](http://martinfowler.com/eaaCatalog/classTableInheritance.html). See how Propel implements this inheritance type, and others, in the [inheritance chapter](../documentation/09-inheritance.html).
 
 ## Delegating To Several Tables ##
 
