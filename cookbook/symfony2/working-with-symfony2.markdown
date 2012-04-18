@@ -562,9 +562,9 @@ In case you want to use a different database for your ACL than your business mod
 
 ``` yaml
 services:
-    propel.security.acl.connection:
+        propel.security.acl.connection:
         class: PropelPDO
-        factory_class: Propel
+                factory_class: Propel
         factory_method: getConnection
         arguments:
             - "acl"
