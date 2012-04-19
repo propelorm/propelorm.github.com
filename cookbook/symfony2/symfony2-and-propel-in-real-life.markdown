@@ -70,9 +70,9 @@ the `Resources/config/` directory of your `AcmeStoreBundle`:
 
 ### Building the Model ###
 
-Once you wrote your `schema.xml`, you just have to generate it:
+Once you write your `schema.xml`, you just have to generate it:
 
-    php app/console propel:model:build
+    php app/console propel:build-model
 
 It will generate all classes to quickly develop your application in the `Model/` directory of your `AcmeStoreBundle` bundle.
 
