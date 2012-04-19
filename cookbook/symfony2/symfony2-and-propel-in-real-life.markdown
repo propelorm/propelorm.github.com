@@ -83,10 +83,9 @@ You now have a usable `Product` class and all you need to persist it. Of course,
 Fortunately, Propel can automatically create all the database tables needed for every known entity in your application.
 To do this, run:
 
-    php app/console propel:sql:build
+    php app/console propel:build-sql
 
-    php app/console propel:sql:insert --force
-
+    php app/console propel:insert-sql --force
 
 Your database now has a fully-functional `product` table with columns that match the schema you've specified.
 
