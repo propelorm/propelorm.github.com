@@ -277,9 +277,9 @@ Call the application console with the `propel:build` command:
 
 ### Insert SQL
 
-Call the application console with the `propel:sql:insert` command:
+Call the application console with the `propel:insert-sql` command:
 
-    php app/console propel:sql:insert [--force]
+    php app/console propel:insert-sql [--force]
 
 Note that the `--force` option is needed to actually execute the SQL statements.
 
