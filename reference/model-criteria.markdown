@@ -74,6 +74,20 @@ $query = 'SELECT book.* from `book`
 WHERE book.TITLE = :p1'; // :p1 => 'War And Peace'
 {% endhighlight %}
 
+* You can control the filter a Criteria parameter:
+
+{% highlight php %}
+<?php
+$books = BookQuery::create()
+  ->filterByAuthor('', Criteria::NOT_EQUAL)
+  ->find();
+// example Query generated for a MySQL database
+$query = 'SELECT book.* from `book`
+WHERE book.AUTHOR <> :p1'; // :p1 => ''
+{% endhighlight %}
+
+
+
 * For string columns, `filterByXXX()` translates to a SQL `WHERE ... LIKE` if the value contains wildcards:
 
 {% highlight php %}
