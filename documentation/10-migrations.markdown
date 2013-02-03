@@ -325,6 +325,7 @@ ALTER TABLE `book` ADD
 		$pdo = $manager->getPdoConnection('bookstore');
 		$stmt = $pdo->prepare($sql);
 		$stmt->execute();
+                $stmt->closeCursor();
 	}
 }
 {% endhighlight %}
