@@ -164,6 +164,88 @@ Models using the sortable behavior with scope benefit from one additional Query 
 $allPaulsTasks = TaskPeer::create()->inList($scope = $paul->getId())->find();
 {% endhighlight %}
 
+## Multi-Column scopes ##
+
+As of Propel 1.7.0 we added support for Multi-Column scoped Sortable Behavior. This is defined using a comma separated list of column names as `scope_column` parameter. 
+
+{% highlight xml %}
+<table name="task">
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
+  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="user_id" required="true" type="INTEGER" />
+  <column name="group_id" required="true" type="INTEGER" />
+  <foreign-key foreignTable="user" onDelete="cascade">
+    <reference local="user_id" foreign="id" />
+  </foreign-key>
+  <behavior name="sortable">
+    <parameter name="use_scope" value="true" />
+    <parameter name="scope_column" value="user_id, group_id" />
+  </behavior>
+</table>
+{% endhighlight %}
+
+With this schema defined Propel manages one sortable list of tasks per User per Group, so for each User-Group combination:
+
+{% highlight php %}
+<?php
+// test groups
+$adminGroup = new Group();
+$userGroup = new Group();
+// test users
+$paul = new User();
+$john = new User();
+
+// now onto the tasks
+$t1 = new Task();
+$t1->setTitle('Create permissions');
+$t1->setUser($paul);
+$t1->setGroup($adminGroup);
+$t1->save();
+echo $t1->getRank(); // 1
+
+$t2 = new Task();
+$t2->setTitle('Grant permissions to users');
+$t2->setUser($paul);
+$t2->setGroup($adminGroup);
+$t2->save();
+echo $t2->getRank(); // 2
+
+$t3 = new Task();
+$t3->setTitle('Install servers');
+$t3->setUser($john);
+$t3->setGroup($adminGroup);
+$t3->save()
+echo $t3->getRank(); // 1, because John has his own task list inside the admin-group
+
+$t4 = new Task();
+$t4->setTitle('Manage content');
+$t4->setUser($john);
+$t4->setGroup($userGroup);
+$t4->save()
+echo $t4->getRank(); // 1, because John has his own task list inside the user-group
+
+{% endhighlight %}
+
+// TODO Adjust according to the final signature of findOneByRank() after implementation is finshed
+
+The generated methods now accept a `$scope` parameter to restrict the query to a given scope:
+
+{% highlight php %}
+<?php
+$firstPaulTask = TaskQuery::create()->findOneByRank($rank = 1, $scope = $paul->getId()); // $t1
+$lastPaulTask = $firstTask->getNext();      // $t2
+$firstJohnTask = TaskPeer::create()->findOneByRank($rank = 1, $scope = $john->getId()); // $t1
+{% endhighlight %}
+
+// TODO Adjust according to the final signature of inList() after implementation is finshed
+
+Models using the sortable behavior with scope benefit from one additional Query method named `inList()`:
+
+{% highlight php %}
+<?php
+$allPaulsTasks = TaskPeer::create()->inList($scope = $paul->getId())->find();
+{% endhighlight %}
+
 ## Parameters ##
 
 By default, the behavior adds one columns to the model - two if you use the scope feature. If these columns are already described in the schema, the behavior detects it and doesn't add them a second time. The behavior parameters allow you to use custom names for the sortable columns. The following schema illustrates a complete customization of the behavior:
@@ -178,7 +260,7 @@ By default, the behavior adds one columns to the model - two if you use the scop
     <reference local="user_id" foreign="id" />
   </foreign-key>
   <behavior name="sortable">
-  	<parameter name="rank_column" value="my_rank_column" />
+    <parameter name="rank_column" value="my_rank_column" />
     <parameter name="use_scope" value="true" />
     <parameter name="scope_column" value="user_id" />
   </behavior>
