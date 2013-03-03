@@ -226,24 +226,20 @@ echo $t4->getRank(); // 1, because John has his own task list inside the user-gr
 
 {% endhighlight %}
 
-// TODO Adjust according to the final signature of findOneByRank() after implementation is finshed
-
-The generated methods now accept a `$scope` parameter to restrict the query to a given scope:
+The generated methods now accept one parameter per scoped column, to restrict the query to a given scope:
 
 {% highlight php %}
 <?php
-$firstPaulTask = TaskQuery::create()->findOneByRank($rank = 1, $scope = $paul->getId()); // $t1
+$firstPaulAdminTask = TaskQuery::create()->findOneByRank($rank = 1, $userIdScope = $paul->getId(), $groupIdScope = $adminGroup->getId()); // $t1
 $lastPaulTask = $firstTask->getNext();      // $t2
-$firstJohnTask = TaskPeer::create()->findOneByRank($rank = 1, $scope = $john->getId()); // $t1
+$firstJohnUserTask = TaskPeer::create()->findOneByRank($rank = 1, $userIdScope = $john->getId(), $groupIdScope = $userGroup->getId()); // $t4
 {% endhighlight %}
-
-// TODO Adjust according to the final signature of inList() after implementation is finshed
 
 Models using the sortable behavior with scope benefit from one additional Query method named `inList()`:
 
 {% highlight php %}
 <?php
-$allPaulsTasks = TaskPeer::create()->inList($scope = $paul->getId())->find();
+$allJohnsUserTasks = TaskPeer::create()->inList($userIdScope = $john->getId(), $groupIdScope = $userGroup->getId())->find();
 {% endhighlight %}
 
 ## Parameters ##
