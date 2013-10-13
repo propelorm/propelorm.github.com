@@ -3,6 +3,7 @@ layout: blog
 ---
 
 {% for post in site.posts limit: 5 %}
+<article class="blog-tease">
     <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
     <p class="author">
         {% if post.author %}
@@ -16,9 +17,11 @@ layout: blog
         {{ post.content | split: '<!-- more -->' | first }}
         <p class="read-more"><a href="{{ post.url }}">Read more&nbsp;&raquo;</a></p>
     </p>
-    {% endfor %}
+</article>
+{% endfor %}
 
 {% for post in site.posts offset: 5 %}
+<article class="blog-tease">
     <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
     <p class="author">
         {% if post.author %}
@@ -28,4 +31,5 @@ layout: blog
         {% endif %}
         – <span class="date">{{ post.date | date_to_long_string }}</span>
     </p>
+</article>
 {% endfor %}
