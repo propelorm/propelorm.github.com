@@ -1,0 +1,39 @@
+<div class="home-what">
+  <img src="/images/home-what.png" />
+{{ what | markdownify }}
+</div>
+
+<div class="home-why">
+  <img src="/images/home-why.png" />
+{{ why | markdownify }}
+</div>
+
+<div class="home-how">
+  <h3>How does it work?!</h3>
+  <div class="home-how-schema">
+    {{ howSchema | markdownify }}
+    <div class="home-how-reverse">
+      <img src="/images/curved-arrow-right-top.png" />
+      If you have already a database with tables, you can use <a href="/cookbook/working-with-existing-databases.html">reverse engineering</a> to generate the XML automatically.
+    </div>
+  </div>
+
+  <div class="home-how-more">
+    <h4>Migration</h4>
+    <p>
+      {{ howMigrate | markdownify }}
+    </p>
+    <h4>Retrieving Data</h4>
+    <p>
+      {{ howRetrieve | markdownify }}
+    </p>
+    <h4>Manipulate Data</h4>
+    <p>
+      {{ howManipulate | markdownify }}
+    </p>
+  </div>
+</div>
+
+<div class="home-content">
+{{ content | markdownify }}
+</div>

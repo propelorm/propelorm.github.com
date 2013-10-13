@@ -1,0 +1,98 @@
+@media all and (max-width: 1000px) {
+    .wrapper, header > div {
+        width: auto;
+    }
+}
+
+@media all and (max-width: 660px) {
+    body .home-why,
+    body .home-what {
+        float: none;
+        width: auto;
+        border: 0;
+        padding: 0;
+    }
+}
+
+@media all and (max-width: 780px) {
+    header {
+        height: auto;
+    }
+
+    a.logo {
+        float: none;
+    }
+
+    header nav {
+        float: none;
+        height: auto;
+    }
+
+    .search {
+        position: relative;
+        top: 0;
+        margin: 15px;
+    }
+
+    .ribbon {
+        display: none;
+    }
+
+    .toc {
+        width: auto;
+        float: none;
+        margin: 5px;
+        padding: 10px;
+    }
+}
+
+@media all and (max-width: 520px) {
+    footer li.element, .topmenu li.element {
+        display: block;
+    }
+
+    .topmenu a {
+        padding: 2px 12px;
+    }
+
+    header nav li, header nav li a {
+        line-height: 25px;
+    }
+
+    body .home-how-more {
+        margin-left: 5px;
+    }
+
+    header nav li {
+        border-bottom: 1px dotted #ddd;
+    }
+
+    body .home-how-more img {
+        right: 0;
+    }
+
+    body .home-how-reverse {
+        position: relative;
+        bottom: 0;
+    }
+
+    footer li.element {
+        border-right: 0;
+        border-bottom: 1px dotted #ddd;
+    }
+
+    footer {
+        padding-left: 15px;
+        height: auto;
+    }
+
+    section.content {
+        padding: 5px 10px;
+        margin-top: 20px;
+    }
+
+    .fork_and_edit {
+        display: none;
+    }
+
+}
