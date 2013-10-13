@@ -61,10 +61,7 @@
 
 .markdown pre {
   font-family:"Bitstream Vera Sans Mono",monospace;
-  background: #222;
   padding: 5px;
-  color: #fff;
-  margin-bottom: 1em;
   max-width:100%;
   overflow-y:auto;
 }
