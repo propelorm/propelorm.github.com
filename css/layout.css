@@ -7,12 +7,16 @@ a:hover, a:focus {
     color:#edbc1c;
 }
 
-.topmenu a.link {
+.topmenu a {
     padding: 12px;
     padding-bottom: 11px;
 }
 
-.topmenu a.link:hover {
+.rootnav a:hover {
+    color: white;
+}
+
+.topmenu a:hover {
     background-color: #ebb71c;
     color: #fff;
 }
@@ -233,10 +237,6 @@ h1.no_margin_bottom {
     -moz-border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-}
-
-.rootnav a.link:hover {
-    color: white;
 }
 
 .ribbon {
