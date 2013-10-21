@@ -5,8 +5,8 @@ title: Documentation
 
 # Documentation #
 
- * [What's New in Propel 1.6](whats-new.html) Users of previous versions can check the changes here.
- * [Changelog](https://raw.github.com/propelorm/Propel/master/CHANGELOG) Updates in the 1.6 branch since the release of 1.6.0 stable.
+ * [What's New in Propel 2.0](whats-new.html) Users of previous versions can check the changes here.
+ * [Changelog](https://raw.github.com/propelorm/Propel2/master/UPDATE.md) Updates of the version 2.0.
  * [API Documentation](http://api.propelorm.org/) The generated API documentation.
 
 ## Project Setup ##
@@ -18,7 +18,6 @@ title: Documentation
 
 * [Basic CRUD](03-basic-crud.html) The basics of Propel C.R.U.D. (Create, Retrieve, Update, Delete) operations
 * [Relationships](04-relationships.html) Searching and manipulating data from related tables.
-* [Validators](05-validators.html) The validation framework checks data before insertion based on column type.
 * [Transactions](06-transactions.html) Where and when to use transactions.
 * [Behaviors](07-behaviors.html) The behavior system allows to package and reuse common model features.
 * [Logging And Debugging](08-logging.html) Propel can log a lot of information, including the SQL queries it executes.
@@ -44,9 +43,9 @@ title: Documentation
 * [`nested_set`](../behaviors/nested-set.html)
 * [`query_cache`](../behaviors/query-cache.html)
 * [`sluggable`](../behaviors/sluggable.html)
-* *[`soft_delete`](../behaviors/soft-delete.html) (deprecated, use `archivable` instead)*
 * [`timestampable`](../behaviors/timestampable.html)
 * [`sortable`](../behaviors/sortable.html)
+* [`validate`](../behaviors/validate.html)
 * [`versionable`](../behaviors/versionable.html)
 * And [`concrete_inheritance`](09-inheritance.html), documented in the Inheritance Chapter even if it's a behavior
 
@@ -59,7 +58,6 @@ You can also look at [user contributed behaviors](../cookbook/user-contributed-b
 * [Additional SQL Files](../cookbook/adding-additional-sql-files.html) How to execute custom SQL statements at buildtime
 * [Advanced Column Types](../cookbook/working-with-advanced-column-types.html) How to work with BLOBs, serialized PHP objects, ENUM, and ARRAY column types.
 * [Customizing build](../cookbook/customizing-build.html) How to customize the Phing build process.
-* [DB Designer](../cookbook/dbdesigner.html) How to import an XML schema from existing DBDesigner 4 file.
 * [How to Use PHP 5.3 Namespaces](../cookbook/namespaces.html) How to generate model classes with namespaces, and how to use them.
 * [Model Introspection At Runtime](../cookbook/runtime-introspection.html) How to use the Map classes to discover table properties at runtime.
 * [Multi-Component Data Model](../cookbook/multi-component-data-model.html) How to generate model classes in subdirectories, and organize your model into independent packages / modules.
@@ -69,17 +67,9 @@ You can also look at [user contributed behaviors](../cookbook/user-contributed-b
 * [Using SQL Schemas](../cookbook/using-sql-schemas.html) How to organize tables into SQL schemas (only for MySQL, PostgreSQL, and MSSQL).
 * [Working With Existing Databases](../cookbook/working-with-existing-databases.html) How to build an XML schema from an existing db structure, how to dump data to XML, how to import it into a new database, etc.
 
-### Contribute to Propel ###
+### Extending Propel ###
 
 * [Writing A Behavior](../cookbook/writing-behavior.html) How to write a custom behavior to reuse model code horizontally.
-* [Testing Your Behaviors](../cookbook/testing-your-behaviors.html) How to unit test your behaviors.
-* [Working with unit tests](../cookbook/working-with-unit-tests.html) How to setup propel's required environment and use PHPUnit.
-
-### Working with symfony 1.4 ###
-
-* [Using Propel as Default ORM](../cookbook/symfony1/init-a-Symfony-project-with-Propel-git-way.html) How to initialize a symfony project with Propel as default ORM - the git way.
-* [Using the `i18n` behavior](../cookbook/symfony1/how-to-use-old-SfPropelBehaviori18n-with-sf1.4.html) How to use Propel's `i18n` behavior with symfony 1.4.
-* [Using the legacy `symfony_i18n` behavior](../cookbook/symfony1/how-to-use-old-SfPropelBehaviori18n-with-sf1.4.html) How to use the old `SfPropelBehaviori18n` (a.k.a. `symfony_i18n`) with symfony 1.4.
 
 ### Working with Symfony2 ###
 
@@ -87,11 +77,5 @@ You can also look at [user contributed behaviors](../cookbook/user-contributed-b
 * [Symfony2 And Propel In Real Life](../cookbook/symfony2/symfony2-and-propel-in-real-life.html)
 * [Mastering Symfony2 Forms With Propel](../cookbook/symfony2/mastering-symfony2-forms-with-propel.html)
 * [The Symfony2 Security Component And Propel](../cookbook/symfony2/the-symfony2-security-component-and-propel.html)
-* [Adding A New Behavior In Symfony2](../cookbook/symfony2/adding-a-new-behavior-in-symfony2.html)
-* [Testing](../cookbook/symfony2/testing.html)
-
-### Working with Silex ###
-
-* [Working with Silex](../cookbook/silex/working-with-silex.html)
 
 >**Tip**<br />This is the up-to-date documentation for the last Propel version. To access the old documentation, please visit [trac.propelorm.org](http://trac.propelorm.org).

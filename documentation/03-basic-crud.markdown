@@ -72,7 +72,7 @@ The simplest way to retrieve a row from the database, is to use the generated `f
 <?php
 $q = new AuthorQuery();
 $firstAuthor = $q->findPK(1);
-// now $firstAuthor is an Author object, or NULL if no match was found.
+// now $firstBook is an Author object, or NULL if no match was found.
 ```
 
 This issues a simple SELECT SQL query. For instance, for MySQL:
@@ -157,8 +157,6 @@ $author = AuthorQuery::create()->findOneByFirstName('Jane');
 
 The Propel Query API is very powerful. The next chapter will teach you to use it to add conditions on related objects. If you can't wait, jump to the [Query API reference](../reference/model-criteria).
 
->**Tip**<br />The `findPk` method and `findOneByXXX` magic methods (for primary key attributes) do not always query the database, but sometimes give you information from a cache. See the section about the [instance pool](#propel-instance-pool) for more information.
-
 ### Using Custom SQL ###
 
 The `Query` class provides a relatively simple approach to constructing a query. Its database neutrality and logical simplicity make it a good choice for expressing many common queries. However, for a very complex query, it may prove more effective (and less painful) to simply use a custom SQL query to hydrate your Propel objects.
@@ -167,7 +165,8 @@ As Propel uses PDO to query the underlying database, you can always write custom
 
 ```php
 <?php
-$con = Propel::getConnection(BookPeer::DATABASE_NAME);
+use Propel\Runtime\Propel;
+$con = Propel::getWriteConnection(BookTableMap::DATABASE_NAME);
 $sql = "SELECT * FROM book WHERE id NOT IN "
         ."(SELECT book_review.book_id FROM book_review"
         ." INNER JOIN author ON (book_review.author_id=author.ID)"
@@ -186,12 +185,11 @@ $books = $formatter->format($stmt);
 // $books contains a collection of Book objects
 ```
 
->**Tip**<br />
->There are a few important things to remember when using custom SQL to populate Propel:
->
-> * The resultset columns must be numerically indexed
-> * The resultset must contain all the columns of the table (except lazy-load columns)
-> * The resultset must have columns _in the same order_ as they are defined in the `schema.xml` file
+There are a few important things to remember when using custom SQL to populate Propel:
+
+* The resultset columns must be numerically indexed
+* The resultset must contain all the columns of the table (except lazy-load columns)
+* The resultset must have columns _in the same order_ as they are defined in the `schema.xml` file
 
 ## Updating Objects ##
 
@@ -244,16 +242,19 @@ echo $author->getFirstName(); // 'Jane'
 
 ## Query Termination Methods ##
 
-The Query methods that don't return the current query object are called "Termination Methods". You've already seen some of them: `find()`, `findOne()`, `update()`, `delete()`. There are two more termination methods that you should know about:
+The Query methods that don't return the current query object are called "Termination Methods". You've already seen come of them: `find()`, `findOne()`, `update()`, `delete()`. There are two more termination methods that you should know about:
+
+`count()` returns the number of results of the query.
 
 ```php
 <?php
-// count() returns the number of results of the query.
 $nbAuthors = AuthorQuery::create()->count();
-// You could also count the number of results from a find(), but that would be less effective,
-// since it implies hydrating objects just to count them
+```
+You could also count the number of results from a find(), but that would be less effective, since it implies hydrating objects just to count them
 
-// paginate() returns a paginated list of results
+`paginate()` returns a paginated list of results:
+
+```php
 $authorPager = AuthorQuery::create()->paginate($page = 1, $maxPerPage = 10);
 // This method will compute an offset and a limit
 // based on the number of the page and the max number of results per page.
@@ -261,12 +262,17 @@ $authorPager = AuthorQuery::create()->paginate($page = 1, $maxPerPage = 10);
 foreach ($authorPager as $author) {
   echo $author->getFirstName();
 }
-// A pager object gives more information
-echo $authorPager->getNbResults();   // total number of results if not paginated
-echo $authorPager->haveToPaginate(); // return true if the total number of results exceeds the maximum per page
-echo $authorPager->getFirstIndex();  // index of the first result in the page
-echo $authorPager->getLastIndex();   // index of the last result in the page
-$links = $authorPager->getLinks(5);  // array of page numbers around the current page; useful to display pagination controls
+```
+
+A pager object gives more information:
+
+```php
+<?php
+echo $pager->getNbResults();   // total number of results if not paginated
+echo $pager->haveToPaginate(); // return true if the total number of results exceeds the maximum per page
+echo $pager->getFirstIndex();  // index of the first result in the page
+echo $pager->getLastIndex();   // index of the last result in the page
+$links = $pager->getLinks(5);  // array of page numbers around the current page; useful to display pagination controls
 ```
 
 ## Collections And On-Demand Hydration ##
@@ -279,7 +285,7 @@ $authors = AuthorQuery::create()
   ->limit(5)
   ->find();
 foreach ($authors as $author) {
-  echo $author->getFirstName();
+  echo $authors->getFirstName();
 }
 ```
 
@@ -304,8 +310,7 @@ The [ModelCriteria Query API reference](../reference/model-criteria) describes e
 
 ## Propel Instance Pool ##
 
-Propel keeps a list of the objects that you already retrieved in memory to avoid calling the same request twice in a PHP script. This list is called the instance pool, and is automatically populated from your past requests.
-The instance pool is consulted whenever searching for an object using its primary key via `findPk` or `findOneById` (which is an alias for the former).
+Propel keeps a list of the objects that you already retrieved in memory to avoid calling the same request twice in a PHP script. This list is called the instance pool, and is automatically populated from your past requests:
 
 ```php
 <?php
@@ -314,29 +319,6 @@ $author1 = AuthorQuery::create()->findPk(1);
 // Issues a SELECT query
 ...
 // second call
-$author2 = AuthorQuery::create()->findPk(1);    // or AuthorQuery::create()->findOneById(1);
+$author2 = AuthorQuery::create()->findPk(1);
 // Skips the SQL query and returns the existing $author1 object
-```
-
-The instance pool is located in and managed via an entity's peer class (e.g. `AuthorPeer::getInstanceFromPool((string) $key)`) but there should seldom or never be the need to call it manually.
-
-That said, remember that in some cases, executing an actual query to the database might be necessary, e.g. if the state of the object differs from the database state.
-This is frequently the case if for instance the attributes are set externally by e.g. binding it to a form.
-If the values as of the database state of an entity are needed within an entity, for instance in its `save()` function, using `findPk($this->id)` and `findOneById($this->getId())` won't work, since the instance pool will answer this request, giving you the data you already have.
-To retrieve the object either use one of the other `find` methods or disable instance pooling for the moment:
-
-```php
-<?php
-
-  public function save(PropelPDO $con = NULL) {
-    
-    \Propel::disableInstancePooling();
-
-    $uq = UserQuery::create()->findOneById($this->getId());
-    if( null !== $uq ){
-        $oldPassword = $uq->getPassword();
-        $this->setPassword($oldPassword);
-    }
-
-    \Propel::enableInstancePooling();
 ```

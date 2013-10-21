@@ -10,7 +10,6 @@ The `sluggable` behavior allows a model to offer a human readable identifier tha
 ## Basic Usage ##
 
 In the `schema.xml`, use the `<behavior>` tag to add the `sluggable` behavior to a table:
-
 ```xml
 <table name="post">
   <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
@@ -50,7 +49,7 @@ $p = PostQuery::create()->findOneBySlug('hello-world');
 
 ## Parameters ##
 
-By default, the behavior adds one column to the model. If this column is already described in the schema, the behavior detects it and doesn't add it a second time. The behavior parameters allow you to use custom patterns for the slug composition. The following schema illustrates a complete customization of the behavior:
+By default, the behavior adds one columns to the model. If this column is already described in the schema, the behavior detects it and doesn't add it a second time. The behavior parameters allow you to use custom patterns for the slug composition. The following schema illustrates a complete customization of the behavior:
 
 ```xml
 <table name="post">
@@ -64,7 +63,6 @@ By default, the behavior adds one column to the model. If this column is already
     <parameter name="replacement" value="-" />
     <parameter name="separator" value="/" />
     <parameter name="permanent" value="true" />
-    <parameter name="scope_column" value="" />
   </behavior>
 </table>
 ```
@@ -93,7 +91,7 @@ The `replace_pattern` parameter is a regular expression that shows all the chara
 
 The `separator` parameter is the character that separates the slug from the incremental index added in case of non-unicity. Set as '/', it makes `Post` objects sharing the same title have the following slugs:
 
-```text
+```
 'posts/hello-world'
 'posts/hello-world/1'
 'posts/hello-world/2'
@@ -112,7 +110,7 @@ protected function createSlug()
 {
   // create the slug based on the `slug_pattern` and the object properties
   $slug = $this->createRawSlug();
-  // truncate the slug to accomodate the size of the slug column
+  // truncate the slug to accommodate the size of the slug column
   $slug = $this->limitSlugSize($slug);
   // add an incremental index to make sure the slug is unique
   $slug = $this->makeSlugUnique($slug);

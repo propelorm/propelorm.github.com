@@ -5,7 +5,12 @@ title: Inheritance
 
 # Inheritance #
 
-Developers often need one model table to extend another model table. Inheritance being an object-oriented notion, it doesn't have a true equivalent in the database world, so this is something an ORM must emulate. Propel offers three types of table inheritance: [Single Table Inheritance](http://www.martinfowler.com/eaaCatalog/singleTableInheritance.html), which is the most efficient implementations from a SQL and query performance perspective, but is limited to a small number of inherited fields ; [Class Table Inheritance](http://martinfowler.com/eaaCatalog/classTableInheritance.html), which separates data into several tables and uses joins to fetch complete children entities, and [Concrete Table Inheritance](http://www.martinfowler.com/eaaCatalog/concreteTableInheritance.html), which provides the most features but adds a small overhead on write queries.
+Developers often need one model table to extend another model table. Inheritance being an object-oriented notion, it doesn't have a true equivalent in the database world, so this is something an ORM must emulate. Propel offers three types of table inheritance:
+
+* [Single Table Inheritance](http://www.martinfowler.com/eaaCatalog/singleTableInheritance.html), which is the most efficient implementations from a SQL and query performance perspective, but is limited to a small number of inherited fields
+* [Class Table Inheritance](http://martinfowler.com/eaaCatalog/classTableInheritance.html), which separates data into several tables and uses joins to fetch complete children entities
+* [Concrete Table Inheritance](http://www.martinfowler.com/eaaCatalog/concreteTableInheritance.html), which provides the most features but adds a small overhead on write queries.
+
 
 ## Single Table Inheritance ##
 
@@ -58,7 +63,7 @@ Inherited objects share the same properties and methods by default, but you can 
 
 Behind the curtain, Propel sets the `class_key` column based on the model class. So the previous code stores the following rows in the database:
 
-```text
+```
 id | title                             | class_key
 ---|-----------------------------------|----------
 1  | War And Peace                     | Book
@@ -109,7 +114,7 @@ echo get_class($comic) . ': ' . $comic->getTitle() . "\n";
 // Comic: Little Nemo In Slumberland
 ```
 
->**Tip**<br />You can override the base peer's `getOMClass()` to return the classname to use based on more complex logic (or query).
+>**Tip**<br />You can override the base TableMap's `getOMClass()` to return the classname to use based on more complex logic (or query).
 
 ### Abstract Entities ###
 
@@ -124,7 +129,7 @@ That way users will only be able to instantiate `Essay` or `Comic` books, but no
 
 ## Class Table Inheritance ##
 
-Class Table Inheritance uses one table per class in the inheritance structure ; each table stores only the columns it doesn't inherit from its parent.
+Class Table Inheritance uses one table per class in the inheritance structure ; each table stores only the columns it doesn't inherits from its parent.
 Propel doesn't offer class table inheritance per se, however it provides a behavior called `delegate`, which offers the same functionality.
 
 ### Schema Definition ###
@@ -176,7 +181,7 @@ Using the previous schema, here is how you create a `Basketballer` and set his s
 
 ```php
 <?php
-$basketballer = new Basketballer();
+basketballer = new Basketballer();
 $basketballer->setPoints(101);
 $basketballer->setFieldGoals(47);
 $basketballer->setThreePointsFieldGoals(7);
@@ -255,7 +260,7 @@ $footballer->save();
 echo $footballer->getFirstName(); // Michael
 ```
 
-Multiple delegation also allows to implement a deep inheritance hirerarchy. For instance, if your object model contains a `ProBasketballer` inheriting from `Basketballer` inheriting from `Player`, the  `ProBasketballer` should delegate to both `Basketballer` and `Player`; delegating to `Basketballer` only isn't enough.
+Multiple delegation also allows to implement a deep inheritance hierarchy. For instance, if your object model contains a `ProBasketballer` inheriting from `Basketballer` inheriting from `Player`, the  `ProBasketballer` should delegate to both `Basketballer` and `Player`; delegating to `Basketballer` only isn't enough.
 
 ```xml
 <table name="player">
@@ -369,7 +374,7 @@ Since the columns of the main table are copied to the child tables, this schema 
 </table>
 ```
 
->**Tip**<br />The `concrete_inheritance` behavior copies columns, foreign keys, indices and validators.
+>**Tip**<br />The `concrete_inheritance` behavior copies columns, foreign keys and indices. If you've configured the `validate` behavior, it copies also validators.
 
 ### Using Inherited Model Classes ###
 

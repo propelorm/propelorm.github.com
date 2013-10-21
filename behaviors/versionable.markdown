@@ -22,7 +22,7 @@ In the `schema.xml`, use the `<behavior>` tag to add the `versionable` behavior 
 </table>
 ```
 
-Rebuild your model, insert the table creation sql again, and you're ready to go. The model now has one new column, `version`, which stores the version number. It also has a new table, `book_version`, which stores all the versions of all `Book` objects, past and present. You won't need to interact with this second table, since the behavior offers an easy-to-use API that takes care of all verisoning actions from the main ActiveRecord object.
+Rebuild your model, insert the table creation sql again, and you're ready to go. The model now has one new column, `version`, which stores the version number. It also has a new table, `book_version`, which stores all the versions of all `Book` objects, past and present. You won't need to interact with this second table, since the behavior offers an easy-to-use API that takes care of all versioning actions from the main ActiveRecord object.
 
 ```php
 <?php
@@ -119,7 +119,7 @@ You may not need a new version each time an object is created or modified. If yo
 <?php
 class Book extends BaseBook
 {
-  public function isVersioningNecessary($con = null)
+  public function isVersioningNecessary()
   {
     return $this->getISBN() !== null && parent::isVersioningNecessary();
   }
@@ -132,19 +132,19 @@ $book->setISBN('0553213105');
 $book->save(): // book is saved, and a new version is created
 ```
 
-Alternatively, you can choose to disable the automated creation of a new version at each save for all objects of a given model by calling the `disableVersioning()` method on the Peer class. In this case, you still have the ability to manually create a new version of an object, using the `addVersion()` method on a saved object:
+Alternatively, you can choose to disable the automated creation of a new version at each save for all objects of a given model by calling the `disableVersioning()` method on the Query class. In this case, you still have the ability to manually create a new version of an object, using the `addVersion()` method on a saved object:
 
 ```php
 <?php
-BookPeer::disableVersioning();
+BookQuery::disableVersioning();
 $book = new Book();
 $book->setTitle('Pride and Prejudice');
 $book->setVersion(1);
 $book->save(); // book is saved, no new version is created
 $book->addVersion(); // a new version is created
 
-// you can reenable versioning using the Peer static method enableVersioning()
-BookPeer::enableVersioning();
+// you can reenable versioning using the Query static method enableVersioning()
+BookQuery::enableVersioning();
 ```
 
 ## Versioning Related objects ##
@@ -240,24 +240,23 @@ The audit log abilities need to be enabled in the schema as well:
 * `void save()`: Adds a new version to the object version history and increments the `version` property
 * `void delete()`: Deletes the object version history
 * `boolean isVersioningNecessary(PropelPDO $con = null)`: Checks whether a new version needs to be saved
-* `void enforceVersioning()`: Enforces a new version of the object upon next save
 * `BaseObject toVersion(integer $version_number)`: Populates the properties of the current object with values from the requested version. Beware that saving the object afterwards will create a new version (and not update the previous version).
 * `integer getLastVersionNumber(PropelPDO $con)`: Queries the database for the highest version number recorded for this object
 * `boolean isLastVersion()`: Returns true if the current object is the last available version
 * `Version addVersion(PropelPDO $con)`: Creates a new Version record and saves it. To be used when isVersioningNecessary() is false. Beware that it doesn't take care of incrementing the version number of the main object, and that the main object must be saved prior to calling this method.
 * `array getAllVersions(PropelPDO $con)`: Returns all Version objects related to the main object in a collection
-* `array getLastVersions($number, $criteria, $con)`: Retrieves the last $number versions
 * `Version getOneVersion(integer $versionNumber PropelPDO $con)`: Returns a given version object
 * `array compareVersions(integer $version1, integer $version2)`: Returns an array of differences showing which parts of a resource changed between two versions
-* `compareVersion(integer $versionNumber, string $keys, PropelPDO $con, array $ignoredColumns)`: Compares the current object with another of its version
 * `BaseObject populateFromVersion(Version $version, PropelPDO $con)`: Populates an ActiveRecord object based on a Version object
+* `array compareVersions(integer $version1, integer $version2)`: Returns an array of differences showing which parts of a resource changed between two versions
+
 * `BaseObject setVersionCreatedBy(string $createdBy)`: Defines the author name for the revision
 * `string getVersionCreatedBy()`: Gets the author name for the revision
 * `mixed getVersionCreatedAt()`: Gets the creation date for the revision (the behavior takes care of setting it)
 * `BaseObject setVersionComment(string $comment)`: Defines the comment for the revision
 * `string getVersionComment()`: Gets the comment for the revision
 
-### Peer class ###
+### Query static methods ###
 
 * `void enableVersioning()`: Enables versionning for all instances of the related ActiveRecord class
 * `void disableVersioning()`: Disables versionning for all instances of the related ActiveRecord class

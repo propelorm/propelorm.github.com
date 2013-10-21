@@ -343,7 +343,7 @@ echo $publisher;
 // <?xml version="1.0" encoding="UTF-8"?>
 // <data>
 //   <Id></Id>
-//   <Name><![CDATA[Penguin]]></Name>
+//   <Name><![CDATA[Peguin]]></Name>
 // </data>
 ```
 
@@ -421,7 +421,7 @@ Here is an example buildtime configuration file that defines a MySQL and a SQLit
 </config>
 ```
 
-Now that Propel can deal with database vendors at buildtime more accurately, the generated classes offer more optimizations for the database they rely one. Incidentally, that means that you should rebuild your model if you use different database vendors. Thats includes cases when your development and production environments use different vendors.
+Now that Propel can deal with database vendors at buildtime more accurately, the generated classes offer more optimizations for the database they rely one. Incidentally, that means that you should rebuild your model if you use different database vendors. That includes cases when your development and production environments use different vendors.
 
 ## Support For SQL Schemas ##
 
@@ -432,7 +432,7 @@ For complex models showing a large number of tables, database administrators oft
   <table name="book" schema="bookstore">
     <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
     <column name="title" type="VARCHAR" required="true" />
-    <column name="author_id" type="INTEGER" />
+    <column name="author_id" type="INTGER" />
     <foreign-key foreignTable="author" foreignSchema="people" onDelete="setnull" onUpdate="cascade">
       <reference local="author_id" foreign="id" />
     </foreign-key>
@@ -486,7 +486,7 @@ If you need to bind a variable to the condition, set the variable as last parame
 <?php
 $authors = AuthorQuery::create()
   ->join('Author.Book')
-  ->addJoinCondition('Book', 'Book.Title LIKE ?', 'War%', null, PDO::PARAM_STR)
+  ->addJoinCondition('Book', 'Book.Title LIKE ?', 'War%')
   ->find();
 // SELECT * FROM author
 // INNER JOIN book ON (author.ID=book.AUTHOR_ID AND book.TITLE LIKE 'War%');
@@ -547,16 +547,16 @@ $book->setStyle('novel');
 echo $book->getStyle(); // novel
 // Trying to set a value not in the valueSet throws an exception
 
-// Each value in an ENUM column has a related constant in the Peer class
+// Each value in an ENUM column has a related constant in the TableMap class
 // Your IDE with code completion should love this
-echo BookPeer::STYLE_NOVEL;  // 'novel'
-echo BookPeer::STYLE_ESSAY;  // 'essay'
-echo BookPeer::STYLE_POETRY; // 'poetry'
-// The Peer class also gives access to list of available values
-print_r(BookPeer::getValueSet(BookPeer::STYLE)); // array('novel', 'essay', 'poetry')
+echo BookTableMap::STYLE_NOVEL;  // 'novel'
+echo BookTableMap::STYLE_ESSAY;  // 'essay'
+echo BookTableMap::STYLE_POETRY; // 'poetry'
+// The TableMap class also gives access to list of available values
+print_r(BookTableMap::getValueSet(BookTableMap::STYLE)); // array('novel', 'essay', 'poetry')
 
 // ENUM columns are also searchable, using the generated filterByXXX() method
-// or other ModelCritera methods (like where(), orWhere(), condition())
+// or other ModelCriteria methods (like where(), orWhere(), condition())
 $books = BookQuery::create()
   ->filterByStyle('novel')
   ->find();
@@ -681,7 +681,7 @@ $latestBooks = BookQuery::create()
   ->withColumn('MAX(Book.CreatedAt)')
   ->groupBy('Book.AuthorId');
 $latestCheapBooks = BookQuery::create()
-  ->addSelectQuery($latestBooks, 'lastBook')
+  ->useSelectQuery($latestBooks, 'lastBook')
   ->where('lastBook.Price < ?', 20)
   ->find();
 ```
@@ -702,7 +702,7 @@ Rebuild your model, and voila: ActiveRecord objects can now retrieve foreign obj
 
 ## New Reference Chapter in the Documentation: Active Record ##
 
-There wasn't any one-stop place to read about the abilities of the generated Active Record objects in the Propel documentation. Since Propel 1.6, the new [Active Record reference](/reference/active-record.html) makes it easier to learn the  usage of Propel models using code examples.
+There wasn't any one-stop place to read about the abilities of the generated Active Record objects in the Propel documentation. Since Propel 1.6, the new [Active Record reference](active-record.html) makes it easier to learn the  usage of Propel models using code examples.
 
 ## Miscellaneous ##
 

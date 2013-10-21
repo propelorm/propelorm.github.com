@@ -10,7 +10,6 @@ The `timestampable` behavior allows you to keep track of the date of creation an
 ## Basic Usage ##
 
 In the `schema.xml`, use the `<behavior>` tag to add the `timestampable` behavior to a table:
-
 ```xml
 <table name="book">
   <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
@@ -89,26 +88,4 @@ $b->setTitle('Anna Karenina');
 $b->save();
 echo $b->getMyCreateDate(); // 2009-10-02 18:14:23
 echo $b->getMyUpdateDate(); // 2009-10-02 18:14:25
-```
-
-If you only want to keep track of the date of creation of your model objects set the `disable_updated_at` parameter to true:
-
-```xml
-<table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
-  <behavior name="timestampable">
-    <parameter name="disable_updated_at" value="true" />
-  </behavior>
-</table>
-```
-
-```php
-<?php
-$b = new Book();
-$b->setTitle('War And Peace');
-$b->save();
-echo method_exists($b, 'getCreatedAt'); // true
-echo method_exists($b, 'getUpdatedAt'); // false
-echo $b->getCreatedAt(); // 2009-10-02 18:14:23
 ```

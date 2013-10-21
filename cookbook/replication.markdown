@@ -9,14 +9,14 @@ Propel can be used in a master-slave replication environment. These environments
 
 ## Configuring Propel for Replication ##
 
-* Set up a replication environment (see the Databases section below)
-* Use the latest Propel-Version
-* add a slaves-section to your `runtime-conf.xml` file
-* verify the correct setup by checking the masters log file (should not contain "select ..." statements)
+  * Set up a replication environment (see the Databases section below)
+  * Use the latest Propel-Version from SVN
+  * add a slaves-section to your `runtime-conf.xml` file
+  * verify the correct setup by checking the masters log file (should not contain "select ..." statements)
 
 You can configure Propel to support replication by adding a `<slaves>` element with nested `<connection>` element(s) to your `runtime-conf.xml`.
 
-The `<slaves>` section is at the same level as the master `<connection>` and contains multiple nested `<connection>` elements with the same information as the top-level (master) `<connection>`. It is recommended that they are numbered. The follwing example shows a slaves section with a several slave connections configured where "localhost" is the master and "slave-server1" and "slave-server2" are the slave-database connections.
+The `<slaves>` section is at the same level as the master `<connection>` and contains multiple nested `<connection>` elements with the same information as the top-level (master) `<connection>`. It is recommended that they are numbered. The following example shows a slaves section with a several slave connections configured where "localhost" is the master and "slave-server1" and "slave-server2" are the slave-database connections.
 
 ```xml
 <?xml version="1.0"?>
@@ -55,37 +55,57 @@ The `<slaves>` section is at the same level as the master `<connection>` and con
 
 ## Implementation ##
 
-The replication functionality is implemented in the Propel connection configuration and initialization code and in the generated Peer and Object classes.
+The replication functionality is implemented in the Propel connection configuration and initialization code and in the generated TableMap and Object classes.
 
-### Propel::getConnection() ###
+### `Propel::getReadConnection()` and `Propel::getWriteConnection()` ###
 
-When requesting a connection from Propel (_Propel::getConnection()_), you can either specify that you want a READ connection (slave) or WRITE connection (master).  Methods that are designed to perform READ operations, like the `doSelect*()` methods of your generated Peer classes, will always request a READ connection like so:
+When you request a connection with Propel, you can either specify that you want
+a READ connection (slave) or a WRITE connection (master). Methods that are
+designed to perform READ operations, like `ModelCriteria::find()`, will always
+request a READ connection like so:
 
 ```php
 <?php
-
-$con = Propel::getConnection(MyPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+$con = Propel::getReadConnection(MyTableMap::DATABASE_NAME);
+$books = BookQuery::create()->find($con);
 ```
 
-Other methods that are designed to perform write operations will explicitly request a Propel::CONNECTION_WRITE connection.  The WRITE connections are also the default, however, so applications that make a call to _Propel::getConnection()_ without specifying a connection mode will always get a master connection.
+Other methods that are designed to perform write operations, like `ModelCriteria::update()` or `ModelCriteria::delete()`; will explicitly request a WRITE connection:
 
-If you do have configured slave connections, Propel will choose a single random slave to use per request for any connections where the mode is Propel::CONNECTION_READ.
+```php
+<?php
+$con = Propel::getWriteConnection(MyTableMap::DATABASE_NAME);
+BookQuery::create()->deleteAll($con);
+```
+
+If you do have configured slave connections, Propel will choose a single random slave to use per request for any connections where the mode is READ.
 
 Both READ (slave) and WRITE (master) connections are only configured on demand.  If all of your SQL statements are SELECT queries, Propel will never create a connection to the master database (unless, of course, you have configured Propel to always use the master connection -- see below).
 
-_Important:_ if you are using Propel to execute custom SQL queries in your application (and you want to make sure that Propel respects your replication setup), you will need to explicitly get the correct connection.  For example:
+**Warning**: If you are using Propel to execute custom SQL queries in your application (and you want to make sure that Propel respects your replication setup), you will need to explicitly get the correct connection. For example:
 
 ```php
 <?php
-
-$con = Propel::getConnection(MyPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+$con = Propel::getReadConnection(MyTableMap::DATABASE_NAME);
 $stmt = $con->query('SELECT * FROM my');
 /* ... */
 ```
 
-### Propel::setForceMasterConnection() ###
+### `ConnectionManager::setForceMasterConnection()` ###
 
-You can force Propel to always return a WRITE (master) connection from _Propel::getConnection()_ by calling _Propel::setForceMasterConnection(true);_.  This can be useful if you must be sure that you are getting the most up-to-date data (i.e. if there is some latency possible between master and slaves).
+You can force Propel to always return a WRITE (master) connection when calling `Propel::getServiceContainer()->getReadConnection()`, even though there are some slaves connections defined.
+
+To do so, call the `setForceMasterConnection()` method on the related `ConnectionManager`, as follows:
+
+```php
+<?php
+$manager = Propel::getServiceContainer()->getConnectionManager(MyTableMap::DATABASE_NAME);
+$manager->setForceMasterConnection(true);
+$con = Propel::getReadConnection(MyTableMap::DATABASE_NAME);
+// $con is a WRITE connection
+```
+
+This can be useful if you must be sure that you are getting the most up-to-date data (i.e. if there is some latency possible between master and slaves). But remember that the only safe way to get data integrity is to use transactions.
 
 ## Databases ##
 

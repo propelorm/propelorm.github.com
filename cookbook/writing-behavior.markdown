@@ -81,7 +81,7 @@ class AggregateColumnBehavior extends Behavior
       ));
     }
     // add the aggregate column if not present
-    if(!$table->containsColumn($columnName)) {
+    if(!$table->hasColumn($columnName)) {
       $table->addColumn(array(
         'name'    => $columnName,
         'type'    => 'INTEGER',
@@ -93,7 +93,7 @@ class AggregateColumnBehavior extends Behavior
 
 This method shows that a behavior class has access to the `<parameters>` defined for it in the `schema.xml` through the `getParameter()` command. Behaviors can also always access the `Table` object attached to them, by calling `getTable()`. A `Table` can check if a column exists and add a new one easily. The `Table` class is one of the numerous generator classes that serve to describe the object model at buildtime, together with `Column`, `ForeignKey`, `Index`, and a lot more classes. You can find all the buildtime model classes under the `generator/lib/model` directory.
 
-_Tip_: Don't mix up the _runtime_ database model (`DatabaseMap`, `TableMap`, `ColumnMap`, `ValidatorMap`, `RelationMap`) with the _buildtime_ database model (`Database`, `Table`, `Column`, `Validator`, etc.). The buildtime model is very detailed, in order to ease the work of the builders that write the ActiveRecord and Query classes. On the other hand, the runtime model is optimized for speed, and carries minimal information to allow correct hydration and binding at runtime. Behaviors use the buildtime object model, because they are run at buildtime, so they have access to the most powerful model.
+_Tip_: Don't mix up the _runtime_ database model (`DatabaseMap`, `TableMap`, `ColumnMap`, `RelationMap`) with the _buildtime_ database model (`Database`, `Table`, `Column`, etc.). The buildtime model is very detailed, in order to ease the work of the builders that write the ActiveRecord and Query classes. On the other hand, the runtime model is optimized for speed, and carries minimal information to allow correct hydration and binding at runtime. Behaviors use the buildtime object model, because they are run at buildtime, so they have access to the most powerful model.
 
 Now rebuild the model and the SQL, and sure enough, the new column is there. `BasePollQuestion` offers a `getTotalNbVotes()` and a `setTotalNbVotes()` method, and the table creation SQL now includes the additional `total_nb_votes` column:
 
@@ -108,7 +108,10 @@ CREATE TABLE poll_question
 )Type=InnoDB;
 ```
 
-_Tip_: The behavior only adds the column if it's not present (`!$table->containsColumn($columnName)`). So if a user needs to customize the column type, or any other attribute, he can include a `<column>` tag in the table with the same name as defined in the behavior, and the `modifyTable()` will then skip the column addition.
+_Tip_: The behavior only adds the column if it's not present (`!$table->hasColumn($columnName)`).
+So if a user needs to customize the column type, or any other attribute, he can
+include a `<column>` tag in the table with the same name as defined in the
+behavior, and the `modifyTable()` will then skip the column addition.
 
 ## Adding A Method To The ActiveRecord Class ##
 
@@ -120,9 +123,11 @@ class AggregateColumnBehavior extends Behavior
 {
   // ...
 
-  public function objectMethods($builder)
+  public function objectMethods()
   {
-    return $this->addUpdateAggregateColumn();
+    $script = _;
+    $script .= $this->addUpdateAggregateColumn();
+    return $script;
   }
 
   protected function addUpdateAggregateColumn()
@@ -188,7 +193,7 @@ Now if you rebuild the model, you will see the new `updateTotalNbVotes()` method
 
 ```php
 <?php
-class BasePollQuestion extends BaseObject
+class BasePollQuestion implements ActiveRecordInterface
 {
   // ...
 
@@ -208,7 +213,7 @@ class BasePollQuestion extends BaseObject
 }
 ```
 
-Behaviors offer similar hook methods to allow the addition of methods to the query classes (`queryMethods()`) and to the peer classes (`peerMethods()`). And if you need to add attributes, just implement one of the `objectAttributes()`, `queryAttributes()`, or `peerAttributes()` methods.
+Behaviors offer similar hook methods to allow the addition of methods to the query classes (`queryMethods()`) and to the object classes (`objectMethods()`). And if you need to add attributes, just implement one of the `objectAttributes()` or `queryAttributes()` methods.
 
 ## Using a Template For Generated Code ##
 
@@ -285,14 +290,9 @@ class AggregateColumnBehavior extends Behavior
       require_once 'AggregateColumnRelationBehavior.php';
       $relationBehavior = new AggregateColumnRelationBehavior();
       $relationBehavior->setName('aggregate_column_relation');
-      $relationBehavior->addParameter(array(
-        'name' => 'foreign_table',
-        'value' => $table->getName()
-      ));
-      $relationBehavior->addParameter(array(
-        'name' => 'foreign_column',
-        'value' => $this->getParameter('name')
-      ));
+
+      $relationBehavior->setParameter('foreign_table', $table->getName());
+      $relationBehavior->setParameter('foreign_column', $this->getParameter('name');
       $foreignTable->addBehavior($relationBehavior);
     }
   }
@@ -318,7 +318,7 @@ Adding a behavior to a `Table` instance, as well as adding a `Parameter` to a `B
 
 ## Adding Code For Model Hooks ##
 
-The new `AggregateColumnRelationBehavior` is not yet ready to write. It must implement a call to `PollQuestion::updateTotalNbVotes()` in the `postSave()` and `postDelete()` hooks.
+The new `AggregateColumnRelationBehavior` is yet to write. It must implement a call to `PollQuestion::updateTotalNbVotes()` in the `postSave()` and `postDelete()` hooks.
 
 Adding code to hooks from a behavior is just like adding methods: add a method with the right hook name returning a code string, and the code will get appended at the right place. Unsurprisingly, the behavior hook methods for `postSave()` and `postDelete()` are called `postSave()` and `postDelete()`:
 
@@ -423,10 +423,8 @@ class BehaviorB extends Behavior
 
 ## What's Left ##
 
-These are the basics of behavior writing: implement one of the methods documented in the [behaviors chapter](../documentation/07-behaviors.html#writing-a-behavior) of the Propel guide, and return strings containing the code to be added to the ActiveRecord, Query, and Peer classes. In addition to the behavior code, you should always write unit tests - all the behaviors bundled with Propel have full unit test coverage. And to make your behavior usable by others, documentation is highly recommended. Once again, Propel core behaviors are fully documented, to let users understand the behavior usage without having to peek into the code.
+These are the basics of behavior writing: implement one of the methods documented in the [behaviors chapter](../documentation/07-behaviors.html#writing-a-behavior) of the Propel guide, and return strings containing the code to be added to the ActiveRecord, Query, and TableMap classes. In addition to the behavior code, you should always write unit tests - all the behaviors bundled with Propel have full unit test coverage. And to make your behavior usable by others, documentation is highly recommended. Once again, Propel core behaviors are fully documented, to let users understand the behavior usage without having to peek into the code.
 
 As for the `AggregateColumnBehavior`, the job is not finished. The [blog post](http://propel.posterous.com/getting-to-know-propel-15-keeping-an-aggregat) emphasized the need for hooks in the Query class, and these are not yet implemented in the above code. Besides, the  post kept quiet about one use case that left the aggregate column not up to date (when a question is detached from a poll without deleting it). Lastly, the parameters required for this behavior are currently a bit verbose, especially concerning the need to define the foreign table and the foreign key - this could be simplified thanks to the knowledge of the object model that behaviors have.
 
 All this is left to the reader as an exercise. Fortunately, the final behavior is part of the Propel core behaviors, so the [aggregate_column documentation](../behaviors/aggregate-column) and the code are all ready to help you to further understand the power of Propel's behavior system.
-
-You can also read [how to test your behaviors](testing-your-behaviors.html).

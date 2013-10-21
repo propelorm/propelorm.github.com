@@ -13,8 +13,6 @@ title: The Cookbook
 
 * [Customizing build](customizing-build.html)
 
-* [How to Create A Schema Based On A DBDesigner Model](dbdesigner.html)
-
 * [How to Use PHP 5.3 Namespaces](namespaces.html)
 
 * [Model Introspection At Runtime](runtime-introspection.html)
@@ -36,18 +34,7 @@ title: The Cookbook
 
 * [How to Write A Behavior](writing-behavior.html)
 
-* [How to Unit Test Your Behaviors](testing-your-behaviors.html)
-
 * [User Contributed Behaviors](user-contributed-behaviors.html)
-
-
-### Working with symfony 1.4 ###
-
-* [Init A Symfony Project With Propel As Default ORM - The Git Way](symfony1/init-a-Symfony-project-with-Propel-git-way.html)
-
-* [How To Use Propel i18n Behavior With Symfony 1.4](symfony1/how-to-use-old-SfPropelBehaviori18n-with-sf1.4.html)
-
-* [How To Use Old SfPropelBehaviori18n (Aka symfony_i18n) With Symfony 1.4](symfony1/how-to-use-old-SfPropelBehaviori18n-with-sf1.4.html)
 
 
 ### Working with Symfony2 ###
@@ -59,12 +46,3 @@ title: The Cookbook
 * [Mastering Symfony2 Forms With Propel](symfony2/mastering-symfony2-forms-with-propel.html)
 
 * [The Symfony2 Security Component And Propel](symfony2/the-symfony2-security-component-and-propel.html)
-
-* [Adding A New Behavior In Symfony2](symfony2/adding-a-new-behavior-in-symfony2.html)
-
-* [Testing](symfony2/testing.html)
-
-
-### Working with Silex ###
-
-* [Working with Silex](silex/working-with-silex.html)

@@ -11,7 +11,7 @@ In this chapter, you'll learn how to master Symfony2 forms with Propel.
 
 Assuming you manage `Book` and `Author` objects, you'll define the following `schema.xml`:
 
-{% highlight xml %}
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <database name="default" namespace="Acme\LibraryBundle\Model" defaultIdMethod="native">
     <table name="book">
@@ -29,40 +29,33 @@ Assuming you manage `Book` and `Author` objects, you'll define the following `sc
         <column name="last_name" type="varchar" size="100" />
     </table>
 </database>
-{% endhighlight %}
+```
 
 In Symfony2, you deal with `Type` so let's create a `BookType` to manage
 our books. For the moment, just ignore the relation with `Author` objects.
 
-
->**Quickly generate a `Type` with Symfony2**<br/>
-If you want a `Type` generated from a `Model`, you can use the Symfony2 console.
-For the following example, the command is: 
-`php app/console propel:form:generate @AcmeLibraryBundle Book`
-
-{% highlight php %}
+```php
 <?php
 // src/Acme/LibraryBundle/Form/Type/BookType.php
 
 namespace Acme\LibraryBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormBuilder;
 
 class BookType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('title');
         $builder->add('isbn');
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getDefaultOptions(array $options)
     {
-        $resolver->setDefaults(array(
+        return array(
             'data_class' => 'Acme\LibraryBundle\Model\Book',
-        ));
+        );
     }
 
     public function getName()
@@ -70,7 +63,7 @@ class BookType extends AbstractType
         return 'book';
     }
 }
-{% endhighlight %}
+```
 
 >**Setting the `data_class`**<br />Every form needs to know the name of the class that holds the underlying data (e.g. `Acme\LibraryBundle\Model\Book`). Usually, this is just guessed based off of the object passed to the second argument to createForm().
 
@@ -78,7 +71,7 @@ Basically, you will use this class in an action of one of your controllers.
 Assuming you have a `BookController` controller in your `LibraryBundle`, you will
 write the following code to create new books:
 
-{% highlight php %}
+```php
 <?php
 // src/Acme/LibraryBundle/Controller/BookController.php
 
@@ -101,13 +94,13 @@ class BookController extends Controller
         ));
     }
 }
-{% endhighlight %}
+```
 
 >**Warning**<br />To quickly explain how forms are rendered, the controller above extends the `Controller` class which provides the `render()` method used to return a `Response` but this is not considered as a best practice. It's better to create a controller as a service.
 
 To render the form, you'll need to create a Twig template like below:
 
-{% highlight django %}
+```jinja
 {# src/Acme/LibraryBundle/Resources/views/Book/new.html.twig #}
 
 <form action="{{ "{{ path('book_new')" }} }}" method="post" {{ "{{ form_enctype(form)" }} }}>
@@ -115,7 +108,7 @@ To render the form, you'll need to create a Twig template like below:
 
     <input type="submit" />
 </form>
-{% endhighlight %}
+```
 
 You'll get this result:
 
@@ -125,7 +118,7 @@ As such, the topic of persisting the `Book` object to the database is entirely
 unrelated to the topic of forms. But, if you've created a `Book` class with Propel,
 then persisting it after a form submission can be done when the form is valid:
 
-{% highlight php %}
+```php
 <?php
 // src/Acme/LibraryBundle/Controller/BookController.php
 
@@ -139,7 +132,7 @@ then persisting it after a form submission can be done when the form is valid:
         $request = $this->getRequest();
 
         if ('POST' === $request->getMethod()) {
-            $form->handleRequest($request);
+            $form->bindRequest($request);
 
             if ($form->isValid()) {
                 $book->save();
@@ -153,43 +146,39 @@ then persisting it after a form submission can be done when the form is valid:
         ));
     }
 }
-{% endhighlight %}
-
->**Note**<br/>`handleRequest` has been introduced in Symfony 2.3. Be sure to use
-`bindRequest` instead in previous versions of Symfony.
+```
 
 If, for some reason, you don't have access to your original `$book` object,
 you can fetch it from the form:
 
-{% highlight php %}
+```php
 <?php
 
 $book = $form->getData();
-{% endhighlight %}
+```
 
 As you can see, this is really easy to manage basic forms with both Symfony2
-and Propel. But, in real life, this kind of forms is not enought and you'll probably
+and Propel. But, in real life, this kind of forms is not enough and you'll probably
 manage objects with relations, this is the next part of this chapter.
 
 
 ## One-To-Many relations ##
 
-A `Book` has an `Author`, this is a **One-To-Many** relation. Let's modifing your
+A `Book` has an `Author`, this is a **One-To-Many** relation. Let's modifying your
 `BookType` to handle this relation:
 
-{% highlight php %}
+```php
 <?php
 // src/Acme/LibraryBundle/Form/Type/BookType.php
 
 namespace Acme\LibraryBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormBuilder;
 
 class BookType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('title');
         $builder->add('isbn');
@@ -197,11 +186,11 @@ class BookType extends AbstractType
         $builder->add('author', new AuthorType());
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getDefaultOptions(array $options)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Acme\LibraryBundle\Model\Book'
-        ));
+        return array(
+            'data_class' => 'Acme\LibraryBundle\Model\Book',
+        );
     }
 
     public function getName()
@@ -209,31 +198,30 @@ class BookType extends AbstractType
         return 'book';
     }
 }
-{% endhighlight %}
+```
 
 You now have to write an `AuthorType` to reflect the new requirements:
 
-{% highlight php %}
+```php
 <?php
 // src/Acme/LibraryBundle/Form/Type/AuthorType.php
 
 namespace Acme\LibraryBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormBuilder;
 
 class AuthorType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('first_name');
         $builder->add('last_name');
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getDefaultOptions(array $options)
     {
-        $resolver->setDefaults(array(
+        return array(
             'data_class' => 'Acme\LibraryBundle\Model\Author',
         );
     }
@@ -243,7 +231,7 @@ class AuthorType extends AbstractType
         return 'author';
     }
 }
-{% endhighlight %}
+```
 
 If you refresh your page, you'll now get the following result:
 
@@ -255,19 +243,18 @@ The `Author` instance is accessible naturally via $book->getAuthor().
 
 But you could have the following use case: to add books to an author. The main type will be the `AuthorType` as below:
 
-{% highlight php %}
+```php
 <?php
 // src/Acme/LibraryBundle/Form/Type/AuthorType.php
 
 namespace Acme\LibraryBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormBuilder;
 
 class AuthorType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('first_name');
         $builder->add('last_name');
@@ -279,9 +266,9 @@ class AuthorType extends AbstractType
         ));
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getDefaultOptions(array $options)
     {
-        $resolver->setDefaults(array(
+        return array(
             'data_class' => 'Acme\LibraryBundle\Model\Author',
         );
     }
@@ -291,31 +278,30 @@ class AuthorType extends AbstractType
         return 'author';
     }
 }
-{% endhighlight %}
+```
 
 You'll also need to refactor your `BookType`:
 
-{% highlight php %}
+```php
 <?php
 // src/Acme/LibraryBundle/Form/Type/BookType.php
 
 namespace Acme\LibraryBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormBuilder;
 
 class BookType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('title');
         $builder->add('isbn');
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getDefaultOptions(array $options)
     {
-        $resolver->setDefaults(array(
+        return array(
             'data_class' => 'Acme\LibraryBundle\Model\Book',
         );
     }
@@ -325,7 +311,7 @@ class BookType extends AbstractType
         return 'book';
     }
 }
-{% endhighlight %}
+```
 
 When you'll create a new `Author` object, you'll be able to add a set of new `Books` objects and they will be
 linked to this author without any effort thanks to Propel and specific methods to handle collections on related objects.
@@ -338,9 +324,9 @@ linked to this author without any effort thanks to Propel and specific methods t
 Now, imagine you want to add your books to some lists for book clubs. A `BookClubList` can have many
 `Book` objects and a `Book` can be in many lists (`BookClubList`). This is a **Many-To-Many** relation.
 
-Add the following defintion to your `schema.xml ` and rebuild your model classes:
+Add the following definition to your `schema.xml ` and rebuild your model classes:
 
-{% highlight xml %}
+```xml
 <table name="book_club_list" description="Reading list for a book club.">
     <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" description="Unique ID for a school reading list." />
     <column name="group_leader" required="true" type="VARCHAR" size="100" description="The name of the teacher in charge of summer reading." />
@@ -358,23 +344,22 @@ Add the following defintion to your `schema.xml ` and rebuild your model classes
         <reference local="book_club_list_id" foreign="id" />
     </foreign-key>
 </table>
-{% endhighlight %}
+```
 
 You now have `BookClubList` and `BookListRel` objects. Let's create a `BookClubListType`:
 
-{% highlight php %}
+```php
 <?php
 // src/Acme/LibraryBundle/Form/Type/BookClubListType.php
 
 namespace Acme\LibraryBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormBuilder;
 
 class BookClubListType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('group_leader');
         $builder->add('theme');
@@ -387,9 +372,9 @@ class BookClubListType extends AbstractType
         ));
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getDefaultOptions(array $options)
     {
-        $resolver->setDefaults(array(
+        return array(
             'data_class' => 'Acme\LibraryBundle\Model\BookClubList',
         );
     }
@@ -399,7 +384,7 @@ class BookClubListType extends AbstractType
         return 'book_club_list';
     }
 }
-{% endhighlight %}
+```
 
 You've added a `CollectionType` for the `Book` list and you've configured it
 with your `BookType`. In this example, you allow to add and/or delete books.
@@ -416,24 +401,20 @@ doesn't handle the add/remove abilities in the view. You have to write some Java
 
 In the previous example, you always create new objects.
 
-If you want to select existing authors when you create new books, you'll have to
- use a `Model` type.
-You can change the text wich be displayed by passing the `property` argument. If
- left blank, the `__toString()` method will be used.
+If you want to select existing authors when you create new books, you'll have to use a `model` type:
 
-{% highlight php %}
+```php
 <?php
 // src/Acme/LibraryBundle/Form/Type/BookType.php
 
 namespace Acme\LibraryBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormBuilder;
 
 class BookType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('title');
         $builder->add('isbn');
@@ -441,13 +422,12 @@ class BookType extends AbstractType
         //$builder->add('author', new AuthorType());
         $builder->add('author', 'model', array(
             'class' => 'Acme\LibraryBundle\Model\Author',
-            'property' => 'fullname',
         ));
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getDefaultOptions(array $options)
     {
-        $resolver->setDefaults(array(
+        return array(
             'data_class' => 'Acme\LibraryBundle\Model\Book',
         );
     }
@@ -457,77 +437,14 @@ class BookType extends AbstractType
         return 'book';
     }
 }
-{% endhighlight %}
+```
 
 You'll obtain the following result:
 
 ![](./images/many_to_many_form_with_existing_objects.png)
 
->**Information**<br />The `ModelType` is part of the [`Symfony Propel Bridge`](https://github.com/symfony/symfony/blob/master/src/Symfony/Bridge/Propel1/).
+>**Information**<br />The `ModelType` is part of the [`PropelBundle`](http://github.com/propelorm/PropelBundle.git).
 
-## Validation ##
-
-Using Propel in a Symfony2 project lacks a convenient way to use validation through annotation.
-Instead you have to use classic validation process, using a validation (in yml, xml or php format) file.
-
-In order to use this type of validation you must configure your application.
-
-In YAML:
-
-{% highlight yaml %}
-# in app/config/config.yml
-framework:
-    validation: { enabled: true }
-{% endhighlight %}
-
-In XML:
-
-{% highlight xml %}
-<!-- in app/config/config.xml -->
-<framework:config>
-    <framework:validation enabled="true" />
-</framework:config>
-{% endhighlight %}
-
-In PHP:
-
-{% highlight php %}
-// in app/config/config.php
-$container->loadFromExtension('framework', array('validation' => array(
-    'enabled' => true,
-)));
-{% endhighlight %}
-
-Now just follow the official documentation [`about validation`](http://symfony.com/doc/current/book/validation.html) to know how to create your validation file.
-
-
-### Introducing the UniqueObject constraint ###
-
-As Doctrine has his `UniqueEntity` constraint, Propel has its `UniqueObject` constraint.
-The use of this constraint is similar to the use of the UniqueEntity.
-
-
-In a form, if you want to validate the unicity of a field in a table you have to use the UniqueObject constraint.
-To use it is in a `validation.yml` file just add those few lines in your validation file:
-
-{% highlight yaml %}
-BundleNamespace\Model\User:
-  constraints:
-    - Propel\PropelBundle\Validator\Constraints\UniqueObject:
-      fields: username
-      message: User already exists ({{ fields }}).
-{% endhighlight %}
-
-In order to validate the unicity of more than just one fields:
-
-{% highlight yaml %}
-BundleNamespace\Model\User:
-  constraints:
-    - Propel\PropelBundle\Validator\Constraints\UniqueObject:
-      fields: [username, login]
-{% endhighlight %}
-
-As many validator of this type as you want can be used.
 
 ## Summary ##
 
