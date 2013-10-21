@@ -1,0 +1,24 @@
+.banner {
+    position:absolute;
+    top: 0px;
+    background-color: red;
+    color: white;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+}
+
+.banner p {
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.banner a:hover,
+.banner a:focus {
+    color: #fff;
+}
+
+.layout {
+    margin: 40px auto;
+}
