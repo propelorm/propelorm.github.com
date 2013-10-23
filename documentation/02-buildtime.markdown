@@ -161,27 +161,6 @@ $ cd /path/to/bookstore
 $ propel sql:build
 ```
 
-Before insert it into your database, you should create a database, let's say we want to call it `bookstore`. If you are using MySQL for instance, just run:
-
-```bash
-$ mysqladmin -u root -p create bookstore
-```
-
-Then insert the SQL into your database:
-```bash
-$ propel sql:insert
-```
-
-You should normally have yours tables created. Propel will also generate a
-`generated-sql` folder containning the SQL files of your schema ; useful if you
-are using a SCM, you can so compare the different versions of your schema.
-
-Each time you will update your schema, you should run `sql:build` and `sql:insert`.
-
-Depending on which RDBMS you are using, it may be normal to see some errors (e.g. "unable to DROP...") when you first run this command. This is because some databases have no way of checking to see whether a database object exists before attempting to DROP it (MySQL is a notable exception). It is safe to disregard these errors, and you can always run the script a second time to make sure that the errors are no longer present.
-
->**Tip**<br />The `schema.sql` file will DROP any existing table before creating them, which will effectively erase your database.
-
 ### Generate Model Classes ###
 
 Now that your database is ready, we are going to generate our model files. These files are just classes that allows you to interact easily with your different tables. To generate these tables, just run:
@@ -320,3 +299,36 @@ require_once '/path/to/vendor/autoload.php';
 // setup Propel
 require_once '/generated-conf/config.php';
 ```
+
+### Create the Database Schema ###
+
+Now that your project is fully set up, you have to create the generated schema
+in your database.
+
+Before insert it, you should create a database, let's say we want to call it
+`bookstore`. If you are using MySQL for instance, just run:
+
+```bash
+$ mysqladmin -u root -p create bookstore
+```
+
+Then insert the SQL into your database:
+```bash
+$ propel sql:insert
+```
+
+You should normally have yours tables created. Propel will also generate a
+`generated-sql` folder containning the SQL files of your schema ; useful if you
+are using a SCM, you can so compare the different versions of your schema.
+
+Each time you will update your schema, you should run `sql:build` and `sql:insert`.
+
+Depending on which RDBMS you are using, it may be normal to see some errors
+(e.g. "unable to DROP...") when you first run this command. This is because some
+databases have no way of checking to see whether a database object exists before
+attempting to DROP it (MySQL is a notable exception). It is safe to disregard
+these errors, and you can always run the script a second time to make sure that
+the errors are no longer present.
+
+>**Warning**<br />The `schema.sql` file will DROP any existing table before
+creating them, which will effectively erase your database.
