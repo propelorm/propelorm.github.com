@@ -12,19 +12,14 @@ Behaviors are a great way to package model extensions for reusability. They are 
 
 The `save()` and `delete()` methods of your generated objects are easy to override. In fact, Propel looks for one of the following methods in your objects and executes them when needed:
 
-```php
-<?php
-// save() hooks
-preInsert()            // code executed before insertion of a new object
-postInsert()           // code executed after insertion of a new object
-preUpdate()            // code executed before update of an existing object
-postUpdate()           // code executed after update of an existing object
-preSave()              // code executed before saving an object (new or existing)
-postSave()             // code executed after saving an object (new or existing)
-// delete() hooks
-preDelete()            // code executed before deleting an object
-postDelete()           // code executed after deleting an object
-```
+* `preInsert`: code executed before insertion of a new object
+* `postInsert`: code executed after insertion of a new object
+* `preUpdate`: code executed before update of an existing object
+* `postUpdate`: code executed after update of an existing object
+* `preSave`: code executed before saving an object (new or existing)
+* `postSave`: code executed after saving an object (new or existing)
+* `preDelete`: code executed before deleting an object
+* `postDelete`: code executed after deleting an object
 
 For example, you may want to keep track of the creation date of every row in the `book` table. In order to achieve this behavior, you can add a `created_at` column to the table in `schema.xml`:
 
@@ -267,45 +262,39 @@ class MyBehavior extends Behavior
 
 Behaviors can add code to the generated model object by implementing one of the following methods:
 
-```php
-objectAttributes()     // add attributes to the object
-objectMethods()        // add methods to the object
-preInsert()            // add code to be executed before insertion of a new object
-postInsert()           // add code to be executed after  insertion of a new object
-preUpdate()            // add code to be executed before update of an existing object
-postUpdate()           // add code to be executed after  update of an existing object
-preSave()              // add code to be executed before saving an object (new or existing)
-postSave()             // add code to be executed after  saving an object (new or existing)
-preDelete()            // add code to be executed before deleting an object
-postDelete()           // add code to be executed after  deleting an object
-objectCall()           // add code to be executed inside the object's __call()
-objectFilter(&$script) // do whatever you want with the generated code, passed as reference
-```
+* `objectAttributes`: add attributes to the object
+* `objectMethods`: add methods to the object
+* `preInsert`: add code to be executed before insertion of a new object
+* `postInsert`: add code to be executed after  insertion of a new object
+* `preUpdate`: add code to be executed before update of an existing object
+* `postUpdate`: add code to be executed after  update of an existing object
+* `preSave`: add code to be executed before saving an object (new or existing)
+* `postSave`: add code to be executed after  saving an object (new or existing)
+* `preDelete`: add code to be executed before deleting an object
+* `postDelete`: add code to be executed after  deleting an object
+* `objectCall`: add code to be executed inside the object's __call()
+* `objectFilter($script)`: do whatever you want with the generated code, passed as reference
 
 ### Modifying the Query Classes ###
 
 Behaviors can also add code to the generated query objects by implementing one of the following methods:
 
-```php
-queryAttributes()     // add attributes to the query class
-queryMethods()        // add methods to the query class
-preSelectQuery()      // add code to be executed before selection of a existing objects
-preUpdateQuery()      // add code to be executed before update of a existing objects
-postUpdateQuery()     // add code to be executed after  update of a existing objects
-preDeleteQuery()      // add code to be executed before deletion of a existing objects
-postDeleteQuery()     // add code to be executed after  deletion of a existing objects
-queryFilter(&$script) // do whatever you want with the generated code, passed as reference
-```
+* `queryAttributes`: add attributes to the query class
+* `queryMethods`: add methods to the query class
+* `preSelectQuery`: add code to be executed before selection of a existing objects
+* `preUpdateQuery`: add code to be executed before update of a existing objects
+* `postUpdateQuery`: add code to be executed after  update of a existing objects
+* `preDeleteQuery`: add code to be executed before deletion of a existing objects
+* `postDeleteQuery`: add code to be executed after  deletion of a existing objects
+* `queryFilter(&$script)`: do whatever you want with the generated code, passed as reference
 
 ### Modifying the TableMap Classes ###
 
 Behaviors can also add code to the generated TableMap objects by implementing one of the following methods:
 
-```php
-staticAttributes()   // add static attributes to the TableMap class
-staticMethods()      // add static methods to the TableMap class
-tableMapFilter(&$script) // do whatever you want with the generated code, passed as reference
-```
+* `staticAttributes`: add static attributes to the TableMap class
+* `staticMethods`: add static methods to the TableMap class
+* `tableMapFilter(&$script)`: do whatever you want with the generated code, passed as reference
 
 ### Adding New Classes ###
 
@@ -405,9 +394,7 @@ public function findPk(\$key, \$con = null)
 
 The `PropelPHPParser` class provides the following utility methods:
 
-```php
-removeMethod($methodName)
-replaceMethod($methodName, $newCode)
-addMethodAfter($methodName, $newCode)
-addMethodBefore($methodName, $newCode)
-```
+* `removeMethod($methodName)`
+* `replaceMethod($methodName, $newCode)`
+* `addMethodAfter($methodName, $newCode)`
+* `addMethodBefore($methodName, $newCode)`
