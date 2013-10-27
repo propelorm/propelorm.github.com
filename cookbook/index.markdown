@@ -34,5 +34,11 @@ title: The Cookbook
 
 * [How to Write A Behavior](writing-behavior.html)
 
+* [How to Unit Test Your Behaviors](testing-your-behaviors.html)
+
 * [User Contributed Behaviors](user-contributed-behaviors.html)
 
+
+### Working with Silex ###
+
+* [Working with Silex](silex/working-with-silex.html)
