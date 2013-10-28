@@ -86,8 +86,8 @@ $book->save(); // persist the modification to the database
 // create new
 $book = new Book();
 $book->setTitle('JavaScript, The Good Parts.');
-$book->save() // add new row
-$book->getId() // now available since it's autoIncrement
+$book->save();  // add new row
+$book->getId(); // now available since it's autoIncrement
 ```
 {% endcapture %}
 
