@@ -67,18 +67,18 @@ If you've run `bin/propel`, you can see some other commands, not included in the
 
 The Phing tasks that you used at buildtime are now refactored to Commands. They work the same, but their name has changed:
 
-    OLD TASK             NEW COMMAND
-
-    build-model          model:build
-    build-sql            sql:build
-    insert-sql           sql:insert
-    convert-conf         config:convert-xml
-    diff                 migration:diff
-    status               migration:status
-    migrate              migration:migrate
-    up                   migration:up
-    down                 migration:down
-    reverse              database:reverse
+| Old task      | New command       |
+|---------------|-------------------|
+| build-model   | model:build       |
+| build-sql     | sql:build         |
+| insert-sql    | sql:insert        |
+| convert-conf  | config:convert-xml|
+| diff          | migration:diff    |
+| status        | migration:status  |
+| migrate       | migration:migrate |
+| up            | migration:up      |
+| down          | migration:down    |
+| reverse       | database:reverse  |
 
 
 ## PSR-0 and namespaces ##
@@ -135,10 +135,10 @@ All PDO connection references, now are `ConnectionInterface` onces and all PDOSt
 `ServiceContainer` class includes all methods, properties and constants relate to "shared" services: connections, adapters, data sources, database map, logger and profiler.
 Some ServiceContainer informations was previously included in `Propel` class:
 
-    Replace...                    With...
-
-    Propel::CONNECTION_WRITE      ServiceContainerInterface::CONNECTION_WRITE
-    Propel::CONNECTION_READ       ServiceContainerInterface::CONNECTION_READ
+| Replace...                 | With...                                       |
+|----------------------------|-----------------------------------------------|
+| `Propel::CONNECTION_WRITE` | `ServiceContainerInterface::CONNECTION_WRITE` |
+| `Propel::CONNECTION_READ`  | `ServiceContainerInterface::CONNECTION_READ`  |
 
 
 Some static methods from the `Propel` class have been renamed. Therefore, you must replace the following occurrences in your code:
@@ -181,18 +181,18 @@ model.
 The classes used by Propel internally to build the object model were renamed.
 This affects your project if you extended one of these classes.
 
-    Replace...                       With...
-
-    OMBuilder.php                    AbstractOMBuilder.php
-    ObjectBuilder.php                AbstractObjectBuilder.php
-    PeerBuilder.php                  __removed__
-    PHP5ExtensionObjectBuilder.php   ExtensionObjectBuilder.php
-    PHP5ExtensionPeerBuilder.php     __removed__
-    PHP5InterfaceBuilder.php         InterfaceBuilder.php
-    PHP5MultiExtendObjectBuilder.php MultiExtendObjectBuilder.php
-    PHP5ObjectBuilder.php            ObjectBuilder.php
-    PHP5PeerBuilder.php              __removed__
-    PHP5TableMapBuilder.php          TableMapBuilder.php
+| Replace...                       | With...                     |
+|----------------------------------|-----------------------------|
+| OMBuilder.php                    | AbstractOMBuilder.php       |
+| ObjectBuilder.php                | AbstractObjectBuilder.php   |
+| PeerBuilder.php                  |  __removed__                |
+| PHP5ExtensionObjectBuilder.php   | ExtensionObjectBuilder.php  |
+| PHP5ExtensionPeerBuilder.php     | __removed__                 |
+| PHP5InterfaceBuilder.php         |InterfaceBuilder.php         |
+| PHP5MultiExtendObjectBuilder.php | MultiExtendObjectBuilder.php|
+| PHP5ObjectBuilder.php            | ObjectBuilder.php           |
+| PHP5PeerBuilder.php              | __removed__                 |
+| PHP5TableMapBuilder.php          | TableMapBuilder.php         |
 
 #### Base classes reorganized ####
 
