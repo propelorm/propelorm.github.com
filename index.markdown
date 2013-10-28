@@ -49,7 +49,7 @@ Everything starts with a xml file. The `schema.xml`.
 
 {% capture howMigrate %}
 ![Table Schema from Migration](/images/home-how-migration-table.png)
-With the [migration feature](/documentation/10-migrations.html) of Propel you can update database's schema automatically based on your xml file.
+With the [migration feature](/documentation/09-migrations.html) of Propel you can update database's schema automatically based on your xml file.
 This keeps the database always up2date without the hazzle of writing own `ALTER TABLE`' SQLs.
 {% endcapture %}
 
