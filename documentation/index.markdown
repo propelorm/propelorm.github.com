@@ -18,11 +18,11 @@ title: Documentation
 
 * [Basic CRUD](03-basic-crud.html) The basics of Propel C.R.U.D. (Create, Retrieve, Update, Delete) operations
 * [Relationships](04-relationships.html) Searching and manipulating data from related tables.
-* [Transactions](06-transactions.html) Where and when to use transactions.
-* [Behaviors](07-behaviors.html) The behavior system allows to package and reuse common model features.
-* [Logging And Debugging](08-logging.html) Propel can log a lot of information, including the SQL queries it executes.
-* [Inheritance](09-inheritance.html) Single Table Inheritance, Class Table Inheritance, and Concrete Table Inheritance come free with Propel.
-* [Migrations](10-migrations.html) Change the structure of the database without altering the data.
+* [Transactions](05-transactions.html) Where and when to use transactions.
+* [Behaviors](06-behaviors.html) The behavior system allows to package and reuse common model features.
+* [Logging And Debugging](07-logging.html) Propel can log a lot of information, including the SQL queries it executes.
+* [Inheritance](08-inheritance.html) Single Table Inheritance, Class Table Inheritance, and Concrete Table Inheritance come free with Propel.
+* [Migrations](09-migrations.html) Change the structure of the database without altering the data.
 
 ## Reference ##
 
