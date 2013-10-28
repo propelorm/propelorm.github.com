@@ -97,9 +97,9 @@ $book->getId() // now available since it's autoIncrement
 Via [Composer](https://packagist.org/)
 
 ```json
- "require": {
-   "propel/propel": "dev-master"
- }
+"require": {
+    "propel/propel": "2.0.0-alpha2"
+}
 ```
 
 All releases at packagist.org: [packagist.org/packages/propel/propel](https://packagist.org/packages/propel/propel)

@@ -11,8 +11,8 @@ title: Documentation
 
 ## Project Setup ##
 
- * [Installing Propel](01-installation.html) Install Propel using Git, PEAR, or a tarball.
- * [Building A Project](02-buildtime.html) Generate a PHP model based on a XML schema
+ * [Installing Propel](01-installation.html) Install Propel using Git, or a zipball/tarball.
+ * [Building A Project](02-buildtime.html) Generate a PHP model based on a XML schema.
 
 ## Propel Basics ##
 
@@ -77,4 +77,7 @@ You can also look at [user contributed behaviors](../cookbook/user-contributed-b
 
 * [Working with Silex](../cookbook/silex/working-with-silex.html)
 
->**Tip**<br />This is the up-to-date documentation for the last Propel version. To access the old documentation, please visit [trac.propelorm.org](http://trac.propelorm.org).
+>**Tip**<br />This is the up-to-date documentation for the last Propel version.
+> To access the old documentation, please visit
+[trac.propelorm.org](http://trac.propelorm.org) or
+[propelorm.org/Propel](http://propelorm.org/Propel/).
