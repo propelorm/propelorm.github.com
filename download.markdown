@@ -51,17 +51,6 @@ $ svn co http://github.com/propelorm/Propel2
 
 >**Warning**<br />SVN is no more the default Source Code Management since 2011.
 
-## PEAR Installer ##
-
-Propel is available through its own PEAR channel [pear.propelorm.org](pear.propelorm.org), in two separate packages for generator and runtime:
-
-```bash
-$ pear channel-discover pear.propelorm.org
-$ sudo pear install -a propel/Propel2
-```
-
->**Tip**<br />If you would like to use a beta or RC version of Propel, you may need to change your preferred_state PEAR environment variable.
-
 ## Full Propel Package ##
 
 Please download one of the packages below if you would like to install the traditional Propel package, which includes both runtime and generator components.
@@ -73,7 +62,7 @@ Other releases are available for download at [files.propelorm.org](http://files.
 
 ## License ##
 
-Copyright (c) 2005-2011 Hans Lellelid, David Zuelke, Francois Zaninotto, William
+Copyright (c) 2005-2013 Hans Lellelid, David Zuelke, Francois Zaninotto, William
 Durand
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

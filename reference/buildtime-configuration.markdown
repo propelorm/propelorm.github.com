@@ -5,7 +5,9 @@ title: Build Properties Reference
 
 # Build Properties Reference #
 
-Here is a list of properties that can be set to affect how Propel builds database files.  For a complete list, see the `default.properties` file that is bundled with your version of Propel generator (this will be in PEAR's data directory if you are using a PEAR-installed version of Propel).
+Here is a list of properties that can be set to affect how Propel builds database files.
+For a complete list, see the `default.properties` file that is bundled with your version
+of Propel generator.
 
 First, some conventions:
 
@@ -21,7 +23,7 @@ The most natural place to specify properties for a file are in the project's `bu
 
 ### In a global `build.properties` file ###
 
-You can also create a global `build.properties` file in the same directory as Propel's `default.properties` file. For users who have installed Propel using PEAR, this will be in PEAR data directory structure.
+You can also create a global `build.properties` file in the same directory as Propel's `default.properties` file.
 
 ## Property List ##
 

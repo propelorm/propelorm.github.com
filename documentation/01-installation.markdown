@@ -5,7 +5,7 @@ title: Installing Propel
 
 # Installing Propel #
 
-Propel is available as a [PEAR](http://pear.php.net/manual/en/installation.getting.php) package, as a clone from the official [Github repository](http://github.com/propelorm/Propel2), as a checkout from Subversion through Github and as a "traditional" [tgz](https://github.com/propelorm/Propel2/tarball/master) or [zip](https://github.com/propelorm/Propel2/zipball/master) package. Whatever installation method you may choose, getting Propel to work is pretty straightforward.
+Propel is available as a clone from the official [Github repository](http://github.com/propelorm/Propel2), as a checkout from Subversion through Github and as a "traditional" [tgz](https://github.com/propelorm/Propel2/tarball/master) or [zip](https://github.com/propelorm/Propel2/zipball/master) package. Whatever installation method you may choose, getting Propel to work is pretty straightforward.
 
 ## Prerequisites ##
 
@@ -65,31 +65,6 @@ Propel is well unit-tested so the cloned version should be pretty stable. If you
 $ cd myproject/vendor/propel
 $ git pull
 ```
-
-### Global Installation Via PEAR ###
-
-Alternatively, you can install Propel globally on your system using PEAR. All your projects will use the same Propel version - that may or may not be a good idea, depending on how often you update your projects.
-
-Propel has its own PEAR channel, that you must "discover". Using the `pear install -a` command, you can let PEAR download and install all dependencies.
-
-So the commands to install Propel globally sum up to this:
-
-```bash
-$ pear channel-discover pear.propelorm.org
-$ pear install -a propel/propel
-```
-
-Once Propel is installed globally, you can access the `propel` command from everywhere without symlink.
-
->**Tip**<br />If you want to install non-stable versions of Propel, change your `preferred_state` PEAR environment variable before installing the Propel packages. Valid states include 'stable', 'beta', 'alpha', and 'devel':
-
-```bash
-$ pear config-set preferred_state beta
-```
-
-#### PEAR Directory In Include Path ####
-
-If you choose to install Propel via PEAR, and if it's your first use of PEAR, the PEAR directory may not be on your PHP `include_path`. Check the [PEAR documentation](http://pear.php.net/manual/en/installation.checking.php) for details on how to do that.
 
 ### Using a Tarball Or a Zipball ###
 
