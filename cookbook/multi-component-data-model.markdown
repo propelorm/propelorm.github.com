@@ -7,13 +7,13 @@ title: Multi-Component Data Model
 
 Propel comes along with packaging capabilities that allow you to more easily integrate Propel into a packaged or modularized application.
 
-## Muliple Schemas ##
+## Multiple Schemas ##
 
 You can use as many `schema.xml` files as you want. Schema files have to be named `(*.)schema.xml`, so names like `schema.xml`, `package1.schema.xml`, `core.package1.schema.xml` are all acceptable. These files _have_ to be located in your project directory.
 
 Each schema file has to contain a `<database>` element with a `name` attribute. This name references the connection settings to be used for this database (and configured in the `runtime-conf.xml`), so separated schemas can share a common database name.
 
-Whenever you call a propel build task, Propel will consider all these schema files and build the classes (or the SQL) for all the tables.
+Whenever you call a propel build tasks, Propel will consider all these schema files and build the classes (or the SQL) for all the tables.
 
 ## Understanding Packages ##
 
@@ -94,22 +94,15 @@ The `package` attribute of a table translates to the directory in which Propel g
 
 For instance, if no `package` attribute is defined at the database of table level, Propel places all classes according to the `propel.targetPackage` from the `build.properties`:
 
-```text
-build/
-  classes/
-    my_project/
-      om/
-      map/
-      Author.php
-      AuthorPeer.php
-      AuthorQuery.php
-      Book.php
-      BookPeer.php
-      BookQuery.php
-      Review.php
-      ReviewPeer.php
-      ReviewQuery.php
-```
+* generated-classes/
+  * Base/
+  * Map/
+  * Author.php
+  * AuthorQuery.php
+  * Book.php
+  * BookQuery.php
+  * Review.php
+  * ReviewQuery.php
 
 You can further tweak the location where Propel puts the created files by changing the `propel.output.dir` build property. By default this property is set to:
 
@@ -121,52 +114,39 @@ You can change it to use any other directory as your build directory.
 
 If you set up packages for `<database>` elements, Propel splits up the generated model classes into subdirectories named after the package attribute:
 
-```text
-build/
-  classes/
-    my_project/
-      author/
-        om/
-        map/
-        Author.php
-        AuthorPeer.php
-        AuthorQuery.php
-      book/
-        om/
-        map/
-        Book.php
-        BookPeer.php
-        BookQuery.php
-        Review.php
-        ReviewPeer.php
-        ReviewQuery.php
-```
+* generated-classes/
+  * author/
+      * Base/
+      * Map/
+      * Author.php
+      * AuthorQuery.php
+  * book/
+      * Base/
+      * Map/
+      * Book.php
+      * BookQuery.php
+      * Review.php
+      * ReviewQuery.php
 
 And of course, if you specialize the `package` attribute per table, you can have one table use its own package:
 
-```text
-build/
-  classes/
-    my_project/
-      author/
-        om/
-        map/
-        Author.php
-        AuthorPeer.php
-        AuthorQuery.php
-      book/
-        om/
-        map/
-        Book.php
-        BookPeer.php
-        BookQuery.php
-      review/
-        om/
-        map/
-        Review.php
-        ReviewPeer.php
-        ReviewQuery.php
-```
+
+* generated-classes/
+  * author/
+      * Base/
+      * Map/
+      * Author.php
+      * AuthorQuery.php
+  * book/
+      * Base/
+      * Map/
+      * Book.php
+      * BookQuery.php
+  * review/
+      * Base/
+      * Map/
+      * Review.php
+      * ReviewQuery.php
 
 ### Packages And SQL Files ###
 
@@ -174,30 +154,21 @@ Propel also considers packages for SQL generation. In practice, Propel generates
 
 So by default, all the tables end up in a single SQL file:
 
-```text
-build/
-  sql/
-    schema.sql
-```
+* generated-sql/
+  * schema.sql
 
 If you specialize the `package` for each `<database>` element, Propel uses it for SQL files:
 
-```text
-build/
-  sql/
-    author.schema.sql // contains CREATE TABLE author
-    book.schema.sql   // contains CREATE TABLE book and CREATE TABLE review
-```
+* generated-sql/
+  * author.schema.sql // contains CREATE TABLE author
+  * book.schema.sql   // contains CREATE TABLE book and CREATE TABLE review
 
-And, as you probably expect it, a package overridden at the table level also acocunts for an independent SQL file:
+And, as you probably expect it, a package overridden at the table level also accounts for an independent SQL file:
 
-```text
-build/
-  sql/
-    author.schema.sql // contains CREATE TABLE author
-    book.schema.sql   // contains CREATE TABLE book
-    review.schema.sql // contains CREATE TABLE review
-```
+* generated-sql
+  * author.schema.sql // contains CREATE TABLE author
+  * book.schema.sql   // contains CREATE TABLE book
+  * review.schema.sql // contains CREATE TABLE review
 
 ## Understanding The packageObjectModel Build Property ##
 
@@ -205,7 +176,7 @@ The `propel.packageObjectModel` build property enables the "packaged" build proc
 
 To switch this on, simply add the following line to the `build.properties` file in your project directory:
 
-```text
+```
 propel.packageObjectModel = true
 ```
 
@@ -225,7 +196,7 @@ Each schema file has to contain a `<database>` tag that has its `package` attrib
 
 For example, in the bookstore-packaged example the `author.schema.xml` contains the following `<database>` tag:
 
-```text
+```
 <database package="core.author" name="bookstore" [...]>
 ```
 
@@ -233,43 +204,35 @@ That means, that the Author OM classes will be created in a subdirectory `core/a
 
 You can have more than one schema file that belong to one package. For example, in the the bookstore-packaged example both the `book.schema.xml` and `media.schema.xml` belong to the same package "core.book". The generated OM classes for these schemas will therefore end up in the same `core/book/` subdirectory.
 
-### The OM build ###
+### The Object Model build ###
 
 To run the packaged bookstore example build simply go to the `propel/test/fixtures/bookstore-packages/` directory and type:
 
-```text
-../../../generator/bin/propel-gen om
+```bash
+$ propel model:build
 ```
 
-This should run without any complaints. When you have a look at the projects/bookstore-packaged/build/classes directory, the following directory tree should have been created:
-```text
-addon/
-   club/
-      BookClubList.php
-      BookClubListPeer.php
-      BookListRel.php
-      BookListRelPeer.php
-core/
-   author/
-      Author.php
-      AuthorPeer.php
-   book/
-      Book.php
-      BookPeer.php
+This should run without any complaints. When you have a look at the `projects/bookstore-packaged/generated-classes` directory, the following directory tree should have been created:
 
-      Media.php
-      MediaPeer.php
-   publisher/
-      Publisher.php
-      PublisherPeer.php
-   review/
-      Review.php
-      ReviewPeer.php
-util/
-   log/
-      BookstoreLog.php
-      BookstoreLogPeer.php
-```
+
+* addon/
+   * club/
+        * BookClubList.php
+        * BookListRel.php
+* core/
+   * author/
+        * Author.php
+   * book/
+        * Book.php
+    * media/
+        * Media.php
+   * publisher/
+        * Publisher.php
+   * review/
+        * Review.php
+* util/
+   * log/
+        * BookstoreLog.php
 
 (The additional subdirectories map/ and om/ in each of these directories have been omitted for clarity.)
 
@@ -277,11 +240,11 @@ util/
 
 From the same schema files, run the SQL generation by calling:
 
-```text
-../../../generator/bin/propel-gen sql
+```bash
+propel sql:build
 ```
 
-Then, have a look at the `build/sql/` directory: you will see that for each package (that is specified as a package attribute in the schema file database tags), one sql file has been created:
+Then, have a look at the `generated-sql/` directory: you will see that for each package (that is specified as a package attribute in the schema file database tags), one sql file has been created:
 
 * addon.club.schema.sql
 * core.author.schema.sql
@@ -292,10 +255,10 @@ Then, have a look at the `build/sql/` directory: you will see that for each pack
 
 These files contain the CREATE TABLE SQL statements necessary for each package.
 
-When you now run the insert-sql task by typing:
+When you now run the `sql:insert` task by typing:
 
-```text
-../../../generator/bin/propel-gen insert-sql
+``` bash
+$ propel sql:insert
 ```
 
 these SQL statements will be executed on a SQLite database located in the Propel/generator/test/ directory.

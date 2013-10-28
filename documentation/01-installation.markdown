@@ -5,63 +5,76 @@ title: Installing Propel
 
 # Installing Propel #
 
-Propel is available as a [composer package](https://packagist.org/packages/propel/propel1), as a [PEAR](http://pear.php.net/manual/en/installation.getting.php) package, as a clone from the official [Github repository](http://github.com/propelorm/Propel), as a checkout from [Subversion through Github](https://github.com/blog/1178-collaborating-on-github-with-subversion) and as a "traditional" [tgz](https://github.com/propelorm/Propel/tarball/master) or [zip](https://github.com/propelorm/Propel/zipball/master) package. Whatever installation method you may choose, getting Propel to work is pretty straightforward.
+Propel is available as a clone from the official [Github repository](http://github.com/propelorm/Propel2), as a checkout from Subversion through Github and as a "traditional" [tgz](https://github.com/propelorm/Propel2/tarball/master) or [zip](https://github.com/propelorm/Propel2/zipball/master) package. Whatever installation method you may choose, getting Propel to work is pretty straightforward.
 
 ## Prerequisites ##
 
-Propel runs on most PHP platforms. It just requires:
+Propel just requires:
 
-* [PHP 5.2.4+](http://www.php.net/) or newer, with the DOM (libxml2) module enabled
+* [PHP 5.4](http://www.php.net/) or newer, with the DOM (libxml2) module enabled
 * A supported database (MySQL, MS SQL Server, PostgreSQL, SQLite, Oracle)
+
+Propel also uses some Symfony2 components to work properly:
+
+* [Console](https://github.com/symfony/Console) : which manage the generators propel uses.
+* [Yaml](https://github.com/symfony/Yaml)
+* [Validator](https://github.com/symfony/Validator) : a way you manage validations with Propel.
+* [Finder](https://github.com/symfony/Finder) : uses in the source code to manage the files.
 
 >**Tip**<br />Propel uses the PDO and SPL components, which are bundled and enabled by default in PHP5.
 
-## Project-Local Installation ##
+## Setup ##
 
-For a quick start, the best choice is to install Propel inside a project directory structure, typically under a `vendor/` subdirectory:
-You could install propel manually into the your `vendor` directory, or let [composer](http://getcomposer.org/) do the job for you.
+### Via Composer ###
 
-### Composer Installation ###
+We advise you to rely on [Composer](http://getcomposer.org/) to manage your projects' dependencies. If you want to install Propel via Composer, just create a new `composer.json` file at the root of your project's directory with the following content:
 
-
-The only thing you need to do is, to drop the following line into your projects' `composer.json` file.
-
-```yaml
+```json
 {
     "require": {
-        "propel/propel1": "~1.6"
+        "propel/propel": ">= 2.0"
     }
 }
 ```
 
-composer will also take care to download all dependencies which are required by Propel.
-
->**Note**<br />Composer requires [PHP 5.3.2+](http://www.php.net/). In case you are running PHP5.2.X you should stick to the "Manual Installation"
-
-### Manual Installation ###
+Then you have to download Composer itself so in a terminal just type the following:
 
 ```bash
-myproject/
-  ...
-  vendor/ <= This is where third-party libraries usually go
+$ wget http://getcomposer.org/composer.phar
+# If you haven't wget on your computer
+$ curl -s http://getcomposer.org/installer | php
 ```
 
-To install Propel there using Git, type:
+Finally, to install all your project's dependencies, type the following:
 
 ```bash
-cd myproject/vendor
-git clone https://github.com/propelorm/Propel.git propel
+$ php composer.phar install
 ```
 
-This will export the propel library to a local `myproject/vendor/propel/` directory.
+### Via Git ###
+
+If you want, you can also setup Propel using Git cloning the Github repository:
+
+```bash
+$ git clone git://github.com/propelorm/Propel2 vendor/propel
+```
+
+Propel is well unit-tested so the cloned version should be pretty stable. If you want to update Propel, just go to the repository and pull the remote:
+
+```bash
+$ cd myproject/vendor/propel
+$ git pull
+```
+
+### Using a Tarball Or a Zipball ###
 
 Alternatively, to use a tarball, type the following commands on unix platforms:
 
 ```bash
-cd myproject/vendor
-wget http://files.propelorm.org/propel-1.6.X.tar.gz
-tar zxvf propel-1.6.X.tar.gz
-mv propel-1.6.X propel
+$ cd myproject/vendor
+$ wget http://files.propelorm.org/propel-2.0.0.tar.gz
+$ tar zxvf propel-2.0.0.tar.gz
+$ mv propel-2.0.0 propel
 ```
 
 Or, in Windows, download a ZIP from [files.propelorm.org](http://files.propelorm.org), unzip it under the `vendor/` directory, and rename it to `propel`.
@@ -72,112 +85,52 @@ The root directory of the Propel library includes the following folders:
 
 |Folders        |Explanations
 |---------------|----------------------------------------------------------------------
-|generator      |Contains the classes required to run Propel in the command line. Propel commands can build the object model, compile configuration files, execute migrations, etc.
-|runtime        |Contains the classes required to access Propel models and the database. Typically, applications using a web server will only access the `runtime` directory and not the `generator`.
+|bin            |Contains three scripts that manage propel command line tool (depending of your operating system)
+|documentation  |The Propel documentation source
+|features       |Tests written with the Behat framework
+|resources      |Contains some files such as the database XSD or DTD
+|src            |The Propel source code. Pass over if you just want to use Propel, not to contribute.
 |tests          |Propel unit tests. Ignore this if you don't want to contribute to Propel.
-
-Usually, both the generator and the runtime components are installed on development environments, while the actual test or production servers may need only the runtime component installed.
-
-## Installing Dependencies ##
-
-The Propel generator uses [Phing 2.4.5](http://phing.info/) to manage command line tasks; both the generator and the runtime classes use [PEAR Log](http://pear.php.net/package/Log/) to log events.
-
-To install these packages, use the PEAR command as follows:
-
-```bash
-pear channel-discover pear.phing.info
-pear install phing/phing
-pear install Log
-```
-
-Refer to their respective websites for alternative installation strategies for Phing and PEAR Log.
 
 ## Testing Propel Installation ##
 
-The Propel generator component bundles a `propel-gen` sh script (and a `propel-gen.bat` script for Windows). This script makes it easy to execute build commands. You can test this component is properly installed by calling the `propel-gen` script from the CLI:
+The Propel generator component bundles a `propel` sh script (and a `propel.bat` script for Windows). This script makes it easy to execute build commands. You can test this component is properly installed by calling the `propel` script from the CLI:
 
 ```bash
-cd myproject
-vendor/propel/generator/bin/propel-gen
+$ cd myproject
+$ vendor/bin/propel
 ```
 
-The script should output a welcome message, followed by a 'BUILD FAILED' message, which is normal - you haven't defined a model to build yet.
+The command should output the propel version following by a list of the options and the available commands. We will learn to use these commands later.
 
->**Tip**<br />In order to allow an easier execution the script, you can also add the propel generator's `bin/` directory to your PATH, or create a symlink. For example:
+>**Tip**<br />In order to allow an easier execution of the script, you can also add the propel generator's `bin/` directory to your PATH, or create a symlink. For example:
 
 ```bash
-cd myproject
-ln -s vendor/propel/generator/bin/propel-gen propel-gen # Make a symlink to the propel generator file
+$ cd myproject
+$ ln -s vendor/bin/propel propel
 ```
 
-Or edit your ~/.bashrc or ~/.zshrc file with :
+Or simply edit your .bashrc or .zshrc file:
 
 ```bash
-export PATH=$PATH:/path/to/propel/bin
+export PATH=$PATH:/path/to/vendor/bin/
 ```
 
-On Windows you could set the PATH for the opened command with :
+On Windows you could set the PATH for the opened command with:
 
 ```
-set PATH=%PATH%;C:/path/to/propel/generator/bin/
+set PATH=%PATH%;C:/path/to/vendor/bin/
 ```
 
-To globally define the PATH adjust it inside the "Environment Variables", which you can find in your system advanced settings panel.
+To globally define the PATH adjust it inside the "Environment Variables", which
+you can find in your system advanced settings panel.
+
 
 At this point, Propel should be setup and ready to use. You can follow the steps in the [Build Guide](02-buildtime.html) to try it out.
 
-## Alternative: Global Installation Using PEAR ##
-
-Alternatively, you can install Propel globally on your system using PEAR. All your projects will use the same Propel version - that may or may not be a good idea, depending on how often you update your projects.
-
-Propel has its own PEAR channel, that you must "discover". Using the `pear install -a` command, you can let PEAR download and install all dependencies (Phing and PEAR Log).
-
-So the commands to install Propel, Phing and PEAR Log globally sum up to this:
-
-```bash
-pear channel-discover pear.propelorm.org
-pear install -a propel/propel_generator
-pear install -a propel/propel_runtime
-```
-
-Once Propel is installed globally, you can access the `propel-gen` command from everywhere without symlink.
-
->**Tip**<br />If you want to install non-stable versions of Propel, change your `preferred_state` PEAR environment variable before installing the Propel packages. Valid states include 'stable', 'beta', 'alpha', and 'devel':
-
-```bash
-pear config-set preferred_state beta
-```
-
 ## Troubleshooting ##
-
-### PHP Configuration ###
-
-Propel requires the following settings in `php.ini`:
-
-|Variable               |Value
-|-----------------------|-----
-|ze1_compatibility_mode |Off
-|magic_quotes_gpc       |Off
-|magic_quotes_sybase    |Off
-
-### PEAR Directory In Include Path ###
-
-If you choose to install Propel via PEAR, and if it's your first use of PEAR, the PEAR directory may not be on your PHP `include_path`. Check the [PEAR documentation](http://pear.php.net/manual/en/installation.checking.php) for details on how to do that.
-
-### Phing Version ###
-
-Phing versions 2.4.3 and 2.4.4 are incompatible with Propel. Check your Phing version by calling:
-
-```bash
-phing -v
-```
-
-In case you're using a version less than 2.4.5, upgrade to the latest stable version:
-
-```bash
-pear upgrade phing/phing
-```
 
 ### Getting Help ###
 
-If you can't manage to install Propel, don't hesitate to ask for help. See [Support](../support) for details on getting help.
+If you can't manage to install Propel, don't hesitate to ask for help. See
+[Support](../support) for details on getting help.

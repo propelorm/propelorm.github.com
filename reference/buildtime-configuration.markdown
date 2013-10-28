@@ -5,7 +5,9 @@ title: Build Properties Reference
 
 # Build Properties Reference #
 
-Here is a list of properties that can be set to affect how Propel builds database files.  For a complete list, see the `default.properties` file that is bundled with your version of Propel generator (this will be in PEAR's data directory if you are using a PEAR-installed version of Propel).
+Here is a list of properties that can be set to affect how Propel builds database files.
+For a complete list, see the `default.properties` file that is bundled with your version
+of Propel generator.
 
 First, some conventions:
 
@@ -21,15 +23,7 @@ The most natural place to specify properties for a file are in the project's `bu
 
 ### In a global `build.properties` file ###
 
-You can also create a global `build.properties` file in the same directory as Propel's `default.properties` file. For users who have installed Propel using PEAR, this will be in PEAR data directory structure.
-
-### On the Command Line ###
-
-You can also specify properties on the command line when you invoke Propel. The command line accepts a camelCase version of the property name. So for instance, to set the value of the `propel.some.other.property` property using the command line, type:
-
-    > propel-gen /path/to/project -Dpropel.someOtherProperty=value
-
->**Tip**<br />There is no space between the -D and the property name.
+You can also create a global `build.properties` file in the same directory as Propel's `default.properties` file.
 
 ## Property List ##
 
@@ -69,7 +63,7 @@ propel.schema.autoNamespace = true|{false}
 propel.schema.autoPrefix = true|{false}
 
 # Whether to validate the XML schema using the XSD file.
-# The default XSD file is located under `generator/resources/xsd/database.xsd`
+# The default XSD file is located under `resources/xsd/database.xsd`
 # and you can use a custom XSD file by changing the `propel.schema.xsd.file`
 # property.
 propel.schema.validate = {true}|false
@@ -77,7 +71,7 @@ propel.schema.validate = {true}|false
 # Whether to transform the XML schema using the XSL file.
 # This was used in previous Propel versions to clean up the schema, but tended
 # to hide problems in the schema. It is disabled by default since Propel 1.5.
-# The default XSL file is located under `generator/resources/xsd/database.xsl`
+# The default XSL file is located under `resources/xsl/database.xsl`
 # and you can use a custom XSL file by changing the `propel.schema.xsl.file`
 # property.
 propel.schema.transform = true|{false}
@@ -90,8 +84,8 @@ propel.schema.transform = true|{false}
 # the SQL DDL, the PHP classes, etc.
 propel.database = pgsql|mysql|sqlite|mssql|oracle
 
-# The database PDO connection settings at builtime.
-# This setting is required for the sql, reverse, and datasql tasks.
+# The database PDO connection settings at buildtime.
+# This setting is required for the sql and reverse tasks.
 # Note that some drivers (e.g. mysql, oracle) require that you specify the
 # username and password separately from the DSN, which is why they are
 # available as options.
@@ -144,12 +138,6 @@ propel.samePhpName = true|{false}
 # does provide additional information (such as full-text indexes) which can
 # affect the generation of the DDL from the schema.
 propel.addVendorInfo = true|{false}
-
-# Which Propel validators to add to the generated schema,
-# based on the database constraints.
-propel.addValidators = {none}|maxvalue|type|required|unique|all
-# You can cherry-pick allowed validators by using a comma-separated value, e.g
-propel.addValidators = maxvalue,type,required
 ```
 
 ### Customizing Generated Object Model ###
@@ -166,10 +154,6 @@ propel.addGenericMutators = {true}|false
 # will be committed too often with just a date change.
 propel.addTimeStamp = true|{false}
 
-# Whether to add `validate()` method to your classes.
-# Set to false if you don't use Propel validation.
-propel.addValidateMethod = {true}|false
-
 # Whether to add `require` statements on the generated stub classes.
 # Propel uses autoloading for OM classes, and doesn't insert require statements
 # by default. If you don't want to use autoloading, set this to true.
@@ -183,7 +167,7 @@ propel.addHooks = {true}|false
 propel.basePrefix = {Base}|string
 
 # Some sort of "namespacing": All Propel classes with get the Prefix
-# "My_ORM_Prefix_" just like "My_ORM_Prefix_BookPeer".
+# "My_ORM_Prefix_" just like "My_ORM_Prefix_BookTableMap".
 propel.classPrefix = {empty}|string
 
 # Identifier quoting may result in undesired behavior (especially in Postgres),
@@ -244,7 +228,7 @@ propel.defaultDateFormat = { %x }|string
 propel.project.dir = {current_path}|string
 
 # The directory where Propel expects to find the XML configuration files.
-propel.conf.dir = ${propel.project.dir}
+propel.conf.dir # ${propel.project.dir}
 # The XML configuration file names
 propel.runtime.conf.file = runtime-conf.xml
 propel.buildtime.conf.file = buildtime-conf.xml
@@ -275,28 +259,18 @@ propel.sql.dir = ${propel.output.dir}/sql
 
 ```ini
 # Object Model builders
-propel.builder.peer.class = builder.om.PHP5PeerBuilder
-propel.builder.object.class = builder.om.PHP5ObjectBuilder
-propel.builder.objectstub.class = builder.om.PHP5ExtensionObjectBuilder
-propel.builder.peerstub.class = builder.om.PHP5ExtensionPeerBuilder
+propel.builder.object.class = builder.om.AbstractObjectBuilder
+propel.builder.objectstub.class = builder.om.ExtensionObjectBuilder
 
-propel.builder.objectmultiextend.class = builder.om.PHP5MultiExtendObjectBuilder
+propel.builder.objectmultiextend.class = builder.om.MultiExtendObjectBuilder
 
-propel.builder.tablemap.class = builder.om.PHP5TableMapBuilder
+propel.builder.tablemap.class = builder.om.TableMapBuilder
 propel.builder.query.class = builder.om.QueryBuilder
 propel.builder.querystub.class = builder.om.ExtensionQueryBuilder
 propel.builder.queryinheritance.class = builder.om.QueryInheritanceBuilder
 propel.builder.queryinheritancestub.class = builder.om.ExtensionQueryInheritanceBuilder
 
-propel.builder.interface.class = builder.om.PHP5InterfaceBuilder
-
-propel.builder.node.class = builder.om.PHP5NodeBuilder
-propel.builder.nodepeer.class = builder.om.PHP5NodePeerBuilder
-propel.builder.nodestub.class = builder.om.PHP5ExtensionNodeBuilder
-propel.builder.nodepeerstub.class = builder.om.PHP5ExtensionNodePeerBuilder
-
-propel.builder.nestedset.class = builder.om.PHP5NestedSetBuilder
-propel.builder.nestedsetpeer.class = builder.om.PHP5NestedSetPeerBuilder
+propel.builder.interface.class = builder.om.InterfaceBuilder
 
 # SQL builders
 propel.builder.datasql.class = builder.sql.${propel.database}.${propel.database}DataSQLBuilder
@@ -317,9 +291,8 @@ As you can see, you can specify your own builder and platform classes if you wan
 ```ini
 # Define the path to the class to be used for the `timestampable` behavior.
 # This behavior is bundled with Propel, but if you want to override it, you can
-# specify a different path. Note that your `timestampable` behavior must have a
-# different classname from the one bundled with Propel.
-propel.behavior.timestampable.class = propel.engine.behavior.MyTimestampableBehavior
+# specify a different path.
+propel.behavior.timestampable.class = propel.engine.behavior.TimestampableBehavior
 # Other behaviors use similar settings
 
 # If you want to add more behaviors, write their path following the same model:
@@ -328,5 +301,5 @@ propel.behavior.my_behavior.class = my.custom.path.to.MyBehaviorClass
 # Behaviors are enabled on a per-table basis in the `schema.xml`. However, you
 # can add behaviors for all your schemas, provided that you define them in the
 # `propel.behavior.default` setting:
-propel.behavior.default = soft_delete,my_behavior
+propel.behavior.default = archivable,my_behavior
 ```

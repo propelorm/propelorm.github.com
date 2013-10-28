@@ -59,11 +59,11 @@ The best way to learn what a generated Active Record class can do is to inspect 
 <!-- Active Record classes are generated in the directory specified in build.properties
      under the propel.php.dir setting !-->
 <table name="book">
-<!-- generates the Book class under /path/to/project/build/classes/Book.php !-->
+<!-- generates the Book class under /path/to/project/generated-classes/Book.php !-->
 
 <!-- To group Active Record classes into subdirectories, set the package attribute in the <table> tag !-->
 <table name="book" package="bookstore">
-<!-- generates the Book class under /path/to/project/build/classes/bookstore/Book.php !-->
+<!-- generates the Book class under /path/to/project/generated-classes/bookstore/Book.php !-->
 ```
 
 ```php
@@ -75,12 +75,12 @@ class Book extends BaseBook
 }
 
 // Most of the generated code is actually in the abstract Base- classes
-abstract class BaseBook extends BaseObject implements Persistent
+abstract class BaseBook implements ActiveRecordInterface
 {
   // lots of generated code
 }
 
-// BaseObject and Persistent are classes bundled by Propel
+// ActiveRecordInterface is bundled with Propel
 
 // Do not alter the code of the Base- classes, as your modifications will be overridden
 // each time you rebuild the model. Instead, add your custom code to the stub class
@@ -191,7 +191,7 @@ $book->delete();
 // DELETE FROM book WHERE id = 1234
 
 // All persistence methods accept a connection object
-$con = Propel::getConnection(BookPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+$con = Propel::getWriteConnection(BookTableMap::DATABASE_NAME);
 $book->delete($con);
 ```
 
@@ -250,7 +250,7 @@ echo $book->getAuthor()->getLastName(); // Tolstoi
     <reference local="author_id" foreign="id" />
   </foreign-key>
 </table>
-<!-- Generated methods will then be Book::setWriter(), and Book::getWriter()
+<!-- Generated methods will then be Book::setWriter(), and Book::getWriter() -->
 ```
 
 ### Many-to-one Relationships ###
@@ -280,7 +280,7 @@ $author->clearBooks(); // removes the relationship
   </foreign-key>
 </table>
 <!-- Generated methods will then be Author::addPublication(), Author::getPublications(),
-     Author::countPublications(), and Author::clearPublications()
+     Author::countPublications(), and Author::clearPublications() -->
 ```
 
 ### Many-to-many relationships ###
@@ -382,13 +382,13 @@ $book->setStyle('novel');
 echo $book->getStyle(); // novel
 // An enum is stored as a TINYINT in the database
 
-// Each value in an ENUM column has a related constant in the Peer class
+// Each value in an ENUM column has a related constant in the TableMap class
 // Your IDE with code completion should love this
-echo BookPeer::STYLE_NOVEL;  // 'novel'
-echo BookPeer::STYLE_ESSAY;  // 'essay'
-echo BookPeer::STYLE_POETRY; // 'poetry'
-// The Peer class also gives access to list of available values
-print_r(BookPeer::getValueSet(BookPeer::STYLE)); // array('novel', 'essay', 'poetry')
+echo BookTableMap::STYLE_NOVEL;  // 'novel'
+echo BookTableMap::STYLE_ESSAY;  // 'essay'
+echo BookTableMap::STYLE_POETRY; // 'poetry'
+// The TableMap class also gives access to list of available values
+print_r(BookTableMap::getValueSet(BookTableMap::STYLE)); // array('novel', 'essay', 'poetry')
 ```
 
 ### OBJECT columns ###
@@ -461,8 +461,8 @@ $book->setByName('Title', 'War and Peace');
 echo $book->getByName('Title'); // War and Peace
 // The name used is the column phpName - the same name used in generated getters and setters.
 // You can also use the table column name by adding a converter argument
-$book->setByName('title', 'War and Peace', BookPeer::TYPE_FIELDNAME);
-echo $book->getByName('title', BookPeer::TYPE_FIELDNAME); // War and Peace
+$book->setByName('title', 'War and Peace', BookTableMap::TYPE_FIELDNAME);
+echo $book->getByName('title', BookTableMap::TYPE_FIELDNAME); // War and Peace
 
 // Each Active Record class also offers generic getter and setter by position
 $book->setByPosition(2, 'War and Peace'); // 'title' is the second column of the table
@@ -486,7 +486,7 @@ print_r($book->toArray());
 // )
 
 // As with getByName() and setByName(), you can use the table column names by adding a converter argument
-print_r($book->toArray(BookPeer::TYPE_FIELDNAME));
+print_r($book->toArray(BookTableMap::TYPE_FIELDNAME));
 // array(
 //  'id'        => null
 //  'title'     => 'War and Peace',
@@ -499,7 +499,7 @@ print_r($book->toArray(BookPeer::TYPE_FIELDNAME));
 
 // If the class has related objects, they are not included by default in the output of toArray().
 // To include them, set the third argument to true.
-print_r($book->toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $includeForeignObjects = true));
+print_r($book->toArray($keyType = BaseTableMap::TYPE_PHPNAME, $includeLazyLoadColumns = true, $includeForeignObjects = true));
 // array(
 //  'Id'       => null
 //  'Title'    => 'War and Peace',
@@ -522,7 +522,7 @@ propel.addGenericMutators  = false
 
 ## Validation ##
 
-Active Record classes for tables using validation rules (defined in the schema using the `<validator>` and `<rule>` tags) have two additional methods: `validate()`, and `getValidationFailures()`.
+Active Record classes for tables using validate behavior have three additional methods: `validate()`, `getValidationFailures()` and `loadValidatorMetadata()`.
 
 ```php
 <?php
@@ -540,11 +540,11 @@ if ($book->validate()) {
 }
 ```
 
-See the [Validators documentation](../documentation/05-validators) for more details.
+See the [Validate behavior documentation](../behaviors/validate.html) for more details.
 
 ## Import and Export Capabilities ##
 
-Active Record objects have the ability to be converted to and from a string, using any of the XML, YAML, JSON, and CSV formats. This ability uses magic methods, but the phpDoc blocks defined in the `BaseObject` class make the related methods visible to an IDE.
+Active Record objects have the ability to be converted to and from a string, using any of the XML, YAML, JSON, and CSV formats. This ability uses magic methods, but the phpDoc blocks defined in the `ActiveRecordInterface` interface make the related methods visible to an IDE.
 
 Each Active Record object accepts the following method calls:
 
@@ -696,7 +696,7 @@ $book->delete();
 echo $book->isDeleted(); // true
 
 // You can test and list the modified columns using isColumnModified() and getModifiedColumns()
-// The function uses fully qualified column names (i.e. of type BasePeer::TYPE_COLNAME)
+// The function uses fully qualified column names (i.e. of type BaseTableMap::TYPE_COLNAME)
 $book = new Book();
 $book->setTitle('War and Peace');
 echo $book->isColumnModified('book.ISBN'); // false
@@ -704,7 +704,7 @@ echo $book->isColumnModified('book.TITLE'); // true
 print_r($book->getModifiedColumns());
 // array('book.TITLE')
 // To use column phpNames, just convert the parameter using translateFieldName()
-$colName = BookPeer::translateFieldName('Title', BasePeer::TYPE_PHPNAME, BasePeer::TYPE_COLNAME);
+$colName = BookTableMap::translateFieldName('Title', TableMap::TYPE_PHPNAME, TableMap::TYPE_COLNAME);
 echo $book->isColumnModified($colname); // true
 ```
 

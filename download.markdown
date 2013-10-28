@@ -7,58 +7,62 @@ title: Download Propel
 
 For a full installation tutorial, check the [Installation documentation](documentation/01-installation). The following options allow you to download the Propel code and documentation.
 
+## Composer ##
+
+You can download Propel using Composer. First, download the `composer.phar` file using one of the following command depending on your system:
+
+```bash
+$ curl -sS https://getcomposer.org/installer | php
+# Alternatively
+$ wget http://getcomposer.org/composer.phar
+```
+
+Then touch a `composer.json` file with the following content
+
+```json
+{
+    "require": {
+        "propel/propel": ">= 2.0"
+    }
+}
+```
+
+Then simply run `php composer.phar install` to fetch Propel and its dependencies.
+
 ## Git ##
 
 Clone it:
 
 ```bash
-$ git clone git://github.com/propelorm/Propel.git
+$ git clone git://github.com/propelorm/Propel2.git
 ```
 
 Or add it as a submodule:
 
 ```bash
-$ git submodule add git://github.com/propelorm/Propel.git /path/to/propel
+$ git submodule add git://github.com/propelorm/Propel2.git /path/to/propel
 ```
 
 ## Subversion Checkout / Externals ##
 
 ```bash
-$ svn co http://svn.github.com/propelorm/Propel.git
-```
->**Warning**<br />SVN is no longer the default Source Code Management since 2011.
-
-## PEAR Installer ##
-
-Propel is available through its own PEAR channel [pear.propelorm.org](pear.propelorm.org), in two separate packages for generator and runtime:
-
-```bash
-$ pear channel-discover pear.propelorm.org
-$ sudo pear install -a propel/propel_generator
-$ sudo pear install -a propel/propel_runtime
+$ svn co http://github.com/propelorm/Propel2
 ```
 
-Propel depends on the Phing library, and the dependency should be properly handled by PEAR thanks to the -a option above. Alternatively, you can install Phing separately:
-
-```bash
-$ pear channel-discover pear.phing.info
-$ sudo pear install phing/phing
-```
-
->**Tip**<br />If you would like to use a beta or RC version of Propel, you may need to change your preferred_state PEAR environment variable.
+>**Warning**<br />SVN is no more the default Source Code Management since 2011.
 
 ## Full Propel Package ##
 
 Please download one of the packages below if you would like to install the traditional Propel package, which includes both runtime and generator components.
 
-* [Last version of Propel as ZIP file](https://github.com/propelorm/Propel/zipball/master)
-* [Last version of Propel as TAR.GZ file](https://github.com/propelorm/Propel/tarball/master)
+* [Last version of Propel as ZIP file](https://github.com/propelorm/Propel2/zipball/master)
+* [Last version of Propel as TAR.GZ file](https://github.com/propelorm/Propel2/tarball/master)
 
 Other releases are available for download at [files.propelorm.org](http://files.propelorm.org).
 
 ## License ##
 
-Copyright (c) 2005-2011 Hans Lellelid, David Zuelke, Francois Zaninotto, William
+Copyright (c) 2005-2013 Hans Lellelid, David Zuelke, Francois Zaninotto, William
 Durand
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

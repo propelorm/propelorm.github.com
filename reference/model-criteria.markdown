@@ -39,7 +39,7 @@ Propel uses the column name in conjunction with the schema to determine the colu
 <?php
 // $con is a PDO instance
 $stmt = $con->prepare($query);
-$stmt->bindParam(':p1', time() - 30 * 24 * 60 * 60, PDO::PARAM_INT);
+$stmt->bind(':p1', time() - 30 * 24 * 60 * 60, PDO::PARAM_INT);
 $res = $stmt->execute();
 ```
 
@@ -133,7 +133,7 @@ $books = BookQuery::create()
   ->find();
 // example Query generated for a MySQL database
 $query = 'SELECT book.* from `book`
-WHERE book.PUBLISHED_AT <= :p1; // :p1 => 1291065396
+WHERE book.PUBLISHED_AT < :p1; // :p1 => 1291065396
 ```
 
  * for ENUM columns, `filterByXXX()` accepts one of the values defined in the `valueSet` attribute in the schema.
@@ -330,9 +330,9 @@ $books = BookQuery::create()
 
 ```php
 <?php
-// All the termination methods accept a PropelPDO connection instance
+// All the termination methods accept a Connection object
 // So you can specify which connection to use
-$con = Propel::getConnection('bookstore', Propel::CONNECTION_READ);
+$con = Propel::getReadConnection(BookTableMap::DATABASE_NAME);
 $nbBooks = BookQuery::create()
   ->findOne($con);
 ```
@@ -450,8 +450,6 @@ $articles = ArticleQuery::create()
 //   array('Id' => 456, 'Title' => 'bar', 'Content' => 'This is bar')
 // )
 ```
-
->**Tip**<br />The `select()` method use the `PropelSimpleArrayFormatter` if you use another propel formatter it won't work as expected. You can use your own custom formatter that extends `PropelSimpleArrayFormatter` or work the same way.
 
 ### Creating An Object Based on a Query ###
 
@@ -636,7 +634,7 @@ WHERE book.TITLE = :p1'   // :p1 => 'War and Peace'
 ```php
 <?php
 // Test data
-$author1 = new Author();
+$author1 = new Book();
 $author1->setName('Jane Austen');
 $author1->save();
 $book1 = new Book();
@@ -764,7 +762,7 @@ $book = BookQuery::create()
 $author = $book->getAuthor();  // Same result, with no supplementary query
 ```
 
-Since the call to `with()` adds the columns of the related object to the SELECT part of the query, and uses these columns to populate the related object, that means that `joinWith()` is slower and consumes more memory than `join()`. So use it only when you actually need the related objects afterwards.
+Since the call to `with()` adds the columns of the related object to the SELECT part of the query, and uses these columns to populate the related object, that means that `joinWith()` is slower and consumes more memory that `join()`. So use it only when you actually need the related objects afterwards.
 
 `with()` and `joinWith()` are not limited to immediate relationships. As a matter of fact, just like you can chain `join()` calls, you can chain `joinWith()` calls to populate a chain of objects:
 
@@ -780,7 +778,7 @@ $author = $book->getAuthor();       // No additional query needed
 $publisher = $book->getPublisher(); // No additional query needed
 ```
 
-So `joinWith()` is very useful to minimize the number of database queries. As soon as you see that the number of queries necessary to perform an action is proportional to the number of results, adding `With` after `join()` calls is the trick to get down to a more reasonnable query count.
+So `joinWith()` is very useful to minimize the number of database queries. As soon as you see that the number of queries necessary to perform an action is proportional to the number of results, adding `With` after `join()` calls is the trick to get down to a more reasonable query count.
 
 ### Adding Columns ###
 
@@ -991,7 +989,7 @@ comment($comment)
 count($con = null)
 find($con = null)
 findOne($con = null)
-findOneOrCreate($con = null)
+finOneOrCreate($con = null)
 findBy($columnName, $value, $con = null)
 findByArray($conditions, $con = null)
 findOneBy($columnName, $value, $con = null)
@@ -1011,11 +1009,11 @@ update($values, $con = null, $forceIndividualSaves = false)
 // find() returns a PropelCollection, which you can use just like an array
 $books = BookQuery::create()->find(); // $books behaves like an array
 ?>
-There are <?php echo count($books) ?> books:
+There are <?= count($books) ?> books:
 <ul>
   <?php foreach ($books as $book): ?>
   <li>
-    <?php echo $book->getTitle() ?>
+    <?= $book->getTitle() ?>
   </li>
   <?php endforeach; ?>
 </ul>
@@ -1029,11 +1027,11 @@ $books = BookQuery::create()->find(); // $books is an object
 <?php if($books->isEmpty()): ?>
 There are no books.
 <?php else: ?>
-There are <?php echo $books->count() ?> books:
+There are <?= $books->count() ?> books:
 <ul>
   <?php foreach ($books as $book): ?>
-  <li class="<?php echo $books->isOdd() ? 'odd' : 'even' ?>">
-    <?php echo $book->getTitle() ?>
+  <li class="<?= $books->isOdd() ? 'odd' : 'even' ?>">
+    <?= $book->getTitle() ?>
   </li>
   <?php if($books->isLast()): ?>
   <li>Do you want more books?</li>
@@ -1087,10 +1085,10 @@ string toJSON() // exports all the objects as a JSON string
 string toCSV() // exports all the objects as a CSV string
 string __toString() // exports to a string using the default string representation (YAML)
 void  fromArray($array) // imports a collection from an array
-void fromXML($xml) // imports a collection from an XML string
-void fromYAML($yaml) // imports a collection from a YAML string
-void fromJSON($json) // imports a collection from a JSON string
-void fromCSV($csv) // imports a collection from a CSV string
+void toXML($xml) // imports a collection from an XML string
+void toYAML($yaml) // imports a collection from a YAML string
+void toJSON($json) // imports a collection from a JSON string
+void toCSV($csv) // imports a collection from a CSV string
 ```
 
 >**Tip**<br />`PropelCollection` extends `ArrayObject`, so you can also call all the methods of this SPL class on a collection (including `count()`, `append()`, `ksort()`, etc.).
@@ -1108,11 +1106,11 @@ $bookPager = BookQuery::create()
 <?php if($bookPager->isEmpty()): ?>
 There are no books.
 <?php else: ?>
-There are <?php echo $bookPager->count() ?> books:
+There are <?= $bookPager->count() ?> books:
 <ul>
   <?php foreach ($bookPager as $book): ?>
-  <li class="<?php echo $bookPager->isOdd() ? 'odd' : 'even' ?>">
-    <?php echo $book->getTitle() ?>
+  <li class="<?= $bookPager->isOdd() ? 'odd' : 'even' ?>">
+    <?= $book->getTitle() ?>
   </li>
   <?php if($bookPager->isLast()): ?>
   <li>Do you want more books?</li>
@@ -1123,10 +1121,10 @@ There are <?php echo $bookPager->count() ?> books:
 
 <?php // PropelModelPager offers a convenient API to display pagination controls ?>
 <?php if($bookPager->haveToPaginate()): ?>
-  <p>Page <?php echo $bookPager->getPage() ?> of <?php echo $bookPager->getLastPage() ?></p>
+  <p>Page <?= $bookPager->getPage() ?> of <?= $bookPager->getLastPage() ?></p>
   <p>
-  	Displaying results <?php echo $bookPager->getFirstIndex() ?> to <?php echo $bookPager->getLastIndex() ?>
-  	on a total of <?php echo $bookPager->getNbResults() ?>
+    Displaying results <?= $bookPager->getFirstIndex() ?> to <?= $bookPager->getLastIndex() ?>
+    on a total of <?= $bookPager->getNbResults() ?>
 	</p>
 <?php endif; ?>
 ```

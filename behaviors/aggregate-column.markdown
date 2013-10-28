@@ -9,7 +9,7 @@ The `aggregate_column` behavior keeps a column updated using an aggregate functi
 
 ## Basic Usage ##
 
-In the `schema.xml`, use the `<behavior>` tag to add the `aggregate_column` behavior to a table. You must provide parameters for the aggregate column `name`, the foreign table name, and the aggegate `expression`. For instance, to add an aggregate column keeping the comment count in a `post` table:
+In the `schema.xml`, use the `<behavior>` tag to add the `aggregate_column` behavior to a table. You must provide parameters for the aggregate column `name`, the foreign table name, and the aggregate `expression`. For instance, to add an aggregate column keeping the comment count in a `post` table:
 
 ```xml
 <table name="post">
@@ -110,38 +110,6 @@ public function computeNbComments(PropelPDO $con)
 ```
 
 You can override this method in the model class to customize the aggregate column calculation.
-
-## Additional Condition ##
-
-What if you use your own soft deletion and want to calculate only comments which are not marked as deleted?
-It is possible to add a custom SQL condition:
-
-```xml
-<table name="post">
-  <column name="id" type="INTEGER" required="true" primaryKey="true" autoIncrement="true" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
-  <behavior name="aggregate_column">
-    <parameter name="name" value="nb_comments" />
-    <parameter name="foreign_table" value="comment" />
-    <parameter name="expression" value="COUNT(id)" />
-    <parameter name="condition" value="is_deleted = false" />
-  </behavior>
-</table>
-```
-
-Which will result in generated SQL query:
-
-```php
-<?php
-// in om/BasePost.php
-public function computeNbComments(PropelPDO $con)
-{
-  $stmt = $con->prepare('SELECT COUNT(id) FROM `comment` WHERE is_deleted = false AND comment.POST_ID = :p1');
-  $stmt->bindValue(':p1', $this->getId());
-  $stmt->execute();
-  return $stmt->fetchColumn();
-}
-```
 
 ## Customizing The Aggregate Column ##
 

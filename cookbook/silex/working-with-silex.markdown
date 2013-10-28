@@ -5,28 +5,53 @@ title: Working With Silex
 
 # Working With Silex #
 
-The [PropelServiceProvider](https://github.com/propelorm/PropelServiceProvider) provides integration with [Propel](http://www.propelorm.org).
+The [PropelServiceProvider](https://github.com/propelorm/PropelServiceProvider)
+provides integration with [Propel](http://www.propelorm.org).
+
+The *PropelServiceProvider* provides Silex integration with
+[Propel](https://github.com/propelorm/Propel2).
+
+Set up
+------
+
+If you want to use *PropelServiceProvider*, you will need:
+
+  * Silex 1.x
+  * PHP 5.4 or greater
+  * Composer
+
+To setup the project in your Silex application, you have to rely on composer ;
+just add the following to your `composer.json` file:
+
+``` json
+"require": {
+    "propel/propel-service-provider": "2.x"
+}
+```
+
+Then register you model namespace in Composer autoload:
+
+``` json
+"autoload": {
+     "psr-0": { "Your\\Model\\Namespace": "path/of/your/model" }
+}
+```
+
+Then install Composer and all dependencies:
+
+    wget http://getcomposer.org/composer.phar
+
+    php composer.phar install
+
 
 Parameters
 ----------
 
-* **propel.path** (optional): The path in wich Propel.php will be found. Usually, for
-  PEAR installation, it is `propel` while for Git installation it is
-  `vendor/propel/runtime/lib`.
-  Default is `/full/project/path/vendor/propel/runtime/lib`.
+* **propel.config_file** (optional): The name of Propel configuration file
+with full path. Default is `/full/project/path/generated-conf/config.php`
 
-* **propel.config_file** (optional): The name of Propel configuration file with full path.
-  Default is `/full/project/path/build/conf/projectname-conf.php`
-
-* **propel.model_path** (optional): Path to where model classes are located.
-  Default is `/full/project/path/build/classes`
-
-* **propel.internal_autoload** (optional): Setting to true, forces Propel to use
-  its own internal autoloader, instead of Silex one, to load model classes.
-  Default is `false`
-
-
->**Tip**<br/>It's strongly recommanded to use absolute paths for previous options.
+> **Tip**<br/>It's strongly recommanded to use **absolute paths** for previous
+option.
 
 
 Services
@@ -34,97 +59,55 @@ Services
 
 No service is provided.
 
-Propel configures and manages itself by **using** static methods, so no service is registered into Application.
-Actually, the PropelServiceProvider class initializes Propel in a more "Silex-ian" way.
+Propel configures and manages itself by using **static** methods and its own
+service container, so no service is registered into Application. Actually, the
+PropelServiceProvider class initializes Propel in a more "Silex-ian" way.
 
 
 Registering
 -----------
 
-Make sure you place a copy of *Propel* in `vendor/propel` or install it through PEAR, or Composer.
+After you've installed *PropelServiceProvider* and its dependencies, you can
+register PropelServiceProvider in your application:
 
-For more informations consult the [Propel documentation](http://www.propelorm.org/documentation/01-installation.html):
-
-{% highlight php %}
+``` php
 <?php
 
-$app['autoloader']->registerNamespaces(array(
-    'Propel\Silex'  => __DIR__ . '/../../vendor/propel/propel-service-provider/src',
-));
-
 $app->register(new Propel\Silex\PropelServiceProvider(), array(
-    'propel.path'        => __DIR__.'/path/to/Propel.php',
-    'propel.config_file' => __DIR__.'/path/to/myproject-conf.php',
-    'propel.model_path'  => __DIR__.'/path/to/model/classes',
+    'propel.config_file' => __DIR__.'/path/to/myproject-conf.php'
 ));
-{% endhighlight %}
+```
 
-Alternatively, if you 've installed Propel by Git in `vendor/propel` and
-you built your model with default Propel generator options:
+Alternatively, if you built your model with default Propel generator options:
 
-{% highlight php %}
+``` php
 <?php
 
 $app->register(new Propel\Silex\PropelServiceProvider());
-{% endhighlight %}
-
+```
 
 We can consider "default" Propel generator options:
 
-* Put `build.properties` and `schema.xml` files into the main directory project,
-usually where file `index.php` is located.
-
-* In `build.properties` file, define only `propel.database`, `propel.project`
-and `propel.namespace.autopackage` properties.
-
+* Put `schema.xml` files into the main directory project
+* Run `vendor/bin/propel model:build` command without specify any options about
+directories and namespace package.
 
 Usage
 -----
 
-You'll have to build the model by yourself. According to Propel documentation, you'll need three files:
+You'll have to build the model by yourself. According to Propel documentation,
+you'll need two files:
 
 * `schema.xml` which contains your database schema;
-
-* `build.properties` more information below;
 
 * `runtime-conf.xml` which contains the database configuration.
 
 
-Use the `propel-gen` script to create all files (SQL, configuration, Model classes).
+Use the `vendor/bin/propel` script to create all files (SQL, configuration, Model
+classes).
 
-By default, the *PropelServiceProvider* relies on the Silex autoloader you have to configure to load
-model classes. Of course, the Silex autoloader needs the model to be built with namespaces,
-so be sure to set this property into the `build.properties` file:
+    vendor/bin/propel model:build
+    vendor/bin/propel config:convert-xml
+    vendor/bin/propel sql:build
+    .................
 
-{% highlight yaml %}
-propel.namespace.autopackage = true
-
-The recommended configuration for your `build.properties` file is:
-
-propel.project      = <project_name>
-
-propel.namespace.autoPackage = true
-propel.packageObjectModel    = true
-
-# Enable full use of the DateTime class.
-# Setting this to true means that getter methods for date/time/timestamp
-# columns will return a DateTime object when the default format is empty.
-propel.useDateTimeClass = true
-
-# Specify a custom DateTime subclass that you wish to have Propel use
-# for temporal values.
-propel.dateTimeClass = DateTime
-
-# These are the default formats that will be used when fetching values from
-# temporal columns in Propel. You can always specify these when calling the
-# methods directly, but for methods like getByName() it is nice to change
-# the defaults.
-# To have these methods return DateTime objects instead, you should set these
-# to empty values
-propel.defaultTimeStampFormat =
-propel.defaultTimeFormat =
-propel.defaultDateFormat =
-{% endhighlight %}
-
-If you plan to build your model without using namespaces, you need to force Propel to use
-its internal autoloader. Do this by setting the option `propel.internal_autoload` to `true`.

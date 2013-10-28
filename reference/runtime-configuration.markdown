@@ -50,24 +50,16 @@ Here is a the sample runtime configuration file.
         </slaves>
       </datasource>
     </datasources>
-    <debugpdo>
-      <logging>
-        <details>
-          <method>
-            <enabled>true</enabled>
-          </method>
-          <time>
-            <enabled>true</enabled>
-            <precision>3</precision>
-          </time>
-          <mem>
-            <enabled>true</enabled>
-            <precision>1</precision>
-          </mem>
-        </details>
-      </logging>
-    </debugpdo>
   </propel>
+  <profiler class="\Runtime\Runtime\Util\Profiler">
+    <slowTreshold>0.2</slowTreshold>
+    <details>
+      <time name="Time" precision="3" pad="8" />
+      <mem name="Memory" precision="3" pad="8" />
+    </details>
+    <innerGlue>: </innerGlue>
+    <outerGlue> | </outerGlue>
+  </profiler>
 </config>
 ```
 
@@ -178,7 +170,7 @@ The PDO DSN that Propel will use to connect to the database for this datasource.
 
 See the PHP documentation for specific format:
  * [MySQL DSN](http://www.php.net/manual/en/ref.pdo-mysql.connection.php)
- * [PostgreSQL DSN](http://php.net/manual/en/ref.pdo-pgsql.connection.php)
+ * [PostgreSQL DSN](http://github.com/seven1m/trac_wiki_to_github)
  * [SQLite DSN](http://www.php.net/manual/en/ref.pdo-sqlite.connection.php)
  * [Oracle DSN](http://www.php.net/manual/en/ref.pdo-oci.connection.php)
  * [MSSQL DSN](http://www.php.net/manual/en/ref.pdo-dblib.connection.php)
@@ -304,8 +296,8 @@ Specifies any SQL statements to run when the database connection is initialized.
     <slaves>
 ```
 
-The `<slaves>` tag groups slave `<connection>` elements which provide support for configuring slave db servers -- when using Propel in a master-slave replication environment. See the [Master-Slave documentation](../cookbook/replication.html) for more information.  The nested `<connection>` elements are configured the same way as the top-level `<connection>` element is configured.
+The `<slaves>` tag groups lists slave `<connection>` elements which provide support for configuring slave db servers -- when using Propel in a master-slave replication environment. See the [Master-Slave documentation](../cookbook/replication.html) for more information.  The nested `<connection>` elements are configured the same way as the top-level `<connection>` element is configured.
 
-### `<debugpdo>` ###
+### `<profiler>` ###
 
-The optional `<debugpdo>` element may be provided to pass additional logging configuration options to DebugPDO. Note that these settings have no effect unless DebugPDO has been selected in `runtime-conf.xml` as the PDO connection class. See the [Logging documentation](../documentation/08-logging) for more information on configuring DebugPDO.
+The optional `<profiler>` element may be provided to customize the profiler when using a `ProfilerConnectionWrapper` connection class. See the [Logging documentation](../documentation/08-logging) for more information on configuring the profiler.

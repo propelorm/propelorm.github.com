@@ -15,13 +15,15 @@ Propel uses PDO as database abstraction layer, and therefore uses [PDO's built-i
 
 ```php
 <?php
+use Propel\Runtime\Propel;
+// ...
 public function transferMoney($fromAccountNumber, $toAccountNumber, $amount)
 {
   // get the PDO connection object from Propel
-  $con = Propel::getConnection(AccountPeer::DATABASE_NAME);
+  $con = Propel::getWriteConnection(AccountTableMap::DATABASE_NAME);
 
-  $fromAccount = AccountPeer::retrieveByPk($fromAccountNumber, $con);
-  $toAccount   = AccountPeer::retrieveByPk($toAccountNumber, $con);
+  $fromAccount = AccountQuery::create()->findPk($fromAccountNumber, $con);
+  $toAccount   = AccountQuery::create()->findPk($toAccountNumber, $con);
 
   $con->beginTransaction();
 
@@ -45,7 +47,7 @@ The transaction statements are `beginTransaction()`, `commit()` and `rollback()`
 
 In this example, if something wrong happens while saving either one of the two accounts, an `Exception` is thrown, and the whole operation is rolled back. That means that the transfer is cancelled, with an insurance that the money hasn't vanished (that's the A in ACID, which stands for "Atomicity"). If both account modifications work as expected, the whole transaction is committed, meaning that the data changes enclosed in the transaction are persisted in the database.
 
-Tip: In order to build a transaction, you need a connection object. The connection object for a Propel model is always available through `Propel::getConnection([ModelName]Peer::DATABASE_NAME)`.
+>**Tip**<br/>: In order to build a transaction, you need a connection object. The connection object for a Propel model is always available through `Propel::getReadConnection([ModelName]TableMap::DATABASE_NAME)` (for READ queries) and `Propel::getWriteConnection([ModelName]TableMap::DATABASE_NAME)` (for WRITE queries).
 
 ## Denormalization And Transactions ##
 
@@ -56,7 +58,7 @@ For instance, suppose that you have an `Author` model with a one to many relatio
 ```php
 <ul>
 <?php foreach ($authors as $author): ?>
-  <li><?php echo $author->getName() ?> (<?php echo $author->countBooks() ?> books)</li>
+  <li><?= $author->getName() ?> (<?= $author->countBooks() ?> books)</li>
 <?php endforeach; ?>
 </ul>
 ```
@@ -64,10 +66,9 @@ For instance, suppose that you have an `Author` model with a one to many relatio
 If you have a large number of authors and books, this simple code snippet can be a real performance blow to your application. The usual way to optimize it is to _denormalize_ your schema by storing the number of books by each author in a new `nb_books` column, in the `author` table.
 
 ```xml
-<table name="author" phpName="Author">
-  <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
-  <column name="first_name" type="varchar" size="128" required="true"/>
-  <column name="last_name" type="varchar" size="128" required="true"/>
+<table name="book">
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
+  <column name="title" type="VARCHAR" required="true" />
   <column name="nb_books" type="INTEGER" default="0" />
 </table>
 ```
@@ -78,17 +79,17 @@ You must update this new column every time you save or delete a `Book` object; t
 <?php
 class Book extends BaseBook
 {
-  public function postSave(PropelPDO $con)
+  public function postSave(ConnectionInterface $con)
   {
     $this->updateNbBooks($con);
   }
 
-  public function postDelete(PropelPDO $con)
+  public function postDelete(ConnectionInterface $con)
   {
     $this->updateNbBooks($con);
   }
 
-  public function updateNbBooks(PropelPDO $con)
+  public function updateNbBooks(ConnectionInterface $con)
   {
     $author = $this->getAuthor();
     $nbBooks = $author->countBooks($con);
@@ -104,7 +105,7 @@ The `BaseBook::save()` method wraps the actual database INSERT/UPDATE query insi
 <?php
 class Book extends BaseBook
 {
-  public function save(PropelPDO $con)
+  public function save(ConnectionInterface $con)
   {
     $con->beginTransaction();
 
@@ -129,7 +130,7 @@ class Book extends BaseBook
 
 In this example, the `nb_books` column of the `author` table will always we synchronized with the number of books. If anything happens during the transaction, the saving of the book is rolled back, as well as the `nb_books` column update. The transaction serves to preserve data consistency in a denormalized schema ("Consistency" stands for the C in ACID).
 
->**Tip**<br />Check the [behaviors documentation]() for details about the pre- and post- hooks in Propel model objects.
+>**Tip**<br />Check the [behaviors documentation](07-behaviors.html#pre-and-post-hooks-for-save-and-delete-methods) for details about the pre- and post- hooks in Propel model objects.
 
 ## Nested Transactions ##
 
@@ -137,13 +138,13 @@ Some RDBMS offer the ability to nest transactions, to allow partial rollback of 
 
 ```php
 <?php
-function deleteBooksWithNoPrice(PropelPDO $con)
+function deleteBooksWithNoPrice(ConnectionInterface $con)
 {
   $con->beginTransaction();
   try {
     $c = new Criteria();
-    $c->add(BookPeer::PRICE, null, Criteria::ISNULL);
-    BookPeer::doDelete($c, $con);
+    $c->add(BookTableMap::PRICE, null, Criteria::ISNULL);
+    BookTableMap::doDelete($c, $con);
     $con->commit();
   } catch (Exception $e) {
     $con->rollback();
@@ -151,13 +152,13 @@ function deleteBooksWithNoPrice(PropelPDO $con)
   }
 }
 
-function deleteAuthorsWithNoEmail(PropelPDO $con)
+function deleteAuthorsWithNoEmail(ConnectionInterface $con)
 {
   $con->beginTransaction();
   try {
     $c = new Criteria();
-    $c->add(AuthorPeer::EMAIL, null, Criteria::ISNULL);
-    AuthorPeer::doDelete($c, $con);
+    $c->add(AuthorTableMap::EMAIL, null, Criteria::ISNULL);
+    AuthorTableMap::doDelete($c, $con);
     $con->commit();
   } catch (Exception $e) {
     $con->rollback();
@@ -165,7 +166,7 @@ function deleteAuthorsWithNoEmail(PropelPDO $con)
   }
 }
 
-function cleanup(PropelPDO $con)
+function cleanup(ConnectionInterface $con)
 {
   $con->beginTransaction();
   try {
@@ -193,7 +194,7 @@ A database transaction has a cost in terms of performance. In fact, for simple d
 
 ```php
 <?php
-$con = Propel::getConnection(BookPeer::DATABASE_NAME);
+$con = Propel::getWriteConnection(BookTableMap::DATABASE_NAME);
 for ($i=0; $i<2002; $i++)
 {
   $book = new Book();
@@ -221,7 +222,7 @@ You can take advantage of Propel's nested transaction capabilities to encapsulat
 
 ```php
 <?php
-$con = Propel::getConnection(BookPeer::DATABASE_NAME);
+$con = Propel::getWriteConnection(BookTableMap::DATABASE_NAME);
 $con->beginTransaction();
 for ($i=0; $i<2002; $i++)
 {
@@ -245,16 +246,16 @@ COMMIT;
 
 In practice, encapsulating a large amount of simple queries inside a single transaction significantly improves performance.
 
-Tip: Until the final `commit()` is called, most database engines lock updated rows, or even tables, to prevent any query outside the transaction from seeing the partially committed data (this is how transactions preserve Isolation, which is the I in ACID). That means that large transactions will queue every other queries for potentially a long time. Consequently, use large transactions only when concurrency is not a requirement.
+>**Tip**<br/>: Until the final `commit()` is called, most database engines lock updated rows, or even tables, to prevent any query outside the transaction from seeing the partially committed data (this is how transactions preserve "Isolation", which is the I in ACID). That means that large transactions will queue every other queries for potentially a long time. Consequently, use large transactions only when concurrency is not a requirement.
 
 ## Why Is The Connection Always Passed As Parameter? ##
 
-All the code examples in this chapter show the connection object passed a a parameter to Propel methods that trigger a database query:
+All the code examples in this chapter show the connection object passed as a parameter to Propel methods that trigger a database query:
 
 ```php
 <?php
-$con = Propel::getConnection(AccountPeer::DATABASE_NAME);
-$fromAccount = AccountPeer::retrieveByPk($fromAccountNumber, $con);
+$con = Propel::getWriteConnection(AccountTableMap::DATABASE_NAME);
+$fromAccount = AccountQuery::create()->findPk($fromAccountNumber, $con);
 $fromAccount->setValue($fromAccount->getValue() - $amount);
 $fromAccount->save($con);
 ```
@@ -263,7 +264,7 @@ The same code works without explicitly passing the connection object, because Pr
 
 ```php
 <?php
-$fromAccount = AccountPeer::retrieveByPk($fromAccountNumber);
+$fromAccount = AccountQuery::create()->findPk($fromAccountNumber);
 $fromAccount->setValue($fromAccount->getValue() - $amount);
 $fromAccount->save();
 ```

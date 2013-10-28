@@ -6,25 +6,20 @@ title: Behaviors
 
 # Behaviors #
 
-Behaviors are a great way to package model extensions for reusability. They are the powerful, versatile, fast, and help you organize your code in a better way.
+Behaviors are a great way to package model extensions for reusability. They are powerful, versatile, fast, and help you organize your code in a better way.
 
 ## Pre and Post Hooks For `save()` And `delete()` Methods ##
 
 The `save()` and `delete()` methods of your generated objects are easy to override. In fact, Propel looks for one of the following methods in your objects and executes them when needed:
 
-```php
-<?php
-// save() hooks
-preInsert()            // code executed before insertion of a new object
-postInsert()           // code executed after insertion of a new object
-preUpdate()            // code executed before update of an existing object
-postUpdate()           // code executed after update of an existing object
-preSave()              // code executed before saving an object (new or existing)
-postSave()             // code executed after saving an object (new or existing)
-// delete() hooks
-preDelete()            // code executed before deleting an object
-postDelete()           // code executed after deleting an object
-```
+* `preInsert`: code executed before insertion of a new object
+* `postInsert`: code executed after insertion of a new object
+* `preUpdate`: code executed before update of an existing object
+* `postUpdate`: code executed after update of an existing object
+* `preSave`: code executed before saving an object (new or existing)
+* `postSave`: code executed after saving an object (new or existing)
+* `preDelete`: code executed before deleting an object
+* `postDelete`: code executed after deleting an object
 
 For example, you may want to keep track of the creation date of every row in the `book` table. In order to achieve this behavior, you can add a `created_at` column to the table in `schema.xml`:
 
@@ -41,7 +36,7 @@ Then, you can force the update of the `created_at` column before every insertion
 <?php
 class Book extends BaseBook
 {
-  public function preInsert(PropelPDO $con = null)
+  public function preInsert(ConnectionInterface $con = null)
   {
     $this->setCreatedAt(time());
     return true;
@@ -61,7 +56,7 @@ echo $b->getCreatedAt(); // 2009-10-02 18:14:23
 
 _Warning_: If you implement `preInsert()`, `preUpdate()`, `preSave()` or `preDelete()`, these methods **must return a boolean value**. Any return value other than `true` stops the action (save or delete). This is a neat way to bypass persistence on some cases, but can also create unexpected problems if you forget to return `true`.
 
->**Tip**<br />Since this feature adds a small overhead to write operations, you can deactivate it completely in your build properties by setting `propel.addHooks` to `false`.
+>**Tip**<br />Since this feature adds a small overhead to write operations, you can disable it completely in your build properties by setting `propel.addHooks` to `false`.
 
 ```ini
 # -------------------
@@ -112,7 +107,7 @@ Even if the code of this example is very simple, the repetition of code is alrea
 
 Propel offers three ways to achieve the refactoring of the common behavior. The first one is to use a custom builder during the build process. This can work if all of your models share one single behavior. The second way is to use table inheritance. The inherited methods then offer limited capabilities. And the third way is to use Propel behaviors. This is the right way to refactor common model logic.
 
-Behaviors are special objects that use events called during the build process to enhance the generated model classes. Behaviors can add attributes and methods to both the Peer and model classes, they can modify the course of some of the generated methods, and they can even modify the structure of a database by adding columns or tables.
+Behaviors are special objects that use events called during the build process to enhance the generated model classes. Behaviors can add attributes and methods to both the tableMap and model classes, they can modify the course of some of the generated methods, and they can even modify the structure of a database by adding columns or tables.
 
 For instance, Propel bundles a behavior called `timestampable`, which does exactly the same thing as described above. But instead of adding columns and methods by hand, all you have to do is to declare it in a `<behavior>` tag in your `schema.xml`, as follows:
 
@@ -140,7 +135,6 @@ Propel currently bundles several behaviors. Check the behavior documentation for
 * [delegate](../behaviors/delegate)
 * [timestampable](../behaviors/timestampable)
 * [sluggable](../behaviors/sluggable)
-* [soft_delete](../behaviors/soft-delete) **Deprecated**
 * [sortable](../behaviors/sortable)
 * [nested_set](../behaviors/nested-set)
 * [versionable](../behaviors/versionable)
@@ -227,12 +221,12 @@ In this example, both the `book` and `author` table benefit from the `timestampa
 Going one step further, you can even apply a behavior to all the databases of your project, provided the behavior doesn't need parameters - or can use default parameters. To add a behavior to all databases, simply declare it in the project's `build.properties` under the `propel.behavior.default` key, as follows:
 
 ```ini
-propel.behavior.default = soft_delete, timestampable
+propel.behavior.default = archivable, timestampable
 ```
 
 ## Writing a Behavior ##
 
-Check the behaviors bundled with Propel to see how to implement your own behavior: they are the best starting point to understanding the power of behaviors and builders.
+Check [the behaviors bundled with Propel](https://github.com/propelorm/Propel2/tree/master/src/Propel/Generator/Behavior) to see how to implement your own behavior: they are the best starting point to understanding the power of behaviors and builders.
 
 ### Modifying the Data Model ###
 
@@ -254,7 +248,7 @@ class MyBehavior extends Behavior
     $table = $this->getTable();
     $columnName = $this->getParameter('column_name');
     // add the column if not present
-    if(!$this->getTable()->containsColumn($columnName)) {
+    if(!$this->getTable()->hasColumn($columnName)) {
       $column = $this->getTable()->addColumn(array(
         'name'    => $columnName,
         'type'    => 'INTEGER',
@@ -268,46 +262,39 @@ class MyBehavior extends Behavior
 
 Behaviors can add code to the generated model object by implementing one of the following methods:
 
-```php
-objectAttributes()     // add attributes to the object
-objectMethods()        // add methods to the object
-preInsert()            // add code to be executed before insertion of a new object
-postInsert()           // add code to be executed after  insertion of a new object
-preUpdate()            // add code to be executed before update of an existing object
-postUpdate()           // add code to be executed after  update of an existing object
-preSave()              // add code to be executed before saving an object (new or existing)
-postSave()             // add code to be executed after  saving an object (new or existing)
-preDelete()            // add code to be executed before deleting an object
-postDelete()           // add code to be executed after  deleting an object
-objectCall()           // add code to be executed inside the object's __call()
-objectFilter(&$script) // do whatever you want with the generated code, passed as reference
-```
+* `objectAttributes`: add attributes to the object
+* `objectMethods`: add methods to the object
+* `preInsert`: add code to be executed before insertion of a new object
+* `postInsert`: add code to be executed after  insertion of a new object
+* `preUpdate`: add code to be executed before update of an existing object
+* `postUpdate`: add code to be executed after  update of an existing object
+* `preSave`: add code to be executed before saving an object (new or existing)
+* `postSave`: add code to be executed after  saving an object (new or existing)
+* `preDelete`: add code to be executed before deleting an object
+* `postDelete`: add code to be executed after  deleting an object
+* `objectCall`: add code to be executed inside the object's __call()
+* `objectFilter($script)`: do whatever you want with the generated code, passed as reference
 
 ### Modifying the Query Classes ###
 
 Behaviors can also add code to the generated query objects by implementing one of the following methods:
 
-```php
-queryAttributes()     // add attributes to the query class
-queryMethods()        // add methods to the query class
-preSelectQuery()      // add code to be executed before selection of a existing objects
-preUpdateQuery()      // add code to be executed before update of a existing objects
-postUpdateQuery()     // add code to be executed after  update of a existing objects
-preDeleteQuery()      // add code to be executed before deletion of a existing objects
-postDeleteQuery()     // add code to be executed after  deletion of a existing objects
-queryFilter(&$script) // do whatever you want with the generated code, passed as reference
-```
+* `queryAttributes`: add attributes to the query class
+* `queryMethods`: add methods to the query class
+* `preSelectQuery`: add code to be executed before selection of a existing objects
+* `preUpdateQuery`: add code to be executed before update of a existing objects
+* `postUpdateQuery`: add code to be executed after  update of a existing objects
+* `preDeleteQuery`: add code to be executed before deletion of a existing objects
+* `postDeleteQuery`: add code to be executed after  deletion of a existing objects
+* `queryFilter(&$script)`: do whatever you want with the generated code, passed as reference
 
-### Modifying the Peer Classes ###
+### Modifying the TableMap Classes ###
 
-Behaviors can also add code to the generated peer objects by implementing one of the following methods:
+Behaviors can also add code to the generated TableMap objects by implementing one of the following methods:
 
-```php
-staticAttributes()   // add static attributes to the peer class
-staticMethods()      // add static methods to the peer class
-preSelect()          // adds code before every select query
-peerFilter(&$script) // do whatever you want with the generated code, passed as reference
-```
+* `staticAttributes`: add static attributes to the TableMap class
+* `staticMethods`: add static methods to the TableMap class
+* `tableMapFilter(&$script)`: do whatever you want with the generated code, passed as reference
 
 ### Adding New Classes ###
 
@@ -384,8 +371,8 @@ class FastPkFindBehavior extends Behavior
 public function findPk(\$key, \$con = null)
 {
   \$query = 'SELECT * from `%s` WHERE id = ?';
-  if (null ### \$con) {
-    \$con = Propel::getConnection(%sPeer::DATABASE_NAME);
+  if (null === \$con) {
+    \$con = Propel::getReadConnection(%sTableMap::DATABASE_NAME);
   }
   \$stmt = \$con->prepare(\$query);
   \$stmt->bindValue(1, \$key);
@@ -407,27 +394,7 @@ public function findPk(\$key, \$con = null)
 
 The `PropelPHPParser` class provides the following utility methods:
 
-```php
-removeMethod($methodName)
-replaceMethod($methodName, $newCode)
-addMethodAfter($methodName, $newCode)
-addMethodBefore($methodName, $newCode)
-```
-
-### Add a new Interface ###
-
-Behaviors can also add new Interfaces to the generated class. It is achieved by adding the following 3 lines to the `objectFilter` method.
-
-```php
-<?php
-class MyBehavior extends Behavior
-{
-  public function objectFilter(&$script)
-  {
-    $pattern = '/abstract class (\w+) extends (\w+) implements (\w+)/i';
-    $replace = 'abstract class ${1} extends ${2} implements ${3}, MyInterface';
-    $script = preg_replace($pattern, $replace, $script);
-  }
-}
-```
-
+* `removeMethod($methodName)`
+* `replaceMethod($methodName, $newCode)`
+* `addMethodAfter($methodName, $newCode)`
+* `addMethodBefore($methodName, $newCode)`

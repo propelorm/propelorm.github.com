@@ -31,18 +31,18 @@ Rebuild your model, and you're ready to go. The code of the model classes now us
    */
   public function setTitle($v)
   {
-  	if ($v !== null)
-  	{
-  		$v = (string) $v;
-  	}
+	if ($v !== null)
+	{
+		$v = (string) $v;
+	}
 
-  	if ($this->title !== $v)
-  	{
-  		$this->title = $v;
-  		$this->modifiedColumns[] = BookPeer::TITLE;
-  	}
+	if ($this->title !== $v)
+	{
+		$this->title = $v;
+		$this->modifiedColumns[] = BookTableMap::TITLE;
+	}
 
-  	return $this;
+	return $this;
   }
 
 // instead of
@@ -61,7 +61,7 @@ Rebuild your model, and you're ready to go. The code of the model classes now us
 
 		if ($this->title !== $v) {
 			$this->title = $v;
-			$this->modifiedColumns[] = BookPeer::TITLE;
+			$this->modifiedColumns[] = BookTableMap::TITLE;
 		}
 
 		return $this;

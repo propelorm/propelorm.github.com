@@ -1,6 +1,4 @@
 .banner {
-    position:absolute;
-    top: 0px;
     background-color: red;
     color: white;
     width: 100%;
@@ -17,8 +15,4 @@
 .banner a:hover,
 .banner a:focus {
     color: #fff;
-}
-
-.layout {
-    margin: 40px auto;
 }

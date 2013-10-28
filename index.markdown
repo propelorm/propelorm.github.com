@@ -2,42 +2,109 @@
 layout: home
 ---
 
-![Propel logo](./images/propel-logo.png)
+{% capture what %}
+### What is Propel? ###
+Propel is an open-source Object-Relational Mapping (ORM) for SQL-Databases in PHP 5.4.
+It allows you to access your database using a set of objects, providing a simple API for storing and retrieving data.
 
-### What? ###
+But not only plain ORM but it also provides database schema migration, reverse engineering of existing database and much more.
+{% endcapture %}
 
-Propel is an open-source Object-Relational Mapping (ORM) for PHP5. It allows you to access your database using a set of objects, providing a simple API for storing and retrieving data.
+{% capture why %}
+### Why Propel? ###
 
-### Why? ###
+Propel gives you, the web application developer, the tools to work with databases in the same way you work with
+other classes and objects in PHP without writing SQL.
 
-Propel gives you, the web application developer, the tools to work with databases in the same way you work with other classes and objects in PHP.
-
+* Propel is blazing fast!
 * Propel gives your database a well-defined API.
-* Propel uses the PHP5 OO standards -- Exceptions, autoloading, Iterators and friends.
+* Propel is well documented.
+* Propel comes with common `behaviors`.
+{% endcapture %}
 
-Propel makes database coding fun again.
+{% capture howSchema %}
+Everything starts with a xml file. The `schema.xml`.
 
-### Show Me! ###
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="bookstore" defaultIdMethod="native">
+  <table name="book" phpName="Book">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="title" type="varchar" size="255" required="true" />
+    <column name="isbn" type="varchar" size="24" required="true" phpName="ISBN"/>
+    <column name="author_id" type="integer" required="true"/>
+    <foreign-key foreignTable="author">
+      <reference local="author_id" foreign="id"/>
+    </foreign-key>
+  </table>
+  <table name="author" phpName="Author">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="first_name" type="varchar" size="128" required="true"/>
+    <column name="last_name" type="varchar" size="128" required="true"/>
+  </table>
+</database>
+```
+{% endcapture %}
+
+
+{% capture howMigrate %}
+![Table Schema from Migration](/images/home-how-migration-table.png)
+With the [migration feature](/documentation/10-migrations.html) of Propel you can update database's schema automatically based on your xml file.
+This keeps the database always up2date without the hazzle of writing own `ALTER TABLE`' SQLs.
+{% endcapture %}
+
+{% capture howRetrieve %}
+After [building your PHP classes](/documentation/02-buildtime.html#building-the-model) from the xml file you can
+use those to retrieve data from the database.
 
 ```php
 <?php
-$book = BookQuery::create()->findPK(123); // retrieve a record from a database
-$book->setName('Don\'t be Hax0red!'); // modify. Don't worry about escaping
-$book->save(); // persist the modification to the database
 
-$books = BookQuery::create()  // retrieve all books...
+$books = BookQuery::create()  // retrieve all books ...
   ->filterByPublishYear(2009) // ... published in 2009
   ->orderByTitle()            // ... ordered by title
   ->joinWith('Book.Author')   // ... with their author
   ->find();
+
 foreach($books as $book) {
-  echo  $book->getAuthor()->getFullName();
+  echo  $book->getId() . ': ' . $book->getAuthor()->getFullName();
+}
+```
+{% endcapture %}
+
+{% capture howManipulate %}
+Beside your `*Query` classes you'll get also active-record classes for your objects after [the building](/documentation/02-buildtime.html#building-the-model).
+
+```php
+<?php
+
+// manipulate existing
+$book = BookQuery::create()->findPK(123); // retrieve a record from a database
+$book->setTitle('Don\'t be Hax0red!'); // modify. Don't worry about escaping
+$book->save(); // persist the modification to the database
+
+// create new
+$book = new Book();
+$book->setTitle('JavaScript, The Good Parts.');
+$book->save() // add new row
+$book->getId() // now available since it's autoIncrement
+```
+{% endcapture %}
+
+{% capture content %}
+### Get It! ###
+
+Via [Composer](https://packagist.org/)
+
+```json
+"require": {
+    "propel/propel": "2.0.0-alpha2"
 }
 ```
 
-### Get It! ###
+All releases at packagist.org: [packagist.org/packages/propel/propel](https://packagist.org/packages/propel/propel)
 
-Fork the Propel GitHub repository at [http://github.com/propelorm/propel](http://github.com/propelorm/propel).
+All releases at github.com: [github.com/propelorm/Propel2/releases](https://github.com/propelorm/Propel2/releases)
 
 ### Dive In! ###
 
@@ -67,17 +134,17 @@ and here are the statuses:
 
 <table width="100%" class="ecg">
     <tr>
-        <th><a href="https://github.com/propelorm/Propel">Propel 1.6</a></th>
-        <th><a href="https://github.com/propelorm/Propel2">Propel2 (unstable)</a></th>
-        <th><a href="https://github.com/propelorm/sfPropelORMPlugin">sfPropelORMPlugin</a></th>
-        <th><a href="https://github.com/propelorm/PropelBundle">PropelBundle</a></th>
-        <th><a href="https://github.com/propelorm/PropelServiceProvider">PropelServiceProvider</a></th>
-    </tr>
-    <tr>
-        <td><img src="https://travis-ci.org/propelorm/Propel.png" /></td>
-        <td><img src="https://travis-ci.org/propelorm/Propel2.png" /></td>
-        <td><img src="https://travis-ci.org/propelorm/sfPropelORMPlugin.png" /></td>
-        <td><img src="https://travis-ci.org/propelorm/PropelBundle.png" /></td>
-        <td><img src="https://travis-ci.org/propelorm/PropelServiceProvider.png" /></td>
+        <td><a href="https://github.com/propelorm/Propel">Propel 1.6</a></td><td><img src="https://travis-ci.org/propelorm/Propel.png" /></td>
+    </tr><tr>
+        <td><a href="https://github.com/propelorm/Propel2">Propel2 (unstable)</a></td><td><img src="https://travis-ci.org/propelorm/Propel2.png" /></td>
+    </tr><tr>
+        <td><a href="https://github.com/propelorm/sfPropelORMPlugin">sfPropelORMPlugin</a></td><td><img src="https://travis-ci.org/propelorm/sfPropelORMPlugin.png" /></td>
+    </tr><tr>
+        <td><a href="https://github.com/propelorm/PropelBundle">PropelBundle</a></td><td><img src="https://travis-ci.org/propelorm/PropelBundle.png" /></td>
+    </tr><tr>
+        <td><a href="https://github.com/propelorm/PropelServiceProvider">PropelServiceProvider</a></td><td><img src="https://travis-ci.org/propelorm/PropelServiceProvider.png" /></td>
     </tr>
 </table>
+{% endcapture %}
+
+{% include home.html %}

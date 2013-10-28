@@ -1,0 +1,82 @@
+.home h3 {
+    border-bottom: 1px solid #e7e7e7;
+    text-align: center;
+    color: #444;
+    font-size: 24px;
+    padding-bottom: 5px;
+}
+
+.home-why,
+.home-what {
+    min-height: 380px;
+    margin-bottom: 20px;
+}
+
+.home-what {
+    float: left;
+    width: 45%;
+    padding-right: 45px;
+    border-right: 1px dotted #e7e7e7;
+}
+
+.home-why {
+    float: right;
+    width: 45%;
+}
+
+.home-how {
+    clear: both;
+}
+
+.home-how-schema {
+    position: relative;
+}
+
+.home-how-reverse {
+    padding-left: 20px;
+    font-size: 13px;
+    text-align: right;
+    position: absolute;
+    bottom: -25px;
+    right: 0;
+    z-index: 50;
+}
+
+.home-how-reverse img {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.home-how-more {
+    margin-left: 15px;
+    border-left: 1px dotted #ddd;
+    padding-top: 40px;
+    position: relative;
+    top: -25px;
+    padding-bottom: 10px;
+}
+
+.home-how-more h4 {
+    border-bottom: 1px dotted #ddd;
+    padding-left: 20px;
+    color: #444;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    display: inline-block;
+    font-style: normal;
+    padding-right: 50px;
+}
+
+.home-how-more p,
+.home-how-more .highlight {
+    margin-left: 20px;
+}
+
+.home-how-more img {
+    border: 1px solid #ccc;
+    display: inline-block;
+    float: right;
+    margin-left: 25px;
+    position: relative;
+}

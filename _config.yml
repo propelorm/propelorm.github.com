@@ -3,4 +3,15 @@ permalink: /blog/:year/:month/:day/:title.html
 markdown:  redcarpet
 exclude:   [ README.md, Gemfile ]
 redcarpet:
- extensions: ["tables", "no_intra_emphasis"] 
+    extensions: ["tables", "no_intra_emphasis"]
+navigation:
+ - title: Documentation
+   url: /documentation/
+ - title: Support
+   url: /support.html
+ - title: Download
+   url: /download.html
+ - title: Contribute
+   url: /contribute.html
+ - title: Blog
+   url: /blog/

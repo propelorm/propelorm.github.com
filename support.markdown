@@ -24,10 +24,6 @@ These lists were created in May 2009. A previous set mailing-lists were hosted b
 * [Development list archives](http://propel.tigris.org/ds/viewForumSummary.do?dsForumId=1093)
 
 
-## Stackoverflow ##
-
-You can ask other coders at [Stackoverflow Propel](http://stackoverflow.com/questions/tagged/propel).
-
 ## IRC ##
 
 The [#propel](http://webchat.freenode.net/?channels=propel) channel on **irc.freenode.net** is an informal meeting place for discussing new ideas, asking support questions, or just airing general frustrations with the PHP5 engine :)
@@ -37,4 +33,4 @@ The [#propel](http://webchat.freenode.net/?channels=propel) channel on **irc.fre
 
 >**Tip**<br />Since 2011, the Propel project is hosted and managed on [GitHub](http://github.com).
 
-You can look at the [Propel organization](https://github.com/propelorm) and to report bugs or to ask for new features to the [Propel ticketing system](https://github.com/propelorm/Propel/issues).
+You can look at the [Propel organization](https://github.com/propelorm) and to report bugs or to ask for new features to the [Propel ticketing system](https://github.com/propelorm/Propel2/issues).

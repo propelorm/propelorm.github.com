@@ -67,7 +67,6 @@ Starting with the `<database>` element. The _attributes_ and _elements_ availabl
   [schema="/SQLSchema/"]
   [namespace="/ClassNamespace/"]
   [baseClass="/baseClassName/"]
-  [basePeer="/baseClassPeerName/"]
   [defaultPhpNamingMethod="nochange|{underscore}|phpname|clean"
   [heavyIndexing="true|false"]
   [tablePrefix="/tablePrefix/"]
@@ -89,7 +88,6 @@ A Database element may include an `<external-schema>` element, or multiple `<tab
 * `schema` specifies the default SQL schema containing the tables. Ignored on RDBMS not supporting database schemas.
 * `namespace` specifies the default namespace that generated model classes will use (PHP 5.3 only). This attribute can be completed or overridden at the table level.
 * `baseClass` allows you to specify a default base class that all generated Propel objects should extend (in place of `propel.om.BaseObject`).
-* `basePeer` instructs Propel to use a different SQL-generating `BasePeer` class (or sub-class of `BasePeer`) for all generated objects.
 * `defaultPhpNamingMethod` the default naming method to use for tables of this database. Defaults to `underscore`, which transforms table names into CamelCase phpNames.
 * `heavyIndexing` adds indexes for each component of the primary key (when using composite primary keys).
 * `tablePrefix` adds a prefix to all the SQL table names.
@@ -108,10 +106,8 @@ The `<table>` element is the most complicated of the usable elements. Its defini
   [namespace = "/PhpObjectNamespace/"]
   [skipSql = "true|false"]
   [abstract = "true|false"]
-  [isCrossRef = "true|false"]
   [phpNamingMethod = "nochange|{underscore}|phpname|clean"]
   [baseClass = "/baseClassName/"]
-  [basePeer = "/baseClassPeerName/"]
   [description="/A text description of the table/"]
   [heavyIndexing = "true|false"]
   [readOnly = "true|false"]
@@ -134,7 +130,7 @@ The `<table>` element is the most complicated of the usable elements. Its defini
 </table>
 ```
 
-According to the schema, `name` is the only required attribute.  Also, the `idMethod`, `package`, `schema`, `namespace`, `phpNamingMethod`, `baseClass`, `basePeer`, and `heavyIndexing` attributes all default to what is specified by the `<database>` element.
+According to the schema, `name` is the only required attribute.  Also, the `idMethod`, `package`, `schema`, `namespace`, `phpNamingMethod`, `baseClass`, and `heavyIndexing` attributes all default to what is specified by the `<database>` element.
 
 #### Table Attributes ####
 
@@ -142,13 +138,11 @@ According to the schema, `name` is the only required attribute.  Also, the `idMe
 * `phpName` specifies object model class name. By default, Propel uses a CamelCase version of the table name as phpName.
 * `package` specifies the "package" (or subdirectory) in which model classes get generated.
 * `schema` specifies the default SQL schema containing the table. Ignored on RDBMS not supporting database schemas.
-* `namespace` specifies the namespace that the generated model classes will use (PHP 5.3 only). If the table namespace starts with a `\`, it overrides the namespace defined in the `<database>` tag; otherwise, the actual table namespace is the concatenation of the database namespace and the table namespace.
+* `namespace` specifies the namespace that the generated model classes will use (PHP 5.3 only). If the table namespace starts with a `\\`, it overrides the namespace defined in the `<database>` tag; otherwise, the actual table namespace is the concatenation of the database namespace and the table namespace.
 * `skipSql` instructs Propel not to generate DDL SQL for the specified table. This can be used together with `readOnly` for supporting VIEWS in Propel.
 * `abstract` Whether the generated _stub_ class will be abstract (e.g. if you're using inheritance)
-* `isCrossRef` Whether this is a cross-reference table (or "junction" table) for a [many-to-many relationship](../documentation/04-relationships.html#manytomany_relationships)
 * `phpNamingMethod` the naming method to use. Defaults to `underscore`, which transforms the table name into a CamelCase phpName.
 * `baseClass` allows you to specify a class that the generated Propel objects should extend (in place of `propel.om.BaseObject`).
-* `basePeer` instructs Propel to use a different SQL-generating `BasePeer` class (or sub-class of `BasePeer`).
 * `heavyIndexing` adds indexes for each component of the primary key (when using composite primary keys).
 * `readOnly` suppresses the mutator/setter methods, save() and delete() methods.
 * `treeMode` is used to indicate that this table is part of a node tree. Currently the only supported values are `NestedSet` (see the [NestedSet behavior section](../behaviors/nested-set.html)) and `MaterializedPath` (deprecated).
@@ -162,7 +156,7 @@ According to the schema, `name` is the only required attribute.  Also, the `idMe
 <column
   name = "/ColumnName/"
   [phpName = "/PHPColumnName/"]
-  [peerName = "/PEERNAME/"]
+  [tableMapName = "/TABLEMAPNAME/"]
   [primaryKey = "true|{false}"]
   [required = "true|{false}"]
   [type = "BOOLEAN|TINYINT|SMALLINT|INTEGER|BIGINT|DOUBLE|FLOAT|REAL|DECIMAL|CHAR|{VARCHAR}|LONGVARCHAR|DATE|TIME|TIMESTAMP|BLOB|CLOB|OBJECT|ARRAY"]
@@ -193,7 +187,6 @@ According to the schema, `name` is the only required attribute.  Also, the `idMe
 * `valueSet` The list of enumerated values accepted on an ENUM column. The list contains 255 values at most, separated by commas.
 * `lazyLoad` A lazy-loaded column is not fetched from the database by model queries. Only the generated getter method for such a column issues a query to the database. Useful for large column types (such as CLOB and BLOB).
 * `primaryString` A column defined as primary string serves as default value for a `__toString()` method in the generated Propel object.
-* `description` For adding a description to the column. In SQL the `description` is referred as `comment`
 
 >**Tip**<br />For performance reasons, it is often a good idea to set BLOB and CLOB columns as lazyLoaded. A resultset containing one of more very large columns takes time to transit between the database and the PHP server, so you want to make sure this only happen when you actually need it.
 
@@ -357,7 +350,7 @@ For example:
 
 ### Adding Vendor Info ###
 
-Propel supports database-specific elements in the schema (currently only for MySQL). This "vendor" parameters affect the generated SQL. To add vendor data, add a `<vendor>` tag with a `type` attribute specifying the target database vendor. In the `<vendor>` tag, add `<parameter>` tags with a `name` and a `value` attribue. For instance:
+Propel supports database-specific elements in the schema (currently only for MySQL). This "vendor" parameters affect the generated SQL. To add vendor data, add a `<vendor>` tag with a `type` attribute specifying the target database vendor. In the `<vendor>` tag, add `<parameter>` tags with a `name` and a `value` attribute. For instance:
 
 ```xml
 <table name="book">
@@ -381,58 +374,62 @@ CREATE TABLE book
 
 Propel supports the following vendor parameters for MySQL:
 
-|Name               | Example values
-|-------------------|---------------
-|// in `<table>` element|&nbsp;
-|`Engine`           | MYISAM (default), InnoDB, BDB, MEMORY, ISAM, MERGE, MRG_MYISAM, etc.
-|`AutoIncrement`    | 1234, N, etc
-|`AvgRowLength`     | &nbsp;
-|`Charset`          | utf8, latin1, etc.
-|`Checksum`         | 0, 1
-|`Collate`          | utf8_unicode_ci, latin1_german1_ci, etc.
-|`Connection`       | mysql://fed_user@remote_host:9306/federated/test_table (for FEDERATED storage engine)
-|`DataDirectory`    | /var/db/foo (for MyISAM storage engine)
-|`DelayKeyWrite`    | 0, 1
-|`IndexDirectory`   | /var/db/foo (for MyISAM storage engine)
-|`InsertMethod`     | FIRST, LAST (for MERGE storage Engine)
-|`KeyBlockSize`     | 0 (default), 1024, etc
-|`MaxRows`          | 1000, 4294967295, etc
-|`MinRows`          | 1000 (for MEMORY storage engine)
-|`PackKeys`         | 0, 1, DEFAULT
-|`RowFormat`        | FIXED, DYNAMIC, COMPRESSED, COMPACT, REDUNDANT
-|`Union`            | (t1,t2)  (for MERGE storage Engine)
-|// in `<column>` element|&nbsp;
-|`Charset`          | utf8, latin1, etc.
-|`Collate`          | utf8_unicode_ci, latin1_german1_ci, etc.
-|// in `<index>` element|&nbsp;
-|`Index_type`       | FULLTEXT
+```
+Name             | Example values
+-----------------|---------------
+// in <table> element
+Engine           | MYISAM (default), InnoDB, BDB, MEMORY, ISAM, MERGE, MRG_MYISAM, etc.
+AutoIncrement    | 1234, N, etc
+AvgRowLength     |
+Charset          | utf8, latin1, etc.
+Checksum         | 0, 1
+Collate          | utf8_unicode_ci, latin1_german1_ci, etc.
+Connection       | mysql://fed_user@remote_host:9306/federated/test_table (for FEDERATED storage engine)
+DataDirectory    | /var/db/foo (for MyISAM storage engine)
+DelayKeyWrite    | 0, 1
+IndexDirectory   | /var/db/foo (for MyISAM storage engine)
+InsertMethod     | FIRST, LAST (for MERGE storage Engine)
+KeyBlockSize     | 0 (default), 1024, etc
+MaxRows          | 1000, 4294967295, etc
+MinRows          | 1000 (for MEMORY storage engine)
+PackKeys         | 0, 1, DEFAULT
+RowFormat        | FIXED, DYNAMIC, COMPRESSED, COMPACT, REDUNDANT
+Union            | (t1,t2)  (for MERGE storage Engine)
+// in <column> element
+Charset          | utf8, latin1, etc.
+Collate          | utf8_unicode_ci, latin1_german1_ci, etc.
+// in <index> element
+Index_type       | FULLTEXT
+```
 
 #### Oracle Vendor Info ####
 
 Propel supports the following vendor parameters for Oracle:
 
-|Name               | Example values
-|-------------------|---------------
-|// in `<table>` element|&nbsp;
-|`PCTFree`          | 20
-|`InitTrans`        | 4
-|`MinExtents`       | 1
-|`MaxExtents`       | 99
-|`PCTIncrease`      | 0
-|`Tablespace`       | L_128K
-|`PKPCTFree`        | 20
-|`PKInitTrans`      | 4
-|`PKMinExtents`     | 1
-|`PKMaxExtents`     | 99
-|`PKPCTIncrease`    | 0
-|`PKTablespace`     | IL_128K
-|// in `<index>` element|&nbsp;
-|`PCTFree`          | 20
-|`InitTrans`        | 4
-|`MinExtents`       | 1
-|`MaxExtents`       | 99
-|`PCTIncrease`      | 0
-|`Tablespace`       | L_128K
+```
+Name             | Example values
+-----------------|---------------
+// in <table> element
+PCTFree          | 20
+InitTrans        | 4
+MinExtents       | 1
+MaxExtents       | 99
+PCTIncrease      | 0
+Tablespace       | L_128K
+PKPCTFree        | 20
+PKInitTrans      | 4
+PKMinExtents     | 1
+PKMaxExtents     | 99
+PKPCTIncrease    | 0
+PKTablespace     | IL_128K
+// in <index> element
+PCTFree          | 20
+InitTrans        | 4
+MinExtents       | 1
+MaxExtents       | 99
+PCTIncrease      | 0
+Tablespace       | L_128K
+```
 
 ### Using Custom Platform ###
 
@@ -466,4 +463,3 @@ class CustomMysqlPlatform extends MysqlPlatform
 You must then specify that mapping in the `build.properties` for your project:
 
     propel.platform.class = propel.engine.platform.${propel.database}Platform
-

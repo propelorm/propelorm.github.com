@@ -7,12 +7,11 @@ title: NestedSet Behavior
 
 The `nested_set` behavior allows a model to become a tree structure, and provides numerous methods to traverse the tree in an efficient way.
 
-Many applications need to store hierarchical data in the model. For instance, a forum stores a tree of messages for each discussion. A CMS sees sections and subsections as a navigation tree. In a business organization chart, each person is a leaf of the organization tree. [Nested sets](http://en.wikipedia.org/wiki/Nested_set_model) are the best way to store such hierachical data in a relational database and manipulate it. The name "nested sets" describes the algorithm used to store the position of a model in the tree; it is also known as "modified preorder tree traversal".
+Many applications need to store hierarchical data in the model. For instance, a forum stores a tree of messages for each discussion. A CMS sees sections and subsections as a navigation tree. In a business organization chart, each person is a leaf of the organization tree. [Nested sets](http://en.wikipedia.org/wiki/Nested_set_model) are the best way to store such hierarchical data in a relational database and manipulate it. The name "nested sets" describes the algorithm used to store the position of a model in the tree ; it is also known as "modified preorder tree traversal".
 
 ## Basic Usage ##
 
 In the `schema.xml`, use the `<behavior>` tag to add the `nested_set` behavior to a table:
-
 ```xml
 <table name="section">
   <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
@@ -41,16 +40,12 @@ $s4 = new Section();
 $s4->setTitle('Business');
 $s4->insertAsNextSiblingOf($s2); // insert the node in the tree
 $s4->save();
-
-/*
-The sections are now stored in the database as a tree:
-
-$s1:Home
+/* The sections are now stored in the database as a tree:
+    $s1:Home
+    |       \
+$s2:World  $s4:Business
     |
-$s2:World
-    |     \
-$s3:Europe  $s4:Business
-
+$s3:Europe
 */
 ```
 
@@ -82,7 +77,7 @@ echo $s2->countChildren(); // 1
 echo $s2->hasSiblings(); // true
 ```
 
-Each of the traversal and inspection methods result in a single database query, whatever the position of the node in the tree. This is because the information about the node position in the tree is stored in three columns of the model, named `tree_left`, `tree_right`, and `tree_level`. The value given to these columns is determined by the nested set algorithm, and it makes read queries much more effective than trees using a simple `parent_id` foreign key.
+Each of the traversal and inspection methods result in a single database query, whatever the position of the node in the tree. This is because the information about the node position in the tree is stored in three columns of the model, named `tree_left`, `tree_left`, and `tree_level`. The value given to these columns is determined by the nested set algorithm, and it makes read queries much more effective than trees using a simple `parent_id` foreign key.
 
 ## Manipulating Nodes ##
 
@@ -102,7 +97,7 @@ $s2:World
 $s3:Europe
 */
 // now move the "Europe" section directly under root, after "Business"
-$s3->moveToFirstChildOf($s4);
+$s2->moveToFirstChildOf($s4);
 /* The tree is modified as follows:
     $s1:Home
     |        \
@@ -185,7 +180,7 @@ For instance, to display an entire tree structure, you can use the following cod
 ```php
 <?php
 $root = SectionQuery::create()->findRoot();
-foreach (new RecursiveIteratorIterator($root->getIterator(), RecursiveIteratorIterator::SELF_FIRST) as $node) {
+foreach ($root->getIterator() as $node) {
   echo str_repeat(' ', $node->getLevel()) . $node->getTitle() . "\n";
 }
 ```
@@ -347,7 +342,7 @@ $node findRoot($scope = null)
 coll findTree($scope = null)
 ```
 
-Lastly, the behavior adds a few methods to the Peer classes:
+Lastly, the behavior adds a few methods to the Query classes:
 
 ```php
 <?php

@@ -19,10 +19,10 @@ BLOB values will be returned as PHP stream resources from the accessor methods. 
 
 ```php
 <?php
-$media = MediaPeer::retrieveByPK(1);
+$media = MediaQuery::create()->findPk(1);
 $fp = $media->getCoverImage();
 if ($fp !== null) {
-  echo stream_get_contents($fp, -1, 0); // important to use 0 as offset so it works when being called multiple times
+  echo stream_get_contents($fp);
 }
 ```
 
@@ -62,7 +62,7 @@ For example:
 ```php
 <?php
 
-$media = MediaPeer::retrieveByPK(1);
+$media = MediaQuery::create()->findPk(1);
 $fp = $media->getCoverImage();
 $media->setCoverImage($fp);
 
@@ -89,19 +89,10 @@ echo $book->getStyle(); // novel
 // Trying to set a value not in the valueSet throws an exception
 
 // ENUM columns are also searchable, using the generated filterByXXX() method
-// or other ModelCritera methods (like where(), condition())
+// or other ModelCriteria methods (like where(), condition())
 $books = BookQuery::create()
-  ->filterByStyle(BookPeer::STYLE_NOVEL) // BookPeer::STYLE_NOVEL is a PHP equivalent for 'novel'
+  ->filterByStyle('novel')
   ->find();
-
-// Alternatively there are getters for SQL value which can be used in Criteria or even plain SQL
-$style = BookPeer::getStyleSqlValue(BookPeer::STYLE_NOVEL);
-$criteria = new Criteria();
-$criteria->add(BookPeer::STYLE, $style);
-$books = BookPeer::doSelect($criteria);
-
-// NOTE: method getStyleSqlValue() is only an alias for:
-BookPeer::getSqlValueForEnum(BookPeer::STYLE, BookPeer::STYLE_NOVEL);
 ```
 
 ## OBJECT Columns ##
@@ -150,9 +141,7 @@ Propel looks in the database for a serialized version of the object passed as pa
 
 ## ARRAY Columns ##
 
-An `ARRAY` column can store a simple PHP array in the database (nested arrays and associative arrays are not accepted).
-The column setter serializes the array, which is later stored to the database as a string.
-The column getter unserializes the string and returns the array. Therefore, for the end user, the column contains an array.
+An `ARRAY` column can store a simple PHP array in the database (nested arrays and associative arrays are not accepted). The column setter serializes the array, which is later stored to the database as a string. The column getter unserializes the string and returns the array. Therefore, for the end user, the column contains an array.
 
 ### Getting and Setting ARRAY Values ###
 
@@ -174,8 +163,7 @@ print_r($book->getTags()); // array('novel', 'romantic')
 
 ### Retrieving Records based on ARRAY Values ###
 
-Propel doesn't use `serialize()` to transform the array into a string.
-Instead, it uses a special serialization function, that makes it possible to search for values of `ARRAY` columns.
+Propel doesn't use `serialize()` to transform the array into a string. Instead, it uses a special serialization function, that makes it possible to search for values of `ARRAY` columns.
 
 ```php
 <?php
@@ -202,14 +190,5 @@ $books = BookQuery::create()
 ```
 
 >**Tip**<br />Filters on array columns translate to SQL as LIKE conditions. That means that the resulting query often requires a full table scan, and is not suited for large tables.
-
-### Using default values ###
-
-You may want to add default values to your `ARRAY` column, Propel 1.6.6, and upper allows to use the `defaultValue` 
-attribute in your XML schema to set a list of values as comma separated values:
-
-```xml
-<column name="my_array_column" type="ARRAY" defaultValue="foo,bar" />
-```
 
 _Warning_: Only generated Query classes (through generated `filterByXXX()` methods) and `ModelCriteria` (through `where()`, and `condition()`) allow conditions on `ENUM`, `OBJECT`, and `ARRAY` columns. `Criteria` alone (through `add()`, `addAnd()`, and `addOr()`) does not support conditions on such columns.
