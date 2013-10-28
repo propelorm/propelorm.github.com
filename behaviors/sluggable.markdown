@@ -12,8 +12,8 @@ The `sluggable` behavior allows a model to offer a human readable identifier tha
 In the `schema.xml`, use the `<behavior>` tag to add the `sluggable` behavior to a table:
 ```xml
 <table name="post">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="sluggable" />
 </table>
 ```
@@ -53,9 +53,9 @@ By default, the behavior adds one columns to the model. If this column is alread
 
 ```xml
 <table name="post">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
-  <column name="url" type="VARCHAR" size="100" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
+  <column name="url" type="varchar" size="100" />
   <behavior name="sluggable">
     <parameter name="slug_column" value="url" />
     <parameter name="slug_pattern" value="/posts/{Title}" />

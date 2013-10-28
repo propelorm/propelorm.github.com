@@ -67,9 +67,9 @@ If you have a large number of authors and books, this simple code snippet can be
 
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" />
-  <column name="nb_books" type="INTEGER" default="0" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" />
+  <column name="nb_books" type="integer" default="0" />
 </table>
 ```
 

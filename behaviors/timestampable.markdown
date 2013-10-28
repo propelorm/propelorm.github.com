@@ -12,8 +12,8 @@ The `timestampable` behavior allows you to keep track of the date of creation an
 In the `schema.xml`, use the `<behavior>` tag to add the `timestampable` behavior to a table:
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="timestampable" />
 </table>
 ```
@@ -66,10 +66,10 @@ You can change the name of the columns added by the behavior by setting the `cre
 
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
-  <column name="my_create_date" type="TIMESTAMP" />
-  <column name="my_update_date" type="TIMESTAMP" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
+  <column name="my_create_date" type="timestamp" />
+  <column name="my_update_date" type="timestamp" />
   <behavior name="timestampable">
     <parameter name="create_column" value="my_create_date" />
     <parameter name="update_column" value="my_update_date" />

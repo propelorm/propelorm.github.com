@@ -183,18 +183,18 @@ Databases typically use a cross-reference table, or junction table, to materiali
 
 ```xml
 <table name="user">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="name" type="VARCHAR" size="32"/>
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="name" type="varchar" size="32"/>
 </table>
 
 <table name="group">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="name" type="VARCHAR" size="32"/>
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="name" type="varchar" size="32"/>
 </table>
 
 <table name="user_group" isCrossRef="true">
-  <column name="user_id" type="INTEGER" primaryKey="true"/>
-  <column name="group_id" type="INTEGER" primaryKey="true"/>
+  <column name="user_id" type="integer" primaryKey="true"/>
+  <column name="group_id" type="integer" primaryKey="true"/>
   <foreign-key foreignTable="user">
     <reference local="user_id" foreign="id"/>
   </foreign-key>
@@ -248,14 +248,14 @@ Propel supports the special case of one-to-one relationships. These relationship
 
 ```xml
 <table name="bookstore_employee" description="Employees of a bookstore">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="name" type="VARCHAR" size="32"/>
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="name" type="varchar" size="32"/>
 </table>
 
 <table name="bookstore_employee_account" description="Bookstore employees' login credentials">
-  <column name="employee_id" type="INTEGER" primaryKey="true"/>
-  <column name="login" type="VARCHAR" size="32"/>
-  <column name="password" type="VARCHAR" size="100"/>
+  <column name="employee_id" type="integer" primaryKey="true"/>
+  <column name="login" type="varchar" size="32"/>
+  <column name="password" type="varchar" size="100"/>
   <foreign-key foreignTable="bookstore_employee">
     <reference local="employee_id" foreign="id"/>
   </foreign-key>
@@ -270,9 +270,9 @@ Propel also supports the _ON UPDATE_ and _ON DELETE_ aspect of foreign keys. The
 
 ```xml
 <table name="review">
-  <column name="review_id" type="INTEGER" primaryKey="true" required="true"/>
-  <column name="reviewer" type="VARCHAR" size="50" required="true"/>
-  <column name="book_id" required="true" type="INTEGER"/>
+  <column name="review_id" type="integer" primaryKey="true" required="true"/>
+  <column name="reviewer" type="varchar" size="50" required="true"/>
+  <column name="book_id" required="true" type="integer"/>
   <foreign-key foreignTable="book" onDelete="CASCADE">
     <reference local="book_id" foreign="id"/>
   </foreign-key>
@@ -376,9 +376,9 @@ For example, a `review` table designed for a MyISAM database engine is linked to
 
 ```xml
 <table name="review">
-  <column name="review_id" type="INTEGER" primaryKey="true" required="true"/>
-  <column name="reviewer" type="VARCHAR" size="50" required="true"/>
-  <column name="book_id" required="true" type="INTEGER"/>
+  <column name="review_id" type="integer" primaryKey="true" required="true"/>
+  <column name="reviewer" type="varchar" size="50" required="true"/>
+  <column name="book_id" required="true" type="integer"/>
 </table>
 ```
 
@@ -386,9 +386,9 @@ To enable a model-only relationship, add a `<foreign-key>` tag using the `skipSq
 
 ```xml
 <table name="review">
-  <column name="review_id" type="INTEGER" primaryKey="true" required="true"/>
-  <column name="reviewer" type="VARCHAR" size="50" required="true"/>
-  <column name="book_id" required="true" type="INTEGER"/>
+  <column name="review_id" type="integer" primaryKey="true" required="true"/>
+  <column name="reviewer" type="varchar" size="50" required="true"/>
+  <column name="book_id" required="true" type="integer"/>
   <!-- Model-only relationship -->
   <foreign-key foreignTable="book" onDelete="CASCADE" skipSql="true">
     <reference local="book_id" foreign="id"/>

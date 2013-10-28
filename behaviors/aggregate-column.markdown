@@ -13,8 +13,8 @@ In the `schema.xml`, use the `<behavior>` tag to add the `aggregate_column` beha
 
 ```xml
 <table name="post">
-  <column name="id" type="INTEGER" required="true" primaryKey="true" autoIncrement="true" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="aggregate_column">
     <parameter name="name" value="nb_comments" />
     <parameter name="foreign_table" value="comment" />
@@ -22,8 +22,8 @@ In the `schema.xml`, use the `<behavior>` tag to add the `aggregate_column` beha
   </behavior>
 </table>
 <table name="comment">
-  <column name="id" type="INTEGER" required="true" primaryKey="true" autoIncrement="true" />
-  <column name="post_id" type="INTEGER" />
+  <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+  <column name="post_id" type="integer" />
   <foreign-key foreignTable="post" onDelete="cascade">
     <reference local="post_id" foreign="id" />
   </foreign-key>
@@ -66,8 +66,8 @@ Any aggregate function can be used on any of the foreign columns. For instance, 
 
 ```xml
 <table name="post">
-  <column name="id" type="INTEGER" required="true" primaryKey="true" autoIncrement="true" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="aggregate_column">
     <parameter name="name" value="nb_comments" />
     <parameter name="foreign_table" value="comment" />
@@ -85,13 +85,13 @@ Any aggregate function can be used on any of the foreign columns. For instance, 
   </behavior>
 </table>
 <table name="comment">
-  <column name="id" type="INTEGER" required="true" primaryKey="true" autoIncrement="true" />
-  <column name="post_id" type="INTEGER" />
+  <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+  <column name="post_id" type="integer" />
   <foreign-key foreignTable="post" onDelete="cascade">
     <reference local="post_id" foreign="id" />
   </foreign-key>
   <column name="created_at" type="TIMESTAMP" />
-  <column name="vote" type="INTEGER" />
+  <column name="vote" type="integer" />
 </table>
 ```
 
@@ -117,9 +117,9 @@ By default, the behavior adds one columns to the model. If this column is alread
 
 ```xml
 <table name="post">
-  <column name="id" type="INTEGER" required="true" primaryKey="true" autoIncrement="true" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
-  <column name="nb_comments" phpName="CommentCount" type="INTEGER" />
+  <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
+  <column name="nb_comments" phpName="CommentCount" type="integer" />
   <behavior name="aggregate_column">
     <parameter name="name" value="nb_comments" />
     <parameter name="foreign_table" value="comment" />

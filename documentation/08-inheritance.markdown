@@ -24,9 +24,9 @@ A table using Single Table Inheritance requires a column to identify which class
 
 ```xml
 <table name="book">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="title" type="VARCHAR" size="100"/>
-  <column name="class_key" type="INTEGER" inheritance="single">
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="title" type="varchar" size="100"/>
+  <column name="class_key" type="integer" inheritance="single">
     <inheritance key="1" class="Book"/>
     <inheritance key="2" class="Essay" extends="Book"/>
     <inheritance key="3" class="Comic" extends="Book"/>
@@ -140,15 +140,15 @@ Instead of having the children table inherit from the parent table, Propel lets 
 
 ```xml
 <table name="player">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="first_name" type="VARCHAR" size="100"/>
-  <column name="last_name" type="VARCHAR" size="100"/>
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="first_name" type="varchar" size="100"/>
+  <column name="last_name" type="varchar" size="100"/>
 </table>
 <table name="footballer">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="goals_scored" type="INTEGER" />
-  <column name="fouls_committed" type="INTEGER" />
-  <column name="player_id" type="INTEGER" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="goals_scored" type="integer" />
+  <column name="fouls_committed" type="integer" />
+  <column name="player_id" type="integer" />
   <foreign-key foreignTable="player">
     <reference local="player_id" foreign="id" />
   </foreign-key>
@@ -157,11 +157,11 @@ Instead of having the children table inherit from the parent table, Propel lets 
   </behavior>
 </table>
 <table name="basketballer">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="points" type="INTEGER" />
-  <column name="field_goals" type="INTEGER" />
-  <column name="three_points_field_goals" type="INTEGER" />
-  <column name="player_id" type="INTEGER" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="points" type="integer" />
+  <column name="field_goals" type="integer" />
+  <column name="three_points_field_goals" type="integer" />
+  <column name="player_id" type="integer" />
   <foreign-key foreignTable="player">
     <reference local="player_id" foreign="id" />
   </foreign-key>
@@ -213,23 +213,23 @@ The `delegate` behavior allows to delegate to more than one class, effectively s
 
 ```xml
 <table name="person">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="first_name" type="VARCHAR" size="100"/>
-  <column name="last_name" type="VARCHAR" size="100"/>
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="first_name" type="varchar" size="100"/>
+  <column name="last_name" type="varchar" size="100"/>
 </table>
 <table name="team">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="name" type="VARCHAR" size="100"/>
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="name" type="varchar" size="100"/>
 </table>
 <table name="footballer">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="goals_scored" type="INTEGER" />
-  <column name="fouls_committed" type="INTEGER" />
-  <column name="person_id" type="INTEGER" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="goals_scored" type="integer" />
+  <column name="fouls_committed" type="integer" />
+  <column name="person_id" type="integer" />
   <foreign-key foreignTable="person">
     <reference local="person_id" foreign="id" />
   </foreign-key>
-  <column name="team_id" type="INTEGER" />
+  <column name="team_id" type="integer" />
   <foreign-key foreignTable="team">
     <reference local="team_id" foreign="id" />
   </foreign-key>
@@ -264,16 +264,16 @@ Multiple delegation also allows to implement a deep inheritance hierarchy. For i
 
 ```xml
 <table name="player">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="first_name" type="VARCHAR" size="100"/>
-  <column name="last_name" type="VARCHAR" size="100"/>
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="first_name" type="varchar" size="100"/>
+  <column name="last_name" type="varchar" size="100"/>
 </table>
 <table name="basketballer">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="points" type="INTEGER" />
-  <column name="field_goals" type="INTEGER" />
-  <column name="three_points_field_goals" type="INTEGER" />
-  <column name="player_id" type="INTEGER" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="points" type="integer" />
+  <column name="field_goals" type="integer" />
+  <column name="three_points_field_goals" type="integer" />
+  <column name="player_id" type="integer" />
   <foreign-key foreignTable="player">
     <reference local="player_id" foreign="id" />
   </foreign-key>
@@ -282,13 +282,13 @@ Multiple delegation also allows to implement a deep inheritance hierarchy. For i
   </behavior>
 </table>
 <table name="pro_basketballer">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="salary" type="INTEGER" />
-  <column name="basketballer_id" type="INTEGER" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="salary" type="integer" />
+  <column name="basketballer_id" type="integer" />
   <foreign-key foreignTable="basketballer">
     <reference local="basketballer_id" foreign="id" />
   </foreign-key>
-  <column name="player_id" type="INTEGER" />
+  <column name="player_id" type="integer" />
   <foreign-key foreignTable="player">
     <reference local="player_id" foreign="id" />
   </foreign-key>
@@ -314,31 +314,31 @@ Once again, this is easier to understand through an example. In a Content Manage
 
 ```xml
 <table name="content">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="title" type="VARCHAR" size="100"/>
-  <column name="category_id" required="false" type="INTEGER" />
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="title" type="varchar" size="100"/>
+  <column name="category_id" required="false" type="integer" />
   <foreign-key foreignTable="category" onDelete="cascade">
     <reference local="category_id" foreign="id" />
   </foreign-key>
 </table>
 <table name="category">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="name" type="VARCHAR" size="100" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="name" type="varchar" size="100" primaryString="true" />
 </table>
 <table name="article">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="title" type="VARCHAR" size="100"/>
-  <column name="body" type="VARCHAR" size="100"/>
-  <column name="category_id" required="false" type="INTEGER" />
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="title" type="varchar" size="100"/>
+  <column name="body" type="varchar" size="100"/>
+  <column name="category_id" required="false" type="integer" />
   <foreign-key foreignTable="category" onDelete="cascade">
     <reference local="category_id" foreign="id" />
   </foreign-key>
 </table>
 <table name="video">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="title" type="VARCHAR" size="100"/>
-  <column name="resource_link" type="VARCHAR" size="100"/>
-  <column name="category_id" required="false" type="INTEGER" />
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="title" type="varchar" size="100"/>
+  <column name="resource_link" type="varchar" size="100"/>
+  <column name="category_id" required="false" type="integer" />
   <foreign-key foreignTable="category" onDelete="cascade">
     <reference local="category_id" foreign="id" />
   </foreign-key>
@@ -349,28 +349,28 @@ Since the columns of the main table are copied to the child tables, this schema 
 
 ```xml
 <table name="content">
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="title" type="VARCHAR" size="100"/>
-  <column name="category_id" required="false" type="INTEGER" />
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="title" type="varchar" size="100"/>
+  <column name="category_id" required="false" type="integer" />
   <foreign-key foreignTable="category" onDelete="cascade">
     <reference local="category_id" foreign="id" />
   </foreign-key>
 </table>
 <table name="category">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="name" type="VARCHAR" size="100" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="name" type="varchar" size="100" primaryString="true" />
 </table>
 <table name="article">
   <behavior name="concrete_inheritance">
     <parameter name="extends" value="content" />
   </behavior>
-  <column name="body" type="VARCHAR" size="100"/>
+  <column name="body" type="varchar" size="100"/>
 </table>
 <table name="video">
   <behavior name="concrete_inheritance">
     <parameter name="extends" value="content" />
   </behavior>
-  <column name="resource_link" type="VARCHAR" size="100"/>
+  <column name="resource_link" type="varchar" size="100"/>
 </table>
 ```
 
@@ -488,14 +488,14 @@ The `hasChildObject()` and `getChildObject()` methods are automatically added by
     <parameter name="extends" value="content" />
     <parameter name="copy_data_to_parent" value="false" />
   </behavior>
-  <column name="body" type="VARCHAR" size="100"/>
+  <column name="body" type="varchar" size="100"/>
 </table>
 // results in
 <table name="article">
-  <column name="body" type="VARCHAR" size="100"/>
-  <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true"/>
-  <column name="title" type="VARCHAR" size="100"/>
-  <column name="category_id" required="false" type="INTEGER" />
+  <column name="body" type="varchar" size="100"/>
+  <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
+  <column name="title" type="varchar" size="100"/>
+  <column name="category_id" required="false" type="integer" />
   <foreign-key foreignTable="category" onDelete="cascade">
     <reference local="category_id" foreign="id" />
   </foreign-key>

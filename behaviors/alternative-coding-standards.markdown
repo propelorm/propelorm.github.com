@@ -12,8 +12,8 @@ The `alternative_coding_standards` behavior changes the coding standards of the 
 In the `schema.xml`, use the `<behavior>` tag to add the `alternative_coding_standards` behavior to a table:
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="alternative_coding_standards" />
 </table>
 ```
@@ -76,8 +76,8 @@ Each of the new coding style rules has corresponding parameter in the behavior d
 
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="alternative_coding_standards">
     <parameter name="brackets_newline" value="true" />
     <parameter name="remove_closing_comments" value="true" />

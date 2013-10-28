@@ -12,8 +12,8 @@ The `sortable` behavior allows a model to become an ordered list, and provides n
 In the `schema.xml`, use the `<behavior>` tag to add the `sortable` behavior to a table:
 ```xml
 <table name="task">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="sortable" />
 </table>
 ```
@@ -110,9 +110,9 @@ When you need to store several lists for a single model - for instance, one task
 
 ```xml
 <table name="task">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
-  <column name="user_id" required="true" type="INTEGER" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
+  <column name="user_id" required="true" type="integer" />
   <foreign-key foreignTable="user" onDelete="cascade">
     <reference local="user_id" foreign="id" />
   </foreign-key>
@@ -170,10 +170,10 @@ By default, the behavior adds one columns to the model - two if you use the scop
 
 ```xml
 <table name="task">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
-  <column name="my_rank_column" required="true" type="INTEGER" />
-  <column name="user_id" required="true" type="INTEGER" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
+  <column name="my_rank_column" required="true" type="integer" />
+  <column name="user_id" required="true" type="integer" />
   <foreign-key foreignTable="user" onDelete="cascade">
     <reference local="user_id" foreign="id" />
   </foreign-key>

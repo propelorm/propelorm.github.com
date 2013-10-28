@@ -16,8 +16,8 @@ The `versionable` behavior provides versioning capabilities to any ActiveRecord 
 In the `schema.xml`, use the `<behavior>` tag to add the `versionable` behavior to a table:
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" />
   <behavior name="versionable" />
 </table>
 ```
@@ -59,8 +59,8 @@ For future reference, you probably need to record who edited an object, as well 
 
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" />
   <behavior name="versionable">
     <parameter name="log_created_at" value="true" />
     <parameter name="log_created_by" value="true" />
@@ -185,9 +185,9 @@ You can change the name of the column added by the behavior by setting the `vers
 
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" />
-  <column name="my_version_column" type="BIGINT" description="Version column" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" />
+  <column name="my_version_column" type="bigint" description="Version column" />
   <behavior name="versionable">
     <parameter name="version_column" value="my_version_column" />
   </behavior>
@@ -208,8 +208,8 @@ You can also change the name of the version table by setting the `version_table`
 
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" />
   <behavior name="versionable">
     <parameter name="version_table" value="my_book_version" />
   </behavior>
@@ -220,8 +220,8 @@ The audit log abilities need to be enabled in the schema as well:
 
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" />
   <behavior name="versionable">
     <!-- Log the version creation date -->
     <parameter name="log_created_at" value="true" />

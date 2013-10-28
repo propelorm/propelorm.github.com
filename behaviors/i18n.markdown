@@ -13,11 +13,11 @@ In the `schema.xml`, use the `<behavior>` tag to add the `i18n` behavior to a ta
 
 ```xml
 <table name="item">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="name" type="VARCHAR" required="true" />
-  <column name="description" type="LONGVARCHAR" />
-  <column name="price" type="FLOAT" />
-  <column name="is_in_store" type="BOOLEAN" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="name" type="varchar" required="true" />
+  <column name="description" type="longvarchar" />
+  <column name="price" type="float" />
+  <column name="is_in_store" type="boolean" />
   <behavior name="i18n">
     <parameter name="i18n_columns" value="name, description" />
   </behavior>
@@ -28,15 +28,15 @@ Rebuild your model, insert the table creation sql again, and you're ready to go.
 
 ```xml
 <table name="item">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="price" type="FLOAT" />
-  <column name="is_in_store" type="BOOLEAN" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="price" type="float" />
+  <column name="is_in_store" type="boolean" />
 </table>
 <table name="item_i18n">
-  <column name="id" type="INTEGER" required="true" primaryKey="true" />
-  <column name="locale" type="VARCHAR" size="5" required="true" primaryKey="true" />
-  <column name="name" type="VARCHAR" required="true" />
-  <column name="description" type="LONGVARCHAR" />
+  <column name="id" type="integer" required="true" primaryKey="true" />
+  <column name="locale" type="varchar" size="5" required="true" primaryKey="true" />
+  <column name="name" type="varchar" required="true" />
+  <column name="description" type="longvarchar" />
   <foreign-key foreignTable="item" onDelete="setnull" onUpdate="cascade">
     <reference local="id" foreign="id" />
   </foreign-key>
@@ -168,17 +168,17 @@ So the following schema is exactly equivalent to the first one in this tutorial:
 
 ```xml
 <table name="item">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="price" type="FLOAT" />
-  <column name="is_in_store" type="BOOLEAN" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="price" type="float" />
+  <column name="is_in_store" type="boolean" />
   <behavior name="i18n">
     <parameter name="locale_alias" value="culture" />
   </behavior>
 </table>
 <table name="item_i18n">
-  <column name="id" type="INTEGER" required="true" primaryKey="true" />
-  <column name="name" type="VARCHAR" required="true" />
-  <column name="description" type="LONGVARCHAR" />
+  <column name="id" type="integer" required="true" primaryKey="true" />
+  <column name="name" type="varchar" required="true" />
+  <column name="description" type="longvarchar" />
 </table>
 ```
 
@@ -190,11 +190,11 @@ If you don't specify a locale when dealing with a translatable object, Propel us
 
 ```xml
 <table name="item">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="name" type="VARCHAR" required="true" />
-  <column name="description" type="LONGVARCHAR" />
-  <column name="price" type="FLOAT" />
-  <column name="is_in_store" type="BOOLEAN" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="name" type="varchar" required="true" />
+  <column name="description" type="longvarchar" />
+  <column name="price" type="float" />
+  <column name="is_in_store" type="boolean" />
   <behavior name="i18n">
     <parameter name="i18n_columns" value="name, description" />
     <parameter name="default_locale" value="fr_FR" />
@@ -206,11 +206,11 @@ You can change the name of the locale column added by the behavior by setting th
 
 ```xml
 <table name="item">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="name" type="VARCHAR" required="true" />
-  <column name="description" type="LONGVARCHAR" />
-  <column name="price" type="FLOAT" />
-  <column name="is_in_store" type="BOOLEAN" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="name" type="varchar" required="true" />
+  <column name="description" type="longvarchar" />
+  <column name="price" type="float" />
+  <column name="is_in_store" type="boolean" />
   <behavior name="i18n">
     <parameter name="i18n_columns" value="name, description" />
     <parameter name="locale_column" value="language" />

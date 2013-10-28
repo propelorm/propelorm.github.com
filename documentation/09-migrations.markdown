@@ -23,8 +23,8 @@ Here is a concrete example. On a new bookstore project, a developer creates an X
 ```xml
 <database name="bookstore" defaultIdMethod="native">
   <table name="book" description="Book Table">
-    <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />    <column name="title" type="VARCHAR" required="true" primaryString="true" />
-    <column name="isbn" required="true" type="VARCHAR" size="24" phpName="ISBN" />
+    <column name="id" type="integer" primaryKey="true" autoIncrement="true" />    <column name="title" type="varchar" required="true" primaryString="true" />
+    <column name="isbn" required="true" type="varchar" size="24" phpName="ISBN" />
   </table>
 </database>
 ```
@@ -100,18 +100,18 @@ After a few days, the developer wants to add a new `author` table, with a foreig
 ```xml
 <database name="bookstore" defaultIdMethod="native">
   <table name="book" description="Book Table">
-    <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
-    <column name="title" type="VARCHAR" required="true" primaryString="true" />
-    <column name="isbn" required="true" type="VARCHAR" size="24" phpName="ISBN" />
-    <column name="author_id" type="INTEGER" />
+    <column name="id" type="integer" primaryKey="true" autoIncrement="true" />
+    <column name="title" type="varchar" required="true" primaryString="true" />
+    <column name="isbn" required="true" type="varchar" size="24" phpName="ISBN" />
+    <column name="author_id" type="integer" />
     <foreign-key foreignTable="author" onDelete="setnull" onUpdate="cascade">
       <reference local="author_id" foreign="id" />
     </foreign-key>
   </table>
   <table name="author">
-    <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
-    <column name="first_name" type="VARCHAR" />
-    <column name="last_name" type="VARCHAR" />
+    <column name="id" type="integer" primaryKey="true" autoIncrement="true" />
+    <column name="first_name" type="varchar" />
+    <column name="last_name" type="varchar" />
   </table>
 </database>
 ```

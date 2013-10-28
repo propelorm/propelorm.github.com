@@ -13,7 +13,7 @@ In the `schema.xml`, use the `<behavior>` tag to add the `auto_add_pk` behavior 
 
 ```xml
 <table name="book">
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="auto_add_pk" />
 </table>
 ```
@@ -34,7 +34,7 @@ This behavior is more powerful if you add it to the database instead of a table.
 <database name="bookstore" defaultIdMethod="native">
   <behavior name="auto_add_pk" />
   <table name="book">
-    <column name="title" type="VARCHAR" required="true" primaryString="true" />
+    <column name="title" type="varchar" required="true" primaryString="true" />
   </table>
 </database>
 ```
@@ -54,10 +54,10 @@ By default, the behavior adds a column named `id` to the table if the table has 
   <behavior name="auto_add_pk">
     <parameter name="name" value="identifier" />
     <parameter name="autoIncrement" value="false" />
-    <parameter name="type" value="BIGINT" />
+    <parameter name="type" value="bigint" />
   </behavior>
   <table name="book">
-    <column name="title" type="VARCHAR" required="true" primaryString="true" />
+    <column name="title" type="varchar" required="true" primaryString="true" />
   </table>
 </database>
 ```

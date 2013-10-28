@@ -13,8 +13,8 @@ In the `schema.xml`, use the `<behavior>` tag to add the `archivable` behavior t
 
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="archivable" />
 </table>
 ```
@@ -134,8 +134,8 @@ As explained earlier, the `archivable` behavior archives objects on deletion by 
 
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="archivable">
     <parameter name="archive_on_insert" value="false" />
     <parameter name="archive_on_update" value="false" />
@@ -165,8 +165,8 @@ The behavior can use another database connection for the archive table, to make 
 ```xml
 <database name="main">
   <table name="book">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-    <column name="title" type="VARCHAR" required="true" primaryString="true" />
+    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+    <column name="title" type="varchar" required="true" primaryString="true" />
     <behavior name="archivable">
       <parameter name="archive_class" value="MyBookArchive" />
     </behavior>
@@ -174,9 +174,9 @@ The behavior can use another database connection for the archive table, to make 
 </database>
 <database name="backup">
   <table name="my_book_archive" phpName="MyBookArchive">
-    <column name="id" required="true" primaryKey="true" type="INTEGER" />
-    <column name="title" type="VARCHAR" required="true" primaryString="true" />
-    <column name="archived_at" type="TIMESTAMP" />
+    <column name="id" required="true" primaryKey="true" type="integer" />
+    <column name="title" type="varchar" required="true" primaryString="true" />
+    <column name="archived_at" type="timestamp" />
   </table>
 </database>
 ```

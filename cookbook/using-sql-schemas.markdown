@@ -16,8 +16,8 @@ In a XML schema, you can assign all the tables included into a `<database>` tag 
 ```xml
 <database name="bookstore" schema="bookstore">
   <table name="book">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-    <column name="title" type="VARCHAR" required="true" />
+    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+    <column name="title" type="varchar" required="true" />
   </table>
 </database>
 ```
@@ -28,8 +28,8 @@ You can also assign a table to a given schema individually ; this overrides the 
 
 ```xml
 <table name="book" schema="bookstore1">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" />
 </table>
 ```
 
@@ -39,16 +39,16 @@ You can create foreign keys between tables assigned to different schemas, provid
 
 ```xml
 <table name="book" schema="bookstore">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" />
-  <column name="author_id" type="INTGER" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" />
+  <column name="author_id" type="integer" />
   <foreign-key foreignTable="author" foreignSchema="people" onDelete="setnull" onUpdate="cascade">
     <reference local="author_id" foreign="id" />
   </foreign-key>
 </table>
 <table name="author" schema="people">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="name" type="VARCHAR" required="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="name" type="varchar" required="true" />
 </table>
 ```
 

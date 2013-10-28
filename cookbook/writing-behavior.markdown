@@ -35,8 +35,8 @@ Test the behavior by adding it to a table of your model, for instance to a `poll
 ```xml
 <database name="poll" defaultIdMethod="native">
   <table name="poll_question" phpName="PollQuestion">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-    <column name="body" type="VARCHAR" size="100" />
+    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+    <column name="body" type="varchar" size="100" />
     <behavior name="aggregate_column">
       <parameter name="name" value="total_nb_votes" />
     </behavior>
@@ -84,7 +84,7 @@ class AggregateColumnBehavior extends Behavior
     if(!$table->hasColumn($columnName)) {
       $table->addColumn(array(
         'name'    => $columnName,
-        'type'    => 'INTEGER',
+        'type'    => 'integer',
       ));
     }
   }
@@ -167,8 +167,8 @@ Of course, the schema must be modified to supply the necessary parameters to the
 ```xml
 <database name="poll" defaultIdMethod="native">
   <table name="poll_question" phpName="PollQuestion">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-    <column name="body" type="VARCHAR" size="100" />
+    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+    <column name="body" type="varchar" size="100" />
     <behavior name="aggregate_column">
       <parameter name="name" value="total_nb_votes" />
       <parameter name="expression" value="count(nb_votes)" />
@@ -178,10 +178,10 @@ Of course, the schema must be modified to supply the necessary parameters to the
     </behavior>
   </table>
   <table name="poll_answer" phpName="PollAnswer">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-    <column name="question_id" required="true" type="INTEGER" />
-    <column name="body" type="VARCHAR" size="100" />
-    <column name="nb_votes" type="INTEGER" />
+    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+    <column name="question_id" required="true" type="integer" />
+    <column name="body" type="varchar" size="100" />
+    <column name="nb_votes" type="integer" />
     <foreign-key foreignTable="poll_question" onDelete="cascade">
       <reference local="question_id" foreign="id" />
     </foreign-key>

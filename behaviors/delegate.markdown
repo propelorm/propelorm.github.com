@@ -13,16 +13,16 @@ In the `schema.xml`, use the `<behavior>` tag to add the `delegate` behavior to 
 
 ```xml
 <table name="account">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="login" type="VARCHAR" required="true" />
-  <column name="password" type="VARCHAR" required="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="login" type="varchar" required="true" />
+  <column name="password" type="varchar" required="true" />
   <behavior name="delegate">
     <parameter name="to" value="profile" />
   </behavior>
 </table>
 <table name="profile">
-  <column name="email" type="VARCHAR" />
-  <column name="telephone" type="VARCHAR" />
+  <column name="email" type="varchar" />
+  <column name="telephone" type="varchar" />
 </table>
 ```
 
@@ -30,14 +30,14 @@ Rebuild your model, insert the table creation sql again, and you're ready to go.
 
 ```xml
 <table name="account">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="login" type="VARCHAR" required="true" />
-  <column name="password" type="VARCHAR" required="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="login" type="varchar" required="true" />
+  <column name="password" type="varchar" required="true" />
 </table>
 <table name="profile">
-  <column name="id" required="true" primaryKey="true" type="INTEGER" />
-  <column name="email" type="VARCHAR" />
-  <column name="telephone" type="VARCHAR" />
+  <column name="id" required="true" primaryKey="true" type="integer" />
+  <column name="email" type="varchar" />
+  <column name="telephone" type="varchar" />
   <foreign-key foreignTable="account" onDelete="setnull" onUpdate="cascade">
     <reference local="id" foreign="id" />
   </foreign-key>
@@ -94,16 +94,16 @@ Instead of adding a one-to-one relationship, the `delegate` behavior can take ad
 
 ```xml
 <table name="player">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="first_name" type="VARCHAR" />
-  <column name="last_name" type="VARCHAR" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="first_name" type="varchar" />
+  <column name="last_name" type="varchar" />
 </table>
 <table name="basketballer">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="points" type="INTEGER" />
-  <column name="field_goals" type="INTEGER" />
-  <column name="three_points_field_goals" type="INTEGER" />
-  <column name="player_id" type="INTEGER" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="points" type="integer" />
+  <column name="field_goals" type="integer" />
+  <column name="three_points_field_goals" type="integer" />
+  <column name="player_id" type="integer" />
   <foreign-key foreignTable="player">
       <reference local="player_id" foreign="id" />
     </foreign-key>
@@ -148,20 +148,20 @@ Delegation allows to delegate to several tables. Just separate the name of the d
 
 ```xml
 <table name="account">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="login" type="VARCHAR" required="true" />
-  <column name="password" type="VARCHAR" required="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="login" type="varchar" required="true" />
+  <column name="password" type="varchar" required="true" />
   <behavior name="delegate">
     <parameter name="to" value="profile, preference" />
   </behavior>
 </table>
 <table name="profile">
-  <column name="email" type="VARCHAR" />
-  <column name="telephone" type="VARCHAR" />
+  <column name="email" type="varchar" />
+  <column name="telephone" type="varchar" />
 </table>
 <table name="preference">
-  <column name="preferred_color" type="VARCHAR" />
-  <column name="max_size" type="INTEGER" />
+  <column name="preferred_color" type="varchar" />
+  <column name="max_size" type="integer" />
 </table>
 ```
 
@@ -192,9 +192,9 @@ The `delegate` behavior takes only one parameter, the list of delegate tables:
 
 ```xml
 <table name="account">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="login" type="VARCHAR" required="true" />
-  <column name="password" type="VARCHAR" required="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="login" type="varchar" required="true" />
+  <column name="password" type="varchar" required="true" />
   <behavior name="delegate">
     <parameter name="to" value="profile, preference" />
   </behavior>

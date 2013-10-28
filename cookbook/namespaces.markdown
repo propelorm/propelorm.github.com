@@ -18,12 +18,12 @@ Here is an example schema using namespaces:
 <database name="bookstore" defaultIdMethod="native" namespace="Bookstore">
 
   <table name="book">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-    <column name="title" type="VARCHAR" required="true" primaryString="true" />
-    <column name="isbn" required="true" type="VARCHAR" size="24" phpName="ISBN" />
+    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+    <column name="title" type="varchar" required="true" primaryString="true" />
+    <column name="isbn" required="true" type="varchar" size="24" phpName="ISBN" />
     <column name="price" required="false" type="FLOAT" />
-    <column name="publisher_id" required="false" type="INTEGER" description="Foreign Key Publisher" />
-    <column name="author_id" required="false" type="INTEGER" description="Foreign Key Author" />
+    <column name="publisher_id" required="false" type="integer" description="Foreign Key Publisher" />
+    <column name="author_id" required="false" type="integer" description="Foreign Key Author" />
     <foreign-key foreignTable="publisher" onDelete="setnull">
       <reference local="publisher_id" foreign="id" />
     </foreign-key>
@@ -33,21 +33,21 @@ Here is an example schema using namespaces:
   </table>
 
   <table name="author">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
-    <column name="first_name" required="true" type="VARCHAR" size="128" />
-    <column name="last_name" required="true" type="VARCHAR" size="128" />
-    <column name="email" type="VARCHAR" size="128" />
+    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer"/>
+    <column name="first_name" required="true" type="varchar" size="128" />
+    <column name="last_name" required="true" type="varchar" size="128" />
+    <column name="email" type="varchar" size="128" />
   </table>
 
   <table name="publisher" namespace="Book">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-    <column name="name" required="true" type="VARCHAR" size="128" default="Penguin" />
+    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+    <column name="name" required="true" type="varchar" size="128" default="Penguin" />
   </table>
 
   <table name="user" namespace="\Admin">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
-    <column name="login" required="true" type="VARCHAR" size="128" />
-    <column name="email" type="VARCHAR" size="128" />
+    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer"/>
+    <column name="login" required="true" type="varchar" size="128" />
+    <column name="email" type="varchar" size="128" />
   </table>
 
 </database>

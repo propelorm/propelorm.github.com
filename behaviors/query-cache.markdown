@@ -12,8 +12,8 @@ The `query_cache` behavior gives a speed boost to Propel queries by caching the 
 In the `schema.xml`, use the `<behavior>` tag to add the `query_cache` behavior to a table:
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="query_cache" />
 </table>
 ```
@@ -48,8 +48,8 @@ You can change the cache backend and the cache lifetime (in seconds) by setting 
 
 ```xml
 <table name="book">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="query_cache">
     <parameter name="backend" value="custom" />
     <parameter name="lifetime" value="600" />

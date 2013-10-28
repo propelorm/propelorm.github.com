@@ -14,8 +14,8 @@ Many applications need to store hierarchical data in the model. For instance, a 
 In the `schema.xml`, use the `<behavior>` tag to add the `nested_set` behavior to a table:
 ```xml
 <table name="section">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="nested_set" />
 </table>
 ```
@@ -148,8 +148,8 @@ When you need to store several trees for a single model - for instance, several 
 
 ```xml
 <table name="post">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="body" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="body" type="varchar" required="true" primaryString="true" />
   <behavior name="nested_set">
     <parameter name="use_scope" value="true" />
     <parameter name="scope_column" value="thread_id" />
@@ -203,12 +203,12 @@ By default, the behavior adds three columns to the model - four if you use the s
 
 ```xml
 <table name="post">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="lft" type="INTEGER" />
-  <column name="rgt" type="INTEGER" />
-  <column name="lvl" type="INTEGER" />
-  <column name="thread_id" type="INTEGER" />
-  <column name="body" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="lft" type="integer" />
+  <column name="rgt" type="integer" />
+  <column name="lvl" type="integer" />
+  <column name="thread_id" type="integer" />
+  <column name="body" type="varchar" required="true" primaryString="true" />
   <behavior name="nested_set">
     <parameter name="left_column" value="lft" />
     <parameter name="right_column" value="rgt" />
@@ -240,8 +240,8 @@ If your application used the old nested sets builder from Propel 1.4, you can en
 
 ```xml
 <table name="section">
-  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-  <column name="title" type="VARCHAR" required="true" primaryString="true" />
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" primaryString="true" />
   <behavior name="nested_set">
     <parameter name="method_proxies" value="true" />
   </behavior>
