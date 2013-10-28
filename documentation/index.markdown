@@ -6,7 +6,7 @@ title: Documentation
 # Documentation #
 
  * [What's New in Propel 2.0](whats-new.html) Users of previous versions can check the changes here.
- * [Changelog](https://raw.github.com/propelorm/Propel2/master/UPDATE.md) Updates of the version 2.0.
+ * [Changelog](https://github.com/propelorm/Propel2/blob/master/UPDATE.md) Updates of the version 2.0.
  * [API Documentation](http://api.propelorm.org/) The generated API documentation.
 
 ## Project Setup ##
