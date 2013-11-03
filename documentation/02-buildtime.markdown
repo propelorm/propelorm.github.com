@@ -252,23 +252,25 @@ Create a file called `runtime-conf.xml` at the root of the `bookstore` project, 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-  <datasources default="bookstore">
-    <datasource id="bookstore">
-      <adapter>mysql</adapter> <!-- sqlite, mysql, myssql, oracle, or pgsql -->
-      <connection>
-        <dsn>mysql:host=localhost;dbname=my_db_name</dsn>
-        <user>my_db_user</user>
-        <password>s3cr3t</password>
-      </connection>
-    </datasource>
-  </datasources>
-  <log>
-    <logger name="defaultLogger">
-      <type>stream</type>
-      <path>/var/log/propel.log</path>
-      <level>300</level>
-    </logger>
-  </log>
+  <propel> 
+    <datasources default="bookstore">
+      <datasource id="bookstore">
+        <adapter>mysql</adapter> <!-- sqlite, mysql, myssql, oracle, or pgsql -->
+        <connection>
+          <dsn>mysql:host=localhost;dbname=my_db_name</dsn>
+          <user>my_db_user</user>
+          <password>s3cr3t</password>
+        </connection>
+      </datasource>
+    </datasources>
+    <log>
+      <logger name="defaultLogger">
+        <type>stream</type>
+        <path>/var/log/propel.log</path>
+        <level>300</level>
+      </logger>
+    </log>
+  </propel>
 </config>
 ```
 
