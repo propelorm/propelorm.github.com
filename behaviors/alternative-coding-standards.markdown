@@ -10,6 +10,7 @@ The `alternative_coding_standards` behavior changes the coding standards of the 
 ## Basic Usage ##
 
 In the `schema.xml`, use the `<behavior>` tag to add the `alternative_coding_standards` behavior to a table:
+
 ```xml
 <table name="book">
   <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
