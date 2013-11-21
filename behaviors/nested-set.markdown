@@ -12,6 +12,7 @@ Many applications need to store hierarchical data in the model. For instance, a 
 ## Basic Usage ##
 
 In the `schema.xml`, use the `<behavior>` tag to add the `nested_set` behavior to a table:
+
 ```xml
 <table name="section">
   <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
