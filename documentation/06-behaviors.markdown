@@ -140,7 +140,7 @@ Propel currently bundles several behaviors. Check the behavior documentation for
 * [versionable](../behaviors/versionable)
 * [i18n](../behaviors/i18n)
 * [query_cache](../behaviors/query-cache)
-* And [concrete_inheritance](./09-inheritance), documented in the Inheritance Chapter even if it's a behavior
+* And [concrete_inheritance](./08-inheritance), documented in the Inheritance Chapter even if it's a behavior
 
 You can also look at [user contributed behaviors](../cookbook/user-contributed-behaviors.html).
 
