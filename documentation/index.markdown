@@ -35,7 +35,6 @@ title: Documentation
 ## Behaviors Reference ##
 
 * [`aggregate_column`](../behaviors/aggregate-column.html)
-* [`alternative_coding_standards`](../behaviors/alternative-coding-standards.html)
 * [`archivable`](../behaviors/archivable.html)
 * [`auto_add_pk`](../behaviors/auto-add-pk.html)
 * [`delegate`](../behaviors/delegate.html)
