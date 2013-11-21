@@ -136,7 +136,7 @@ and here are the statuses:
     <tr>
         <td><a href="https://github.com/propelorm/Propel">Propel 1.6</a></td><td><img src="https://travis-ci.org/propelorm/Propel.png" /></td>
     </tr><tr>
-        <td><a href="https://github.com/propelorm/Propel2">Propel2 (unstable)</a></td><td><img src="https://travis-ci.org/propelorm/Propel2.png" /></td>
+        <td><a href="https://github.com/propelorm/Propel2">Propel2</a></td><td><img src="https://travis-ci.org/propelorm/Propel2.png" /></td>
     </tr><tr>
         <td><a href="https://github.com/propelorm/sfPropelORMPlugin">sfPropelORMPlugin</a></td><td><img src="https://travis-ci.org/propelorm/sfPropelORMPlugin.png" /></td>
     </tr><tr>
