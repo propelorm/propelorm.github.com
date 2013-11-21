@@ -10,6 +10,7 @@ The `sortable` behavior allows a model to become an ordered list, and provides n
 ## Basic Usage ##
 
 In the `schema.xml`, use the `<behavior>` tag to add the `sortable` behavior to a table:
+
 ```xml
 <table name="task">
   <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
