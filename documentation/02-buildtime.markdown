@@ -169,7 +169,7 @@ Now that your database is ready, we are going to generate our model files. These
 $ propel model:build
 ```
 
-Propel will generate a new `generated-classes` folder containning all the stuff you need to interact with your different tables.
+Propel will generate a new `generated-classes` folder containing all the stuff you need to interact with your different tables.
 
 For every table in the database, Propel creates 3 PHP classes:
 
