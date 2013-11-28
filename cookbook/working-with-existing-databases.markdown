@@ -44,7 +44,7 @@ $ propel reverse
 
  4. Pay attention to any errors/warnings issued during the task execution and then examine the generated `schema.xml` file to make any corrections needed.
 
- 5. _'You're done! _' Now you have a `schema.xml` file in the `legacyapp/` project directory. You can now run the default Propel build to generate all the classes.
+ 5. _You're done!_ Now you have a `schema.xml` file in the `legacyapp/` project directory. You can now run the default Propel build to generate all the classes.
 
 The generated `schema.xml` file should be used as a guide, not a final answer. There are some datatypes that Propel may not be familiar with; also some datatypes are simply not supported by Propel (e.g. arrays in PostgreSQL). Unfamiliar datatypes will be reported as warnings and substituted with a default VARCHAR datatype.
 
