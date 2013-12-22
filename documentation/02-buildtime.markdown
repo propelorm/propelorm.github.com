@@ -201,6 +201,18 @@ In addition to these classes, Propel generates one `TableMap` class for each tab
 
 Basically, all that means is that despite the fact that Propel generates _five_ classes for each table, you should only care about two of them: the model class and the query class.
 
+
+>**Warning**<br />After generating the classes, you have to autoload them. For example, with composer this can be achieved with
+>```json
+> {
+>   ...
+>   "autoload": { 
+>     "classmap": ["generated-classes/"] 
+>   } 
+> }
+>```   
+> and then executing the command `composer dump-autoload`
+
 ## Runtime Connection Settings ##
 
 The database and PHP classes are now ready to be used. But they don't know yet how to communicate with each other at runtime. You must tell Propel which database connection settings should be used to finish the setup.
