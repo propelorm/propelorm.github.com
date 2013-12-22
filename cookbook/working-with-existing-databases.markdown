@@ -20,7 +20,7 @@ To generate a schema file, create a new directory for your project & specify the
 ```bash
 $ cd legacyapp
 ```
- 2. Run the `reverse` task to generate the `schema.xml`:
+ 2. Run the `reverse` task to generate the `schema.xml` specifying your database credentials:
 
 ```bash
 $ propel reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
