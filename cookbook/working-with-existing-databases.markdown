@@ -15,36 +15,20 @@ Propel uses an abstract XML schema file to represent databases (the [schema](../
 
 To generate a schema file, create a new directory for your project & specify the connection information in your `build.properties` file for that project. For example, to create a new project, `legacyapp`, follow these steps:
 
- 1. Create the `legacyapp` project directory anywhere on your filesystem:
+ 1. Go to the `legacyapp` project directory anywhere on your filesystem:
 
 ```bash
-$ mkdir legacyapp
 $ cd legacyapp
 ```
-
- 2. Create a `build.properties` file in `legacyapp/` directory with the DB connection parameters for your existing database, e.g.:
-
-```ini
-propel.project = legacyapp
-
-# The Propel driver to use for generating SQL, etc.
-propel.database = mysql
-
-# This must be a PDO DSN
-propel.database.url = mysql:dbname=legacyapp
-propel.database.user = root
-# propel.database.password #
-```
-
- 3. Run the `reverse` task to generate the `schema.xml`:
+ 2. Run the `reverse` task to generate the `schema.xml`:
 
 ```bash
-$ propel reverse
+$ propel reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
 ```
 
- 4. Pay attention to any errors/warnings issued during the task execution and then examine the generated `schema.xml` file to make any corrections needed.
+ 3. Pay attention to any errors/warnings issued during the task execution and then examine the generated `schema.xml` file to make any corrections needed.
 
- 5. _You're done!_ Now you have a `schema.xml` file in the `legacyapp/` project directory. You can now run the default Propel build to generate all the classes.
+ 4. _You're done!_ Now you have a `schema.xml` file in the `legacyapp/` project directory. You can now run the default Propel build to generate all the classes.
 
 The generated `schema.xml` file should be used as a guide, not a final answer. There are some datatypes that Propel may not be familiar with; also some datatypes are simply not supported by Propel (e.g. arrays in PostgreSQL). Unfamiliar datatypes will be reported as warnings and substituted with a default VARCHAR datatype.
 
