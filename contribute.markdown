@@ -33,7 +33,7 @@ First, you should create a new branch from the `master`.
 Assuming you are in your local Propel project:
 
 ```bash
-$ git checkout -b master fix-my-patch
+$ git checkout -b fix-my-patch master
 ```
 
 Now you can write your patch in this branch. Don't forget to provide unit tests
