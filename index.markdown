@@ -134,7 +134,7 @@ and here are the statuses:
 
 <table width="100%" class="ecg">
     <tr>
-        <td><a href="https://github.com/propelorm/Propel">Propel 1.6</a></td><td><img src="https://travis-ci.org/propelorm/Propel.png" /></td>
+        <td><a href="https://github.com/propelorm/Propel">Propel 1.7</a></td><td><img src="https://travis-ci.org/propelorm/Propel.png" /></td>
     </tr><tr>
         <td><a href="https://github.com/propelorm/Propel2">Propel2</a></td><td><img src="https://travis-ci.org/propelorm/Propel2.png" /></td>
     </tr><tr>
