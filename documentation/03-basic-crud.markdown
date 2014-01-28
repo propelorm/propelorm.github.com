@@ -166,7 +166,7 @@ As Propel uses PDO to query the underlying database, you can always write custom
 ```php
 <?php
 use Propel\Runtime\Propel;
-$con = Propel::getWriteConnection(BookTableMap::DATABASE_NAME);
+$con = Propel::getWriteConnection(\Map\BookTableMap::DATABASE_NAME);
 $sql = "SELECT * FROM book WHERE id NOT IN "
         ."(SELECT book_review.book_id FROM book_review"
         ." INNER JOIN author ON (book_review.author_id=author.ID)"
@@ -175,13 +175,15 @@ $stmt = $con->prepare($sql);
 $stmt->execute(array(':name' => 'Austen'));
 ```
 
-With only a little bit more work, you can also populate `Book` objects from the resulting statement. Create a new `PropelObjectCollection` for the `Book` model, and call the `format()` method using the statement:
+With only a little bit more work, you can also populate `Book` objects from the resulting statement. Create a new `ObjectFormatter` for the `Book` model, and call the `format()` method using the `DataFetcher` instance of the current connection with the pdo statement:
 
 ```php
 <?php
-$formatter = new PropelObjectFormatter();
-$formatter->setClass('Book');
-$books = $formatter->format($stmt);
+use Propel\Runtime\Formatter\ObjectFormatter;
+$con = Propel::getWriteConnection(\Map\BookTableMap::DATABASE_NAME);
+$formatter = new ObjectFormatter();
+$formatter->setClass('\Book'); //full qualified class name
+$books = $formatter->format($con->getDataFetcher($stmt));
 // $books contains a collection of Book objects
 ```
 
