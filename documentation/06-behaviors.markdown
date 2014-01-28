@@ -377,9 +377,9 @@ public function findPk(\$key, \$con = null)
   \$stmt->bindValue(1, \$key);
   \$res = \$stmt->execute();
   // hydrate ActiveRecord objects with the result
-  \$formatter = new PropelObjectFormatter();
+  \$formatter = new \Propel\Runtime\Formatter\ObjectFormatter();
   \$formatter->setClass('%s');
-  return \$formatter->formatOne(\$res);
+  return \$formatter->formatOne(\$con->getSingleDataFetcher($stmt));
 }
 ";
     $table = $this->getTable();
