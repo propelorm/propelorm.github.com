@@ -244,7 +244,7 @@ echo $author->getFirstName(); // 'Jane'
 
 ## Query Termination Methods ##
 
-The Query methods that don't return the current query object are called "Termination Methods". You've already seen come of them: `find()`, `findOne()`, `update()`, `delete()`. There are two more termination methods that you should know about:
+The Query methods that don't return the current query object are called "Termination Methods". You've already seen some of them: `find()`, `findOne()`, `update()`, `delete()`. There are two more termination methods that you should know about:
 
 `count()` returns the number of results of the query.
 
@@ -252,11 +252,12 @@ The Query methods that don't return the current query object are called "Termina
 <?php
 $nbAuthors = AuthorQuery::create()->count();
 ```
-You could also count the number of results from a find(), but that would be less effective, since it implies hydrating objects just to count them
+You could also count the number of results from a `find()`, but that would be less effective, since it implies hydrating objects just to count them.
 
 `paginate()` returns a paginated list of results:
 
 ```php
+<?php
 $authorPager = AuthorQuery::create()->paginate($page = 1, $maxPerPage = 10);
 // This method will compute an offset and a limit
 // based on the number of the page and the max number of results per page.
