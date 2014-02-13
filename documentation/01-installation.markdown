@@ -32,7 +32,7 @@ We advise you to rely on [Composer](http://getcomposer.org/) to manage your proj
 ```json
 {
     "require": {
-        "propel/propel": ">= 2.0"
+        "propel/propel": "dev-master"
     }
 }
 ```
@@ -43,6 +43,12 @@ Then you have to download Composer itself so in a terminal just type the followi
 $ wget http://getcomposer.org/composer.phar
 # If you haven't wget on your computer
 $ curl -s http://getcomposer.org/installer | php
+```
+
+Git is requires for the install.  If it isn't already installed
+```bash
+#e.g. Centos / RedHat
+$ yum install git
 ```
 
 Finally, to install all your project's dependencies, type the following:
