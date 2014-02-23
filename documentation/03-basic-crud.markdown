@@ -88,10 +88,10 @@ When the primary key consists of more than one column, `findPK()` accepts multip
 
 >**Tip**<br />Every generated Query objects offers a factory method called `create()`. This methods creates a new instance of the query, and allows you to write queries in a single line:
 
-```php
-<?php
-$firstAuthor = AuthorQuery::create()->findPK(1);
-```
+>```php
+><?php
+>$firstAuthor = AuthorQuery::create()->findPK(1);
+>```
 
 You can also select multiple objects based on their primary keys, by calling the generated `findPKs()` method. It takes an array of primary keys as a parameter:
 
