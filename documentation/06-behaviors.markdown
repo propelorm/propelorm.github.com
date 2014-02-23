@@ -91,6 +91,7 @@ class Book extends BaseBook
   public function preInsert()
   {
     $this->setCreatedAt(time());
+    return true;
   }
 }
 
@@ -99,6 +100,7 @@ class Author extends BaseAuthor
   public function preInsert()
   {
     $this->setCreatedAt(time());
+    return true;
   }
 }
 ```
