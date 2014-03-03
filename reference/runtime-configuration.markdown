@@ -169,6 +169,7 @@ The PDO DSN that Propel will use to connect to the database for this datasource.
 ```
 
 See the PHP documentation for specific format:
+
  * [MySQL DSN](http://www.php.net/manual/en/ref.pdo-mysql.connection.php)
  * [PostgreSQL DSN](http://github.com/seven1m/trac_wiki_to_github)
  * [SQLite DSN](http://www.php.net/manual/en/ref.pdo-sqlite.connection.php)
