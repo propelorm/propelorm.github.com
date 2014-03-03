@@ -27,6 +27,10 @@ To generate a schema file, create a new directory for your project & specify the
   $ propel reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
   ```
 
+  The given string is a DSN which will be passed to a PDO object. See the
+  [Runtime Configuration reference](../reference/runtime-configuration.html)
+  for further information.
+
  3. Pay attention to any errors/warnings issued during the task execution and then examine the generated `schema.xml` file to make any corrections needed.
 
  4. _You're done!_ Now you have a `schema.xml` file in the `legacyapp/` project directory. You can now run the default Propel build to generate all the classes.
