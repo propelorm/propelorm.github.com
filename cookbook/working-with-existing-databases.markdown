@@ -28,7 +28,7 @@ To generate a schema file, create a new directory for your project & specify the
   ```
 
   The given string is a DSN which will be passed to a PDO object. See the
-  [Runtime Configuration reference](../reference/runtime-configuration.html)
+  [Runtime Configuration reference](../reference/runtime-configuration.html#dsn)
   for further information.
 
  3. Pay attention to any errors/warnings issued during the task execution and then examine the generated `schema.xml` file to make any corrections needed.
