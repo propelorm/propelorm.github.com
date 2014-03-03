@@ -82,7 +82,7 @@ Each of the traversal and inspection methods result in a single database query, 
 
 ## Manipulating Nodes ##
 
-You can move a node - and its subtree - across the tree using any of the `moveToFirstChildOf()`, `moveToLastChildOf()`, `moveToPrevSiblingOf()`, and `moveToLastSiblingOf()` methods. These operations are immediate and don't require that you save the model afterwards:
+You can move a node - and its subtree - across the tree using any of the `moveToFirstChildOf()`, `moveToLastChildOf()`, `moveToPrevSiblingOf()`, and `moveToNextSiblingOf()` methods. These operations are immediate and don't require that you save the model afterwards:
 
 ```php
 <?php
@@ -98,7 +98,7 @@ $s2:World
 $s3:Europe
 */
 // now move the "Europe" section directly under root, after "Business"
-$s2->moveToFirstChildOf($s4);
+$s3->moveToNextSiblingOf($s4);
 /* The tree is modified as follows:
     $s1:Home
     |        \
@@ -112,8 +112,8 @@ You can delete the descendants of a node using `deleteDescendants()`:
 
 ```php
 <?php
-// move the entire "World" section under "Business"
-$s4->deleteDescendants($s4);
+// delete the entire "World" section of "Business"
+$s4->deleteDescendants();
 /* The tree is modified as follows:
     $s1:Home
     |        \
