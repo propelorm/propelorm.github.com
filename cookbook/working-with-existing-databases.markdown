@@ -17,14 +17,15 @@ To generate a schema file, create a new directory for your project & specify the
 
  1. Go to the `legacyapp` project directory anywhere on your filesystem:
 
-```bash
-$ cd legacyapp
-```
+  ```bash
+  $ cd legacyapp
+  ```
+
  2. Run the `reverse` task to generate the `schema.xml` specifying your database credentials:
 
-```bash
-$ propel reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
-```
+  ```bash
+  $ propel reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
+  ```
 
  3. Pay attention to any errors/warnings issued during the task execution and then examine the generated `schema.xml` file to make any corrections needed.
 
@@ -43,19 +44,19 @@ To do this you would simply:
  1. Follow the steps above to create the `schema.xml` file from existing db.
  2. Then you would change the target database type and specify connection URL for new database in the project's `build.properties` file:
 
-```ini
-propel.database = pgsql
-propel.database.url = pgsql://unix+localhost/newlegacyapp
-```
+  ```ini
+  propel.database = pgsql
+  propel.database.url = pgsql://unix+localhost/newlegacyapp
+  ```
 
  3. And then run the `sql:build` task to generate the new DDL:
 
-```bash
-$ propel sql:build
-```
+  ```bash
+  $ propel sql:build
+  ```
 
  4. And (optionally) the `sql:insert` task to create the new database:
 
-```bash
-$ propel sql:insert
-```
+  ```bash
+  $ propel sql:insert
+  ```
