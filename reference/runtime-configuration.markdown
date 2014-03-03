@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: documentation
 title: Runtime Configuration File
 ---
 
@@ -67,7 +67,7 @@ Here is a the sample runtime configuration file.
 
 Below you will find an explanation of the primary elements in the configuration.
 
-### `<log>` ###
+### log ###
 
 If the `<log>` element is present, Propel will use the specified information to instantiate a PEAR Log logger.
 
@@ -92,7 +92,7 @@ The nested elements correspond to the configuration options for the logger (opti
 
 This log configuring API is designed to provide a simple way to get log output from Propel; however, if your application already has a logging mechanism, we recommend instead that you use your existing logger (writing a simple log adapter, if you are using an unsupported logger). See the [Logging documentation](../documentation/08-logging) for more info.
 
-### `<datasources>` ###
+### datasources ###
 
 This is the top-level tag for Propel datasources configuration.
 
@@ -102,7 +102,7 @@ This is the top-level tag for Propel datasources configuration.
   <datasources>
 ```
 
-### `<datasource>` ###
+### datasource ###
 
 ```xml
 <config>
@@ -114,7 +114,7 @@ A specific datasource being configured.
 
 * The @id must match the `<database>` @name attribute from your `schema.xml`.
 
-### `<adapter>` ###
+### adapter ###
 
 The adapter to use for Propel.  Currently supported adapters:  sqlite, pgsql, mysql, oracle, mssql.  Note that it is possible that your adapter could be different from your connection driver (e.g. if using ODBC to connect to MSSQL database, you would use an ODBC PDO driver, but MSSQL Propel adapter).
 
@@ -126,7 +126,7 @@ The adapter to use for Propel.  Currently supported adapters:  sqlite, pgsql, my
      <adapter>sqlite</adapter>
 ```
 
-### `<connection>` ###
+### connection ###
 
 The PDO database connection for the specified datasource.
 
@@ -140,7 +140,7 @@ Nested elements define the DSN, connection options, other PDO attributes, and fi
     <connection>
 ```
 
-#### `<classname>` ####
+#### classname ####
 
 A custom PDO class (must be a PropelPDO subclass) that you would like to use for the PDO connection.
 
@@ -155,7 +155,7 @@ A custom PDO class (must be a PropelPDO subclass) that you would like to use for
 
 This can be used to specify the alternative **DebugPDO** class bundled with Propel, or your own subclass.  _Your class must extend PropelPDO, because Propel requires the ability to nest transactions (without having exceptions being thrown by PDO)._
 
-#### `<dsn>` ####
+#### dsn ####
 
 The PDO DSN that Propel will use to connect to the database for this datasource.
 
@@ -178,7 +178,7 @@ See the PHP documentation for specific format:
 
 Note that some database (e.g. PostgreSQL) specify username and password as part of the DSN while the others specify user and password separately.
 
-#### `<user>` and `<password>` ####
+#### user and password ####
 
 Specifies credentials for databases that specify username and password separately (e.g. MySQL, Oracle).
 
@@ -193,7 +193,7 @@ Specifies credentials for databases that specify username and password separatel
      <password>testpass</password>
 ```
 
-#### `<options>` ####
+#### options ####
 
 Specify any options which _must_ be specified when the PDO connection is created.  For example, the ATTR_PERSISTENT option must be specified at object creation time.
 
@@ -211,7 +211,7 @@ See the [PDO documentation](http://www.php.net/pdo) for more details.
      </options>
 ```
 
-#### `<attributes>` ####
+#### attributes ####
 
 `<attributes>` are similar to `<options>`; the difference is that options specified in `<attributes>` are set after the PDO object has been created.  These are set using the [PDO->setAttribute()](http://us.php.net/PDO-setAttribute) method.
 
@@ -243,7 +243,7 @@ In addition to the standard attributes that can be set on the PDO object, there 
 <option id="MYSQL_ATTR_USE_BUFFERED_QUERY">true</option>
 ```
 
-####  `<settings>` ####
+####  settings ####
 
 Settings are Propel-specific options used to further configure the connection -- or perform other user-defined initialization tasks.
 
@@ -287,7 +287,7 @@ Specifies any SQL statements to run when the database connection is initialized.
      </settings>
 ```
 
-### `<slaves>` ###
+### slaves ###
 
 ```xml
 <config>
