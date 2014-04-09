@@ -39,7 +39,7 @@ Let's now see the properties of `<parameter>` tag:
 * The `value` of the parameters is an array in YAML format, in which we need to specify 3 values:
   * `column`: the column to validate
   * `validator`: the name of [Validator Constraint](http://symfony.com/doc/current/reference/constraints.html)
-  * `options`: (optional)an array of optional values to pass to the validator constraint class, according to its reference documentation
+  * `options`: (optional) an array of optional values to pass to the validator constraint class, according to its reference documentation
 
 
 
