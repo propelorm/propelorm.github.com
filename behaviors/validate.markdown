@@ -15,6 +15,7 @@ We recommend to read Symfony2 Validator Component documentation, in particular [
 
 In the `schema.xml`, use the `<behavior>` tag to add the `validate` behavior to a table.
 Then add validation rules via `<parameter>` tag.
+
 ```xml
 <table name="author" description="Author Table">
   <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" description="Author Id" />
@@ -33,11 +34,12 @@ Then add validation rules via `<parameter>` tag.
 ```
 
 Let's now see the properties of `<parameter>` tag:
-*   The `name` of each parameter is arbitrary.
-*   The `value` of the parameters is an array in YAML format, in which we need to specify 3 values:
-     `column`: the column to validate
-     `validator`: the name of [Validator Constraint](http://symfony.com/doc/current/reference/constraints.html)
-     `options`: (optional)an array of optional values to pass to the validator constraint class, according to its reference documentation
+
+* The `name` of each parameter is arbitrary.
+* The `value` of the parameters is an array in YAML format, in which we need to specify 3 values:
+  * `column`: the column to validate
+  * `validator`: the name of [Validator Constraint](http://symfony.com/doc/current/reference/constraints.html)
+  * `options`: (optional) an array of optional values to pass to the validator constraint class, according to its reference documentation
 
 
 
@@ -334,7 +336,7 @@ if ($ret <= 0) {
 
 ## Supported constraints ##
 
-The behavior supports all Symfony Validator Constraints (see [http://symfony.com/doc/current/reference/constraints.html]), except `UniqueEntity` which is not compatible with Propel.
+The behavior supports all Symfony Validator Constraints (see [Symfony documentation] (http://symfony.com/doc/current/reference/constraints.html) for details), except `UniqueEntity` which is not compatible with Propel.
 Propel has its own unique validator: `Unique` constraint.
 This constraint checks if a certain value is already stored in the database. You can use it in the same way:
 
@@ -376,6 +378,7 @@ Let's also suppose to put our files in a subdir of our project root, called `/my
 Under `/myConstraints` dir, let's create the subdir `Propel/Runtime/Validator/Constraints`, in which we'll put the two following scripts:
 
 `PropelDomain.php`
+
 ```php
 <?php
 // /myConstraints/Propel/Runtime/Validator/Constraints/PropelDomain.php
@@ -393,6 +396,7 @@ class PropelDomain extends Constraint
 ```
 
 `PropelDomainValidator.php`
+
 ```php
 <?php
  // /myConstraints/Propel/Runtime/Validator/Constraints/PropelDomainValidator.php
