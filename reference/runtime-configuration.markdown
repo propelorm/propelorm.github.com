@@ -213,13 +213,13 @@ See the [PDO documentation](http://www.php.net/pdo) for more details.
 
 #### attributes ####
 
-`<attributes>` are similar to `<options>`; the difference is that options specified in `<attributes>` are set after the PDO object has been created.  These are set using the [PDO->setAttribute()](http://us.php.net/PDO-setAttribute) method.
+`<attributes>` are similar to `<options>`; the difference is that options specified in `<attributes>` are set after the PDO object has been created.  These are set using the `ConnectionWrapper->setAttribute` method(redirected internally to [PDO->setAttribute()](http://us.php.net/PDO-setAttribute)).
 
 In addition to the standard attributes that can be set on the PDO object, there are also the following Propel-specific attributes that change the behavior of the PropelPDO connection:
 
-|Attribute constant                     | Valid Values (Default)    | Description |
-|---------------------------------------|---------------------------|-----------------------------------------------------------------
-| PropelPDO::PROPEL_ATTR_CACHE_PREPARES | true/false (false)        | Whether to have the PropelPDO connection cache the PDOStatement prepared statements.  This will improve performance if you are executing the same query multiple times by your script (within a single request / script run).
+|Attribute constant          | Valid Values (Default)    | Description |
+|----------------------------|---------------------------|-----------------------------------------------------------------
+| PROPEL_ATTR_CACHE_PREPARES | true/false (false) | Whether to have the PropelPDO connection cache the PDOStatement prepared statements. This will improve performance if you are executing the same query multiple times by your script (within a single request / script run). Use `ConnectionWrapper->clearStatementCache` to clear the cache.
 
 > Note that attributes in the XML can be specified with or without the PDO:: (or PropelPDO::) constant prefix.
 
