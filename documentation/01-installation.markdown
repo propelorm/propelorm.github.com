@@ -32,7 +32,7 @@ We advise you to rely on [Composer](http://getcomposer.org/) to manage your proj
 ```json
 {
     "require": {
-        "propel/propel": ">= 2.0"
+        "propel/propel": "2.0.0-alpha2"
     }
 }
 ```
