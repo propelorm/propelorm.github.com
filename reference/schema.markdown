@@ -297,10 +297,10 @@ Here are the Propel column types with some example mappings to native database a
 
 |Propel Type    |Desc                               |Example Default DB Type (MySQL)|Default PHP Native Type
 |---------------|-----------------------------------|-------------------------------|-----------------------
-|BINARY         |Fixed-length binary data           |BLOB                           |double
-|VARBINARY      |Variable-length binary data        |MEDIUMBLOB                     |double
-|LONGVARBINARY  |Long variable-length binary data   |LONGBLOB                       |double
-|BLOB           |Binary LOB (locator object)        |LONGBLOB                       |stream or string
+|BINARY         |Fixed-length binary data           |BLOB                           |string
+|VARBINARY      |Variable-length binary data        |MEDIUMBLOB                     |stream or string
+|LONGVARBINARY  |Long variable-length binary data   |LONGBLOB                       |stream or string
+|BLOB           |Binary LOB (locator object)        |BLOB                           |stream or string
 
 >**Tip**<br />`BLOB` columns map to PHP as streams, and allows the storage of large binary objects (like images).
 
@@ -316,7 +316,7 @@ Here are the Propel column types with some example mappings to native database a
 
 * `BOOLEAN` columns map to a boolean in PHP. Depending on the native support for this type, they are stored in SQL as `BOOLEAN` or `TINYINT`.
 * `ENUM` columns accept values among a list of predefined ones. Set the value set using the `valueSet` attribute, separated by commas.
-* `OBJECT` columns map to PHP objects and are stored as strings.
+* `OBJECT` columns map to PHP objects and are stored as binary.
 * `ARRAY` columns map to PHP arrays and are stored as strings.
 
 ### Legacy Temporal Types ###
