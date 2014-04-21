@@ -144,7 +144,7 @@ According to the schema, `name` is the only required attribute.  Also, the `idMe
 * `phpNamingMethod` the naming method to use. Defaults to `underscore`, which transforms the table name into a CamelCase phpName.
 * `baseClass` allows you to specify a class that the generated Propel objects should extend (in place of `propel.om.BaseObject`).
 * `heavyIndexing` adds indexes for each component of the primary key (when using composite primary keys).
-* `readOnly` suppresses the mutator/setter methods, save() and delete() methods.
+* `readOnly` suppresses the save() and delete() methods.
 * `treeMode` is used to indicate that this table is part of a node tree. Currently the only supported values are `NestedSet` (see the [NestedSet behavior section](../behaviors/nested-set.html)) and `MaterializedPath` (deprecated).
 * `reloadOnInsert` is used to indicate that the object should be reloaded from the database when an INSERT is performed.  This is useful if you have triggers (or other server-side functionality like column default expressions) that alters the database row on INSERT.
 * `reloadOnUpdate` is used to indicate that the object should be reloaded from the database when an UPDATE is performed.  This is useful if you have triggers (or other server-side functionality like column default expressions) that alters the database row on UPDATE.
