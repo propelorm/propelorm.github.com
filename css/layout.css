@@ -53,19 +53,19 @@ header > div {
 }
 
 header {
-    height: 84px;
+    height: 85px;
     background-color: white;
     border-bottom: 1px solid #e7e7e7;
 }
 
 header nav {
     float: right;
-    height: 84px;
+    height: 85px;
 }
 
 header nav li,
 header nav li a {
-    line-height: 84px;
+    line-height: 85px;
     color: #636466;
 }
 
