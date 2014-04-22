@@ -228,6 +228,8 @@ To create an index on one or more columns, use the following syntax:
 
 In some cases your RDBMS may require you to specify an index size.
 
+* `size` Only for MySQL databases.
+
 ### unique element ###
 
 To create a unique index on one or more columns, use the following syntax:
@@ -240,6 +242,8 @@ To create a unique index on one or more columns, use the following syntax:
 ```
 
 In some cases your RDBMS may require you to specify an index size for unique indexes.
+
+* `size` Only for MySQL databases.
 
 ### id-method-parameter element ###
 

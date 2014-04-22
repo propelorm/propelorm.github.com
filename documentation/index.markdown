@@ -31,6 +31,7 @@ title: Documentation
 * [Active Query Classes](../reference/model-criteria.html) Complete list of the methods of Propel Query classes.
 * [Build Properties](../reference/buildtime-configuration.html) Reference for the `build.properties` file (`propel.ini` in symfony).
 * [Runtime Configuration File](../reference/runtime-configuration.html) Reference for the `runtime-conf.xml` file.
+* [Compatibility index](../reference/compatibility-index.html) A list of primary limitations regarding different databases.
 
 ## Behaviors Reference ##
 
