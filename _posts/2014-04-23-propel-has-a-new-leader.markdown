@@ -28,7 +28,7 @@ web programming anymore. I took over the project three years ago because I did n
 I wanted to lead an Open Source project. Today, Propel is still alive, and I like to think that the long-term vision
 I chose to follow three years ago is not completely unrelated.
 
-I am sincerely glad to welcome **Marc Johannes Schmidt** as **new lead developer of Propel**. He is
+I am sincerely glad to welcome **Marc J. Schmidt** as **new lead developer of Propel**. He is
 [@MarcJSchmidt](https://twitter.com/MarcJSchmidt) on Twitter, and [@marcj](https://github.com/marcj) on GitHub.
 If you follow the Propel2 development, I am sure you know him already! He is German, and an amazing developer. His
 understanding of the Propel design, of the Open Source philosophy, and of the ORM landscape, would be enough to let
