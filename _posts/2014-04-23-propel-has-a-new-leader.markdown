@@ -11,7 +11,7 @@ inexperienced, and a sort of "outsider".
 
 While Propel was a "one-man project" thanks to the awesome [François](https://twitter.com/francoisz), I decided
 not to follow such path. I rather created an [organization](https://github.com/propelorm), gathering [skilled
-people](https://github.com/orgs/propelorm/members). and new projects, with a long-term vision in mind. That
+people](https://github.com/orgs/propelorm/members), and new projects, with a long-term vision in mind. That
 is actually what I like the most in Open Source, enrolling new people to this wonderful world, and giving them
 responsibilities or, at least, opportunities to become Open Source developers.
 
