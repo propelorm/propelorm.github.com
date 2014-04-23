@@ -374,6 +374,24 @@ CREATE TABLE book
   DEFAULT CHARACTER SET utf8;
 ```
 
+#### Global Vendor Info ####
+
+To set a global `<vendor>` tag for your whole database, define the `<vendor>` element at your database level. This will
+apply the "vendor" parameters to all the tables in the database. But you can still override these global "vendor"
+parameters in your `<table>` element.
+
+```xml
+<database name="bookstore">
+   <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+   </vendor>
+   
+   <table name="book">
+      <!-- ... -->
+   </table>
+</database>
+```
+
 #### MySQL Vendor Info ####
 
 Propel supports the following vendor parameters for MySQL:
