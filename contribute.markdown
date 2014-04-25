@@ -82,7 +82,7 @@ Or if you don't have `wget` on your machine:
 
 Then run Composer to install the necessary stuff:
 
-    $ php composer.phar install --dev
+    $ php composer.phar install
 
 #### Setup MySQL ####
 
@@ -111,11 +111,11 @@ Create mandatory databases, then run:
 
 There is nothing to setup, just run:
 
-    $ bin/propel test:prepare --vendor=sqlite --dsn="sqlite:/tmp/database.sqlite" --user="" --password=""
+    $ bin/propel test:prepare --vendor=sqlite --dsn="sqlite:/tmp/database.sqlite"
 
 Now you can run the test suite by running:
 
-    $ phpunit
+    $ ./vendor/bin/phpunit
 
 ### How the Tests Work ###
 
@@ -154,10 +154,10 @@ public function testSaveWithDefaultValues() {
 
 Run the test again using the command line to check that it passes:
 
-    $ phpunit GeneratedObjectTest
+    $ ./vendor/bin/phpunit GeneratedObjectTest
 
 
-You can also write additional unit test classes to any of the directories in `test/testsuite/` (or add new directories if needed). The `phpunit` command will find these files automatically and run them.
+You can also write additional unit test classes to any of the directories in `test/testsuite/` (or add new directories if needed). The `./vendor/bin/phpunit` command will find these files automatically and run them.
 
 ## Fix checkstyle ##
 
