@@ -96,7 +96,7 @@ $article = ArticleQuery::create()
 // Propel 1.4
 $c = new Criteria();
 $cton1 = $c->getNewCriterion(ArticlePeer::TITLE, '%FooBar%', Criteria::LIKE);
-$cton1 = $c->getNewCriterion(ArticlePeer::SUMMARY, '%FooBar%', Criteria::LIKE);
+$cton2 = $c->getNewCriterion(ArticlePeer::SUMMARY, '%FooBar%', Criteria::LIKE);
 $cton1->addOr($cton2);
 $c->add($cton1);
 $c->add(ArticlePeer::PUBLISHED_AT, $begin, Criteria::GREATER_THAN);
