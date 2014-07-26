@@ -113,4 +113,4 @@ WHERE item_i18n.locale = 'en_EN';</pre></div>
 </ul>
 <p><strong>Tip</strong>: If you need to return only objects having translations, add <code>Criteria::INNER_JOIN</code> as second parameter to <code>joinWithI18n()</code>.</p>
 <h3>Get It</h3>
-<p>Just like the recently added <code>versionable</code> behavior, the <code>i18n</code> behavior is thoroughly unit-tested and <a href="http://www.propelorm.org/wiki/Documentation/1.6/Behaviors/i18n">fully documented</a>. It is ready to use in the Propel 1.6 branch, and your multilingual applications will love it.</p>
+<p>Just like the recently added <code>versionable</code> behavior, the <code>i18n</code> behavior is thoroughly unit-tested and <a href="http://propelorm.org/behaviors/i18n">fully documented</a>. It is ready to use in the Propel 1.6 branch, and your multilingual applications will love it.</p>
