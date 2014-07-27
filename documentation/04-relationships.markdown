@@ -100,7 +100,7 @@ foreach ($books as $book) {
 
 Notice that Propel generated a `getBooks()` method returning an array of `Book` objects, rather than a `getBook()` method. This is because the definition of a foreign key defines a many-to-one relationship, seen from the other end as a one-to-many relationship.
 
->**Tip**<br />Propel also generates a `countBooks()` methods to get the number of related objects without hydrating all the `Book` objects. For performance reasons, you should prefer this method to `count($author->getBooks())`.
+>**Tip**Propel also generates a `countBooks()` methods to get the number of related objects without hydrating all the `Book` objects. For performance reasons, you should prefer this method to `count($author->getBooks())`.
 
 Getters for one-to-many relationship accept an optional query object. This allows you to hydrate related objects, or retrieve only a subset of the related objects, or to reorder the list of results:
 
@@ -336,7 +336,7 @@ $publisher = $book->getPublisher(); // No additional query needed
 
 So `with()` is very useful to minimize the number of database queries. As soon as you see that the number of queries necessary to perform an action is proportional to the number of results, adding a `with()` call is the trick to get down to a more reasonable query count.
 
->**Tip**<br />`with()` also works for left joins on one-to-many relationships, but you mustn't use a `limit()` in the query in this case. This is because Propel has no way to determine the actual number of rows of the main object in such a case.
+>**Tip**`with()` also works for left joins on one-to-many relationships, but you mustn't use a `limit()` in the query in this case. This is because Propel has no way to determine the actual number of rows of the main object in such a case.
 
 ```php
 <?php

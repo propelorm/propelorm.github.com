@@ -7,7 +7,7 @@ title: Migrations
 
 During the life of a project, the Model seldom stays the same. New tables arise, and existing tables often need modifications (a new/modified column, a new index, another foreign key etc.). Updating the database structure accordingly, while preserving existing data, is a common concern. Propel provides a set of tools to allow the _migration_ of database structure and data with ease.
 
->**Tip**<br />Propel supports migrations in MySQL, SQLite and PostgreSQL.
+>**Tip**Propel supports migrations in MySQL, SQLite and PostgreSQL.
 
 ## Migration Workflow ##
 
@@ -81,7 +81,7 @@ DROP TABLE IF EXISTS `book`;
 }
 ```
 
->**Tip**<br />On a project using version control, it is important to commit the migration classes to the code repository. That way, other developers checking out the project will just have to run the same migrations to get a database in a similar state.
+>**Tip**On a project using version control, it is important to commit the migration classes to the code repository. That way, other developers checking out the project will just have to run the same migrations to get a database in a similar state.
 
 Now, to actually create the `book` table in the database, the developer has to call the `migrate` task:
 
@@ -163,7 +163,7 @@ CREATE TABLE `author`
 ) ENGINE=InnoDB;
 ```
 
->**Tip**<br />`diff` and `migrate` often come one after the other, so you may want to execute them both in one call. That's possible, provided that the first argument of the `propel` script is the path to the current project:
+>**Tip**`diff` and `migrate` often come one after the other, so you may want to execute them both in one call. That's possible, provided that the first argument of the `propel` script is the path to the current project:
 
 ```bash
 $ propel . diff migrate
@@ -205,7 +205,7 @@ $ propel migration:up
 [propel-migration-up] Migration complete. 1 migrations left to execute.
 ```
 
->**Tip**<br />The difference between the `migration:up` and `migrate` tasks is that `migration:up` executes only one migration, while `migrate` executes all the migrations that were not yet executed.
+>**Tip**The difference between the `migration:up` and `migrate` tasks is that `migration:up` executes only one migration, while `migrate` executes all the migrations that were not yet executed.
 
 ### Migration Status ###
 
@@ -223,7 +223,7 @@ $ propel migration:status
 [propel-migration-status] Call the "migrate" task to execute it
 ```
 
->**Tip**<br />Like all other Propel tasks, `migration:status` offers a "verbose" mode, where the CLI output shows a lot more details. Add `--verbose` at the end of the call to enable it - but remember to add the path to the project as first argument:
+>**Tip**Like all other Propel tasks, `migration:status` offers a "verbose" mode, where the CLI output shows a lot more details. Add `--verbose` at the end of the call to enable it - but remember to add the path to the project as first argument:
 
 ```bash
 $ propel . migration:status --verbose
@@ -240,7 +240,7 @@ $ propel . migration:status --verbose
 
 `migration:up`, `migration:down`, and `migration:status` will help you to find your way in migration files, especially when they become numerous or when you need to revert more than one.
 
->**Tip**<br />There is no need to keep old migration files if you are sure that you won't ever need to revert to an old state. If a new developer needs to setup the project from scratch, the `sql:build` and `sql:insert` tasks will initialize the database structure to the current XML schema.
+>**Tip**There is no need to keep old migration files if you are sure that you won't ever need to revert to an old state. If a new developer needs to setup the project from scratch, the `sql:build` and `sql:insert` tasks will initialize the database structure to the current XML schema.
 
 ## How Do Migrations Work? ##
 
@@ -274,7 +274,7 @@ propel.migration.caseInsensitive = true
 propel.migration.dir = ${propel.output.dir}/migrations
 ```
 
->**Tip**<br />The `diff` task supports an additional parameter, called `editor`, which specifies a text editor to be automatically launched at the end of the task to review the generated migration. Unfortunately, only editors launched in another window are accepted. Mac users will find it useful, though:
+>**Tip**The `diff` task supports an additional parameter, called `editor`, which specifies a text editor to be automatically launched at the end of the task to review the generated migration. Unfortunately, only editors launched in another window are accepted. Mac users will find it useful, though:
 
 ```bash
 $ propel diff --editor=mate
@@ -322,7 +322,7 @@ ALTER TABLE `book` ADD
 }
 ```
 
->**Tip**<br />If you return `false` in the `preUp()` method, the migration is aborted.
+>**Tip**If you return `false` in the `preUp()` method, the migration is aborted.
 
 You can also use Propel ActiveRecord and Query objects, but you'll then need to bootstrap the `Propel` class and the runtime autoloading in the migration class. This is because the Propel CLI does not know where the runtime classes are.
 

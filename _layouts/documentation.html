@@ -2,13 +2,55 @@
 layout: base
 ---
 
-<ul class="toc"></ul>
-<div class="markdown">
-    {{ content }}
+<div class="header-line header-line-big">
+    <div class="wrapper">
+        <a href="/documentation" class="active">Dev</a>
+        <a href="/Propel/documentation/">1.x</a>
+    </div>
+</div>
+
+<div class="documentation">
+    <div class="wrapper">
+        <div class="documentation-navigation">
+            <ul>
+                {% for link in site.documentation %}
+                    {% if link.url == nil %}
+                        <h3>{{ link.title }}</h3>
+                    {% else %}
+                        {% assign current = nil %}
+                        {% if page.url contains link.url %}
+                        {% assign current = 'current' %}
+                        {% endif %}
+                        <li class="element {% if forloop.first %}first{% endif %} {{ current }} {% if forloop.last %}last{% endif %}">
+                            <a class="{{ current }}" href="{{ link.url }}">{{ link.title }}</a>
+                        </li>
+                    {%  endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="documentation-content markdown">
+            <div class="search">
+                <form action="/search.html">
+                    <input name="q" placeholder="Search..." type="text" />
+                    <input type="submit" value="Go" />
+                </form>
+            </div>
+            <div class="wrapper">
+                <ul class="toc"></ul>
+                {{ content }}
+            </div>
+        </div>
+        <div class="break"></div>
+    </div>
+    <div class="jumper"><a href="#">↟ Jump To Top</a></div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.toc').tableOfContents(null, { startLevel: 2 });
+        $('.toc').tableOfContents($('.documentation-content')[0], { startLevel: 2 });
+        var firstH1 = $('.documentation-content .wrapper > h1');
+        if (firstH1.length) {
+            $('.toc').insertAfter(firstH1);
+        }
     });
 </script>
