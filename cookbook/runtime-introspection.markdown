@@ -133,9 +133,9 @@ $bookTable      = $publisherRelation->getLocalTable();
 $publisherTable = $publisherRelation->getForeignTable();
 print_r($publisherRelation->getColumnMappings());
   // array('book.PUBLISHER_ID' => 'publisher.ID')
-print_r(publisherRelation->getLocalColumns());
+print_r($publisherRelation->getLocalColumns());
   // array($bookPublisherIdColumn)
-print_r(publisherRelation->getForeignColumns());
+print_r($publisherRelation->getForeignColumns());
   // array($publisherBookIdColumn)
 ```
 
