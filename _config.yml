@@ -15,3 +15,110 @@ navigation:
    url: /contribute.html
  - title: Blog
    url: /blog/
+documentation:
+ - title: What's new in Propel 2.0
+   url: /documentation/whats-new.html
+ - title: Changelog
+   url: https://github.com/propelorm/Propel2/blob/master/UPDATE.md
+ - title: API Documentation
+   url: http://api.propelorm.org/
+ - title: Setup
+ - title: Installing Propel
+   url: /documentation/01-installation.html
+ - title: Building a project
+   url: /documentation/02-buildtime.html
+ - title: Basics
+ - title: Basic CRUD
+   url: /documentation/03-basic-crud.html
+ - title: Relationships
+   url: /documentation/04-relationships.html
+ - title: Transactions
+   url: /documentation/05-transactions.html
+ - title: Behaviors
+   url: /documentation/06-behaviors.html
+ - title: Logging And Debugging
+   url: /documentation/07-logging.html
+ - title: Inheritance
+   url: /documentation/08-inheritance.html
+ - title: Migrations
+   url: /documentation/09-migrations.html
+
+ - title: Reference
+ - title: XML Schema Format
+   url: /documentation/reference/schema.html
+ - title: Active Record Classes
+   url: /documentation/reference/active-record.html
+ - title: Active Query Classes
+   url: /documentation/reference/model-criteria.html
+ - title: Build Properties
+   url: /documentation/documentation/reference/buildtime-configuration.html
+ - title: Runtime Configuration File
+   url: /documentation/reference/runtime-configuration.html
+ - title: Compatibility index
+   url: /documentation/reference/compatibility-index.html
+
+ - title: Behaviors
+ - title: aggregate_column
+   url: /documentation/behaviors/aggregate-column.html
+ - title: archivable
+   url: /documentation/behaviors/archivable.html
+ - title: auto_add_pk
+   url: /documentation/behaviors/auto-add-pk.html
+ - title: delegate
+   url: /documentation/behaviors/delegate.html
+ - title: i18n
+   url: /documentation/behaviors/i18n.html
+ - title: nested_set
+   url: /documentation/behaviors/nested-set.html
+ - title: query_cache
+   url: /documentation/behaviors/query-cache.html
+ - title: sluggable
+   url: /documentation/behaviors/sluggable.html
+ - title: timestampable
+   url: /documentation/behaviors/timestampable.html
+ - title: sortable
+   url: /documentation/behaviors/sortable.html
+ - title: validate
+   url: /documentation/behaviors/validate.html
+ - title: versionable
+   url: /documentation/behaviors/versionable.html
+ - title: concrete_inheritance
+   url: /documentation/08-inheritance.html
+ - title: User-Contributed Behaviors
+   url: /documentation/cookbook/user-contributed-behaviors.html
+
+ - title: Cookbook
+ - title: Additional SQL Files
+   url: /documentation/cookbook/adding-additional-sql-files.html
+ - title: Advanced Column Types
+   url: /documentation/cookbook/working-with-advanced-column-types.html
+ - title: Customizing build
+   url: /documentation/cookbook/customizing-build.html
+ - title: How to Use PHP 5.3 Namespaces
+   url: /documentation/cookbook/namespaces.html
+ - title: Model Introspection At Runtime
+   url: /documentation/cookbook/runtime-introspection.html
+ - title: Multi-Component Data Model
+   url: /documentation/cookbook/multi-component-data-model.html
+ - title: Object Copy
+   url: /documentation/cookbook/copying-persisted-objects.html
+ - title: Replication
+   url: /documentation/cookbook/replication.html
+ - title: Using Propel With MSSQL Server
+   url: /documentation/cookbook/using-mssql-server.html
+ - title: Using SQL Schemas
+   url: /documentation/cookbook/using-sql-schemas.html
+ - title: Working With Existing Databases
+   url: /documentation/cookbook/working-with-existing-databases.html
+ - title: Working with Silex
+   url: /documentation/cookbook/silex/working-with-silex.html
+
+ - title: Contribute to Propel
+ - title: Writing A Behavior
+   url: /documentation/cookbook/writing-behavior.html
+ - title: Testing Your Behaviors
+   url: /documentation/cookbook/testing-your-behaviors.html
+ - title: Working with unit tests
+   url: /documentation/cookbook/working-with-unit-tests.html
+ - title: Working with Silex
+   url: /documentation/cookbook/silex/working-with-silex.html

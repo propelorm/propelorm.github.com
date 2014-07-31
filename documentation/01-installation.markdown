@@ -21,7 +21,7 @@ Propel also uses some Symfony2 components to work properly:
 * [Validator](https://github.com/symfony/Validator) : a way you manage validations with Propel.
 * [Finder](https://github.com/symfony/Finder) : uses in the source code to manage the files.
 
->**Tip**<br />Propel uses the PDO and SPL components, which are bundled and enabled by default in PHP5.
+>**Tip**Propel uses the PDO and SPL components, which are bundled and enabled by default in PHP5.
 
 ## Setup ##
 
@@ -103,7 +103,7 @@ $ vendor/bin/propel
 
 The command should output the propel version following by a list of the options and the available commands. We will learn to use these commands later.
 
->**Tip**<br />In order to allow an easier execution of the script, you can also add the propel generator's `bin/` directory to your PATH, or create a symlink. For example:
+>**Tip**In order to allow an easier execution of the script, you can also add the propel generator's `bin/` directory to your PATH, or create a symlink. For example:
 
 ```bash
 $ cd myproject

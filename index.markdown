@@ -2,28 +2,56 @@
 layout: home
 ---
 
-{% capture what %}
-### What is Propel? ###
+
+
+{% capture contentLeft %}
+## Installation ##
+
+Via [Composer](https://packagist.org/)
+
+```json
+"require": {
+    "propel/propel": "2.0.0-alpha2"
+}
+```
+
+All releases at packagist.org: [packagist.org/packages/propel/propel](https://packagist.org/packages/propel/propel)
+
+All releases at github.com: [github.com/propelorm/Propel2/releases](https://github.com/propelorm/Propel2/releases)
+
+{% endcapture %}
+
+
+{% capture contentBottom %}
+# Dive In! #
+
+
+### What is Propel exactly? ###
+
 Propel is an open-source Object-Relational Mapping (ORM) for SQL-Databases in PHP 5.4.
 It allows you to access your database using a set of objects, providing a simple API for storing and retrieving data.
 
-But not only plain ORM but it also provides database schema migration, reverse engineering of existing database and much more.
-{% endcapture %}
+Additional to its ORM capabilities it does provide a **query-builder**, **database schema migration**, **reverse engineering** of existing database and much more.
 
-{% capture why %}
 ### Why Propel? ###
 
 Propel gives you, the web application developer, the tools to work with databases in the same way you work with
 other classes and objects in PHP without writing SQL.
 
-* Propel is blazing fast!
-* Propel gives your database a well-defined API.
-* Propel is well documented.
-* Propel comes with common `behaviors`.
-{% endcapture %}
+* Propel is blazing fast
+* Query-Builder
+* IDE friendly thanks to code-generation
+* Generation of methods for all columns and **relations** 
+* Database schema migration
+* Schema reverse engineering
+* Customizable
+* Well documented
+* Propel comes with common 'behaviors'
 
-{% capture howSchema %}
-Everything starts with a xml file. The `schema.xml`.
+### How? ###
+
+You need to write the definition of your tables as xml, export it from your existing database through our 'database:reverse' command or 
+build it via a tool like ORM-Designer.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -44,97 +72,43 @@ Everything starts with a xml file. The `schema.xml`.
   </table>
 </database>
 ```
-{% endcapture %}
 
+### More details please! ###
 
-{% capture howMigrate %}
-![Table Schema from Migration](/images/home-how-migration-table.png)
-With the [migration feature](/documentation/09-migrations.html) of Propel you can update database's schema automatically based on your xml file.
-This keeps the database up to date without the hassle of writing own `ALTER TABLE`' SQLs.
-{% endcapture %}
+It uses PDO as an abstraction layer and code generation to remove the burden of runtime introspection to achieve the fast execution time.
 
-{% capture howRetrieve %}
-After [building your PHP classes](/documentation/02-buildtime.html#building-the-model) from the xml file you can
-use those to retrieve data from the database.
-
-```php
-<?php
-
-$books = BookQuery::create()  // retrieve all books ...
-  ->filterByPublishYear(2009) // ... published in 2009
-  ->orderByTitle()            // ... ordered by title
-  ->joinWith('Book.Author')   // ... with their author
-  ->find();
-
-foreach($books as $book) {
-  echo  $book->getId() . ': ' . $book->getAuthor()->getFullName();
-}
-```
-{% endcapture %}
-
-{% capture howManipulate %}
-Beside your `*Query` classes you'll get also active-record classes for your objects after [the building](/documentation/02-buildtime.html#building-the-model).
-
-```php
-<?php
-
-// manipulate existing
-$book = BookQuery::create()->findPK(123); // retrieve a record from a database
-$book->setTitle('Don\'t be Hax0red!'); // modify. Don't worry about escaping
-$book->save(); // persist the modification to the database
-
-// create new
-$book = new Book();
-$book->setTitle('JavaScript, The Good Parts.');
-$book->save();  // add new row
-$book->getId(); // now available since it's autoIncrement
-```
-{% endcapture %}
-
-{% capture content %}
-### Get It! ###
-
-Via [Composer](https://packagist.org/)
-
-```json
-"require": {
-    "propel/propel": "2.0.0-alpha2"
-}
-```
-
-All releases at packagist.org: [packagist.org/packages/propel/propel](https://packagist.org/packages/propel/propel)
-
-All releases at github.com: [github.com/propelorm/Propel2/releases](https://github.com/propelorm/Propel2/releases)
-
-### Dive In! ###
-
-Propel uses PDO as an abstraction layer, and code generation to remove the burden of runtime introspection. Therefore Propel is *fast*.
-
-Propel implements all the key concepts of mature ORM layers: the ActiveRecord pattern, validators, behaviors, table inheritance, reverse engineering an existing database, nested sets, nested transactions, lazy loading, LOB, you name it.
+Propel implements all the key concepts of mature ORM layers: the **ActiveRecord** pattern, **validators**, **behaviors**, **table inheritance**,
+**reverse engineering an existing database**, **nested sets**, **nested transactions**, **lazy loading**, **LOB**, you name it.
 
 Propel is built for developers who need to keep control of their code:
 
 * Extensibility is at the heart of Propel's design; whatever you need to customize, Propel allows you to do so in a snap.
 * Propel can get out of your way for when you need custom queries or hyper-optimized transactions.
-* If you need to change your RDBMS in the course of the project, rebuild your model and you're ready to go. Propel supports MySQL, PostgreSQL, SQLite, MSSQL, and Oracle.
+* If you need to change your RDBMS in the course of the project, rebuild your model and you're ready to go. Propel supports MySQL,
+PostgreSQL, SQLite, MSSQL, and Oracle. First three are completely integrated in our test suite.
 * The code generated by Propel is well commented, IDE-friendly and easy to use.
-* The Propel project started in 2005, and already powers thousands of websites. Thoroughly documented, backed by many tutorials across the web, it also benefits from an enthusiast community that provides rapid support for both beginner and hardcore developers.
+* The Propel project started in 2005 and already powers thousands of websites. Thoroughly documented, backed by many tutorials
+across the web, it also benefits from an enthusiast community that provides rapid support for both beginner and hardcore developers.
 
 Propel is released under the [MIT license](https://github.com/propelorm/Propel2/blob/master/LICENSE). It's free to use, even in commercial applications.
 
 Do you want to know more? Jump to the Documentation tab, or start exploring the code in the GitHub repository.
 
+{% endcapture %}
 
-### Propel ECG (Build Status) ###
 
-Propel is strongly unit tested. Propel is developed under Continuous
-Integration and with a Test Driven Development approach.
+{% capture contentRight %}
+## Propel Build Status ##
+
+Propel is strongly unit tested and is developed under Continuous
+Integration with a Test Driven Development approach.
+
 We use [Travis-CI](http://travis-ci.org) to automatically build our projects,
 and here are the statuses:
 
 <table width="100%" class="ecg">
     <tr>
-        <td><a href="https://github.com/propelorm/Propel">Propel 1.7</a></td><td><img src="https://travis-ci.org/propelorm/Propel.png" /></td>
+        <td><a href="https://github.com/propelorm/Propel">Propel 1.7</a></td><td width="70"><img src="https://travis-ci.org/propelorm/Propel.png" /></td>
     </tr><tr>
         <td><a href="https://github.com/propelorm/Propel2">Propel2</a></td><td><img src="https://travis-ci.org/propelorm/Propel2.png" /></td>
     </tr><tr>

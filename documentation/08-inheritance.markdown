@@ -36,11 +36,11 @@ A table using Single Table Inheritance requires a column to identify which class
 
 Once you rebuild your model, Propel generated all three model classes (`Book`, `Essay`, and `Comic`) and three query classes (`BookQuery`, `EssayQuery`, and `ComicQuery`). The `Essay` and `Comic` classes extend the `Book` class, the `EssayQuery` and `ComicQuery` classes extend `BookQuery`.
 
->**Tip**<br />An inherited class can extend another inherited class. That mean that you can add a `Manga` kind of book that extends `Comic` instead of `Book`.
+>**Tip**An inherited class can extend another inherited class. That mean that you can add a `Manga` kind of book that extends `Comic` instead of `Book`.
 
 <br />
 
->**Tip**<br />If you define an `<inheritance>` tag with no `extends` attribute, as in the example above, it must use the table `phpName` as its `class` attribute.
+>**Tip**If you define an `<inheritance>` tag with no `extends` attribute, as in the example above, it must use the table `phpName` as its `class` attribute.
 
 ### Using Inherited Objects ###
 
@@ -114,7 +114,7 @@ echo get_class($comic) . ': ' . $comic->getTitle() . "\n";
 // Comic: Little Nemo In Slumberland
 ```
 
->**Tip**<br />You can override the base TableMap's `getOMClass()` to return the classname to use based on more complex logic (or query).
+>**Tip**You can override the base TableMap's `getOMClass()` to return the classname to use based on more complex logic (or query).
 
 ### Abstract Entities ###
 
@@ -173,7 +173,7 @@ Instead of having the children table inherit from the parent table, Propel lets 
 
 The `footballer` table doesn't own the identity columns, which are in the `player` table. However, the `Footballer` class can _delegate_ these columns to the `Player` class. In this case, the `delegate` behavior doesn't alter the schema, it just allows the `Footballer` and `Basketballer` classes to proxy method calls to their "parent" `Player` class.
 
->**Tip**<br />Delegation only works for a single level. If you have a deep inheritance hierarchy, you will need to delegate to each ancestors in the hierarchy by simulating multiple inheritance (see below).
+>**Tip**Delegation only works for a single level. If you have a deep inheritance hierarchy, you will need to delegate to each ancestors in the hierarchy by simulating multiple inheritance (see below).
 
 ### Delegation in Practice ###
 
@@ -205,7 +205,7 @@ The `Basketballer` object delegates `Player` methods to its related `Player` obj
 
 The same happens for `Footballer` class, which also delegates to `Player`. And since a `Basketballer` and a `Footballer` instance can delegate to the same `Player` instance, a player can play both soccer and basketball.
 
->**Tip**<br />Again, delegation isn't really inheritance. The `Basketballer` class doesn't inherit from `Player`, but _proxies_ method calls to `Player`. And since Propel uses `__call()` magic to achieve this proxying, an IDE won't see the `Player` methods accessible to a `Basketballer` instance.
+>**Tip**Again, delegation isn't really inheritance. The `Basketballer` class doesn't inherit from `Player`, but _proxies_ method calls to `Player`. And since Propel uses `__call()` magic to achieve this proxying, an IDE won't see the `Player` methods accessible to a `Basketballer` instance.
 
 ### Multiple Inheritance ###
 
@@ -300,7 +300,7 @@ Multiple delegation also allows to implement a deep inheritance hierarchy. For i
 
 That way, you can call `setPoints()` as well as `setFirstName()` directly on `ProBasketballer`.
 
-The `delegate` behavior offers much more than just simulating Class Table Inheritance. Discover other use cases and complete reference in the [delegate behavior documentation](../behaviors/delegate.html).
+The `delegate` behavior offers much more than just simulating Class Table Inheritance. Discover other use cases and complete reference in the [delegate behavior documentation](../documentation/behaviors/delegate.html).
 
 ## Concrete Table Inheritance ##
 
@@ -374,7 +374,7 @@ Since the columns of the main table are copied to the child tables, this schema 
 </table>
 ```
 
->**Tip**<br />The `concrete_inheritance` behavior copies columns, foreign keys and indices. If you've configured the `validate` behavior, it copies also validators.
+>**Tip**The `concrete_inheritance` behavior copies columns, foreign keys and indices. If you've configured the `validate` behavior, it copies also validators.
 
 ### Using Inherited Model Classes ###
 
@@ -480,7 +480,7 @@ foreach ($conts as $content) {
 
 The `hasChildObject()` and `getChildObject()` methods are automatically added by the behavior to the parent class. Behind the curtain, the saved `content` row has an additional `descendant_column` field allowing it to use the right model for the job.
 
->**Tip**<br />You can disable the data replication by setting the `copy_data_to_parent` parameter to "false". In that case, the `concrete_inheritance` behavior simply modifies the table at buildtime and does nothing at runtime. Also, with `copy_data_to_parent` disabled, any primary key copied from the parent table is not turned into a foreign key:
+>**Tip**You can disable the data replication by setting the `copy_data_to_parent` parameter to "false". In that case, the `concrete_inheritance` behavior simply modifies the table at buildtime and does nothing at runtime. Also, with `copy_data_to_parent` disabled, any primary key copied from the parent table is not turned into a foreign key:
 
 ```xml
 <table name="article">

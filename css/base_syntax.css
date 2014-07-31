@@ -1,14 +1,40 @@
 .highlight {
-    background-color: #efefef;
-    padding: 7px 7px 7px 10px;
-    border: 1px solid #ddd;
-    -moz-box-shadow: 3px 3px rgba(0,0,0,0.1);
-    -webkit-box-shadow: 3px 3px rgba(0,0,0,0.1);
-    box-shadow: 3px 3px rgba(0,0,0,0.1);
+    background-color: #E7EFF5;
     margin: 20px 0 20px 0;
     overflow: hidden;
+
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
 }
 
+.highlight pre {
+    margin: 0;
+    padding: 5px 7px;
+}
+
+.highlight code {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+code {
+    font-family: 'Source Code Pro', monospace;
+    border: 1px solid #d5d5d5;
+    padding: 0 2px;
+    background-color: rgba(249, 249, 249, 0.47);
+    font-size: 14px;
+    font-weight: 300;
+    border-radius: 3px;
+    color: #888;
+}
+
+.highlight code {
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    border: 0;
+}
 
 .highlight .c { color: #586E75 } /* Comment */
 .highlight .err { color: #93A1A1 } /* Error */

@@ -54,9 +54,9 @@ echo $author->toJSON();
 // {"Id":1,"FirstName":"Jane","LastName":"Austen"}
 ```
 
->**Tip**<br />For each export method, Propel also provides an import method counterpart. So you can easily populate an object from an array using `fromArray()`, and from a string using any of `fromXML()`, `fromYAML()`, `fromJSON()`, and `fromCSV()`.
+>**Tip**For each export method, Propel also provides an import method counterpart. So you can easily populate an object from an array using `fromArray()`, and from a string using any of `fromXML()`, `fromYAML()`, `fromJSON()`, and `fromCSV()`.
 
-There are a lot more useful methods offered by the generated objects. You can find an extensive  list of these methods in the [Active Record reference](../reference/active-record).
+There are a lot more useful methods offered by the generated objects. You can find an extensive  list of these methods in the [Active Record reference](../documentation/reference/active-record).
 
 ## Retrieving Rows ##
 
@@ -86,7 +86,7 @@ LIMIT 1;
 
 When the primary key consists of more than one column, `findPK()` accepts multiple parameters, one for each primary key column.
 
->**Tip**<br />Every generated Query objects offers a factory method called `create()`. This methods creates a new instance of the query, and allows you to write queries in a single line:
+>**Tip**Every generated Query objects offers a factory method called `create()`. This methods creates a new instance of the query, and allows you to write queries in a single line:
 
 >```php
 ><?php
@@ -106,6 +106,7 @@ $selectedAuthors = AuthorQuery::create()->findPKs(array(1,2,3,4,5,6,7));
 To retrieve rows other than by the primary key, use the Query `find()` method.
 
 An empty Query object carries no condition, and returns all the rows of the table
+
 ```php
 <?php
 $authors = AuthorQuery::create()->find();
@@ -127,7 +128,7 @@ $authors = AuthorQuery::create()
 
 When you pass a value to a `filterByXXX()` method, Propel uses the column type to escape this value in PDO. This protects you from SQL injection risks.
 
->**Tip**<br />`filterByXXX()` is the preferred method for creating queries. It is very flexible and accepts values with wildcards as well as arrays for more complex use cases. See [Column Filter Methods](../reference/model-criteria.html#column_filter_methods) for details.
+>**Tip**`filterByXXX()` is the preferred method for creating queries. It is very flexible and accepts values with wildcards as well as arrays for more complex use cases. See [Column Filter Methods](../documentation/reference/model-criteria.html#column_filter_methods) for details.
 
 You can also easily limit and order the results on a query. Once again, the Query methods return the current Query object, so you can easily chain them:
 
@@ -148,14 +149,14 @@ $author = AuthorQuery::create()
   ->findOne();
 ```
 
->**Tip**<br />Propel provides magic methods for this simple use case. So you can write the above query as:
+>**Tip**Propel provides magic methods for this simple use case. So you can write the above query as:
 
 ```php
 <?php
 $author = AuthorQuery::create()->findOneByFirstName('Jane');
 ```
 
-The Propel Query API is very powerful. The next chapter will teach you to use it to add conditions on related objects. If you can't wait, jump to the [Query API reference](../reference/model-criteria).
+The Propel Query API is very powerful. The next chapter will teach you to use it to add conditions on related objects. If you can't wait, jump to the [Query API reference](../documentation/reference/model-criteria).
 
 ### Using Custom SQL ###
 
@@ -234,7 +235,7 @@ AuthorQuery::create()
   ->delete();
 ```
 
->**Tip**<br />A deleted object still lives in the PHP code. It is marked as deleted and cannot be saved anymore, but you can still read its properties:
+>**Tip**A deleted object still lives in the PHP code. It is marked as deleted and cannot be saved anymore, but you can still read its properties:
 
 ```php
 <?php
@@ -309,7 +310,7 @@ In this example, Propel will hydrate the `Author` objects row by row, after the 
 
 `ModelCriteria::FORMAT_ON_DEMAND` is one of the many formatters provided by the Query objects. You can also get a collection of associative arrays instead of objects, if you don't need any of the logic stored in your model object, by using `ModelCriteria::FORMAT_ARRAY`.
 
-The [ModelCriteria Query API reference](../reference/model-criteria) describes each formatter, and how to use it.
+The [ModelCriteria Query API reference](../documentation/reference/model-criteria) describes each formatter, and how to use it.
 
 ## Propel Instance Pool ##
 

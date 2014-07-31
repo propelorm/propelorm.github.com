@@ -2,17 +2,11 @@
 <html>
 <head>
   {% include head.html %}
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js"></script>
 </head>
 <body class="home">
 {% include header.html %}
 <section class="content">
   {{ content }}
-  <p class="fork_and_edit">
-    Found a typo ? Something is wrong in this documentation ? Just <a
-          href="http://github.com/propelorm/propelorm.github.com/edit/master{{ page.url|replace:'.html','' }}.markdown">fork
-    and edit</a> it !
-  </p>
 </section>
 {% include footer.html %}
 <script type="text/javascript" src="/js/jquery.tableofcontents.min.js" charset="utf-8"></script>

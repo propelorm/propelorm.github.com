@@ -1,16 +1,70 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {% include head.html %}
-        <link rel="stylesheet" type="text/css" media="all" href="/css/home.css" >
-    </head>
-    <body class="home">
-        {% include header.html %}
-        <section class="content">
-            <div class="markdown">
-                {{ content }}
-            </div>
-        </section>
-        {% include footer.html %}
-    </body>
-</html>
+---
+layout: base
+---
+
+<div class="home-banner">
+    <h2>A highly customizeable and blazing fast
+    <strong>ORM</strong> library for PHP 5.4+.</h2>
+
+    <div class="home-screen">
+        <img src="images/gifs/propel-autocompletion.gif" />
+    </div>
+</div>
+
+<div class="home-features">
+    <div class="wrapper">
+        <div class="home-features-item">
+            <h3>Fast</h3>
+            Thanks to the code generation
+            we reach very fast execution times.
+        </div>
+        <div class="home-features-item">
+            <h3>Migration</h3>
+            Supports schema migration
+            for MySQL, SQLite and PostgreSQL.
+        </div>
+        <div class="home-features-item">
+            <h3>Reverse Engineering</h3>
+            For existing database structures
+            we support reverse enginering of your current
+            database schema.
+        </div>
+        <div class="home-features-item">
+            <h3>IDE friendly</h3>
+            Propel generates all of your getter and
+            setter as well as filter, relation methods
+            and much more for you.
+        </div>
+        <div class="home-features-item">
+            <h3>Customizable</h3>
+            Through our configuration system
+            you can adjust almost all gears.
+        </div>
+        <div class="home-features-item">
+            <h3>High Quality</h3>
+            Test-Driven-Development, Unit-Tests,
+            Continuous-Integration and Code-Coverage
+            over 94% show our quaility.
+        </div>
+        <div class="home-features-item">
+            <h3>Open Source</h3>
+            Propel is available under the open-source MIT license.
+        </div>
+        <div class="home-features-item">
+            <h3>Community</h3>
+            The Propel project started in 2005, has
+            over 10k users each month and
+            powers thousands of websites.
+        </div>
+        <div class="home-features-item">
+            <h3>Well documented</h3>
+            Oh, and we have a pretty detailed documentation!
+        </div>
+        <div class="break"></div>
+    </div>
+</div>
+
+<div class="home-content">
+    {{ content }}
+    <div class="break"></div>
+</div>

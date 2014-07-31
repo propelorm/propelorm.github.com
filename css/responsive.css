@@ -1,98 +1,76 @@
-@media all and (max-width: 1000px) {
-    .wrapper, header > div {
-        width: auto;
+
+
+@media all and (max-width: 1050px) {
+    .documentation > div.wrapper {
+        margin-left: 15px;
+    }
+
+    .documentation-content {
+        width: 74%;
+    }
+    .documentation-navigation {
+        width: 25%;
     }
 }
 
-@media all and (max-width: 660px) {
-    body .home-why,
-    body .home-what {
+
+@media all and (max-width: 774px) {
+    .home-screen img {
+        display: none;
+
+    }
+    .home-screen {
+        position: relative;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+}
+
+@media all and (max-width: 650px) {
+    .documentation-content {
+        width: 100%;
+    }
+    .documentation-navigation {
+        width: 100%;
+    }
+
+    .home-content-left {
         float: none;
+        padding: 5px;
         width: auto;
-        border: 0;
-        padding: 0;
     }
-}
+    .home-content-right {
+        float: none;
+        padding: 5px;
+        border-left: 0;
+        width: auto;
+    }
 
-@media all and (max-width: 780px) {
     header {
         height: auto;
     }
 
-    a.logo {
-        float: none;
-    }
-
     header nav {
-        float: none;
-        height: auto;
-    }
-
-    .search {
-        position: relative;
-        top: 0;
-        margin: 15px;
-    }
-
-    .ribbon {
-        display: none;
-    }
-
-    .toc {
-        width: auto;
-        float: none;
-        margin: 5px;
-        padding: 10px;
+        line-height: 30px;
     }
 }
 
-@media all and (max-width: 520px) {
-    footer li.element, .topmenu li.element {
-        display: block;
+@media all and (max-width: 500px) {
+
+    header nav {
+        float: none;
+    }
+    header nav li,
+    header nav li a,
+    header nav li a:link {
+        display: block !important;
+        float: none !important;
     }
 
-    .topmenu a {
-        padding: 2px 12px;
+    .documentation-content .wrapper {
+        margin: 5px;
     }
-
-    header nav li, header nav li a {
-        line-height: 25px;
-    }
-
-    body .home-how-more {
-        margin-left: 5px;
-    }
-
-    header nav li {
-        border-bottom: 1px dotted #ddd;
-    }
-
-    body .home-how-more img {
-        right: 0;
-    }
-
-    body .home-how-reverse {
-        position: relative;
-        bottom: 0;
-    }
-
-    footer li.element {
-        border-right: 0;
-        border-bottom: 1px dotted #ddd;
-    }
-
-    footer {
-        padding-left: 15px;
-        height: auto;
-    }
-
-    section.content {
-        padding: 5px 10px;
-        margin-top: 20px;
-    }
-
-    .fork_and_edit {
-        display: none;
-    }
-
 }

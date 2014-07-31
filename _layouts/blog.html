@@ -1,27 +1,18 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {% include head.html %}
-    </head>
-    <body class="home">
-        {% include header.html %}
-        <section class="content blog">
-            {% if page.title %}
-            <h1><a href="/blog/">The Blog</a> > {{ page.title }}</h1>
-            {% else %}
-            <h1>The Blog</h1>
-            {% endif %}
+---
+layout: base
+---
 
-            <div class="markdown">
-                {{ content }}
-            </div>
+<div class="header-line"></div>
+<div class="main-wrapper">
+    <section class="content blog">
+        {% if page.title %}
+        <h1><a href="/blog/">Blog</a> > {{ page.title }}</h1>
+        {% else %}
+        <h1>The Blog</h1>
+        {% endif %}
 
-            <p class="fork_and_edit">
-                Found a typo ? Something is wrong in this documentation ? Just <a
-                    href="http://github.com/propelorm/propelorm.github.com/edit/master/_posts/{{ page.url | replace: '/blog/', '' | replace: '/', '-' | replace:'.html','' }}.markdown">fork
-                    and edit</a> it !
-            </p>
-        </section>
-        {% include footer.html %}
-    </body>
-</html>
+        <div class="markdown">
+            {{ content }}
+        </div>
+    </section>
+</div>

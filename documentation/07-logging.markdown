@@ -40,7 +40,7 @@ $queryLogger->pushHandler(new StreamHandler('/var/log/propel_bookstore.log'));
 Propel::getServiceContainer()->setLogger('bookstore', $queryLogger);
 ```
 
->**Tip**<br/>If you don't configure a logger for a particular connection, Propel falls back to the default logger.
+>**Tip**If you don't configure a logger for a particular connection, Propel falls back to the default logger.
 
 ### Logger Configuration ###
 
@@ -104,7 +104,7 @@ The log messages will show up in the log handler defined in `runtime-conf.xml` (
 [2011-12-12 00:29:31] defaultLogger.ERROR: MyObj: uh-oh, something went wrong
 ```
 
->**Tip**<br />All serious errors coming from the Propel core do not only issue a log message, they are also thrown as `PropelException`.
+>**Tip**All serious errors coming from the Propel core do not only issue a log message, they are also thrown as `PropelException`.
 
 ## Debugging Database Activity ##
 
@@ -136,7 +136,7 @@ Alternatively, you can ask Propel to always enable the debug mode for a particul
           <classname>Propel\Runtime\Connection\DebugPDO</classname>
 ```
 
->**Tip**<br />You can use your own connection class there, but make sure that it implements `Propel\Runtime\Connection\ConnectionInterface`.
+>**Tip**You can use your own connection class there, but make sure that it implements `Propel\Runtime\Connection\ConnectionInterface`.
 
 ### Counting Queries ###
 
@@ -149,7 +149,7 @@ $myObjs = MyObjQuery::create()->doSelect(new Criteria(), $con);
 echo $con->getQueryCount();  // 1
 ```
 
->**Tip**<br />You cannot use persistent connections if you want the query count to work. Actually, the debug mode in general requires that you don't use persistent connections in order for it to correctly log bound values and count executed statements.
+>**Tip**You cannot use persistent connections if you want the query count to work. Actually, the debug mode in general requires that you don't use persistent connections in order for it to correctly log bound values and count executed statements.
 
 ### Retrieving The Latest Executed Query ###
 
@@ -162,7 +162,7 @@ $myObjs = MyObjTableMap::create()->doSelect(new Criteria(), $con);
 echo $con->getLastExecutedQuery(); // 'SELECT * FROM my_obj';
 ```
 
->**Tip**<br/>You can also get a decent SQL representation of the criteria being used in a SELECT query by using the `Criteria->toString()` method.
+>**Tip**You can also get a decent SQL representation of the criteria being used in a SELECT query by using the `Criteria->toString()` method.
 
 Propel also keeps track of the queries executed directly on the connection object, and displays the bound values correctly.
 
@@ -175,7 +175,7 @@ $stmt->execute();
 echo $con->getLastExecutedQuery(); // 'SELECT * FROM my_obj where name = "foo"';
 ```
 
->**Tip**<br />The debug mode is intended for development use only. Do not use it in production environment, it logs too much information for a production server, and adds a small overhead to the database queries.
+>**Tip**The debug mode is intended for development use only. Do not use it in production environment, it logs too much information for a production server, and adds a small overhead to the database queries.
 
 ## Full Query Logging ##
 
@@ -284,7 +284,7 @@ You can tweak the type and formatting of the profiler information prefix using t
 
 The `slowTreshold` parameter specifies when the profiler considers a query slow. By default, its value is of 0.1s, or 100ms.
 
->**Tip**<br/>You can choose to only log slow queries when using the `ProfilerConnectionWrapper` connection class. Just add a `isSlowOnly` attribute to the connection in `runtime-conf.xml`, as follows:
+>**Tip**You can choose to only log slow queries when using the `ProfilerConnectionWrapper` connection class. Just add a `isSlowOnly` attribute to the connection in `runtime-conf.xml`, as follows:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

@@ -2,19 +2,30 @@
 layout: base
 ---
 
-{{ content }}
+<div class="main-wrapper">
+    {{ content }}
 
-<script>
-  (function() {
-    var cx = '011663737245720498799:pbicw6zy8ya';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//www.google.com/cse/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
+    <form action="/search.html">
+        <input name="q" id="name" placeholder="Search..." type="text"/>
+        <input type="submit" value="Go"/>
+    </form>
 
-<gcse:searchresults-only></gcse:searchresults-only>
+    <script>
+        (function () {
+            var cx = '011663737245720498799:pbicw6zy8ya';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+
+        $('#name').val(window.location.search.split('?q=')[1]);
+
+    </script>
+
+    <gcse:searchresults-only></gcse:searchresults-only>
+
+</div>

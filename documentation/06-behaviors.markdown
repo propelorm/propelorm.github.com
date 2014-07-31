@@ -56,7 +56,7 @@ echo $b->getCreatedAt(); // 2009-10-02 18:14:23
 
 _Warning_: If you implement `preInsert()`, `preUpdate()`, `preSave()` or `preDelete()`, these methods **must return a boolean value**. Any return value other than `true` stops the action (save or delete). This is a neat way to bypass persistence on some cases, but can also create unexpected problems if you forget to return `true`.
 
->**Tip**<br />Since this feature adds a small overhead to write operations, you can disable it completely in your build properties by setting `propel.addHooks` to `false`.
+>**Tip**Since this feature adds a small overhead to write operations, you can disable it completely in your build properties by setting `propel.addHooks` to `false`.
 
 ```ini
 # -------------------
@@ -130,20 +130,20 @@ Then rebuild your model, and there you go: two columns, `created_at` and `update
 
 Propel currently bundles several behaviors. Check the behavior documentation for details on usage:
 
-* [aggregate_column](../behaviors/aggregate-column)
-* [archivable](../behaviors/archivable) (Replace the deprecated `soft-delete` behavior)
-* [auto_add_pk](../behaviors/auto-add-pk)
-* [delegate](../behaviors/delegate)
-* [timestampable](../behaviors/timestampable)
-* [sluggable](../behaviors/sluggable)
-* [sortable](../behaviors/sortable)
-* [nested_set](../behaviors/nested-set)
-* [versionable](../behaviors/versionable)
-* [i18n](../behaviors/i18n)
-* [query_cache](../behaviors/query-cache)
+* [aggregate_column](../documentation/behaviors/aggregate-column)
+* [archivable](../documentation/behaviors/archivable) (Replace the deprecated `soft-delete` behavior)
+* [auto_add_pk](../documentation/behaviors/auto-add-pk)
+* [delegate](../documentation/behaviors/delegate)
+* [timestampable](../documentation/behaviors/timestampable)
+* [sluggable](../documentation/behaviors/sluggable)
+* [sortable](../documentation/behaviors/sortable)
+* [nested_set](../documentation/behaviors/nested-set)
+* [versionable](../documentation/behaviors/versionable)
+* [i18n](../documentation/behaviors/i18n)
+* [query_cache](../documentation/behaviors/query-cache)
 * And [concrete_inheritance](./08-inheritance), documented in the Inheritance Chapter even if it's a behavior
 
-You can also look at [user contributed behaviors](../cookbook/user-contributed-behaviors.html).
+You can also look at [user contributed behaviors](../documentation/cookbook/user-contributed-behaviors.html).
 
 Behaviors bundled with Propel require no further installation and work out of the box.
 
@@ -199,7 +199,7 @@ Propel will then find the `FormidableBehavior` class whenever you use the `formi
 </table>
 ```
 
->**Tip**<br />If you use autoloading during the build process, and if the behavior classes benefit from the autoloading, then you don't even need to declare the path to the behavior class.
+>**Tip**If you use autoloading during the build process, and if the behavior classes benefit from the autoloading, then you don't even need to declare the path to the behavior class.
 
 ## Applying a Behavior To All Tables ##
 
