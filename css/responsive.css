@@ -27,6 +27,10 @@
         background-size: 100%;
         background-repeat: no-repeat;
     }
+
+    .main-wrapper {
+        padding: 25px 5px;
+    }
 }
 
 @media all and (max-width: 650px) {
