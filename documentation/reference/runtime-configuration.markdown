@@ -90,7 +90,9 @@ The nested elements correspond to the configuration options for the logger (opti
 | ident     |propel             |The identifier tag for the log.
 | level     |7 (PEAR_LOG_DEBUG) |The logging level.
 
-This log configuring API is designed to provide a simple way to get log output from Propel; however, if your application already has a logging mechanism, we recommend instead that you use your existing logger (writing a simple log adapter, if you are using an unsupported logger). See the [Logging documentation](../documentation/08-logging) for more info.
+This log configuring API is designed to provide a simple way to get log output from Propel; however, if your application
+already has a logging mechanism, we recommend instead that you use your existing logger (writing a simple log adapter,
+if you are using an unsupported logger). See the [Logging documentation](/documentation/07-logging) for more info.
 
 ### datasources ###
 
@@ -301,4 +303,5 @@ The `<slaves>` tag groups lists slave `<connection>` elements which provide supp
 
 ### `<profiler>` ###
 
-The optional `<profiler>` element may be provided to customize the profiler when using a `ProfilerConnectionWrapper` connection class. See the [Logging documentation](../documentation/08-logging) for more information on configuring the profiler.
+The optional `<profiler>` element may be provided to customize the profiler when using a `ProfilerConnectionWrapper`
+connection class. See the [Logging documentation](/documentation/07-logging) for more information on configuring the profiler.

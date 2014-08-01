@@ -5,9 +5,16 @@ title: How to Write A Behavior
 
 # How to Write A Behavior #
 
-Behaviors are a good way to reuse code across models without requiring inheritance (a.k.a. horizontal reuse). This step-by-step tutorial explains how to port model code to a behavior, focusing on a simple example.
+Behaviors are a good way to reuse code across models without requiring inheritance (a.k.a. horizontal reuse)
+ This step-by-step tutorial explains how to port model code to a behavior, focusing on a simple example.
 
-In the tutorial "[Keeping an Aggregate Column up-to-date](http://propel.posterous.com/getting-to-know-propel-15-keeping-an-aggregat)", posted in the [Propel blog](http://propel.posterous.com/), the `TotalNbVotes` property of a `PollQuestion` object was updated each time a related `PollAnswer` object was saved, edited, or deleted. This "aggregate column" behavior was implemented by hand using hooks in the model classes. To make it truly reusable, the custom model code needs to be refactored and moved to a Behavior class.
+In the tutorial "[Keeping an Aggregate Column up-to-date](http://propelorm.org/blog/2010/04/29/getting-to-know-propel-1-5-keeping-an-aggregate-column-up-to-date.html)" (Propel 1.x),
+posted in the [Propel blog](http://propelorm.org/blog/), the `TotalNbVotes` property of a `PollQuestion` object was updated
+each time a related `PollAnswer` object was saved, edited, or deleted. This "aggregate column" behavior was implemented by
+hand using hooks in the model classes. To make it truly reusable, the custom model code needs to be refactored and moved
+to a Behavior class.
+
+Please see first the chapter [Behaviors](/documentation/06-behaviors.html) to get information about some basics about Behaviors in Propel.
 
 ## Boostrapping A Behavior ##
 
@@ -423,7 +430,7 @@ class BehaviorB extends Behavior
 
 ## What's Left ##
 
-These are the basics of behavior writing: implement one of the methods documented in the [behaviors chapter](../documentation/07-behaviors.html#writing-a-behavior) of the Propel guide, and return strings containing the code to be added to the ActiveRecord, Query, and TableMap classes. In addition to the behavior code, you should always write unit tests - all the behaviors bundled with Propel have full unit test coverage. And to make your behavior usable by others, documentation is highly recommended. Once again, Propel core behaviors are fully documented, to let users understand the behavior usage without having to peek into the code.
+These are the basics of behavior writing: implement one of the methods documented in the [behaviors chapter](/documentation/06-behaviors.html#writing-a-behavior) of the Propel guide, and return strings containing the code to be added to the ActiveRecord, Query, and TableMap classes. In addition to the behavior code, you should always write unit tests - all the behaviors bundled with Propel have full unit test coverage. And to make your behavior usable by others, documentation is highly recommended. Once again, Propel core behaviors are fully documented, to let users understand the behavior usage without having to peek into the code.
 
 As for the `AggregateColumnBehavior`, the job is not finished. The [blog post](http://propel.posterous.com/getting-to-know-propel-15-keeping-an-aggregat) emphasized the need for hooks in the Query class, and these are not yet implemented in the above code. Besides, the  post kept quiet about one use case that left the aggregate column not up to date (when a question is detached from a poll without deleting it). Lastly, the parameters required for this behavior are currently a bit verbose, especially concerning the need to define the foreign table and the foreign key - this could be simplified thanks to the knowledge of the object model that behaviors have.
 

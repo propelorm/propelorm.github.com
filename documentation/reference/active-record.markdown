@@ -221,7 +221,7 @@ Based on this schema, Propel defines:
 * A many-to-one relationship from the `Book` class to the `Author` class
 * A one-to-many relationship from the `Author` class to the `Book` class
 
-See the [Relationships documentation](../documentation/04-relationships) for more details.
+See the [Relationships documentation](/documentation/04-relationships) for more details.
 
 For each relationship, Propel generates additional getters and setters.
 
@@ -662,7 +662,7 @@ preDelete()            // code executed before deleting an object
 postDelete()           // code executed after deleting an object
 ```
 
-See the [Behaviors guide](../documentation/07-behaviors) for more details.
+See the [Behaviors guide](documentation/06-behaviors) for more details.
 
 ## Persistence Status ##
 

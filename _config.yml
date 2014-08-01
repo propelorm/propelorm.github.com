@@ -58,6 +58,8 @@ documentation:
    url: /documentation/reference/compatibility-index.html
 
  - title: Behaviors
+ - title: Writing A Behavior
+   url: /documentation/cookbook/writing-behavior.html
  - title: aggregate_column
    url: /documentation/behaviors/aggregate-column.html
  - title: archivable
@@ -112,13 +114,5 @@ documentation:
    url: /documentation/cookbook/using-sql-schemas.html
  - title: Working With Existing Databases
    url: /documentation/cookbook/working-with-existing-databases.html
- - title: Working with Silex
-   url: /documentation/cookbook/silex/working-with-silex.html
-
- - title: Contribute to Propel
- - title: Writing A Behavior
-   url: /documentation/cookbook/writing-behavior.html
- - title: Testing Your Behaviors
-   url: /documentation/cookbook/testing-your-behaviors.html
  - title: Working with Silex
    url: /documentation/cookbook/silex/working-with-silex.html

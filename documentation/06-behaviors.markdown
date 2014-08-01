@@ -130,18 +130,18 @@ Then rebuild your model, and there you go: two columns, `created_at` and `update
 
 Propel currently bundles several behaviors. Check the behavior documentation for details on usage:
 
-* [aggregate_column](../documentation/behaviors/aggregate-column)
-* [archivable](../documentation/behaviors/archivable) (Replace the deprecated `soft-delete` behavior)
-* [auto_add_pk](../documentation/behaviors/auto-add-pk)
-* [delegate](../documentation/behaviors/delegate)
-* [timestampable](../documentation/behaviors/timestampable)
-* [sluggable](../documentation/behaviors/sluggable)
-* [sortable](../documentation/behaviors/sortable)
-* [nested_set](../documentation/behaviors/nested-set)
-* [versionable](../documentation/behaviors/versionable)
-* [i18n](../documentation/behaviors/i18n)
-* [query_cache](../documentation/behaviors/query-cache)
-* And [concrete_inheritance](./08-inheritance), documented in the Inheritance Chapter even if it's a behavior
+* [aggregate_column](../documentation/behaviors/aggregate-column.html)
+* [archivable](../documentation/behaviors/archivable.html) (Replace the deprecated `soft-delete` behavior)
+* [auto_add_pk](../documentation/behaviors/auto-add-pk.html)
+* [delegate](../documentation/behaviors/delegate.html)
+* [timestampable](../documentation/behaviors/timestampable.html)
+* [sluggable](../documentation/behaviors/sluggable.html)
+* [sortable](../documentation/behaviors/sortable.html)
+* [nested_set](../documentation/behaviors/nested-set.html)
+* [versionable](../documentation/behaviors/versionable.html)
+* [i18n](../documentation/behaviors/i18n.html)
+* [query_cache](../documentation/behaviors/query-cache.html)
+* And [concrete_inheritance](./08-inheritance.html), documented in the Inheritance Chapter even if it's a behavior
 
 You can also look at [user contributed behaviors](../documentation/cookbook/user-contributed-behaviors.html).
 
@@ -175,7 +175,7 @@ If the columns already exist in your schema, a behavior is smart enough not to a
 </table>
 ```
 
-## Using Third-Party Behaviors ##
+## Using Behaviors ##
 
 As a Propel behavior can be packaged into a single class, behaviors are quite easy to reuse and distribute across several projects. All you need to do is to copy the behavior file into your project, and declare it in `build.properties`, as follows:
 
@@ -355,6 +355,30 @@ class " . $this->getClassname() . " extends " . $this->getStubObjectBuilder() . 
 By default, classes added by a behavior are generated each time the model is rebuilt. To limit the generation to the first time (for instance for stub classes), add a public `$overwrite` attribute to the builder and set it to `false`.
 
 You can set the additional class to be generated in a subfolder by implementing the `getPackage()` method.
+
+### Providing Behaviors Through Composer ###
+
+The normal way of having behaviors available in your tables is to tell Propel explicitly which name is for which class (see
+[Using Behaviors](http://propelorm/documentation/06-behaviors.html#using-behaviors)) or by using the full FQCN as name.
+
+For behaviors you install through composer there's a third method by just using the behavior name defined in the external behavior composer.json file.
+This is only possible for behaviors that do support this kind of feature.
+
+To allow your users to have your behavior installed by just using the name you have just to extend your composer.json a bit:
+
+```json
+{
+    "name" : "gossi/propel-l10n-behavior",
+    "type" : "propel-behavior",
+    "extra": {
+        "name": "l10n",
+        "class": "\\gossi\\propel\\behavior\\l10n\\L10nBehavior"
+    }
+}
+```
+
+The `"name"` value can then be used in `<behavior name="l10n" />` without assigning a name to a class by yourself in Propel's configuration file.
+
 
 ### Replacing or Removing Existing Methods ###
 

@@ -290,7 +290,7 @@ But inside an xml string the double-quote characters should be escaped, so repla
 
 ## Automatic validation ##
 
-You can automatic validate an ActiveRecord, before saving it into your database, thanks to `preSave()` hook (see [behaviors documentation](/documentation/07-behaviors.html)).
+You can automatic validate an ActiveRecord, before saving it into your database, thanks to `preSave()` hook (see [behaviors documentation](/documentation/06-behaviors.html)).
 For example, let's suppose we wish to add automatic validation capability to our `Book` class. Open `Book.php`, in your model path, and add the following code:
 
 ```php
