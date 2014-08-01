@@ -51,7 +51,7 @@ Then run Composer to install the necessary stuff:
     $ php composer.phar install
 
 
-#### Setup Database ####
+### Setup Database ###
 
 We provide three scripts that setup your database.
 
@@ -71,7 +71,7 @@ Call one of those scripts in your console:
 ./tests/bin/setup.mysql.sh
 ```
 
-If your database is configured using a password or a different user than the default, you can configure the scripts via environment variables.
+If your database is configured using a password or a different user than the default, you can configure the command via environment variables.
 
 Example:
 
