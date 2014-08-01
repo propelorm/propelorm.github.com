@@ -221,9 +221,9 @@ class MysqlSchemaParserTest extends TestCaseFixturesDatabase
 {
 ```
 
-`@group database` means this tests requires a configured database.
+`@group database` means this test requires a configured database.
 
-`@group mysql` means this tests is mysql only.
+`@group mysql` means this test is mysql only.
 
 
 ## Running Unit Tests ##
@@ -277,7 +277,7 @@ If you change your credentials or adapter it will be automatically detected and 
 
 ### Specific tests only ###
 
-Since we're using test grouping we have some tests that working only with a configured database and tests
+Since we're using test grouping we have some tests that work only with a configured database and tests
 that work only with mysql.
 
 To filter by those groups you can pass `--group` to the phpunit command.
@@ -304,7 +304,7 @@ Only non-database specific tests:
 
 See `Using the correct test group` at this page to get more information about this. 
 
-### More Tip ###
+### More Tips ###
 
 ```bash
 phpunit --stop-on-failure
@@ -330,10 +330,10 @@ This is very handy if you're trying to fix or write one particular set of test m
 again and again.
 
 
-## Fix checkstyle ##
+## Fix Coding Style ##
 
 You can fix your coding style __before to create your commit__ by using the Symfony2
-[php-cs-fixer][] script. You just need to install the script:
+[php-cs-fixer](https://github.com/fabpot/PHP-CS-Fixer) script. You just need to install the script:
 
     $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
 
