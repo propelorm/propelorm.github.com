@@ -5,7 +5,9 @@ title: Using SQL Schemas
 
 # Using SQL Schemas #
 
-Some database vendors support "schemas", a.k.a. namespaces of collections of database objects (tables, views, etc.). MSSQL, PostgreSQL, and to a lesser extent MySQL, all provide the ability to group and organize tables into schemas. Propel supports tables organized into schemas, and works seamlessly in this context.
+Some database vendors support "schemas", a.k.a. namespaces of collections of database objects (tables, views, etc.).
+MSSQL, PostgreSQL, and to a lesser extent MySQL, all provide the ability to group and organize tables into schemas.
+Propel supports tables organized into schemas, and works seamlessly in this context. For SQLite we emulate schema support.
 
 ## Schema Definition ##
 
@@ -22,7 +24,7 @@ In a XML schema, you can assign all the tables included into a `<database>` tag 
 </database>
 ```
 
->**Tip**On RDBMS that do not support SQL schemas (Oracle, SQLite), the `schema` attribute is ignored.
+>**Tip**On RDBMS that do not support SQL schemas (Oracle), the `schema` attribute is ignored.
 
 You can also assign a table to a given schema individually ; this overrides the `schema` of the parent `<database>`:
 
