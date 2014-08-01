@@ -393,7 +393,7 @@ However, it is quite easy to achieve hydration of related objects with only one 
 $authors = AuthorQuery::create()
   ->limit(5)
   ->find();
-// $authors is a PropelObjectCollection
+// $authors is a Propel\Runtime\Collection\ObjectCollection
 $authors->populateRelation('Book');
 foreach ($authors as $author) {
   // now you can iterate over each author's book without further queries

@@ -43,7 +43,7 @@ $stmt->bind(':p1', time() - 30 * 24 * 60 * 60, PDO::PARAM_INT);
 $res = $stmt->execute();
 ```
 
-The final `find()` doesn't just execute the SQL query above, it also instantiates `Book` objects and populates them with the results of the query. Eventually, it returns a `PropelCollection` object with these `Book` objects inside. For the sake of clarity, you can consider this collection object as an array. In fact, you can use it as if it were a true PHP array and iterate over the result list the usual way:
+The final `find()` doesn't just execute the SQL query above, it also instantiates `Book` objects and populates them with the results of the query. Eventually, it returns a `Collection` object with these `Book` objects inside. For the sake of clarity, you can consider this collection object as an array. In fact, you can use it as if it were a true PHP array and iterate over the result list the usual way:
 
 ```php
 <?php
@@ -402,7 +402,7 @@ $articles = ArticleQuery::create()
   ->join('Category')
   ->select(array('Id', 'Title', 'Content', 'Category.Name'))
   ->find();
-// returns PropelArrayCollection(
+// returns Propel\Runtime\Collection\ArrayCollection(
 //   array('Id' => 123, 'Title' => 'foo', 'Content' => 'This is foo', 'Category.Name' => 'Miscellaneous'),
 //   array('Id' => 456, 'Title' => 'bar', 'Content' => 'This is bar', 'Category.Name' => 'Main')
 // )
@@ -436,7 +436,7 @@ $nbComments = ArticleQuery::create()
   ->groupBy('Article.Title')
   ->select(array('Article.Title', 'nbComments'))
   ->find();
-// returns PropelArrayCollection(
+// returns Propel\Runtime\Collection\ArrayCollection(
 //   array('Article.Title' => 'foo', 'nbComments' => 25),
 //   array('Article.Title' => 'bar', 'nbComments' => 32)
 // )
@@ -445,7 +445,7 @@ $nbComments = ArticleQuery::create()
 $articles = ArticleQuery::create()
   ->select('*')
   ->find();
-// returns PropelArrayCollection(
+// returns Propel\Runtime\Collection\ArrayCollection(
 //   array('Id' => 123, 'Title' => 'foo', 'Content' => 'This is foo'),
 //   array('Id' => 456, 'Title' => 'bar', 'Content' => 'This is bar')
 // )
@@ -882,9 +882,10 @@ $authors = AuthorQuery::create('a')
   ->find();
 ```
 
-### Using A Query As Input For A Second Query (Table Subqueries) ###
+### Sub Selects ###
 
-SQL supports table subqueries (a.k.a "inline view" in Oracle) to solve complex cases that a single query can't solve, or to optimize slow queries with several joins. For instance, to find the latest book written by every author in SQL, it usually takes a query like the following:
+SQL supports table subqueries (a.k.a Sub Selects and "inline view" in Oracle) to solve complex cases that a single query can't solve, or to optimize slow queries with several joins.
+For instance, to find the latest book written by every author in SQL, it usually takes a query like the following:
 
 ```sql
 SELECT book.ID, book.TITLE, book.AUTHOR_ID, book.PRICE, book.CREATED_AT, MAX(book.CREATED_AT)
@@ -1002,11 +1003,11 @@ update($values, $con = null, $forceIndividualSaves = false)
 
 ## Collections, Pager, and Formatters ##
 
-### PropelCollection Methods ###
+### Collection Methods ###
 
 ```php
 <?php
-// find() returns a PropelCollection, which you can use just like an array
+// find() returns a Propel\Runtime\Collection\ObjectCollection, which you can use just like an array
 $books = BookQuery::create()->find(); // $books behaves like an array
 ?>
 There are <?= count($books) ?> books:
@@ -1019,7 +1020,7 @@ There are <?= count($books) ?> books:
 </ul>
 
 <?php
-// But a PropelCollection is more than just an array.
+// But a Collection is more than just an array.
 // That means you can call some special methods on it.
 $books = BookQuery::create()->find(); // $books is an object
 ?>
@@ -1041,7 +1042,7 @@ There are <?= $books->count() ?> books:
 <?php endif; ?>
 ```
 
-Here is the list of methods you can call on a PropelCollection:
+Here is the list of methods you can call on a Propel\Runtime\Collection\ObjectCollection:
 
 ```php
 <?php
@@ -1091,7 +1092,18 @@ void fromJSON($json) // imports a collection from a JSON string
 void fromCSV($csv) // imports a collection from a CSV string
 ```
 
->**Tip**`PropelCollection` extends `ArrayObject`, so you can also call all the methods of this SPL class on a collection (including `count()`, `append()`, `ksort()`, etc.).
+>**Tip**All `Collection` classes implement `\ArrayAccess`, `\IteratorAggregate`, `\Countable` and `\Serializable`, so you can also call all the methods of those SPL classes on a collection (including `count()`, `append()`, `ksort()`, etc.).
+
+### Using An Alternative Collection Class ###
+
+Sometimes its useful to have a custom collection class as result instead of the normal `*Collection` object. Usually the
+formatter defines which collection will be returned, but Propel gives you a nitty-gritty trick to overwrite that behavior.
+ 
+Let's assume you have a table `author` with its model class `Bookstore\Author` and thus a query class `Bookstore\AuthorQuery`:
+When you have the normal `ObjectFormatter` chosen and call now `->find()` on the query class object the formatter searches for a class 
+called `$ModelClass . 'Collection'` respectively `Bookstore\AuthorCollection` and if found uses this class instead of
+`\Propel\Runtime\Collection\ObjectCollection`. You should primarily just extend `Propel\Runtime\Collection\ObjectCollection`
+and extend your custom class with additional methods or overwrite particular methods.
 
 ### Paginating Results ###
 
@@ -1131,23 +1143,23 @@ There are <?= $bookPager->count() ?> books:
 
 ### Using An Alternative Formatter ###
 
-By default, `find()` calls return a `PropelObjectCollection` of model objects. For performance reasons, you may want to get a collection of arrays instead. Use the `setFormatter()` to specify a custom result formatter.
+By default, `find()` calls return a `Propel\Runtime\Collection\ObjectCollection` of model objects. For performance reasons, you may want to get a collection of arrays instead. Use the `setFormatter()` to specify a custom result formatter.
 
 ```php
 <?php
 $book = BookQuery::create()
-  ->setFormatter('PropelArrayFormatter')
+  ->setFormatter('Propel\Runtime\Formatter\ArrayFormatter')
   ->findOne();
 print_r($book);
   => array('Id' => 123, 'Title' => 'War And Peace', 'ISBN' => '3245234535', 'AuthorId' => 456, 'PublisherId' => 567)
 ```
 
-Of course, the formatters take the calls to `with()` into account, so you can end up with a precise array representation of a model object:
+Of course, the formatter take the calls to `with()` into account, so you can end up with a precise array representation of a model object:
 
 ```php
 <?php
 $book = BookQuery::create()
-  ->setFormatter('PropelArrayFormatter')
+  ->setFormatter('Propel\Runtime\Formatter\ArrayFormatter')
   ->with('Book.Author')
   ->with('Book.Publisher')
   ->findOne();
@@ -1170,17 +1182,17 @@ print_r($book);
      )
 ```
 
-Propel provides four formatters:
+Propel provides four formatter:
 
- * `PropelObjectFormatter`: The default formatter, returning a model object for `findOne()`, and a `PropelObjectCollection` of model objects for `find()`
- * `PropelOnDemandFormatter`: To save memory for large resultsets, prefer this formatter ; it hydrates rows one by one as they are iterated on, and doesn't create a new Propel Model object at each row. Note that this formatter doesn't use the Instance Pool.
- * `PropelArrayFormatter`: The array formatter, returning an associative array for `findOne()`, and a `PropelArrayCollection` of arrays for `find()`
- * `PropelSimpleArrayFormatter`: An array formatter for `select()` queries, returning a string, an associative array for `findOne()`, or a `PropelArrayCollection` of arrays for `find()`
- * `PropelStatementFormatter`: The 'raw' formatter, returning a `PDOStatement` in any case.
+ * `Propel\Runtime\Formatter\ObjectFormatter`: The default formatter, returning a model object for `findOne()`, and a `ObjectCollection` of model objects for `find()`
+ * `Propel\Runtime\Formatter\OnDemandFormatter`: To save memory for large resultsets, prefer this formatter ; it hydrates rows one by one as they are iterated on, and doesn't create a new Propel Model object at each row. Note that this formatter doesn't use the Instance Pool.
+ * `Propel\Runtime\Formatter\ArrayFormatter`: The array formatter, returning an associative array for `findOne()`, and a `ArrayCollection` of arrays for `find()`
+ * `Propel\Runtime\Formatter\SimpleArrayFormatter`: An array formatter for `select()` queries, returning a string, an associative array for `findOne()`, or a `ArrayCollection` of arrays for `find()`
+ * `Propel\Runtime\Formatter\StatementFormatter`: The 'raw' formatter is returning a `PDOStatement` in any case.
 
 You can easily write your own formatter to format the results the way you want. A formatter is basically a subclass of `PropelFormatter` providing a `format()` and a `formatOne()` method expecting a PDO statement.
 
-## Writing Your Own business Logic Into A Query ##
+## Own business Logic Into A Query ##
 
 ### Custom Filters ###
 
