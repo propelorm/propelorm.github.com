@@ -242,6 +242,41 @@ $groups = GroupQuery::create()
   ->find();
 ```
 
+If you define a cross-table with a primary key based on more than two columns Propel will generate different method signatures
+for all generated relation methods. It generates for each additional primary key column a new method parameter with its type
+and its name.
+
+Example:
+
+```xml
+<table name="user_group" isCrossRef="true">
+  <column name="user_id" type="integer" primaryKey="true"/>
+  <column name="group_id" type="integer" primaryKey="true"/>
+  <column name="type" type="integer" primaryKey="true"/>
+  <foreign-key foreignTable="user">
+    <reference local="user_id" foreign="id"/>
+  </foreign-key>
+  <foreign-key foreignTable="group">
+    <reference local="group_id" foreign="id"/>
+  </foreign-key>
+</table>
+```
+
+You'll get these methods:
+
+```php
+<?php
+$user->addGroup(User $group, int $type);
+$user->removeGroup(User $group, int $type);
+$user->countGroup(int $type);
+$user->getGroups(int $type);
+
+# Query class will be extended as well
+UserQuery::create()->filterByGroup($group, $type)->find();
+```
+
+Since this is as usual automatic generated you can just use IDE's code completion to see how to call those methods.
+
 ## One-to-One Relationships ##
 
 Propel supports the special case of one-to-one relationships. These relationships are defined when the primary key is also a foreign key. For example:

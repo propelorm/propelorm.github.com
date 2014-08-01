@@ -24,10 +24,17 @@ code {
     border: 1px solid #d5d5d5;
     padding: 0 2px;
     background-color: rgba(249, 249, 249, 0.47);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 300;
     border-radius: 3px;
     color: #888;
+    display: inline-block;
+    line-height: 16px;
+}
+
+.highlight code {
+    display: inline;
+    font-size: 14px;
 }
 
 .highlight code {
