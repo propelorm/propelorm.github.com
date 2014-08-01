@@ -51,7 +51,7 @@ documentation:
  - title: Active Query Classes
    url: /documentation/reference/model-criteria.html
  - title: Build Properties
-   url: /documentation/documentation/reference/buildtime-configuration.html
+   url: /documentation/reference/buildtime-configuration.html
  - title: Runtime Configuration File
    url: /documentation/reference/runtime-configuration.html
  - title: Compatibility index
@@ -88,6 +88,8 @@ documentation:
    url: /documentation/cookbook/user-contributed-behaviors.html
 
  - title: Cookbook
+ - title: Working With Propel's Test Suite
+   url: /documentation/cookbook/working-with-test-suite.html
  - title: Additional SQL Files
    url: /documentation/cookbook/adding-additional-sql-files.html
  - title: Advanced Column Types
@@ -118,7 +120,5 @@ documentation:
    url: /documentation/cookbook/writing-behavior.html
  - title: Testing Your Behaviors
    url: /documentation/cookbook/testing-your-behaviors.html
- - title: Working with unit tests
-   url: /documentation/cookbook/working-with-unit-tests.html
  - title: Working with Silex
    url: /documentation/cookbook/silex/working-with-silex.html

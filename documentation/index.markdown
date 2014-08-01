@@ -56,6 +56,7 @@ You can also look at [user contributed behaviors](../documentation/cookbook/user
 
 ### Common Tasks ###
 
+* [Working With Propel's Test suite](../documentation/cookbook/working-with-test-suite.html) How to use the test suite and to create own tests.
 * [Additional SQL Files](../documentation/cookbook/adding-additional-sql-files.html) How to execute custom SQL statements at buildtime
 * [Advanced Column Types](../documentation/cookbook/working-with-advanced-column-types.html) How to work with BLOBs, serialized PHP objects, ENUM, and ARRAY column types.
 * [Customizing build](../documentation/cookbook/customizing-build.html) How to customize the Phing build process.
@@ -72,7 +73,6 @@ You can also look at [user contributed behaviors](../documentation/cookbook/user
 
 * [Writing A Behavior](../documentation/cookbook/writing-behavior.html) How to write a custom behavior to reuse model code horizontally.
 * [Testing Your Behaviors](../documentation/cookbook/testing-your-behaviors.html) How to unit test your behaviors.
-* [Working with unit tests](../documentation/cookbook/working-with-unit-tests.html) How to setup propel's required environment and use PHPUnit.
 
 ### Working with Silex ###
 
