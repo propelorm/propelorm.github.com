@@ -1096,11 +1096,11 @@ void fromCSV($csv) // imports a collection from a CSV string
 
 ### Using An Alternative Collection Class ###
 
-Sometimes its useful to have a custom collection class as result instead of the normal `*Collection` object. Usually the
+Sometimes it's useful to have a custom collection class as result instead of the normal `*Collection` object. Usually the
 formatter defines which collection will be returned, but Propel gives you a nitty-gritty trick to overwrite that behavior.
- 
+
 Let's assume you have a table `author` with its model class `Bookstore\Author` and thus a query class `Bookstore\AuthorQuery`:
-When you have the normal `ObjectFormatter` chosen and call now `->find()` on the query class object the formatter searches for a class 
+When you have the normal `ObjectFormatter` chosen and call now `->find()` on the query class object the formatter searches for a class
 called `$ModelClass . 'Collection'` respectively `Bookstore\AuthorCollection` and if found uses this class instead of
 `\Propel\Runtime\Collection\ObjectCollection`. You should primarily just extend `Propel\Runtime\Collection\ObjectCollection`
 and extend your custom class with additional methods or overwrite particular methods.
@@ -1182,7 +1182,7 @@ print_r($book);
      )
 ```
 
-Propel provides four formatter:
+Propel provides five formatter:
 
  * `Propel\Runtime\Formatter\ObjectFormatter`: The default formatter, returning a model object for `findOne()`, and a `ObjectCollection` of model objects for `find()`
  * `Propel\Runtime\Formatter\OnDemandFormatter`: To save memory for large resultsets, prefer this formatter ; it hydrates rows one by one as they are iterated on, and doesn't create a new Propel Model object at each row. Note that this formatter doesn't use the Instance Pool.

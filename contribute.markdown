@@ -65,8 +65,9 @@ button. Add a short description to this Pull Request and submit it.
 
 ## Running Unit Tests ##
 
-Please make sure our test suite is still green and you wrote a adequate test that covers your changes.
- 
+Please make sure our test suite is still green and you wrote an adequate test that
+covers your changes.
+
 You can get more information in our cookbook article: [Working with Propel's Test Suite](/documentation/cookbook/working-with-test-suite.html).
 
 ## Improve the documentation ##

@@ -242,9 +242,10 @@ $groups = GroupQuery::create()
   ->find();
 ```
 
-If you define a cross-table with a primary key based on more than two columns Propel will generate different method signatures
-for all generated relation methods. It generates for each additional primary key column a new method parameter with its type
-and its name.
+If you define a cross-table with a primary key based on more than two columns,
+Propel will generate different method signatures for all generated relation
+methods. It generates, for each additional primary key, column a new method
+parameter with its type and its name.
 
 Example:
 
@@ -275,7 +276,8 @@ $user->getGroups(int $type);
 UserQuery::create()->filterByGroup($group, $type)->find();
 ```
 
-Since this is as usual automatic generated you can just use IDE's code completion to see how to call those methods.
+Since this is as usual automatic generated, you can just use IDE's code completion
+to see how to call those methods.
 
 ## One-to-One Relationships ##
 
