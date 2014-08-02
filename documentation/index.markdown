@@ -36,6 +36,7 @@ title: Documentation
 
 ## Behaviors Reference ##
 
+* [Writing A Behavior](../documentation/cookbook/writing-behavior.html) How to write a custom behavior to reuse model code horizontally.
 * [aggregate_column](../documentation/behaviors/aggregate-column.html)
 * [archivable](../documentation/behaviors/archivable.html)
 * [auto_add_pk](../documentation/behaviors/auto-add-pk.html)
@@ -68,11 +69,6 @@ You can also look at [user contributed behaviors](../documentation/cookbook/user
 * [Using Propel With MSSQL Server](../documentation/cookbook/using-mssql-server.html) How to choose and configure Propel to persist data to a Microsoft SQL Server database.
 * [Using SQL Schemas](../documentation/cookbook/using-sql-schemas.html) How to organize tables into SQL schemas (only for MySQL, PostgreSQL, and MSSQL).
 * [Working With Existing Databases](../documentation/cookbook/working-with-existing-databases.html) How to build an XML schema from an existing db structure, how to dump data to XML, how to import it into a new database, etc.
-
-### Contribute to Propel ###
-
-* [Writing A Behavior](../documentation/cookbook/writing-behavior.html) How to write a custom behavior to reuse model code horizontally.
-* [Testing Your Behaviors](../documentation/cookbook/testing-your-behaviors.html) How to unit test your behaviors.
 
 ### Working with Silex ###
 

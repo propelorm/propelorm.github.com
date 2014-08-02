@@ -130,7 +130,7 @@ class Book extends BaseBook
 
 In this example, the `nb_books` column of the `author` table will always we synchronized with the number of books. If anything happens during the transaction, the saving of the book is rolled back, as well as the `nb_books` column update. The transaction serves to preserve data consistency in a denormalized schema ("Consistency" stands for the C in ACID).
 
->**Tip**Check the [behaviors documentation](07-behaviors.html#pre-and-post-hooks-for-save-and-delete-methods) for details about the pre- and post- hooks in Propel model objects.
+>**Tip**Check the [behaviors documentation](/documentation/06-behaviors.html#pre-and-post-hooks-for-save-and-delete-methods) for details about the pre- and post- hooks in Propel model objects.
 
 ## Nested Transactions ##
 
