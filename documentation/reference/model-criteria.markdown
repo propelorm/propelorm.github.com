@@ -1154,7 +1154,7 @@ print_r($book);
   => array('Id' => 123, 'Title' => 'War And Peace', 'ISBN' => '3245234535', 'AuthorId' => 456, 'PublisherId' => 567)
 ```
 
-Of course, the formatter take the calls to `with()` into account, so you can end up with a precise array representation of a model object:
+Of course, the formatters take the calls to `with()` into account, so you can end up with a precise array representation of a model object:
 
 ```php
 <?php
@@ -1182,7 +1182,7 @@ print_r($book);
      )
 ```
 
-Propel provides five formatter:
+Propel provides five formatters:
 
  * `Propel\Runtime\Formatter\ObjectFormatter`: The default formatter, returning a model object for `findOne()`, and a `ObjectCollection` of model objects for `find()`
  * `Propel\Runtime\Formatter\OnDemandFormatter`: To save memory for large resultsets, prefer this formatter ; it hydrates rows one by one as they are iterated on, and doesn't create a new Propel Model object at each row. Note that this formatter doesn't use the Instance Pool.
