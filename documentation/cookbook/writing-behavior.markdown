@@ -31,11 +31,27 @@ class AggregateColumnBehavior extends Behavior
 }
 ```
 
-Save this class in a file called `AggregateColumnBehavior.php`, and set the path for the class file in the project `build.properties` (just replace directory separators with dots). Remember that the `build.properties` paths are relative to the include path:
+Save this class in a file called `AggregateColumnBehavior.php`.
+Now, you should tell Propel where to find your classes. Propel manages third-part behaviors via `composer`, so you can simply create a composer package and polish the relative `composer.json` as follow:
 
-```ini
-propel.behavior.aggregate_column.class = path.to.AggregateColumnBehavior
+1. Set type to "propel-behavior"
+2. Add propel extra package
+3. Set name and class for his behavior
+
+Example:
+
+```json
+{
+    "name" : "your-name/aggregate-column-behavior",
+    "type" : "propel-behavior",
+    "extra": {
+        "name": "aggregate_column",
+        "class": "\\yourPath\\toPropel\\behavior\\AggregateColumn\\AggregateColumnBehavior"
+    }
+}
 ```
+
+Then add the previous package to your project's `composer.json`.
 
 Test the behavior by adding it to a table of your model, for instance to a `poll_question` table:
 
@@ -321,7 +337,7 @@ In practice, everything now happens as if the `poll_answer` had its own behavior
 </database>
 ```
 
-Adding a behavior to a `Table` instance, as well as adding a `Parameter` to a `Behavior` instance, is quite straightforward. And since the second behavior class file is required in the `modifyTable()` method, there is no need to add a path for it in the `build.properties`.
+Adding a behavior to a `Table` instance, as well as adding a `Parameter` to a `Behavior` instance, is quite straightforward.
 
 ## Adding Code For Model Hooks ##
 

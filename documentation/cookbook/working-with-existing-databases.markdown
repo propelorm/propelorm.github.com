@@ -13,7 +13,7 @@ Propel uses an abstract XML schema file to represent databases (the [schema](../
 
 ### Creating an XML Schema from a DB Structure ###
 
-To generate a schema file, create a new directory for your project & specify the connection information in your `build.properties` file for that project. For example, to create a new project, `legacyapp`, follow these steps:
+To generate a schema file, create a new directory for your project & specify the connection information in your *configuration file* for that project. For example, to create a new project, `legacyapp`, follow these steps:
 
  1. Go to the `legacyapp` project directory anywhere on your filesystem:
 
@@ -27,9 +27,7 @@ To generate a schema file, create a new directory for your project & specify the
   $ propel reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
   ```
 
-  The given string is a DSN which will be passed to a PDO object. See the
-  [Runtime Configuration reference](../documentation/reference/runtime-configuration.html#dsn)
-  for further information.
+  The given string is a DSN which will be passed to a PDO object. See the [Configuration reference](../reference/configuration-file.html#dsn) for further information.
 
  3. Pay attention to any errors/warnings issued during the task execution and then examine the generated `schema.xml` file to make any corrections needed.
 
@@ -46,12 +44,7 @@ Because Propel has both the ability to create XML schema files based on existing
 To do this you would simply:
 
  1. Follow the steps above to create the `schema.xml` file from existing db.
- 2. Then you would change the target database type and specify connection URL for new database in the project's `build.properties` file:
-
-  ```ini
-  propel.database = pgsql
-  propel.database.url = pgsql://unix+localhost/newlegacyapp
-  ```
+ 2. Then you would change the target database type and specify connection URL for new database in the project's configuration file (see [configuration](../documentation/10-configuration.html) document)
 
  3. And then run the `sql:build` task to generate the new DDL:
 

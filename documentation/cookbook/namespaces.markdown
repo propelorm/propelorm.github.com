@@ -117,7 +117,7 @@ In a schema, you can define a `package` attribute on a `<database>` or a `<table
   namespace="Foo\Bar" package="Foo.Bar">
 ```
 
-To avoid such repetitions, just set the `propel.namespace.autoPackage` setting to `true` in your `build.properties`:
+To avoid such repetitions, just set the `propel.generator.schema.autoPackage` setting to `true` in your configuration file:
 
 ```ini
 propel.namespace.autoPackage = true

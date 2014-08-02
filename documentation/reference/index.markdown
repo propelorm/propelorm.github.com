@@ -7,10 +7,8 @@ title: The Reference Guide
 
 [Active Record Reference](active-record.html)
 
-[Build Properties Reference](buildtime-configuration.html)
-
 [Propel Query Reference](model-criteria.html)
 
-[Runtime Configuration File](runtime-configuration.html)
+[Configuration File](configuration-file.html)
 
 [Database Schema](schema.html)

@@ -262,16 +262,25 @@ So don't be surprised if your database show a `propel_migration` table that you 
 
 ## Migration Configuration ##
 
-The migration tasks support customization through a few settings from `build.properties`:
+The migration tasks support customization through a few settings from your configuration file:
 
-```ini
-# Name of the table Propel creates to keep the latest migration date
-propel.migration.table = propel_migration
-# Whether the comparison between the XML schema and the database structure
-# cares for differences in case (e.g. 'my_table' and 'MY_TABLE')
-propel.migration.caseInsensitive = true
-# The directory where migration classes are generated and looked for
-propel.migration.dir = ${propel.output.dir}/migrations
+```yaml
+propel:
+  migrations:
+      # Whether to specify PHP names that are the same as the column names.
+      samePhpName: false
+      
+      # Whether to add the vendor info. It does provide additional information (such as full-text indexes) which can
+      # affect the generation of the DDL from the schema.
+      addVendorInfo: false
+      
+      # The name of migrations table
+      tableName: propel_migration
+      
+      # The name of the parser class
+      # If you leave this property blank, Propel looks for an appropriate parser class, based on platform: i.e.
+      # if the platform is `MysqlPlatform` then parser is `\Propel\Generator\Reverse\MysqlSchemaParser` 
+      parserClass:
 ```
 
 >**Tip**The `diff` task supports an additional parameter, called `editor`, which specifies a text editor to be automatically launched at the end of the task to review the generated migration. Unfortunately, only editors launched in another window are accepted. Mac users will find it useful, though:

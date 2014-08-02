@@ -1,5 +1,5 @@
 ---
-layout: documentation
+layout: configuration
 title: Logging And Debugging
 ---
 
@@ -44,29 +44,110 @@ Propel::getServiceContainer()->setLogger('bookstore', $queryLogger);
 
 ### Logger Configuration ###
 
-Alternatively, you can configure the logger to use via `runtime-conf.xml`, under the `<log>` section. Configuration only allows one handler per logger, and only from a subset of handler types, but this is enough for most use cases.
+Alternatively, you can configure the logger to use via your configuration file, under the `propel.runtime.log` section. Configuration only allows one handler per logger, and only from a subset of handler types, but this is enough for most use cases.
 
 Here is the way to define the same loggers as in the previous snippet using configuration:
 
-```xml
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml">propel.yaml</a></li>
+<li><a href="#tabphp">propel.php</a></li>
+<li><a href="#tabjson">propel.json</a></li>
+<li><a href="#tabini">propel.ini</a></li>
+<li><a href="#tabxml">propel.xml</a></li>
+</ul>
+<div id="tabyaml">
+{% highlight yaml %}
+propel:
+  runtime:
+      log:
+          defaultLogger:
+              type: stream
+              path: /var/log/propel.log
+              level: 300
+          bookstore:
+              type: stream
+              path: /var/log/propel_bookstore.log
+{% endhighlight %}
+</div>
+<div id="tabphp">
+{% highlight php %}
+<?php
+
+return [
+    'propel' => [
+        'runtime' => [
+            'log' => [
+                'defaultLogger' => [
+                    'type' => 'stream',
+                    'path' => '/var/log/propel.log',
+                    'level' => 300
+                ],
+                'bookstore' => [
+                    'type' => 'stream',
+                    'path' => '/var/log/propel_bookstore.log',
+                ]
+            ]
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson">
+{% highlight json %}
+{ 
+    "propel": {
+        "runtime": {
+            "log": {
+                "defaultLogger": {
+                    "type": "stream",
+                    "path": "/var/log/propel.log",
+                    "level": 300
+                },
+                "bookstore": {
+                    "type": "stream",
+                    "path": "/var/log/propel_bookstore.log"
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini">
+{% highlight ini %}
+[propel]
+
+runtime.log.defaultLogger.type = "stream"
+runtime.log.defaultLogger.path = "/var/log/propel.log"
+runtime.log.defaultLogger.level = 300
+
+runtime.log.bookstore.type = "stream"
+runtime.log.bookstore.path = "/var/log/propel_bookstore.log"
+
+{% endhighlight %}
+</div>
+<div id="tabxml">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <config>
-  <log>
-    <logger name="defaultLogger">
-      <type>stream</type>
-      <path>/var/log/propel.log</path>
-      <level>300</level>
-    </logger>
-    <logger name="bookstore">
-      <type>stream</type>
-      <path>/var/log/propel_bookstore.log</path>
-    </logger>
-  </log>
-  <propel>
-    ...
-  </propel>
+    <propel>
+        <runtime>
+            <log name="defaultLogger">
+                <type>stream</type>
+                <path>/var/log/propel.log</path>
+                <level>300</level>
+            </log>
+            <log name="bookstore">
+                <type>stream</type>
+                <path>/var/log/propel_bookstore.log</path>
+            </log>
+        </runtime>
+    </propel>
 </config>
-```
+{% endhighlight %}
+</div>
+</div>
 
 The meaning of each of the `<log>` nested elements may vary, depending on which log handler you are using. Accepted handler types in configuration are `stream`, `rotating_file`, and `syslog`. Refer to the [Monolog](https://github.com/Seldaek/monolog) documentation for more details on log handlers configuration and options.
 
@@ -122,19 +203,88 @@ $con->useDebug(true);
 
 You can also disable the debug mode at runtime, by calling `PropelPDO::useDebug(false)`. Using this method, you can choose to enable the debug mode for only one particular query, or for all queries.
 
-Alternatively, you can ask Propel to always enable the debug mode for a particular connection by using the `Propel\Runtime\Connection\DebugPDO` class instead of the default `ConnectionWrapper` class. This is accomplished in the `runtime-conf.xml` file, in the `<classname>` tag of a given datasource connection (see the [runtime configuration reference]() for more details).
+Alternatively, you can ask Propel to always enable the debug mode for a particular connection by using the `Propel\Runtime\Connection\DebugPDO` class instead of the default `ConnectionWrapper` class. This is accomplished in the configuration file, in the `classname` node of a given datasource connection (see the [configuration reference](../reference/config-file.html) for more details).
 
-```xml
-<?xml version="1.0"?>
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml-1">propel.yaml</a></li>
+<li><a href="#tabphp-1">propel.php</a></li>
+<li><a href="#tabjson-1">propel.json</a></li>
+<li><a href="#tabini-1">propel.ini</a></li>
+<li><a href="#tabxml-1">propel.xml</a></li>
+</ul>
+<div id="tabyaml-1">
+{% highlight yaml %}
+propel:
+  database:
+      connections:
+          bookstore:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\DebugPDO
+{% endhighlight %}
+</div>
+<div id="tabphp-1">
+{% highlight php %}
+<?php
+
+return [
+    'propel' => [
+        'database' => [
+            'connections' => [
+                'bookstore' => [
+                    'adapter'    => 'mysql',
+                    'classname'  => 'Propel\Runtime\Connection\DebugPDO'
+                ]
+            ]
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson-1">
+{% highlight json %}
+{
+    "propel": {
+        "database": {
+            "connections": {
+                "bookstore": {
+                    "adapter": "mysql",
+                    "classname": "Propel\Runtime\Connection\DebugPDO",
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini-1">
+{% highlight ini %}
+[propel]
+;
+; Database section
+;
+database.connections.bookstore.adapter    = mysql
+database.connections.bookstore.classname  = Propel\Runtime\Connection\DebugPDO
+{% endhighlight %}
+</div>
+<div id="tabxml-1">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <config>
-  <propel>
-    <datasources default="bookstore">
-      <datasource id="bookstore">
-        <adapter>sqlite</adapter>
-        <connection>
-          <!-- the classname that Propel should instantiate, must be PropelPDO subclass -->
-          <classname>Propel\Runtime\Connection\DebugPDO</classname>
-```
+    <propel>
+        <database>
+            <connections>
+                <connection id="bookstore">
+                    <adapter>mysql</adapter>
+                    <classname>Propel\Runtime\Connection\DebugPDO</classname>
+                </connection>
+            </connections>
+        </database>
+    </propel>
+</config>
+{% endhighlight %}
+</div>
+</div>
 
 >**Tip**You can use your own connection class there, but make sure that it implements `Propel\Runtime\Connection\ConnectionInterface`.
 
@@ -198,25 +348,106 @@ To log SQL queries for a connection, Propel first looks for a logger named after
 
 Using the following config, Propel will log SQL queries from the `bookstore` datasource into a `propel_bookstore.log` file, and the SQL queries for all other datasources into a `propel.log` file.
 
-```xml
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml-2">propel.yaml</a></li>
+<li><a href="#tabphp-2">propel.php</a></li>
+<li><a href="#tabjson-2">propel.json</a></li>
+<li><a href="#tabini-2">propel.ini</a></li>
+<li><a href="#tabxml-2">propel.xml</a></li>
+</ul>
+<div id="tabyaml-2">
+{% highlight yaml %}
+propel:
+  runtime:
+      log:
+          defaultLogger:
+              type: stream
+              path: /var/log/propel.log
+              level: 300
+          bookstore:
+              type: stream
+              path: /var/log/propel_bookstore.log
+{% endhighlight %}
+</div>
+<div id="tabphp-2">
+{% highlight php %}
+<?php
+
+return [
+    'propel' => [
+        'runtime' => [
+            'log' => [
+                'defaultLogger' => [
+                    'type' => 'stream',
+                    'path' => '/var/log/propel.log',
+                    'level' => 300
+                ],
+                'bookstore' => [
+                    'type' => 'stream',
+                    'path' => '/var/log/propel_bookstore.log',
+                ]
+            ]
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson-2">
+{% highlight json %}
+{ 
+    "propel": {
+        "runtime": {
+            "log": {
+                "defaultLogger": {
+                    "type": "stream",
+                    "path": "/var/log/propel.log",
+                    "level": 300
+                },
+                "bookstore": {
+                    "type": "stream",
+                    "path": "/var/log/propel_bookstore.log"
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini-2">
+{% highlight ini %}
+[propel]
+
+runtime.log.defaultLogger.type = "stream"
+runtime.log.defaultLogger.path = "/var/log/propel.log"
+runtime.log.defaultLogger.level = 300
+
+runtime.log.bookstore.type = "stream"
+runtime.log.bookstore.path = "/var/log/propel_bookstore.log"
+
+{% endhighlight %}
+</div>
+<div id="tabxml-2">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <config>
-  <log>
-    <logger name="defaultLogger">
-      <type>stream</type>
-      <path>/var/log/propel.log</path>
-      <level>300</level>
-    </logger>
-    <logger name="bookstore">
-      <type>stream</type>
-      <path>/var/log/propel_bookstore.log</path>
-    </logger>
-  </log>
-  <propel>
-    ...
-  </propel>
+    <propel>
+        <runtime>
+            <log name="defaultLogger">
+                <type>stream</type>
+                <path>/var/log/propel.log</path>
+                <level>300</level>
+            </log>
+            <log name="bookstore">
+                <type>stream</type>
+                <path>/var/log/propel_bookstore.log</path>
+            </log>
+        </runtime>
+    </propel>
 </config>
-```
+{% endhighlight %}
+</div>
+</div>
 
 This allows you to define a different logger per connection, for instance to have different log files for each database, or to log only the queries from a MySQL database to a file while the ones from an Oracle database go into Syslog.
 
@@ -242,18 +473,88 @@ Note that this list takes into account the methods from both `ConnectionWrapper`
 
 ### Adding Profiler Information ###
 
-In addition to the executed queries, you can ask Propel to log the execution time for each query, the memory consumption, and more. To enable profiling, change the connection class name to `Propel\Runtime\Connection\ProfilerConnectionWrapper` in the `runtime-conf.xml`, as follows:
+In addition to the executed queries, you can ask Propel to log the execution time for each query, the memory consumption, and more. To enable profiling, change the connection class name to `Propel\Runtime\Connection\ProfilerConnectionWrapper` in the configuration file, as follows:
 
-```xml
-<?xml version="1.0"?>
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml-3">propel.yaml</a></li>
+<li><a href="#tabphp-3">propel.php</a></li>
+<li><a href="#tabjson-3">propel.json</a></li>
+<li><a href="#tabini-3">propel.ini</a></li>
+<li><a href="#tabxml-3">propel.xml</a></li>
+</ul>
+<div id="tabyaml-3">
+{% highlight yaml %}
+propel:
+  database:
+      connections:
+          bookstore:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\ProfilerConnectionWrapper
+{% endhighlight %}
+</div>
+<div id="tabphp-3">
+{% highlight php %}
+<?php
+
+return [
+    'propel' => [
+        'database' => [
+            'connections' => [
+                'bookstore' => [
+                    'adapter'    => 'mysql',
+                    'classname'  => 'Propel\Runtime\Connection\ProfilerConnectionWrapper'
+                ]
+            ]
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson-3">
+{% highlight json %}
+{
+    "propel": {
+        "database": {
+            "connections": {
+                "bookstore": {
+                    "adapter": "mysql",
+                    "classname": "Propel\Runtime\Connection\ProfilerConnectionWrapper",
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini-3">
+{% highlight ini %}
+[propel]
+;
+; Database section
+;
+database.connections.bookstore.adapter    = mysql
+database.connections.bookstore.classname  = Propel\Runtime\Connection\ProfilerConnectionWrapper
+{% endhighlight %}
+</div>
+<div id="tabxml-3">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <config>
-  <propel>
-    <datasources default="bookstore">
-      <datasource id="bookstore">
-        <adapter>sqlite</adapter>
-        <connection>
-          <classname>Propel\Runtime\Connection\ProfilerConnectionWrapper</classname>
-```
+    <propel>
+        <database>
+            <connections>
+                <connection id="bookstore">
+                    <adapter>mysql</adapter>
+                    <classname>Propel\Runtime\Connection\ProfilerConnectionWrapper</classname>
+                </connection>
+            </connections>
+        </database>
+    </propel>
+</config>
+{% endhighlight %}
+</div>
+</div>
 
 The logged queries now contain profiling information for each query:
 
@@ -265,40 +566,210 @@ Feb 23 16:41:04 Propel [debug] time: 0.012 sec | mem: 2.4 MB | SELECT tags.NAME,
 
 ### Tweaking the Profiling Information Using Configuration ###
 
-You can tweak the type and formatting of the profiler information prefix using the `<profiler>` tag in the `runtime-conf.xml` file:
+You can tweak the type and formatting of the profiler information prefix using the `profiler` section in the configuration file:
 
-```xml
-<?xml version="1.0"?>
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml-4">propel.yaml</a></li>
+<li><a href="#tabphp-4">propel.php</a></li>
+<li><a href="#tabjson-4">propel.json</a></li>
+<li><a href="#tabini-4">propel.ini</a></li>
+<li><a href="#tabxml-4">propel.xml</a></li>
+</ul>
+<div id="tabyaml-4">
+{% highlight yaml %}
+propel:
+  runtime:
+    profiler:
+      classname: \Propel\Runtime\Util\Profiler
+      slowTreshold: 0.1
+      details:
+        time:
+          precision: 3
+          pad: 8
+        memory:
+          precision: 3
+          pad: 8
+{% endhighlight %}
+</div>
+<div id="tabphp-4">
+{% highlight php %}
+<?php
+
+return [
+    'propel' => [
+        'runtime' => [
+            'profiler' => [
+                'classname' => '\Propel\Runtime\Util\Profiler',
+                'slowTreshold' => 0.1,
+                'details' => [
+                    'time'    => [
+                        'precision' => 3,
+                        'pad' => 8
+                    ],
+                    'memory'    => [
+                        'precision' => 3,
+                        'pad' => 8
+                    ]
+                ]
+            ]
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson-4">
+{% highlight json %}
+{
+    "propel": {
+        "runtime": {
+            "profiler": {
+                "classname": "\Propel\Runtime\Util\Profiler",
+                "slowTreshold": 0.1,
+                "details": {
+                    "time": {
+                        "precision": 3,
+                        "pad": 8
+                    },
+                    "memory": {
+                        "precision": 3,
+                        "pad": 8
+                    }
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini-4">
+{% highlight ini %}
+[propel]
+runtime.profiler.classname = "\Propel\Runtime\Util\Profiler"
+runtime.profiler.slowTreshold = 0.1
+runtime.profiler.details.time.precision = 3 
+runtime.profiler.details.time.pad = 8
+runtime.profiler.details.memory.precision = 3 
+runtime.profiler.details.memory.pad = 8
+{% endhighlight %}
+</div>
+<div id="tabxml-4">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <config>
-  <profiler class="\Runtime\Runtime\Util\Profiler">
-    <slowTreshold>0.1</slowTreshold>
-    <details>
-      <time name="Time" precision="3" pad="8" />
-      <mem name="Memory" precision="3" pad="8" />
-    </details>
-    <innerGlue>: </innerGlue>
-    <outerGlue> | </outerGlue>
-  </profiler>
+    <propel>
+        <runtime>
+            <profiler>
+                <classname>"\Propel\Runtime\Util\Profiler"</classname>
+                <slowTreshold>0.1</slowTreshold>
+                <details>
+                    <time precision="3" pad="8" />
+                    <memory precision="3" pad="8" />
+                </details>
+            </profiler>
+        </runtime>
+    </propel>
 </config>
-```
+{% endhighlight %}
+</div>
+</div>
 
 The `slowTreshold` parameter specifies when the profiler considers a query slow. By default, its value is of 0.1s, or 100ms.
 
->**Tip**You can choose to only log slow queries when using the `ProfilerConnectionWrapper` connection class. Just add a `isSlowOnly` attribute to the connection in `runtime-conf.xml`, as follows:
+>**Tip**<br/>You can choose to only log slow queries when using the `ProfilerConnectionWrapper` connection class. Just add a `isSlowOnly` attribute to the connection in `propel.database` section of your configuration file, as follows:
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml-5">propel.yaml</a></li>
+<li><a href="#tabphp-5">propel.php</a></li>
+<li><a href="#tabjson-5">propel.json</a></li>
+<li><a href="#tabini-5">propel.ini</a></li>
+<li><a href="#tabxml-5">propel.xml</a></li>
+</ul>
+<div id="tabyaml-5">
+{% highlight yaml %}
+propel:
+  database:
+      connections:
+          bookstore:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\ProfilerConnectionWrapper
+              attributes:
+                isSlowOnly: true
+{% endhighlight %}
+</div>
+<div id="tabphp-5">
+{% highlight php %}
+<?php
+
+return [
+    'propel' => [
+        'database' => [
+            'connections' => [
+                'bookstore' => [
+                    'adapter'    => 'mysql',
+                    'classname'  => 'Propel\Runtime\Connection\ProfilerConnectionWrapper',
+                    'attributes' => [
+                        'isSlowOnly' => true
+                    ]
+                ]
+            ]
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson-5">
+{% highlight json %}
+{
+    "propel": {
+        "database": {
+            "connections": {
+                "bookstore": {
+                    "adapter": "mysql",
+                    "classname": "Propel\Runtime\Connection\ProfilerConnectionWrapper",
+                    "attributes": {
+                        "isSlowOnly": true
+                    }
+                }
+            }
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini-5">
+{% highlight ini %}
+[propel]
+;
+; Database section
+;
+database.connections.bookstore.adapter    = mysql
+database.connections.bookstore.classname  = Propel\Runtime\Connection\ProfilerConnectionWrapper
+database.connection.bookstore.attributes.isSlowOnly = true
+{% endhighlight %}
+</div>
+<div id="tabxml-5">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <config>
-  <propel>
-    <datasources default="bookstore">
-      <datasource id="bookstore">
-        <adapter>sqlite</adapter>
-        <connection>
-          <classname>Propel\Runtime\Connection\ProfilerConnectionWrapper</classname>
-          <attributes>
-            <option id="isSlowOnly">true</option>
-          </attributes>
-```
+    <propel>
+        <database>
+            <connections>
+                <connection id="bookstore">
+                    <adapter>mysql</adapter>
+                    <classname>Propel\Runtime\Connection\ProfilerConnectionWrapper</classname>
+                    <attributes>
+                        <option id="isSlowOnly">true</option>
+                    </attributes>
+                </connection>
+            </connections>
+        </database>
+    </propel>
+</config>
+{% endhighlight %}
+</div>
+</div>
 
 The supported `details` include `<time>` (the time used by the RDBMS to execute the SQL request), `<mem>` (the memory used so far by the PHP script), `<memDelta>` (the memory used specifically for this query), and `<memPeak>` (the peak memory used by the PHP script). For each detail, you can modify the formatting by setting any of the `name`, `precision`, and `pad` attributes.
 
@@ -320,7 +791,7 @@ $serviceContainer->setProfilerConfiguration(array(
            'precision' => '3',
            'pad' => '8',
         ),
-        'mem' => array(
+        'memory' => array(
             'name' => 'Memory',
             'precision' => '3',
             'pad' => '8',

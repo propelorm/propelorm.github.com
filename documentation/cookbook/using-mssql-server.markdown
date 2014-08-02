@@ -1,11 +1,11 @@
 ---
-layout: documentation
+layout: configuration
 title: Using Propel With MSSQL Server
 ---
 
 # Using Propel With MSSQL Server #
 
-Sybase ASE and MSSQL server 2005 and above are both supported in Propel 1.5.x. There are several different options available for PDO drivers in both Windows and Linux.
+Propel has support for Sybase ASE and MSSQL server 2005 and above. There are several different options available for PDO drivers in both Windows and Linux.
 
 ## Windows ##
 
@@ -25,26 +25,151 @@ Sample dsn's for pdo_sqlsrv:
 <dsn>sqlsrv:server=localhost,1433;Database=propel</dsn>
 ```
 
-Sample runtime-conf.xml for pdo_sqlsrv:
+Sample configuration file for pdo_sqlsrv:
 
-```xml
-<datasource id="bookstore">
-  <adapter>sqlsrv</adapter>
-  <connection>
-    <classname>DebugPDO</classname>
-    <dsn>sqlsrv:server=localhost,1433;Database=propel</dsn>
-    <user>username</user>
-    <password>password</password>
-  </connection>
-</datasource>
-```
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml">propel.yaml</a></li>
+<li><a href="#tabphp">propel.php</a></li>
+<li><a href="#tabjson">propel.json</a></li>
+<li><a href="#tabini">propel.ini</a></li>
+<li><a href="#tabxml">propel.xml</a></li>
+</ul>
+<div id="tabyaml">
+{% highlight yaml %}
+propel:
+  database:
+      connections:
+          bookstore:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\ConnectionWrapper
+              dsn: sqlsrv:server=localhost,1433;Database=propel
+              user: my_db_user
+              password: s3cr3t
+              attributes:
+  runtime:
+      defaultConnection: bookstore
+      connections:
+          - bookstore
+  generator:
+      defaultConnection: bookstore
+      connections:
+          - bookstore
+{% endhighlight %}
+</div>
+<div id="tabphp">
+{% highlight php %}
+<?php
 
-Sample build.properties for pdo_sqlsrv:
+return [
+    'propel' => [
+        'database' => [
+            'connections' => [
+                'bookstore' => [
+                    'adapter'    => 'mysql',
+                    'classname'  => 'Propel\Runtime\Connection\ConnectionWrapper',
+                    'dsn'        => 'sqlsrv:server=localhost,1433;Database=propel',
+                    'user'       => 'my_db_user',
+                    'password'   => 's3cr3t',
+                    'attributes' => []
+                ]
+            ]
+        ],
+        'runtime' => [
+            'defaultConnection' => 'bookstore',
+            'connections' => ['bookstore']
+        ],
+        'generator' => [
+            'defaultConnection' => 'bookstore',
+            'connections' => ['bookstore']
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson">
+{% highlight json %}
+{
+    "propel": {
+        "database": {
+            "connections": {
+                "bookstore": {
+                    "adapter": "mysql",
+                    "classname": "Propel\Runtime\Connection\ConnectionWrapper",
+                    "dsn": "sqlsrv:server=localhost,1433;Database=propel",
+                    "user": "my_db_user",
+                    "password": "s3cr3t",
+                    "attributes": []
+                }
+            }
+        },
+        "runtime": {
+            "defaultConnection": "bookstore",
+            "connections": ["bookstore"]
+        },
+        "generator": {
+            "defaultConnection": "bookstore",
+            "connections": ["bookstore"]
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini">
+{% highlight ini %}
+[propel]
+;
+; Database section
+;
+database.connections.bookstore.adapter    = mysql
+database.connections.bookstore.classname  = Propel\Runtime\Connection\ConnectionWrapper
+database.connections.bookstore.dsn        = sqlsrv:server=localhost,1433;Database=propel
+database.connections.bookstore.user       = my_db_user
+database.connections.bookstore.password   = s3cr3t
+database.connections.bookstore.attributes =
 
-```ini
-propel.database = sqlsrv
-propel.database.url = sqlsrv:server=127.0.0.1,1433;Database=propel
-```
+;
+; Runtime section
+;
+runtime.defaultConnection = bookstore
+runtime.connections[0]    = bookstore
+
+;
+; Generator section
+; 
+generator.defaultConnection = bookstore
+generator.connections[0] = bookstore
+{% endhighlight %}
+</div>
+<div id="tabxml">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<config>
+    <propel>
+        <database>
+            <connections>
+                <connection id="bookstore">
+                    <adapter>mysql</adapter>
+                    <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
+                    <dsn>sqlsrv:server=localhost,1433;Database=propel</dsn>
+                    <user>my_db_user</user>
+                    <password>s3cr3t</password>
+                </connection>
+            </connections>
+        </database>
+        <runtime>
+            <defaultConnection>bookstore</defaultConnection>
+            <connection>bookstore</connection>
+        </runtime>
+        <generator>
+            <defaultConnection>bookstore</defaultConnection>
+            <connection>bookstore</connection>
+        </generator>
+    </propel>
+</config>
+{% endhighlight %}
+</div>
+</div>
 
 ### pdo_sybase ###
 
@@ -74,26 +199,151 @@ Sample dsn's for pdo_sybase:
 <dsn>sybase:host=localhost:1433;dbname=propel</dsn>
 ```
 
-Sample `runtime-conf.xml` for pdo_sybase:
+Sample configuration file for pdo_sybase:
 
-```xml
-<datasource id="bookstore">
-  <adapter>mssql</adapter>
-  <connection>
-    <classname>MssqlDebugPDO</classname>
-    <dsn>sybase:host=localhost:1433;dbname=propel</dsn>
-    <user>username</user>
-    <password>password</password>
-  </connection>
-</datasource>
-```
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml1">propel.yaml</a></li>
+<li><a href="#tabphp1">propel.php</a></li>
+<li><a href="#tabjson1">propel.json</a></li>
+<li><a href="#tabini1">propel.ini</a></li>
+<li><a href="#tabxml1">propel.xml</a></li>
+</ul>
+<div id="tabyaml1">
+{% highlight yaml %}
+propel:
+  database:
+      connections:
+          bookstore:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\ConnectionWrapper
+              dsn: sybase:host=localhost:1433;Database=propel
+              user: my_db_user
+              password: s3cr3t
+              attributes:
+  runtime:
+      defaultConnection: bookstore
+      connections:
+          - bookstore
+  generator:
+      defaultConnection: bookstore
+      connections:
+          - bookstore
+{% endhighlight %}
+</div>
+<div id="tabphp1">
+{% highlight php %}
+<?php
 
-Sample `build.properties` for `pdo_sybase`:
+return [
+    'propel' => [
+        'database' => [
+            'connections' => [
+                'bookstore' => [
+                    'adapter'    => 'mysql',
+                    'classname'  => 'Propel\Runtime\Connection\ConnectionWrapper',
+                    'dsn'        => 'sybase:host=localhost:1433;Database=propel',
+                    'user'       => 'my_db_user',
+                    'password'   => 's3cr3t',
+                    'attributes' => []
+                ]
+            ]
+        ],
+        'runtime' => [
+            'defaultConnection' => 'bookstore',
+            'connections' => ['bookstore']
+        ],
+        'generator' => [
+            'defaultConnection' => 'bookstore',
+            'connections' => ['bookstore']
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson1">
+{% highlight json %}
+{
+    "propel": {
+        "database": {
+            "connections": {
+                "bookstore": {
+                    "adapter": "mysql",
+                    "classname": "Propel\Runtime\Connection\ConnectionWrapper",
+                    "dsn": "sybase:host=localhost:1433;Database=propel",
+                    "user": "my_db_user",
+                    "password": "s3cr3t",
+                    "attributes": []
+                }
+            }
+        },
+        "runtime": {
+            "defaultConnection": "bookstore",
+            "connections": ["bookstore"]
+        },
+        "generator": {
+            "defaultConnection": "bookstore",
+            "connections": ["bookstore"]
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini1">
+{% highlight ini %}
+[propel]
+;
+; Database section
+;
+database.connections.bookstore.adapter    = mysql
+database.connections.bookstore.classname  = Propel\Runtime\Connection\ConnectionWrapper
+database.connections.bookstore.dsn        = sybase:host=localhost:1433;Database=propel
+database.connections.bookstore.user       = my_db_user
+database.connections.bookstore.password   = s3cr3t
+database.connections.bookstore.attributes =
 
-```ini
-propel.database = mssql
-propel.database.url = sybase:host=localhost:1433;dbname=propel
-```
+;
+; Runtime section
+;
+runtime.defaultConnection = bookstore
+runtime.connections[0]    = bookstore
+
+;
+; Generator section
+; 
+generator.defaultConnection = bookstore
+generator.connections[0] = bookstore
+{% endhighlight %}
+</div>
+<div id="tabxml1">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<config>
+    <propel>
+        <database>
+            <connections>
+                <connection id="bookstore">
+                    <adapter>mysql</adapter>
+                    <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
+                    <dsn>sybase:host=localhost:1433;Database=propel</dsn>
+                    <user>my_db_user</user>
+                    <password>s3cr3t</password>
+                </connection>
+            </connections>
+        </database>
+        <runtime>
+            <defaultConnection>bookstore</defaultConnection>
+            <connection>bookstore</connection>
+        </runtime>
+        <generator>
+            <defaultConnection>bookstore</defaultConnection>
+            <connection>bookstore</connection>
+        </generator>
+    </propel>
+</config>
+{% endhighlight %}
+</div>
+</div>
 
 ### pdo_mssql ###
 
@@ -145,26 +395,152 @@ Sample dsn's for `pdo_dblib`:
 <dsn>dblib:host=localhost:1433;dbname=propel</dsn>
 ```
 
-Sample `runtime-conf.xml` for `pdo_dblib`:
+Sample configuration file for `pdo_dblib`:
 
-```xml
-<datasource id="bookstore">
-  <adapter>mssql</adapter>
-  <connection>
-    <classname>MssqlDebugPDO</classname>
-    <dsn>dblib:host=localhost:1433;dbname=propel</dsn>
-    <user>username</user>
-    <password>password</password>
-  </connection>
-</datasource>
-```
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml2">propel.yaml</a></li>
+<li><a href="#tabphp2">propel.php</a></li>
+<li><a href="#tabjson2">propel.json</a></li>
+<li><a href="#tabini2">propel.ini</a></li>
+<li><a href="#tabxml2">propel.xml</a></li>
+</ul>
+<div id="tabyaml2">
+{% highlight yaml %}
+propel:
+  database:
+      connections:
+          bookstore:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\ConnectionWrapper
+              dsn: dblib:host=localhost:1433;dbname=propel
+              user: my_db_user
+              password: s3cr3t
+              attributes:
+  runtime:
+      defaultConnection: bookstore
+      connections:
+          - bookstore
+  generator:
+      defaultConnection: bookstore
+      connections:
+          - bookstore
+{% endhighlight %}
+</div>
+<div id="tabphp2">
+{% highlight php %}
+<?php
 
-Sample `build.properties` for `pdo_dblib`:
+return [
+    'propel' => [
+        'database' => [
+            'connections' => [
+                'bookstore' => [
+                    'adapter'    => 'mysql',
+                    'classname'  => 'Propel\Runtime\Connection\ConnectionWrapper',
+                    'dsn'        => 'dblib:host=localhost:1433;dbname=propel',
+                    'user'       => 'my_db_user',
+                    'password'   => 's3cr3t',
+                    'attributes' => []
+                ]
+            ]
+        ],
+        'runtime' => [
+            'defaultConnection' => 'bookstore',
+            'connections' => ['bookstore']
+        ],
+        'generator' => [
+            'defaultConnection' => 'bookstore',
+            'connections' => ['bookstore']
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson2">
+{% highlight json %}
+{
+    "propel": {
+        "database": {
+            "connections": {
+                "bookstore": {
+                    "adapter": "mysql",
+                    "classname": "Propel\Runtime\Connection\ConnectionWrapper",
+                    "dsn": "dblib:host=localhost:1433;dbname=propel",
+                    "user": "my_db_user",
+                    "password": "s3cr3t",
+                    "attributes": []
+                }
+            }
+        },
+        "runtime": {
+            "defaultConnection": "bookstore",
+            "connections": ["bookstore"]
+        },
+        "generator": {
+            "defaultConnection": "bookstore",
+            "connections": ["bookstore"]
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini2">
+{% highlight ini %}
+[propel]
+;
+; Database section
+;
+database.connections.bookstore.adapter    = mysql
+database.connections.bookstore.classname  = Propel\Runtime\Connection\ConnectionWrapper
+database.connections.bookstore.dsn        = dblib:host=localhost:1433;dbname=propel
+database.connections.bookstore.user       = my_db_user
+database.connections.bookstore.password   = s3cr3t
+database.connections.bookstore.attributes =
 
-```ini
-propel.database = mssql
-propel.database.url = dblib:host=localhost:1433;dbname=propel
-```
+;
+; Runtime section
+;
+runtime.defaultConnection = bookstore
+runtime.connections[0]    = bookstore
+
+;
+; Generator section
+; 
+generator.defaultConnection = bookstore
+generator.connections[0] = bookstore
+{% endhighlight %}
+</div>
+<div id="tabxml2">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<config>
+    <propel>
+        <database>
+            <connections>
+                <connection id="bookstore">
+                    <adapter>mysql</adapter>
+                    <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
+                    <dsn>dblib:host=localhost:1433;dbname=propel</dsn>
+                    <user>my_db_user</user>
+                    <password>s3cr3t</password>
+                    <attributes></attributes>
+                </connection>
+            </connections>
+        </database>
+        <runtime>
+            <defaultConnection>bookstore</defaultConnection>
+            <connection>bookstore</connection>
+        </runtime>
+        <generator>
+            <defaultConnection>bookstore</defaultConnection>
+            <connection>bookstore</connection>
+        </generator>
+    </propel>
+</config>
+{% endhighlight %}
+</div>
+</div>
 
 ### pdo_odbc ###
 

@@ -56,13 +56,13 @@ echo $b->getCreatedAt(); // 2009-10-02 18:14:23
 
 _Warning_: If you implement `preInsert()`, `preUpdate()`, `preSave()` or `preDelete()`, these methods **must return a boolean value**. Any return value other than `true` stops the action (save or delete). This is a neat way to bypass persistence on some cases, but can also create unexpected problems if you forget to return `true`.
 
->**Tip**Since this feature adds a small overhead to write operations, you can disable it completely in your build properties by setting `propel.addHooks` to `false`.
+>**Tip**<br />Since this feature adds a small overhead to write operations, you can disable it completely in your configuration file by setting `propel.generator.objectModel.addHooks` to `false`.
 
-```ini
-# -------------------
-#  TEMPLATE VARIABLES
-# -------------------
-propel.addHooks = false
+```yaml
+propel:
+    generator:
+        objectModel:
+            addHooks: false
 ```
 
 ## Introducing Behaviors ##
@@ -130,20 +130,21 @@ Then rebuild your model, and there you go: two columns, `created_at` and `update
 
 Propel currently bundles several behaviors. Check the behavior documentation for details on usage:
 
-* [aggregate_column](../documentation/behaviors/aggregate-column.html)
-* [archivable](../documentation/behaviors/archivable.html) (Replace the deprecated `soft-delete` behavior)
-* [auto_add_pk](../documentation/behaviors/auto-add-pk.html)
-* [delegate](../documentation/behaviors/delegate.html)
-* [timestampable](../documentation/behaviors/timestampable.html)
-* [sluggable](../documentation/behaviors/sluggable.html)
-* [sortable](../documentation/behaviors/sortable.html)
-* [nested_set](../documentation/behaviors/nested-set.html)
-* [versionable](../documentation/behaviors/versionable.html)
-* [i18n](../documentation/behaviors/i18n.html)
-* [query_cache](../documentation/behaviors/query-cache.html)
+* [aggregate_column](../behaviors/aggregate-column.html)
+* [archivable](../behaviors/archivable.html) (Replace the deprecated `soft-delete` behavior)
+* [auto_add_pk](../behaviors/auto-add-pk.html)
+* [delegate](../behaviors/delegate.html)
+* [i18n](../behaviors/i18n.html)
+* [nested_set](../behaviors/nested-set.html)
+* [query_cache](../behaviors/query-cache.html)
+* [sluggable](../behaviors/sluggable.html)
+* [sortable](../behaviors/sortable.html)
+* [timestampable](../behaviors/timestampable.html)
+* [validate](../behaviors/validate.html)
+* [versionable](../behaviors/versionable.html)
 * And [concrete_inheritance](./08-inheritance.html), documented in the Inheritance Chapter even if it's a behavior
 
-You can also look at [user contributed behaviors](../documentation/cookbook/user-contributed-behaviors.html).
+You can also look at [user contributed behaviors](../cookbook/user-contributed-behaviors.html).
 
 Behaviors bundled with Propel require no further installation and work out of the box.
 
@@ -177,16 +178,13 @@ If the columns already exist in your schema, a behavior is smart enough not to a
 
 ## Using Behaviors ##
 
-As a Propel behavior can be packaged into a single class, behaviors are quite easy to reuse and distribute across several projects. All you need to do is to copy the behavior file into your project, and declare it in `build.properties`, as follows:
+Propel installs third-part behaviors via **Composer**.
+Simply add to your `composer.json` the behavior you whish to install:
 
-```ini
-# ----------------------------------
-#  B E H A V I O R   S E T T I N G S
-# ----------------------------------
-
-propel.behavior.timestampable.class = propel.engine.behavior.timestampable.TimestampableBehavior
-# Add your custom behavior paths here
-propel.behavior.formidable.class = path.to.FormidableBehavior
+```json
+{
+    "require": "formidable\FormidableBehavior"
+}
 ```
 
 Propel will then find the `FormidableBehavior` class whenever you use the `formidable` behavior in your schema:
@@ -198,8 +196,6 @@ Propel will then find the `FormidableBehavior` class whenever you use the `formi
   <behavior name="formidable" />
 </table>
 ```
-
->**Tip**If you use autoloading during the build process, and if the behavior classes benefit from the autoloading, then you don't even need to declare the path to the behavior class.
 
 ## Applying a Behavior To All Tables ##
 
@@ -218,12 +214,6 @@ You can add a `<behavior>` tag directly under the `<database>` tag. That way, th
 ```
 
 In this example, both the `book` and `author` table benefit from the `timestampable` behavior, and therefore automatically update their `created_at` and `updated_at` columns upon saving.
-
-Going one step further, you can even apply a behavior to all the databases of your project, provided the behavior doesn't need parameters - or can use default parameters. To add a behavior to all databases, simply declare it in the project's `build.properties` under the `propel.behavior.default` key, as follows:
-
-```ini
-propel.behavior.default = archivable, timestampable
-```
 
 ## Writing a Behavior ##
 
@@ -305,6 +295,7 @@ For instance, to add an empty child class for the ActiveRecord class, create the
 
 ```php
 <?php
+
 require_once 'AddChildBehaviorBuilder.php';
 
 class AddChildBehavior extends Behavior
@@ -317,6 +308,7 @@ Next, write a builder extending the `OMBuilder` class, and implement the `getUnp
 
 ```php
 <?php
+
 class AddChildBehaviorBuilder extends OMBuilder
 {
 
@@ -388,6 +380,7 @@ The `PropelPHPParser` constructor takes a string as input, so it is best used in
 
 ```php
 <?php
+
 class FastPkFindBehavior extends Behavior
 {
 	public function queryFilter(&$script)
