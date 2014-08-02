@@ -56,8 +56,8 @@ The best way to learn what a generated Active Record class can do is to inspect 
 <table name="foo_books" phpName="Book" />
 <!-- generates the following Active Record class: Book !-->
 
-<!-- Active Record classes are generated in the directory specified in build.properties
-     under the propel.php.dir setting !-->
+<!-- Active Record classes are generated in the directory specified in configuration file
+     under the propel.paths.phpDir setting !-->
 <table name="book">
 <!-- generates the Book class under /path/to/project/generated-classes/Book.php !-->
 
@@ -513,11 +513,11 @@ print_r($book->toArray($keyType = BaseTableMap::TYPE_PHPNAME, $includeLazyLoadCo
 // )
 ```
 
->**Tip**If you never use these generic getters and setters, you can disable their generation to clean up the Active Record class by modifying the `build.properties` as follows:
+>**Tip**<br />If you never use these generic getters and setters, you can disable their generation to clean up the Active Record class by modifying the *configuration file* as follows:
 
 ```ini
-propel.addGenericAccessors = false
-propel.addGenericMutators  = false
+propel.generator.objectModel.addGenericAccessors = false
+propel.generator.objectModel.addGenericMutators  = false
 ```
 
 ## Validation ##

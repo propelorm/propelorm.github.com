@@ -16,6 +16,7 @@ Propel just requires:
 
 Propel also uses some Symfony2 components to work properly:
 
+* [Config](https://github.com/symfony/Config) : uses in the source code to manage and validate configuration.
 * [Console](https://github.com/symfony/Console) : which manage the generators propel uses.
 * [Yaml](https://github.com/symfony/Yaml)
 * [Validator](https://github.com/symfony/Validator) : a way you manage validations with Propel.
@@ -32,7 +33,7 @@ We advise you to rely on [Composer](http://getcomposer.org/) to manage your proj
 ```json
 {
     "require": {
-        "propel/propel": "2.0.0-alpha2"
+        "propel/propel": "~2.0@dev"
     }
 }
 ```
@@ -133,4 +134,4 @@ At this point, Propel should be setup and ready to use. You can follow the steps
 ### Getting Help ###
 
 If you can't manage to install Propel, don't hesitate to ask for help. See
-[Support](../support) for details on getting help.
+[Support](../support.html) for details on getting help.

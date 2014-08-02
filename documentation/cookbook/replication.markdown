@@ -1,5 +1,5 @@
 ---
-layout: documentation
+layout: configuration
 title: Replication
 ---
 
@@ -10,48 +10,174 @@ Propel can be used in a master-slave replication environment. These environments
 ## Configuring Propel for Replication ##
 
   * Set up a replication environment (see the Databases section below)
-  * Use the latest Propel-Version from SVN
-  * add a slaves-section to your `runtime-conf.xml` file
+  * Use the latest Propel-Version from Github
+  * add a slaves-section to `propel.database.connections` property of your configuration file
   * verify the correct setup by checking the masters log file (should not contain "select ..." statements)
 
-You can configure Propel to support replication by adding a `<slaves>` element with nested `<connection>` element(s) to your `runtime-conf.xml`.
+The `slaves` section is included in a master *connection* and contains multiple nested `dsn`. It is recommended that they are numbered. The following example shows a slaves section with several configured slave connections where "localhost" is the master and "slave-server1" and "slave-server2" are the slave-database connections.
 
-The `<slaves>` section is at the same level as the master `<connection>` and contains multiple nested `<connection>` elements with the same information as the top-level (master) `<connection>`. It is recommended that they are numbered. The following example shows a slaves section with a several slave connections configured where "localhost" is the master and "slave-server1" and "slave-server2" are the slave-database connections.
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml">propel.yaml</a></li>
+<li><a href="#tabphp">propel.php</a></li>
+<li><a href="#tabjson">propel.json</a></li>
+<li><a href="#tabini">propel.ini</a></li>
+<li><a href="#tabxml">propel.xml</a></li>
+</ul>
+<div id="tabyaml">
+{% highlight yaml %}
+propel:
 
-```xml
-<?xml version="1.0"?>
+  database:
+      connections:
+          bookstore:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\ConnectionWrapper
+              dsn: mysql:host=localhost;dbname=bookstore
+              user: my_db_user
+              password: s3cr3t
+              slaves:
+                  - dsn: mysql:host=slave-server1;dbname=bookstore
+                  - dsn: mysql:host=slave-server2;dbname=bookstore
+
+  runtime:
+      defaultConnection: bookstore
+      connections:
+          - bookstore
+
+  generator:
+      defaultConnection: bookstore
+      connections:
+          - bookstore
+{% endhighlight %}
+</div>
+<div id="tabphp">
+{% highlight php %}
+<?php
+
+return [
+    'propel' => [
+        'database' => [
+            'connections' => [
+                'bookstore' => [
+                    'adapter'    => 'mysql',
+                    'classname'  => 'Propel\Runtime\Connection\ConnectionWrapper',
+                    'dsn'        => 'mysql:host=localhost;dbname=bookstore',
+                    'user'       => 'my_db_user',
+                    'password'   => 's3cr3t',
+                    'slaves' => [
+                        ['dsn' => 'mysql:host=slave-server1;dbname=bookstore'],
+                        ['dsn' => 'mysql:host=slave-server2;dbname=bookstore']
+                    ]
+                ]
+            ]
+        ],
+        'runtime' => [
+            'defaultConnection' => 'bookstore',
+            'connections' => ['bookstore']
+        ],
+        'generator' => [
+            'defaultConnection' => 'bookstore',
+            'connections' => ['bookstore']
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson">
+{% highlight json %}
+{
+    "propel": {
+        "database": {
+            "connections": {
+                "bookstore": {
+                    "adapter": "mysql",
+                    "classname": "Propel\Runtime\Connection\ConnectionWrapper",
+                    "dsn": "mysql:host=localhost;dbname=bookstore",
+                    "user": "my_db_user",
+                    "password": "s3cr3t",
+                    "slaves": [
+                        {"dsn": "mysql:host=slave-server1;dbname=bookstore"},
+                        {"dsn": "mysql:host=slave-server2;dbname=bookstore"}
+                    ]
+                }
+            }
+        },
+        "runtime": {
+            "defaultConnection": "bookstore",
+            "connections": ["bookstore"]
+        },
+        "generator": {
+            "defaultConnection": "bookstore",
+            "connections": ["bookstore"]
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini">
+{% highlight ini %}
+[propel]
+;
+; Database section
+;
+database.connections.bookstore.adapter    = mysql
+database.connections.bookstore.classname  = Propel\Runtime\Connection\ConnectionWrapper
+database.connections.bookstore.dsn        = mysql:host=localhost;dbname=bookstore
+database.connections.bookstore.user       = my_db_user
+database.connections.bookstore.password   = s3cr3t
+database.connections.bookstore.slaves[0][dsn] = mysql:host=slave-server1;dbname=bookstore
+database.connections.bookstore.slaves[1][dsn] = mysql:host=slave-server2;dbname=bookstore
+
+;
+; Runtime section
+;
+runtime.defaultConnection = bookstore
+runtime.connections[0]    = bookstore
+
+;
+; Generator section
+; 
+generator.defaultConnection = bookstore
+generator.connections[0] = bookstore
+{% endhighlight %}
+</div>
+<div id="tabxml">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <config>
-  <log>
-    <ident>propel-bookstore</ident>
-    <name>console</name>
-    <level>7</level>
-  </log>
-  <propel>
-    <datasources default="bookstore">
-      <datasource id="bookstore">
-        <adapter>sqlite</adapter>
-        <connection>
-          <dsn>mysql:host=localhost;dbname=bookstore</dsn>
-          <user>testuser</user>
-          <password>password</password>
-        </connection>
-        <slaves>
-         <connection>
-          <dsn>mysql:host=slave-server1; dbname=bookstore</dsn>
-          <user>testuser</user>
-          <password>password</password>
-         </connection>
-         <connection>
-          <dsn>mysql:host=slave-server2; dbname=bookstore</dsn>
-          <user>testuser</user>
-          <password>password</password>
-         </connection>
-        </slaves>
-      </datasource>
-    </datasources>
-  </propel>
+    <propel>
+        <database>
+            <connections>
+                <connection id="bookstore">
+                    <adapter>mysql</adapter>
+                    <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
+                    <dsn>mysql:host=localhost;dbname=bookstore</dsn>
+                    <user>my_db_user</user>
+                    <password>s3cr3t</password>
+                    <slave>
+                        <dsn>mysql:host=slave-server1;dbname=bookstore</dsn>
+                    </slave>
+                    <slave>
+                        <dsn>mysql:host=slave-server2;dbname=bookstore</dsn>
+                    </slave>
+                </connection>
+            </connections>
+        </database>
+        <runtime>
+            <defaultConnection>bookstore</defaultConnection>
+            <connection>bookstore</connection>
+        </runtime>
+        <generator>
+            <defaultConnection>bookstore</defaultConnection>
+            <connection>bookstore</connection>
+        </generator>
+    </propel>
 </config>
-```
+{% endhighlight %}
+</div>
+</div>
+
 
 ## Implementation ##
 

@@ -39,12 +39,6 @@ This behavior is more powerful if you add it to the database instead of a table.
 </database>
 ```
 
-You can even enable it for all your databases by adding it to the default behaviors in your `build.properties` file:
-
-```ini
-propel.behavior.default = auto_add_pk
-```
-
 ## Parameters ##
 
 By default, the behavior adds a column named `id` to the table if the table has no primary key. You can customize all the attributes of the added column by setting corresponding parameters in the behavior definition:

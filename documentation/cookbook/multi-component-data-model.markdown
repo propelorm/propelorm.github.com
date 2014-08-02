@@ -11,7 +11,7 @@ Propel comes along with packaging capabilities that allow you to more easily int
 
 You can use as many `schema.xml` files as you want. Schema files have to be named `(*.)schema.xml`, so names like `schema.xml`, `package1.schema.xml`, `core.package1.schema.xml` are all acceptable. These files _have_ to be located in your project directory.
 
-Each schema file has to contain a `<database>` element with a `name` attribute. This name references the connection settings to be used for this database (and configured in the `runtime-conf.xml`), so separated schemas can share a common database name.
+Each schema file has to contain a `<database>` element with a `name` attribute. This name references the connection settings to be used for this database (and configured in the *database* section of your configuration file), so separated schemas can share a common database name.
 
 Whenever you call a propel build tasks, Propel will consider all these schema files and build the classes (or the SQL) for all the tables.
 
@@ -23,10 +23,11 @@ In Propel, a _package_ represents a group of models. This is a convenient way to
 
 The package is defined in a configuration cascade. You can set it up for the whole project, for all the tables of a schema, or for a single table.
 
-For the whole project, the main package is set in the `build.properties`:
+For the whole project, the main package is set in the *configuration file*:
 
 ```ini
-propel.targetPackage = my_project
+;example in ini format
+propel.generator.targetPackage = my_project
 ```
 
 By default, all the tables of all the schemas in the project use this package. However, you can override the package for a given `<database>` by setting its `package` attribute:
@@ -92,7 +93,7 @@ _Tip_: You can use dots in a package name to add more package levels.
 
 The `package` attribute of a table translates to the directory in which Propel generates the Model classes for this table.
 
-For instance, if no `package` attribute is defined at the database of table level, Propel places all classes according to the `propel.targetPackage` from the `build.properties`:
+For instance, if no `package` attribute is defined at the database of table level, Propel places all classes according to the `propel.generator.targetPackage` from the *configuration file*:
 
 * generated-classes/
   * Base/
@@ -104,11 +105,7 @@ For instance, if no `package` attribute is defined at the database of table leve
   * Review.php
   * ReviewQuery.php
 
-You can further tweak the location where Propel puts the created files by changing the `propel.output.dir` build property. By default this property is set to:
-
-```ini
-propel.output.dir = ${propel.project.dir}/build
-```
+You can further tweak the location where Propel puts the created files by changing the `propel.paths.outputDir` configuration property. By default this property is set to the current path (the path where you're running propel commands).
 
 You can change it to use any other directory as your build directory.
 
@@ -170,15 +167,11 @@ And, as you probably expect it, a package overridden at the table level also acc
   * book.schema.sql   // contains CREATE TABLE book
   * review.schema.sql // contains CREATE TABLE review
 
-## Understanding The packageObjectModel Build Property ##
+## Understanding The packageObjectModel Configuration Property ##
 
-The `propel.packageObjectModel` build property enables the "packaged" build process. This modifies the build tasks behavior by joining `<database>` elements of the same name - but keeping their packages separate. That allows to split a large schema into several files, regardless of foreign key dependencies, since Propel will join all schemas using the same database name.
+The `propel.generator.packageObjectModel` configuration property enables the "packaged" build process. This modifies the build tasks behavior by joining `<database>` elements of the same name - but keeping their packages separate. That allows to split a large schema into several files, regardless of foreign key dependencies, since Propel will join all schemas using the same database name.
 
-To switch this on, simply add the following line to the `build.properties` file in your project directory:
-
-```
-propel.packageObjectModel = true
-```
+This property is enabled by default.
 
 ## The Bookstore Packaged Example ##
 

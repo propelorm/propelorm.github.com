@@ -24,15 +24,16 @@ title: Documentation
 * [Logging And Debugging](07-logging.html) Propel can log a lot of information, including the SQL queries it executes.
 * [Inheritance](08-inheritance.html) Single Table Inheritance, Class Table Inheritance, and Concrete Table Inheritance come free with Propel.
 * [Migrations](09-migrations.html) Change the structure of the database without altering the data.
+* [Configuration](10-configuration.html) Configuring Propel
 
 ## Reference ##
 
 * [XML Schema Format](../documentation/reference/schema.html) All the database, table, column and foreign key options explained
 * [Active Record Classes](../documentation/reference/active-record.html) Complete list of the methods of Active Record classes.
 * [Active Query Classes](../documentation/reference/model-criteria.html) Complete list of the methods of Propel Query classes.
-* [Build Properties](../documentation/reference/buildtime-configuration.html) Reference for the `build.properties` file (`propel.ini` in symfony).
-* [Runtime Configuration File](../documentation/reference/runtime-configuration.html) Reference for the `runtime-conf.xml` file.
 * [Compatibility index](../documentation/reference/compatibility-index.html) A list of primary limitations regarding different databases.
+* [Configuration file](../documentation/reference/configuration-file.html) Complete list of Propel configuration properties.
+
 
 ## Behaviors Reference ##
 
@@ -57,18 +58,20 @@ You can also look at [user contributed behaviors](../documentation/cookbook/user
 
 ### Common Tasks ###
 
-* [Working With Propel's Test suite](../documentation/cookbook/working-with-test-suite.html) How to use the test suite and to create own tests.
-* [Additional SQL Files](../documentation/cookbook/adding-additional-sql-files.html) How to execute custom SQL statements at buildtime
-* [Advanced Column Types](../documentation/cookbook/working-with-advanced-column-types.html) How to work with BLOBs, serialized PHP objects, ENUM, and ARRAY column types.
-* [Customizing build](../documentation/cookbook/customizing-build.html) How to customize the Phing build process.
-* [How to Use PHP 5.3 Namespaces](../documentation/cookbook/namespaces.html) How to generate model classes with namespaces, and how to use them.
-* [Model Introspection At Runtime](../documentation/cookbook/runtime-introspection.html) How to use the Map classes to discover table properties at runtime.
-* [Multi-Component Data Model](../documentation/cookbook/multi-component-data-model.html) How to generate model classes in subdirectories, and organize your model into independent packages / modules.
-* [Object Copy](../documentation/cookbook/copying-persisted-objects.html) How to clone and copy persisted objects.
-* [Replication](../documentation/cookbook/replication.html) How to use Propel in a Master-Slave Replication Environment.
-* [Using Propel With MSSQL Server](../documentation/cookbook/using-mssql-server.html) How to choose and configure Propel to persist data to a Microsoft SQL Server database.
-* [Using SQL Schemas](../documentation/cookbook/using-sql-schemas.html) How to organize tables into SQL schemas (only for MySQL, PostgreSQL, and MSSQL).
-* [Working With Existing Databases](../documentation/cookbook/working-with-existing-databases.html) How to build an XML schema from an existing db structure, how to dump data to XML, how to import it into a new database, etc.
+* [Additional SQL Files](../cookbook/adding-additional-sql-files.html) How to execute custom SQL statements at buildtime
+* [Advanced Column Types](../cookbook/working-with-advanced-column-types.html) How to work with BLOBs, serialized PHP objects, ENUM, and ARRAY column types.
+* [How to Use PHP 5.3 Namespaces](../cookbook/namespaces.html) How to generate model classes with namespaces, and how to use them.
+* [Model Introspection At Runtime](../cookbook/runtime-introspection.html) How to use the Map classes to discover table properties at runtime.
+* [Multi-Component Data Model](../cookbook/multi-component-data-model.html) How to generate model classes in subdirectories, and organize your model into independent packages / modules.
+* [Object Copy](../cookbook/copying-persisted-objects.html) How to clone and copy persisted objects.
+* [Replication](../cookbook/replication.html) How to use Propel in a Master-Slave Replication Environment.
+* [Using Propel With MSSQL Server](../cookbook/using-mssql-server.html) How to choose and configure Propel to persist data to a Microsoft SQL Server database.
+* [Using SQL Schemas](../cookbook/using-sql-schemas.html) How to organize tables into SQL schemas (only for MySQL, PostgreSQL, and MSSQL).
+* [Working With Existing Databases](../cookbook/working-with-existing-databases.html) How to build an XML schema from an existing db structure, how to dump data to XML, how to import it into a new database, etc.
+
+### Contribute to Propel ###
+
+* [Writing A Behavior](../cookbook/writing-behavior.html) How to write a custom behavior to reuse model code horizontally.
 
 ### Working with Silex ###
 

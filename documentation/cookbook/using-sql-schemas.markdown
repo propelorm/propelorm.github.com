@@ -1,5 +1,5 @@
 ---
-layout: documentation
+layout: configuration
 title: Using SQL Schemas
 ---
 
@@ -84,19 +84,79 @@ Propel provides other features to organize your model:
 * _Packages_ are subdirectories in which Model classes get generated (see [Multi-Component Data Model](./multi-component-data-model.html))
 * _Namespaces_ are actual PHP5.3 namespaces for generated Model classes (see [PHP 5.3 Namespaces](./namespaces.html))
 
-You can easily tell Propel to copy the `schema` attribute to both the `package` and the `namespace` attributes, in order to reproduce the SQL organization at the PHP level. To that extent, modify the following settings in `build.properties`:
+You can easily tell Propel to copy the `schema` attribute to both the `package` and the `namespace` attributes, in order to reproduce the SQL organization at the PHP level. To that extent, modify the following settings in your *configuration file*:
 
-```ini
-propel.schema.autoPackage = true
-propel.schema.autoNamespace = true
-```
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml">propel.yaml</a></li>
+<li><a href="#tabphp">propel.php</a></li>
+<li><a href="#tabjson">propel.json</a></li>
+<li><a href="#tabini">propel.ini</a></li>
+<li><a href="#tabxml">propel.xml</a></li>
+</ul>
+<div id="tabyaml">
+{% highlight yaml %}
+propel:
+  generator:
+      schema:
+          autoPackage: ture
+          autoNamespace: true
+{% endhighlight %}
+</div>
+<div id="tabphp">
+{% highlight php %}
+<?php
+
+return [
+    'propel' => [
+        'generator' => [
+            'schema' => [
+                'autoPackage'   => true,
+                'autoNamespace' => true,
+            ]
+        ]
+    ]          
+];
+{% endhighlight %}
+</div>
+<div id="tabjson">
+{% highlight json %}
+{
+    "propel": {
+        "generator": {
+            "autoPackage": true,
+            "autoNamespace": true
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini">
+{% highlight ini %}
+[propel]
+;
+; Generator section
+; 
+generator.schema.autoPackage = true
+generator.schema.autoNamespace = true
+{% endhighlight %}
+</div>
+<div id="tabxml">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<config>
+    <propel>
+        <generator>
+            <schema>
+                <autoPackage>true</autoPackage>
+                <autoNamespace>true</autoNamespace>
+            </schema>
+        </generator>
+    </propel>
+</config>
+{% endhighlight %}
+</div>
+</div>
+
 
 With such a configuration, a `book` table assigned to the `bookstore` schema will generate a `Bookstore\Book` ActiveRecord class under the `bookstore/` subdirectory.
-
-If you're stuck with PHP 5.2, you probably need to use the schema name as a class prefix rather than a namespace. That's what the `autoPrefix` setting is for:
-
-```ini
-propel.schema.autoPrefix = true
-```
-
-With such a configuration, a `book` table assigned to the `bookstore` schema will generate a `BookstoreBook` ActiveRecord class.
