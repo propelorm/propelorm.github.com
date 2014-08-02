@@ -13,3 +13,5 @@ Here is a list of Propel behaviors contributed by users. Feel free to use them o
 * [EqualNestBehavior](http://github.com/CraftyShadow/EqualNestBehavior) Supports relations where a class references to itself and the columns within the reference class are equal. Suitable for "Friends"-like relationships.
 
 * [ArrayAccessBehavior](http://github.com/nnarhinen/propel-arrayaccess) Adds ArrayAccess implementations to the BaseObjects
+
+* [DefaultOrderBehavior](https://github.com/gharlan/propel-default-order-behavior) Adds support for user defined order for tables.
