@@ -1,6 +1,7 @@
 ---
-layout: configuration
+layout: documentation
 title: Using Propel With MSSQL Server
+configuration: true
 ---
 
 # Using Propel With MSSQL Server #

@@ -1,6 +1,7 @@
 ---
-layout: configuration
+layout: documentation
 title: Using SQL Schemas
+configuration: true
 ---
 
 # Using SQL Schemas #

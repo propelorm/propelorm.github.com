@@ -1,6 +1,7 @@
 ---
-layout: configuration
+layout: documentation
 title: Logging And Debugging
+configuration: true
 ---
 
 # Logging And Debugging #

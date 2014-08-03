@@ -1,6 +1,7 @@
 ---
-layout: configuration
+layout: documentation
 title: Replication
+configuration: true
 ---
 
 # Replication #

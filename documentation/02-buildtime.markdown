@@ -1,6 +1,7 @@
 ---
 layout: documentation
 title: The Build Time
+configuration: true
 ---
 
 # The Build Time #
