@@ -42,6 +42,8 @@ documentation:
    url: /documentation/08-inheritance.html
  - title: Migrations
    url: /documentation/09-migrations.html
+ - title: Configuration
+   url: /documentation/10-configuration.html
 
  - title: Reference
  - title: XML Schema Format
@@ -50,10 +52,8 @@ documentation:
    url: /documentation/reference/active-record.html
  - title: Active Query Classes
    url: /documentation/reference/model-criteria.html
- - title: Build Properties
-   url: /documentation/reference/buildtime-configuration.html
- - title: Runtime Configuration File
-   url: /documentation/reference/runtime-configuration.html
+ - title: Configuration Properties Reference
+   url: /documentation/reference/configuration-file.html
  - title: Compatibility index
    url: /documentation/reference/compatibility-index.html
 
