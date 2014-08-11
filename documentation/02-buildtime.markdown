@@ -259,32 +259,30 @@ generator.connections[0] = bookstore
 <div id="tabxml">
 {% highlight xml %}
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
-<propel>
-    <database>
-        <connections>
-            <connection id="bookstore">
-                <adapter>mysql</adapter>
-                <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
-                <dsn> mysql:host=localhost;dbname=my_db_name</dsn>
-                <user>my_db_user</user>
-                <password>s3cr3t</password>
-                <attributes></attributes>
-            </connection>
-        </connections>
-    </database>
-    <runtime>
-        <defaultConnection>bookstore</defaultConnection>
-        <connections>
+<config>
+    <propel>
+        <database>
+            <connections>
+                <connection id="bookstore">
+                    <adapter>mysql</adapter>
+                    <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
+                    <dsn> mysql:host=localhost;dbname=my_db_name</dsn>
+                    <user>my_db_user</user>
+                    <password>s3cr3t</password>
+                    <attributes></attributes>
+                </connection>
+            </connections>
+        </database>
+        <runtime>
+            <defaultConnection>bookstore</defaultConnection>
             <connection>bookstore</connection>
-        </connections>
-    </runtime>
-    <generator>
-        <defaultConnection>bookstore</defaultConnection>
-        <connections>
+        </runtime>
+        <generator>
+            <defaultConnection>bookstore</defaultConnection>
             <connection>bookstore</connection>
-        </connections>
-    </generator>
-</propel>
+        </generator>
+    </propel>
+</config>
 {% endhighlight %}
 </div>
 </div>
