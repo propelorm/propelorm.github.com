@@ -289,7 +289,7 @@ $authors = AuthorQuery::create()
   ->limit(5)
   ->find();
 foreach ($authors as $author) {
-  echo $authors->getFirstName();
+  echo $author->getFirstName();
 }
 ```
 
