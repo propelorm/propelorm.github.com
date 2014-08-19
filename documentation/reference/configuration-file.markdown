@@ -9,7 +9,7 @@ Here is a list of properties that can be set to affect Propel behavior: how it b
 
 ## Where and how to Specify Properties ##
 
-You can specify configuration properties in a file, in the main directory of your project, named `propel.ext`, where `.ext` means: one of the supported extensions. See [Configuration chapter](../documentation/10-configuration.html) for further information.
+You can specify configuration properties in a file, in the main directory of your project, named `propel.ext`, where `.ext` means: one of the supported extensions. See [Configuration chapter](../10-configuration.html) for further information.
 
 First, some conventions:
 
