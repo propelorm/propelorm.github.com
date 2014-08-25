@@ -68,7 +68,7 @@ button. Add a short description to this Pull Request and submit it.
 Please make sure our test suite is still green and you wrote an adequate test that
 covers your changes.
 
-You can get more information in our cookbook article: [Working with Propel's Test Suite](/documentation/cookbook/working-with-test-suite.html).
+You can get more information in our cookbook article: [Working with Propel's Test Suite](http://propelorm.org/documentation/cookbook/working-with-test-suite.html).
 
 ## Improve the documentation ##
 
