@@ -197,6 +197,15 @@ Propel will then find the `FormidableBehavior` class whenever you use the `formi
 </table>
 ```
 
+If you don't want to create a additional composer package for your behavior, you can use instead the FQCN (Full Qualified Class Name) instead of a name.
+
+```xml
+<table name="author">
+  ...
+  <behavior name="\Me\PropelBehaviors\FormidableBehavior" />
+</table>
+```
+
 ## Applying a Behavior To All Tables ##
 
 You can add a `<behavior>` tag directly under the `<database>` tag. That way, the behavior will be applied to all the tables of the database.
