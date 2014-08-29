@@ -96,8 +96,6 @@ documentation:
    url: /documentation/cookbook/adding-additional-sql-files.html
  - title: Advanced Column Types
    url: /documentation/cookbook/working-with-advanced-column-types.html
- - title: Customizing build
-   url: /documentation/cookbook/customizing-build.html
  - title: How to Use PHP 5.3 Namespaces
    url: /documentation/cookbook/namespaces.html
  - title: Model Introspection At Runtime
