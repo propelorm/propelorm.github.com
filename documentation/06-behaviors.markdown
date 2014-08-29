@@ -197,7 +197,8 @@ Propel will then find the `FormidableBehavior` class whenever you use the `formi
 </table>
 ```
 
-If you don't want to create a additional composer package for your behavior, you can use instead the FQCN (Full Qualified Class Name) instead of a name.
+If you don't want to create an additional composer package for your behavior,
+you can use the FQCN (Full Qualified Class Name) instead of a name.
 
 ```xml
 <table name="author">
