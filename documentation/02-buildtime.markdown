@@ -266,7 +266,7 @@ generator.connections[0] = bookstore
                 <connection id="bookstore">
                     <adapter>mysql</adapter>
                     <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
-                    <dsn> mysql:host=localhost;dbname=my_db_name</dsn>
+                    <dsn>mysql:host=localhost;dbname=my_db_name</dsn>
                     <user>my_db_user</user>
                     <password>s3cr3t</password>
                     <attributes></attributes>
