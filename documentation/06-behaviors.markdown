@@ -361,7 +361,7 @@ You can set the additional class to be generated in a subfolder by implementing 
 ### Providing Behaviors Through Composer ###
 
 The normal way of having behaviors available in your tables is to tell Propel explicitly which name is for which class (see
-[Using Behaviors](http://propelorm/documentation/06-behaviors.html#using-behaviors)) or by using the full FQCN as name.
+[Using Behaviors](./06-behaviors.html#using-behaviors)) or by using the full FQCN as name.
 
 For behaviors you install through composer there's a third method by just using the behavior name defined in the external behavior composer.json file.
 This is only possible for behaviors that do support this kind of feature.
