@@ -11,7 +11,7 @@ Via [Composer](https://packagist.org/)
 
 ```json
 "require": {
-    "propel/propel": "2.0.0-alpha2"
+    "propel/propel": "2.0.0-alpha3"
 }
 ```
 
