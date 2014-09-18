@@ -202,7 +202,7 @@ If you don't specify a locale when dealing with a translatable object, Propel us
 </table>
 ```
 
-You can change the name of the locale column added by the behavior by setting the `locale_column` parameter. Also, you can change the table name and the phpName of the i18n table by setting the `i18n_table` and `i18n_phpname` parameters:
+You can change the name of the locale column added by the behavior by setting the `locale_column` parameter and the length of the created datatype by setting the `locale_length` parameter. Also, you can change the table name and the phpName of the i18n table by setting the `i18n_table` and `i18n_phpname` parameters and you can set the name of created primary key column of the i18n table by setting the `i18n_pk_column` parameter:
 
 ```xml
 <table name="item">
@@ -214,8 +214,10 @@ You can change the name of the locale column added by the behavior by setting th
   <behavior name="i18n">
     <parameter name="i18n_columns" value="name, description" />
     <parameter name="locale_column" value="language" />
+    <parameter name="locale_length" value="6" />
     <parameter name="i18n_table" value="item_translation" />
     <parameter name="i18n_phpname" value="ItemTranslation" />
+    <parameter name="i18n_pk_column" value="i18n_id" />
   </behavior>
 </table>
 ```
