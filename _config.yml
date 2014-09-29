@@ -112,5 +112,7 @@ documentation:
    url: /documentation/cookbook/using-sql-schemas.html
  - title: Working With Existing Databases
    url: /documentation/cookbook/working-with-existing-databases.html
+ - title: Working with Symfony2
+   url: /documentation/#working-with-symfony2
  - title: Working with Silex
    url: /documentation/cookbook/silex/working-with-silex.html
