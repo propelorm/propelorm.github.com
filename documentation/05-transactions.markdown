@@ -281,3 +281,6 @@ However, it's a good practice to pass the connection explicitly, and for three r
 * You must rethrow the exception caught in the `catch` statement of nested transactions, otherwise there is a risk that the global rollback doesn't occur.
 * True nested transactions, with partial rollback, are only possible in MSSQL, and can be emulated in other RDBMS through savepoints. This feature may be added to Propel in the future, but for the moment, only the outermost PHP transaction triggers a database transaction.
 * If you rollback a partially executed transaction and ignore the exception thrown, there are good chances that some of your objects are out of sync with the database. The good practice is to always let a transaction exception escalate until it stops the script execution.
+
+---
+<span class="next">[Next: Behaviors &rarr;](06-behaviors.html)</span>

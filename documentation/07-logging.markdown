@@ -802,3 +802,6 @@ $serviceContainer->setProfilerConfiguration(array(
    'innerGlue' => ' | '
 ));
 ```
+
+---
+<span class="next">[Next: Inheritance &rarr;](08-inheritance.html)</span>

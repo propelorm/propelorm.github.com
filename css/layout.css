@@ -396,6 +396,11 @@ footer ul li {
     background-color: #fbfbfb;
 }
 
+.documentation-content .next {
+    text-align: right;
+    display: block;
+}
+
 .documentation-content .wrapper {
     margin: 25px;
     margin-top: 0;

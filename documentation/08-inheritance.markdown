@@ -501,3 +501,6 @@ The `hasChildObject()` and `getChildObject()` methods are automatically added by
   </foreign-key>
 </table>
 ```
+
+---
+<span class="next">[Next: Migrations &rarr;](09-migrations.html)</span>
