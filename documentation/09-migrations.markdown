@@ -364,3 +364,6 @@ class PropelMigration_1286483354
 ```
 
 Of course, you can add code to the `preDown()` and `postDown()` methods to execute a data migration when reverting migrations.
+
+---
+<span class="next">[Next: Configuration &rarr;](10-configuration.html)</span>
