@@ -434,3 +434,6 @@ To enable a model-only relationship, add a `<foreign-key>` tag using the `skipSq
 ```
 
 Such a foreign key is not translated into SQL when Propel builds the table creation or table migration code. It can be seen as a "virtual foreign key". However, on the PHP side, the `Book` model actually has a one-to-many relationship with the `Review` model. The generated `ActiveRecord` and `ActiveQuery` classes take advantage of this relationship to offer smart getters and filters.
+
+---
+<span class="next">[Next: Transactions &rarr;](05-transactions.html)</span>

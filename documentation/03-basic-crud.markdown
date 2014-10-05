@@ -326,3 +326,6 @@ $author1 = AuthorQuery::create()->findPk(1);
 $author2 = AuthorQuery::create()->findPk(1);
 // Skips the SQL query and returns the existing $author1 object
 ```
+
+---
+<span class="next">[Next: Relationships &rarr;](04-relationships.html)</span>

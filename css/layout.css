@@ -187,7 +187,7 @@ a:hover {
 }
 
 .home-banner:hover {
-    height: 600px;
+    height: 640px;
 }
 
 .home-banner h2 {
@@ -253,7 +253,7 @@ a:hover {
 .home-features-item h3,
 .home-features-item-last h3 {
     color: white;
-    text-shadow: 0 1px 1px #779CB1;
+    text-shadow: 0 1px 2px #6091ae;
     font-size: 30px;
     font-weight: 300;
     padding-bottom: 10px;
@@ -298,7 +298,7 @@ a:hover {
 
 .home-content-bottom {
     background-color: #F8F8F8;
-    color: #275E1A;
+    color: #444;
     font-size: 14px;
     line-height: 20px;
 }
@@ -328,14 +328,7 @@ a:hover {
 }
 
 .home-buttons {
-    position: absolute;
-    right: -5000px;
-    top: 160px;
-    background-color: #7BC4F0;
-    background-color: #c3dceb;
-    left: 526px;
-    text-align: left;
-    height: 50px;
+    text-align: center;
 }
 
 .button,
@@ -351,18 +344,26 @@ a:hover {
     height: 50px;
     display: inline-block;
     font-size: 14px;
+    text-decoration: none;
+}
+
+.center {
+    text-align: center;
+}
+
+.home-buttons .button {
+    border-right: 1px solid #B5C3CC;
+    text-decoration: none;
+    box-shadow: 0 2px 1px #ACC5D4;
+}
+
+.home-buttons .button:last-child {
+    border-right: 0;
 }
 
 .button:hover {
     background-color: #b9cfde;
 }
-
-.home-buttons .button {
-    border-right: 1px solid #b4cddc;
-    text-decoration: none;
-    float: left;
-}
-
 
 footer {
     text-align: center;
@@ -449,6 +450,11 @@ footer ul li {
     background-color: #fbfbfb;
     margin-left: 250px;
     padding-bottom: 5px;
+}
+
+.documentation-content .next {
+    text-align: right;
+    display: block;
 }
 
 .documentation-content .wrapper {

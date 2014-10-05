@@ -456,3 +456,6 @@ the errors are no longer present.
 
 >**Warning**<br />The `schema.sql` file will DROP any existing table before
 creating them, which will effectively erase your database.
+
+---
+<span class="next">[Next: Basic CRUD &rarr;](03-basic-crud.html)</span>

@@ -104,7 +104,7 @@ Propel is strongly unit tested and is developed under Continuous
 Integration with a Test Driven Development approach.
 
 We use [Travis-CI](http://travis-ci.org) to automatically build our projects,
-and here are the statuses:
+and here are the statuses of our master branches:
 
 <table width="100%" class="ecg">
     <tr>

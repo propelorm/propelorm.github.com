@@ -135,3 +135,6 @@ At this point, Propel should be setup and ready to use. You can follow the steps
 
 If you can't manage to install Propel, don't hesitate to ask for help. See
 [Support](../support.html) for details on getting help.
+
+---
+<span class="next">[Next: Building a project &rarr;](02-buildtime.html)</span>
