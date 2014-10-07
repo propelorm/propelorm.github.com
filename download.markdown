@@ -62,8 +62,8 @@ Other releases are available for download at [files.propelorm.org](http://files.
 
 ## License ##
 
-Copyright (c) 2005-2013 Hans Lellelid, David Zuelke, Francois Zaninotto, William
-Durand
+Copyright (c) Since 2005 Hans Lellelid, David Zuelke, Francois Zaninotto, William
+Durand, Marc J. Schmidt
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
