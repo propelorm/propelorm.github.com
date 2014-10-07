@@ -28,10 +28,21 @@ header {
 header > div.wrapper,
 footer > div.wrapper,
 .header-line > .wrapper,
-.main-wrapper,
-.documentation > div.wrapper {
+.main-wrapper {
     max-width: 1000px;
     margin: auto;
+}
+
+.fullscreen div.wrapper {
+    max-width: inherit !important;
+}
+
+.fullscreen header  {
+    padding: 0 50px;
+}
+
+.documentation > div.wrapper {
+    margin: 0 50px;
 }
 
 .main-wrapper {
@@ -123,7 +134,6 @@ h3 {
 
 a, a:link {
     color: #4498CE;
-    text-decoration: none;
 }
 
 a:hover {
@@ -136,6 +146,7 @@ a:hover {
     background-color: #7bc4f0;
     text-align: center;
     transition-duration: 1s;
+    overflow: hidden;
 }
 
 .header-line {
@@ -176,7 +187,7 @@ a:hover {
 }
 
 .home-banner:hover {
-    height: 600px;
+    height: 640px;
 }
 
 .home-banner h2 {
@@ -189,6 +200,7 @@ a:hover {
     font-weight: 100;
     padding-top: 50px;
     font-family: 'Open Sans', sans-serif;
+    overflow: hidden;
 }
 
 .home-banner h2 strong {
@@ -199,6 +211,7 @@ a:hover {
     width: 774px;
     height: 533px;
     margin: auto;
+    position: relative;
     background-image: url(../images/home-screen-bg.png);
 }
 
@@ -210,7 +223,9 @@ a:hover {
 .home-features {
     position: relative;
     background-color: #b0dfa5;
+    background-color: #C3DCEB;
     color: #275e1a;
+    color: #333;
     font-size: 14px;
     line-height: 20px;
     padding-bottom: 30px;
@@ -238,8 +253,9 @@ a:hover {
 .home-features-item h3,
 .home-features-item-last h3 {
     color: white;
-    text-shadow: 0 1px 1px rgb(108, 108, 108);
+    text-shadow: 0 1px 2px #6091ae;
     font-size: 30px;
+    font-weight: 300;
     padding-bottom: 10px;
 
 }
@@ -281,24 +297,23 @@ a:hover {
 }
 
 .home-content-bottom {
-    margin-top: 25px;
-    padding: 20px 0;
-    background-color: #b0dfa5;
-    color: #275E1A;
+    background-color: #F8F8F8;
+    color: #444;
     font-size: 14px;
     line-height: 20px;
 }
 
 .home-content-bottom > div.wrapper {
-    max-width: 850px;
+    max-width: 950px;
     margin: auto;
-    padding: 0 25px;
+    padding: 50px 25px;
+    background-color: #FBFBFB;
 }
 
 .home-content-bottom > div.wrapper h1 {
     text-align: center;
-    color: white;
-    text-shadow: 0 1px 1px #6C6C6C;
+    color: #333;
+    text-shadow: 0;
 }
 
 .home-content-bottom ul {
@@ -312,13 +327,54 @@ a:hover {
     left: -4px;
 }
 
+.home-buttons {
+    text-align: center;
+}
+
+.button,
+.button:link {
+    background-color: #c3dceb;
+    border: 0px;
+    color: #55749E;
+    font-size: 12px;
+    padding: 0px 20px;
+    -webkit-appearance: none;
+    border-radius: 0;
+    line-height: 50px;
+    height: 50px;
+    display: inline-block;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.center {
+    text-align: center;
+}
+
+.home-buttons .button {
+    border-right: 1px solid #B5C3CC;
+    text-decoration: none;
+    box-shadow: 0 2px 1px #ACC5D4;
+}
+
+.home-buttons .button:last-child {
+    border-right: 0;
+}
+
+.button:hover {
+    background-color: #b9cfde;
+}
+
 footer {
-    background-color: #7cc5f0;
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid #ddd;
     color: #376e90;
 }
 
 footer a,
 footer a:link {
+    text-decoration: underline;
     color: #376e90;
 }
 
@@ -390,10 +446,10 @@ footer ul li {
 }
 
 .documentation-content {
-    float: right;
-    width: 749px;
     border-left: 1px solid #C3DCEB;
     background-color: #fbfbfb;
+    margin-left: 250px;
+    padding-bottom: 5px;
 }
 
 .documentation-content .next {
@@ -434,5 +490,31 @@ footer ul li {
 
 .fork_and_edit {
     margin: 0;
-    padding-top: 10px;
+}
+
+.member {
+    text-align: center;
+    float: left;
+    margin: 25px;
+    color: gray;
+}
+
+.member p {
+    margin: 5px 0;
+}
+
+.member img {
+    width: 170px;
+    border: 1px solid #ECECEC;
+    padding: 5px;
+    background-color: #FFF;
+}
+
+.member .icon-twitter,
+.member .icon-github {
+    text-decoration: none;
+}
+
+.member h3 {
+    color: #317FB1;
 }
