@@ -26,8 +26,8 @@ These lists were created in May 2009. A previous set mailing-lists were hosted b
 
 Gitter is a instant messaging service allowing you to chat via web interface, [iphone app, native app](https://gitter.im/apps) or [irc client](http://irc.gitter.im).
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/propelorm)
- [https://gitter.im/propelorm](https://gitter.im/propelorm)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/propelorm/Propel)
+ [https://gitter.im/propelorm/Propel](https://gitter.im/propelorm/Propel)
 
 ## IRC ##
 
