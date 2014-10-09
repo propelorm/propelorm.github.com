@@ -110,7 +110,7 @@ and here are the statuses of our master branches:
     <tr>
         <td><a href="https://github.com/propelorm/Propel">Propel 1.7</a></td><td width="70"><img src="https://travis-ci.org/propelorm/Propel.png" /></td>
     </tr><tr>
-        <td><a href="https://github.com/propelorm/Propel2">Propel2</a></td><td><img src="https://travis-ci.org/propelorm/Propel2.png" /></td>
+        <td><a href="https://github.com/propelorm/Propel2">Propel2</a></td><td><img src="https://circleci.com/gh/propelorm/Propel2/tree/master.png?style=shield" /></td>
     </tr><tr>
         <td><a href="https://github.com/propelorm/sfPropelORMPlugin">sfPropelORMPlugin</a></td><td><img src="https://travis-ci.org/propelorm/sfPropelORMPlugin.png" /></td>
     </tr><tr>
@@ -119,6 +119,12 @@ and here are the statuses of our master branches:
         <td><a href="https://github.com/propelorm/PropelServiceProvider">PropelServiceProvider</a></td><td><img src="https://travis-ci.org/propelorm/PropelServiceProvider.png" /></td>
     </tr>
 </table>
+
+Propel2's code climate:
+
+[![Code Climate](https://codeclimate.com/github/propelorm/Propel2/badges/gpa.svg)](https://codeclimate.com/github/propelorm/Propel2)
+<a href="https://codeclimate.com/github/propelorm/Propel2"><img src="https://codeclimate.com/github/propelorm/Propel2/badges/coverage.svg" /></a>
+
 {% endcapture %}
 
 {% include home.html %}
