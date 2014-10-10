@@ -59,6 +59,9 @@ propel:
       # The directory where Propel should output the compiled runtime configuration.
       phpConfDir: {current-path/generated-conf}|string
 
+	  # The directory where Propel should output the generated migrations.
+	  migrationDir: {current-path/generated-migrations}|string
+
       # The directory where Propel should output the generated DDL (or data insert statements, etc.)
       sqlDir: {current-path/generated-sql}|string
 
