@@ -291,6 +291,85 @@ Use your own database vendor driver, chosen among pgsql, mysql, sqlite, mssql, a
 
 You can learn more about the available build settings and their possible values in the  [configuration reference](../reference/configuration-file.html).
 
+
+### Setup UTF-8 ###
+
+If you want to save anything in UTF-8 in your database then depending on your database you have to set some extra configuration values.
+ 
+<div class="conftabs">
+<ul>
+<li><a href="#tabMysql">MySQL</a></li>
+<li><a href="#tabPgsql">PostgreSQL</a></li>
+<li><a href="#tabSqlite">SQLite</a></li>
+<li><a href="#tabMssql">MSSQL</a></li>
+<li><a href="#tabOracle">Oracle</a></li>
+</ul>
+<div id="tabMysql">
+{% highlight yaml %}
+propel:
+  database:
+    connections:
+      default:
+        adapter: mysql
+        settings:
+          charset: utf8
+          queries:
+            utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
+{% endhighlight %}
+</div>
+<div id="tabPgsql">
+{% highlight yaml %}
+propel:
+  database:
+    connections:
+      default:
+        adapter: pgsql
+        settings:
+          charset: utf8
+          queries:
+            utf8: "SET NAMES 'UTF8'"
+{% endhighlight %}
+</div>
+<div id="tabSqlite">
+{% highlight yaml %}
+propel:
+  database:
+    connections:
+      default:
+        adapter: sqlite
+        settings:
+          charset: utf8
+{% endhighlight %}
+</div>
+<div id="tabMssql">
+{% highlight yaml %}
+propel:
+  database:
+    connections:
+      default:
+        adapter: mssql
+        settings:
+          charset: UTF-8
+{% endhighlight %}
+</div>
+<div id="tabOracle">
+{% highlight yaml %}
+propel:
+  database:
+    connections:
+      default:
+        adapter: oracle
+        settings:
+          charset: UTF8
+{% endhighlight %}
+</div>
+</div>
+ 
+
+
+ 
+ 
+
 ### Using the `propel` Script To Build The SQL Code ###
 
 As seen in the previous chapter, Propel ships with a script that allows you to realise different actions such as schemas generation.
