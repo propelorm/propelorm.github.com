@@ -242,10 +242,12 @@ $groups = GroupQuery::create()
   ->find();
 ```
 
+### More than two primary keys
+
 If you define a cross-table with a primary key based on more than two columns,
 Propel will generate different method signatures for all generated relation
-methods. It generates, for each additional primary key, column a new method
-parameter with its type and its name.
+methods. It generates for each additional primary key column that doesn't belong
+to the first two outgoing relations a new method parameter with its type and its name.
 
 Example:
 
@@ -254,6 +256,7 @@ Example:
   <column name="user_id" type="integer" primaryKey="true"/>
   <column name="group_id" type="integer" primaryKey="true"/>
   <column name="type" type="integer" primaryKey="true"/>
+  <column name="additional_value" type="varchar"/>
   <foreign-key foreignTable="user">
     <reference local="user_id" foreign="id"/>
   </foreign-key>
@@ -267,17 +270,157 @@ You'll get these methods:
 
 ```php
 <?php
-$user->addGroup(User $group, int $type);
-$user->removeGroup(User $group, int $type);
-$user->countGroup(int $type);
-$user->getGroups(int $type);
+$user->addGroup(User $group, int $type):$this;
+$user->removeGroup(User $group, int $type):$this;
+$user->countGroups($position = null, Criteria $criteria = null, ConnectionInterface $con = null):int;
+$user->getGroups($position = null, Criteria $criteria = null, ConnectionInterface $con = null):Group[]|ObjectCollection;
+$user->createGroupsQuery($position = null, Criteria $criteria = null):GroupsQuery;
+
+$user->getGroupTypes($criteria = null):ObjectCombinationCollection;
+$user->setGroupTypes(array $groupTypes):$this;
 
 # Query class will be extended as well
-UserQuery::create()->filterByGroup($group, $type)->find();
+UserQuery::create()->filterByGroup(Group $group, $comparison = Criteria::EQUAL)->find();
+```
+
+same with the opposite `Group` object.
+
+Note here that you not only have different method signatures but also some additional methods.
+
+`getGroupTypes(int $type)` returns a `ObjectCombinationCollection` where in this example the first place
+of this combination is the `Group` object and second place is the integer `$type`. The order is defined in your
+schema.
+
+```php
+<?php
+$groupTypes = $user->getGroupTypes(); //[ [Group, int], [Group, int], ...]
+foreach ($groupTypes as list($group, $type)) { # this syntax is only available in PHP >= 5.5
+    echo "{$user->getName()} is in group {$group->getName()} as $type";
+}
+```
+
+To find for example all groups from `$hans` where the relation is from type `2` you can `getGroups`:
+
+```php
+<?php
+$hans = new User();
+$group = new Group();
+$groups = $hans->getGroups(2); //hits always the database, so doesn't access its internal state.
+
+$hans->addGroup($group, 3);
+$groups->getGroups(3); //returns empty array since you need to save first
+$groups->getGroupTypes(); //returns array with one entry: [ [$group, 3] ], since this returns its internal state.
+
+$hans->save();
+$groups->getGroups(3); //returns now a list with one group: [$group]
+
+$hans->removeGroup($group, 3);
+$groups->getGroups(3); //returns still a list with one group: [$group], because you need to call save first
+$groups->getGroupTypes(); //returns empty list
+$hans->save();
+
+$groups->getGroups(3); //return empty list
+```
+
+If you want to filter for example by `type > 2` then you need to use `getGroupTypes`:
+
+```php
+<?php
+$filter = UserGroupQuery::create()->filterByType(2, Criteria::GREATER_THAN);
+$groupTypes = $hans->getGroupTypes($filter);
+$groups = $groupTypes->getObjectsFromPosition(1); //first position is the Group object, second is the `type`
+```
+
+More examples of using those methods:
+
+```php
+<?php
+$groups = $groupTypes->getObjectsFromPosition(1); //[Group, Group, ...]
+$types = $groupTypes->getObjectsFromPosition(2);  //[int, int, ...]
+
+$newGroupTypes = array();
+$newGroupTypes[] = array(new Group(), 2);
+$newGroupTypes[] = array(new Group(), 3);
+$user->setGroupTypes($newGroupTypes);
+
+//same as
+$user->addGroup(new Group(), 2);
+$user->addGroup(new Group(), 3);
+
+$user->save();
 ```
 
 Since this is as usual automatic generated, you can just use IDE's code completion
 to see how to call those methods.
+
+### More than two foreign keys
+
+Note that the order of `<foreign-key>` elements are pretty important. If you have three outgoing
+foreign keys that where all are primary keys, then only the first two foreign keys will be used
+for cross relation methods. Additional non-fk primary keys will be attached as filter to those methods.
+
+Example:
+
+```xml
+<table name="user_group" isCrossRef="true">
+  <column name="user_id" type="integer" primaryKey="true"/>
+  <column name="group_id" type="integer" primaryKey="true"/>
+  <column name="type_id" type="integer" primaryKey="true"/>
+  <foreign-key foreignTable="user">
+    <reference local="user_id" foreign="id"/>
+  </foreign-key>
+  <foreign-key foreignTable="group">
+    <reference local="group_id" foreign="id"/>
+  </foreign-key>
+  <foreign-key foreignTable="types">
+    <reference local="type_id" foreign="id"/>
+  </foreign-key>
+</table>
+```
+
+In this example we have three foreign keys whereas each of them is part of the primary key. This generates
+methods like:
+
+```php
+<?php
+$user->addGroup(User $group, Type $type):$this;
+$user->removeGroup(User $group, Type $type):$this;
+$user->countGroups(Type $type = null):int;
+$user->getGroups(Type $type = null, ...):Group[];
+
+$user->getGroupTypes($criteria = null):ObjectCombinationCollection;
+```
+
+Whereas a schema likes this:
+
+```xml
+<table name="user_group" isCrossRef="true">
+  <column name="user_id" type="integer" primaryKey="true"/>
+  <column name="group_id" type="integer" primaryKey="true"/>
+  <column name="type_id" type="integer" primaryKey="true"/>
+  <foreign-key foreignTable="user">
+    <reference local="user_id" foreign="id"/>
+  </foreign-key>
+  <foreign-key foreignTable="types">
+    <reference local="type_id" foreign="id"/>
+  </foreign-key>
+  <foreign-key foreignTable="group">
+    <reference local="group_id" foreign="id"/>
+  </foreign-key>
+</table>
+```
+
+Generates methods like:
+
+```php
+<?php
+$user->addType(Type $type, User $group);
+$user->removeType(Type $type, User $group);
+$user->countTypes(User $group = null, ...);
+$user->getTypes(User $group = null, ...);
+```
+
+
 
 ## One-to-One Relationships ##
 
