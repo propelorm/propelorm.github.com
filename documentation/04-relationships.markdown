@@ -327,8 +327,27 @@ If you want to filter for example by `type > 2` then you need to use `getGroupTy
 ```php
 <?php
 $filter = UserGroupQuery::create()->filterByType(2, Criteria::GREATER_THAN);
+
 $groupTypes = $hans->getGroupTypes($filter);
 $groups = $groupTypes->getObjectsFromPosition(1); //first position is the Group object, second is the `type`
+
+//or
+$groups = $hans->getGroups($position = null, $filter);
+
+//or
+$groups = $hans->createGroupQuery($position = null, $filter)->find();
+
+//createGroupQuery allows your to set a formatter and additional conditions
+$groups = $hans->createGroupQuery($position = null, $filter)
+    ->joinWith('OtherRelation')
+    ->setFormatter(ModelCriteria::FORMAT_ON_DEMAND)
+    ->find(); //groups which relation's type is greater than 2, with addition join and onDemand formatter
+
+//or
+$groups = $hans->createGroupQuery()
+    ->joinWith('OtherRelation')
+    ->setFormatter(ModelCriteria::FORMAT_ON_DEMAND)
+    ->find(); //all groups, with addition join and onDemand formatter
 ```
 
 More examples of using those methods:
