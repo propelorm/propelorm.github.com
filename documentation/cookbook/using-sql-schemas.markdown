@@ -100,7 +100,7 @@ You can easily tell Propel to copy the `schema` attribute to both the `package` 
 propel:
   generator:
       schema:
-          autoPackage: ture
+          autoPackage: true
           autoNamespace: true
 {% endhighlight %}
 </div>
