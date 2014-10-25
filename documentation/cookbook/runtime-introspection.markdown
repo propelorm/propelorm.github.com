@@ -59,6 +59,7 @@ $bookTitleColumn = $bookTable->getColumn('title');
 ```
 
 The `DatabaseMap` object offers a shortcut to every `ColumnMap` object if you know the fully qualified column name:
+
 ```php
 <?php
 $bookTitleColumn = $dbMap->getColumn('book.TITLE');
