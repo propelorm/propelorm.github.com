@@ -18,7 +18,7 @@ The name of the configuration file is `propel`, with one of the supported extens
 > **Note** <br /> Throughout this document, when we'll write `.ext` we intend "one of the supported extensions". 
 
 Propel looks for its configuration file in the current directory or in a sub-directory named *conf* or *config*.
-Alternatively, it searches in the directory where you've put your `schema.xml`, if you've passed it to the command line as `--input-dir` parameter. For instance:
+Alternatively, you can choose a directory at your choiche and pass it to the command line as `--config-dir` parameter. For instance:
 
 ```bash
 # Propel looks for its configuration file in the current directory or 
@@ -26,7 +26,7 @@ Alternatively, it searches in the directory where you've put your `schema.xml`, 
 vendor/bin/propel sql:build
 
 # Propel looks for its configuration file in /my/awesome/path directory
-vendor/bin/propel model:build --input-dir="/my/awesome/path"
+vendor/bin/propel model:build --config-dir="/my/awesome/path"
 ```
 
 When you're part of a team, you could want to define a common configuration file and commit it into your VCS. But, of course, there can be some properties you don't want to share, e.g. database passwords.
