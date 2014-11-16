@@ -5,7 +5,7 @@ title: Configuration Properties Reference
 
 # Configuration Properties Reference #
 
-Here is a list of properties that can be set to affect Propel behavior: how it builds your model, how it performs migrations or runs. 
+Here is a list of properties that can be set to affect Propel behavior: how it builds your model, how it performs migrations or runs.
 
 ## Where and how to Specify Properties ##
 
@@ -59,6 +59,9 @@ propel:
       # The directory where Propel should output the compiled runtime configuration.
       phpConfDir: {current-path/generated-conf}|string
 
+      # The directory where Propel should output the generated migrations.
+      migrationDir: {current-path/generated-migrations}|string
+
       # The directory where Propel should output the generated DDL (or data insert statements, etc.)
       sqlDir: {current-path/generated-sql}|string
 
@@ -70,7 +73,7 @@ propel:
 
 In this section you can define all configured connections and other databases properties. Propel expects you to define one connection at least.
 
->**Tip**<br /> If you come from Propel 1.x: this section replaces the old `runtime-conf.xml` file. This section is also used by `config:convert` command, to write down the bootstrap Propel file. 
+>**Tip**<br /> If you come from Propel 1.x: this section replaces the old `runtime-conf.xml` file. This section is also used by `config:convert` command, to write down the bootstrap Propel file.
 
 ```yaml
   ## All Database settings ##
@@ -94,7 +97,7 @@ A `ConnectionInterface` class (ConnectionWrapper or DebugPDO etc.) that you woul
 
 This can be used to specify the alternative **DebugPDO** class bundled with Propel, or your own subclass. Your class must inherit from ConnectionWrapper, because Propel requires the ability to nest transactions (without having exceptions being thrown by PDO).
 
-```yaml              
+```yaml
               # Connection class. One of the Propel\Runtime\Connection classes
               classname: {Propel\Runtime\Connection\ConnectionWrapper}|string
 ```
@@ -113,7 +116,7 @@ See the PHP documentation for specific format:
 
 Note that some databases (e.g. PostgreSQL) specify username and password as part of the DSN while the others specify user and password separately.
 
-```yaml              
+```yaml
               # The PDO dsn
               dsn: /your dsn/
 ```
@@ -218,8 +221,8 @@ You can override this setting if you wish to default to another engine for all t
               # Default table type
               tableType: {InnoDB}|MyIsam
 ```
-```yaml              
-              
+```yaml
+
               # Keyword used to specify the table engine in the CREATE SQL statement.
               # Defaults to 'ENGINE', users of MYSQL < 5 should use 'TYPE' instead.
               tableEngineKeyword: {ENGINE}|TYPE
@@ -241,17 +244,17 @@ You can override this setting if you wish to default to another engine for all t
   migrations:
       # Whether to specify PHP names that are the same as the column names.
       samePhpName: {false}|true
-      
+
       # Whether to add the vendor info. It does provide additional information (such as full-text indexes) which can
       # affect the generation of the DDL from the schema.
       addVendorInfo: {false}|true
-      
+
       # The name of migrations table
       tableName: {propel_migration}|string
-      
+
       # The name of the parser class
       # If you leave this property blank, Propel looks for an appropriate parserClass, based on platform: e.g.
-      # if the platform is `MysqlPlatform` then parser is `\Propel\Generator\Reverse\MysqlSchemaParser` 
+      # if the platform is `MysqlPlatform` then parser is `\Propel\Generator\Reverse\MysqlSchemaParser`
       parserClass: {empty}|string
 ```
 
@@ -267,10 +270,10 @@ This section configures the reverse engineering, to create an xml schema from an
 
     # Reverse parser class can be different from migration one
     # If you leave this property blank, Propel looks for an appropriate parser class, based on platform: i.e.
-    # if the platform is `MysqlPlatform` then parser is `\Propel\Generator\Reverse\MysqlSchemaParser` 
+    # if the platform is `MysqlPlatform` then parser is `\Propel\Generator\Reverse\MysqlSchemaParser`
     parserClass: {empty}|string
 ```
-    
+
 ### Runtime settings ###
 
 ```yaml
@@ -479,7 +482,7 @@ propel:
 
       # Directory in which your composer.json resides
       composerDir: {empty}|string
-  
+
   ## All Database settings ##
   database:
       # All database sources
@@ -513,7 +516,7 @@ propel:
           mysql:
               # Default table type
               tableType: {InnoDB}|MyIsam
-              
+
               # Keyword used to specify the table engine in the CREATE SQL statement.
               # Defaults to 'ENGINE', users of MYSQL < 5 should use 'TYPE' instead.
               tableEngineKeyword: {ENGINE}|TYPE
@@ -531,17 +534,17 @@ propel:
   migrations:
       # Whether to specify PHP names that are the same as the column names.
       samePhpName: {false}|true
-      
+
       # Whether to add the vendor info. It does provide additional information (such as full-text indexes) which can
       # affect the generation of the DDL from the schema.
       addVendorInfo: {false}|true
-      
+
       # The name of migrations table
       tableName: {propel_migration}|string
-      
+
       # The name of the parser class
       # If you leave this property blank, Propel looks for an appropriate parser class, based on platform: i.e.
-      # if the platform is `MysqlPlatform` then parser is `\Propel\Generator\Reverse\MysqlSchemaParser` 
+      # if the platform is `MysqlPlatform` then parser is `\Propel\Generator\Reverse\MysqlSchemaParser`
       parserClass: {empty}|string
 
   ## Reverse settings
@@ -551,7 +554,7 @@ propel:
 
     # Reverse parser class can be different from migration one
     # If you leave this property blank, Propel looks for an appropriate parser class, based on platform: i.e.
-    # if the platform is `MysqlPlatform` then parser is `\Propel\Generator\Reverse\MysqlSchemaParser` 
+    # if the platform is `MysqlPlatform` then parser is `\Propel\Generator\Reverse\MysqlSchemaParser`
     parserClass: {empty}|string
 
   ## Runtime settings ##
