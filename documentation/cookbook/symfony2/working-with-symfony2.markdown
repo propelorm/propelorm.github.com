@@ -42,14 +42,14 @@ You are almost ready, the next steps are:
 
 Now, you can build your model classes, and SQL by running the following command:
 
-``` console
-> php app/console propel:build [--classes] [--sql] [--insert-sql]
+```bash
+$ php app/console propel:build [--classes] [--sql] [--insert-sql]
 ```
 
 To insert SQL statements, use the propel:sql:insert command:
 
-``` console
-> php app/console propel:sql:insert
+```bash
+$ php app/console propel:sql:insert
 ```
 
 Congratulations! You're done; just use the Model classes as any other class in
@@ -168,16 +168,14 @@ propel:
                     queries:        { query: 'INSERT INTO BAR ('hey', 'there')' }
 ```
 
-See the [Configuring Propel](../../10-configuration.html) section of
-the documentation for a complete reference.
+See the [configuration reference](../../reference/configuration-file.html) for further
+details.
 
 ## XML Schema ##
 
 Place the following schema in `src/Acme/DemoBundle/Resources/config/schema.xml`:
 
 ``` xml
-
-
 <?xml version="1.0" encoding="UTF-8"?>
 <database name="default" namespace="Acme\DemoBundle\Model" defaultIdMethod="native">
 
@@ -212,16 +210,16 @@ manipulations, and so on.
 
 You can **create a database**:
 
-``` console
-> php app/console propel:database:create [--connection[=""]]
+```bash
+$ php app/console propel:database:create [--connection[=""]]
 ```
 
 As usual, `--connection` allows you to specify a connection.
 
 You can **drop a database**:
 
-``` console
-> php app/console propel:database:drop [--connection[=""]] [--force]
+```bash
+$ php app/console propel:database:drop [--connection[=""]] [--force]
 ```
 
 Note that the `--force` option is needed to actually execute the SQL statements.
@@ -230,16 +228,16 @@ Note that the `--force` option is needed to actually execute the SQL statements.
 
 You can generate stub classes based on your `schema.xml` in a given bundle:
 
-``` console
-> php app/console propel:form:generate [-f|--force] bundle [models1] ... [modelsN]
+```bash
+$ php app/console propel:form:generate [-f|--force] bundle [models1] ... [modelsN]
 ```
 
 It will write Form Type classes in `src/YourVendor/YourBundle/Form/Type`.
 
 You can choose which Form Type to build by specifing Model names:
 
-``` console
-> php app/console propel:form:generate @AcmeDemoBundle Book Author
+```bash
+$ php app/console propel:form:generate @AcmeDemoBundle Book Author
 ```
 
 ### Graphviz ###
@@ -247,8 +245,8 @@ You can choose which Form Type to build by specifing Model names:
 You can generate **Graphviz** file for your project by using the following command
 line:
 
-``` console
-> php app/console propel:graphviz:generate
+```bash
+$ php app/console propel:graphviz:generate
 ```
 
 It will write files in `./generated-graphviz`.
@@ -257,43 +255,44 @@ It will write files in `./generated-graphviz`.
 
 Generates SQL diff between the XML schemas and the current database structure:
 
-``` console
-> php app/console propel:migration:generate-diff
+```bash
+$ php app/console propel:migration:generate-diff
 ```
 
 Executes the migrations:
 
-``` console
-> php app/console propel:migration:migrate
+```bash
+$ php app/console propel:migration:migrate
 ```
 
 Executes the next migration up:
 
-``` console
-> php app/console propel:migration:migrate --up
+```bash
+$ php app/console propel:migration:migrate --up
 ```
 
 Executes the previous migration down:
 
-``` console
-> php app/console propel:migration:migrate --down
+```bash
+$ php app/console propel:migration:migrate --down
 ```
 
 Lists the migrations yet to be executed:
 
-``` console
-> php app/console propel:migration:status
+```bash
+$ php app/console propel:migration:status
 ```
 
 ### Table Manipulations ###
 
 You can drop one or several tables:
 
-``` console
-> php app/console propel:table:drop [--force] [--connection[="..."]] [table1] ... [tableN]
+```bash
+$ php app/console propel:table:drop [--force] [--connection[="..."]] [table1] ... [tableN]
 ```
 
-The table arguments define which table will be delete, by default all table.
+The table arguments define which table will be deleted, by default all tables
+are deleted.
 
 Note that the `--force` option is needed to actually execute the deletion.
 
@@ -301,14 +300,14 @@ Note that the `--force` option is needed to actually execute the deletion.
 
 Run the following command to generate an XML schema from your default database:
 
-``` console
-> php app/console propel:reverse
+```bash
+$ php app/console propel:reverse
 ```
 
 You can define which connection to use:
 
-``` console
-> php app/console propel:reverse --connection=default
+```bash
+$ php app/console propel:reverse --connection=default
 ```
 
 This will create your schema file under `./generated-schemas`. You need to
@@ -324,8 +323,8 @@ your database in production.
 
 The following command is designed to load fixtures:
 
-``` console
-> php app/console propel:fixtures:load [-d|--dir[="..."]] [--xml] [--sql] [--yml] [--connection[="..."]] [bundle]
+```bash
+$ php app/console propel:fixtures:load [-d|--dir[="..."]] [--xml] [--sql] [--yml] [--connection[="..."]] [bundle]
 ```
 
 As you can see, there are many options to allow you to easily load fixtures.
@@ -339,14 +338,14 @@ allows you to load only SQL fixtures. The `--yml` parameter allows you to load
 only YAML fixtures.
 
 You can mix `--xml`, `--yml` and `--sql` parameters to load XML, YAML and SQL
-fixtures at the same time. If none of this parameter are set all files YAML,
-XML and SQL in the directory will be load.
+fixtures at the same time. If none of this parameter are set all YAML, XML and
+SQL files in the directory will be loaded.
 
 You can pass a bundle name to load fixtures from it. A bundle's name starts
 with *@* like *@AcmeDemoBundle*.
 
-``` console
-> php app/console propel:fixtures:load @AcmeDemoBundle
+```bash
+$ php app/console propel:fixtures:load @AcmeDemoBundle
 ```
 
 ### XML Fixtures ###
@@ -406,7 +405,7 @@ Acme\DemoBundle\Model\Book:
 
 The aim of this feature is to be able to mix both real and fake data in the same
 file. Fake data is interesting to quickly add data to your application, but most
-of the time you need to rely on real data. Integrating Faker in with your YAML
+of the time you need to rely on real data. Integrating Faker within your YAML
 files allows you to write strong fixtures efficiently.
 
 ## Dumping data ##
@@ -414,8 +413,8 @@ files allows you to write strong fixtures efficiently.
 You can dump data from your database into YAML fixtures file by using this
 command:
 
-``` console
-> php app/console propel:fixtures:dump [--connection[="..."]]
+```bash
+$ php app/console propel:fixtures:dump [--connection[="..."]]
 ```
 
 Dumped files will be written in the fixtures directory: `app/propel/fixtures/`
@@ -423,48 +422,6 @@ with the following name: `fixtures_99999.yml` where 99999 is a timestamp.
 
 Once done, you will be able to load these files by using the
 `propel:fixtures:load command`.
-
-## ACL Implementation ##
-
-The *PropelBundle* provides a model-based implementation of the Security
-components' interfaces. To make us of this *AuditableAclProvider* you only need to
-change your security configuration.
-
-``` yaml
-security:
-    acl:
-        provider: propel.security.acl.provider
-```
-
-This will switch the provider to be the *AuditableAclProvider* of the
-*PropelBundle*.
-
-The auditing of this provider is set to a sensible default. It will audit all
-ACL failures but no success by default. If you also want to audit successful
-authorizations, you need to update the auditing of the given ACL accordingly.
-
-After adding the provider, you only need to run the `propel:acl:init` command in
-order to get the model generated. If you already got an ACL database, the schema
-of the *PropelBundle* is compatible with the default schema of Symfony2.
-
-### Separate database connection for ACL ###
-
-In case you want to use a different database for your ACL than your business model, you only need to configure this service.
-
-``` yaml
-services:
-    propel.security.acl.connection:
-        class:          Propel\Runtime\Connection\DebugPDO
-        factory_class:  Propel\Runtime\Propel
-        factory_method: getConnection
-        arguments:
-            - "acl"
-```
-
-The *PropelBundle* looks for this service, and if given uses the provided
-connection for all ACL related operations. The given argument (`acl` in the
-example) is the name of the connection to use, as defined in your runtime
-configuration.
 
 ## The PropelParamConverter ##
 
@@ -537,7 +494,7 @@ public function myAction(Post $post)
 
 ### Custom mapping ###
 
-You can map route parameters directly to model column to be use for filtering.
+You can map route parameters directly to model columns to be used for filtering.
 
 If you have a route like `/my-route/{postUniqueName}/{AuthorId}` the *mapping* option
 overwrite any other automatic mapping.

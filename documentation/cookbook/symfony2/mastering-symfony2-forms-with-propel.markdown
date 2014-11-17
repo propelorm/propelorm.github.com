@@ -1,6 +1,7 @@
 ---
 layout: documentation
 title: Mastering Symfony2 Forms With Propel
+configuration: true
 ---
 
 # Mastering Symfony2 Forms With Propel #
@@ -155,8 +156,6 @@ valid:
 }
 ```
 
-> **Note**<br>`handleRequest` has been introduced in Symfony 2.3. Be sure to use `bindRequest` instead in previous versions of Symfony.
-
 If, for some reason, you don't have access to your original `$book` object, you
 can fetch it from the form:
 
@@ -167,7 +166,7 @@ $book = $form->getData();
 ```
 
 As you can see, this is really easy to manage basic forms with both Symfony2 and
-Propel. But, in real life, this kind of forms is not enought and you'll probably
+Propel. But, in real life, this kind of forms is not enough and you'll probably
 manage objects with relations, this is the next part of this chapter.
 
 ## One-To-Many relations ##
@@ -363,8 +362,6 @@ You now have *BookClubList* and *BookListRel* objects. Let's create a
 *BookClubListType*:
 
 ``` php
-
-
 <?php
 // src/Acme/LibraryBundle/Form/Type/BookClubListType.php
 
@@ -420,7 +417,7 @@ view. You have to write some JavaScript for that.
 In the previous example, you always create new objects.
 
 If you want to select existing authors when you create new books, you'll have to
-use a *Model* type. You can change the text wich be displayed by passing the
+use a *Model* type. You can change the text wich will be displayed by passing the
 property argument. If left blank, the `__toString()` method will be used.
 
 ``` php
@@ -444,7 +441,7 @@ class BookType extends AbstractType
         $builder->add('author', 'model', array(
             'class' => 'Acme\LibraryBundle\Model\Author',
             'property' => 'fullname',
-            'index_property' => 'slug' /** If you want to use a specifiq unique column for key to not expose the PK **/
+            'index_property' => 'slug' // If you want to use a specific unique column for key to not expose the PK
         ));
     }
 
@@ -469,38 +466,44 @@ You'll obtain the following result:
 ## Validation ##
 
 Using Propel in a Symfony2 project lacks a convenient way to use validation
-through annotation. Instead you have to use classic validation process, using a
+through annotations. Instead you have to use classic validation process, using a
 validation (in yml, xml or php format) file.
 
 In order to use this type of validation you must configure your application.
 
-In YAML:
+<div class="conftabs">
+<ul>
+  <li><a href="#tabyaml">YAML</a></li>
+  <li><a href="#tabxml">XML</a></li>
+  <li><a href="#tabphp">PHP</a></li>
+</ul>
 
-``` yaml
+<div id="tabyaml">
+{% highlight yaml %}
 # in app/config/config.yml
 framework:
     validation: { enabled: true }
-```
+{% endhighlight %}
+</div>
 
-In XML:
-
-``` xml
+<div id="tabxml">
+{% highlight xml %}
 <!-- in app/config/config.xml -->
 <framework:config>
     <framework:validation enabled="true" />
 </framework:config>
-```
+{% endhighlight %}
+</div>
 
-In PHP:
-
-``` php
-<?php
-
+<div id="tabphp">
+{% highlight php %}
 // in app/config/config.php
 $container->loadFromExtension('framework', array('validation' => array(
     'enabled' => true,
 )));
-```
+{% endhighlight %}
+</div>
+</div>
 
 Now just follow the official [documentation about validation](http://symfony.com/doc/current/book/validation.html)
 to know how to create your validation file.
@@ -532,9 +535,9 @@ BundleNamespace\Model\User:
         fields: [username, login]
 ```
 
-As many validator of this type as you want can be used.
+As many validators of this type as you want can be used.
 
 ## Summary ##
 
-The Symfony2 Form Component doesn't have anymore secrets for you and to use it
+The Symfony2 Form Component doesn't have anymore secrets for you and using it
 with Propel is really easy.
