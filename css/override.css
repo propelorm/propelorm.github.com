@@ -1,0 +1,5 @@
+/*override jquery ui style*/
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+    padding: 0.2em 1em;
+}
