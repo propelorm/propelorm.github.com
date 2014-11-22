@@ -1,4 +1,4 @@
-pygments:  true
+highlighter: pygments
 permalink: /blog/:year/:month/:day/:title.html
 markdown:  redcarpet
 exclude:   [ README.md, Gemfile ]
