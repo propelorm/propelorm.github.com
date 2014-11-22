@@ -295,7 +295,7 @@ You can learn more about the available build settings and their possible values 
 ### Setup UTF-8 ###
 
 If you want to save anything in UTF-8 in your database then depending on your database you have to set some extra configuration values.
- 
+
 <div class="conftabs">
 <ul>
 <li><a href="#tabMysql">MySQL</a></li>
@@ -364,11 +364,6 @@ propel:
 {% endhighlight %}
 </div>
 </div>
- 
-
-
- 
- 
 
 ### Using the `propel` Script To Build The SQL Code ###
 

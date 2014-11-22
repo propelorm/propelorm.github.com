@@ -81,7 +81,7 @@ return [
             'defaultConnection' => 'bookstore',
             'connections' => ['bookstore']
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>
@@ -138,7 +138,7 @@ runtime.connections[0]    = bookstore
 
 ;
 ; Generator section
-; 
+;
 generator.defaultConnection = bookstore
 generator.connections[0] = bookstore
 {% endhighlight %}

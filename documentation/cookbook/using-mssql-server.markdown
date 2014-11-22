@@ -84,7 +84,7 @@ return [
             'defaultConnection' => 'bookstore',
             'connections' => ['bookstore']
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>
@@ -137,7 +137,7 @@ runtime.connections[0]    = bookstore
 
 ;
 ; Generator section
-; 
+;
 generator.defaultConnection = bookstore
 generator.connections[0] = bookstore
 {% endhighlight %}
@@ -204,13 +204,13 @@ Sample configuration file for pdo_sybase:
 
 <div class="conftabs">
 <ul>
-<li><a href="#tabyaml1">propel.yaml</a></li>
-<li><a href="#tabphp1">propel.php</a></li>
-<li><a href="#tabjson1">propel.json</a></li>
-<li><a href="#tabini1">propel.ini</a></li>
-<li><a href="#tabxml1">propel.xml</a></li>
+<li><a href="#tabyaml-1">propel.yaml</a></li>
+<li><a href="#tabphp-1">propel.php</a></li>
+<li><a href="#tabjson-1">propel.json</a></li>
+<li><a href="#tabini-1">propel.ini</a></li>
+<li><a href="#tabxml-1">propel.xml</a></li>
 </ul>
-<div id="tabyaml1">
+<div id="tabyaml-1">
 {% highlight yaml %}
 propel:
   database:
@@ -232,7 +232,7 @@ propel:
           - bookstore
 {% endhighlight %}
 </div>
-<div id="tabphp1">
+<div id="tabphp-1">
 {% highlight php %}
 <?php
 
@@ -258,11 +258,11 @@ return [
             'defaultConnection' => 'bookstore',
             'connections' => ['bookstore']
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>
-<div id="tabjson1">
+<div id="tabjson-1">
 {% highlight json %}
 {
     "propel": {
@@ -290,7 +290,7 @@ return [
 }
 {% endhighlight %}
 </div>
-<div id="tabini1">
+<div id="tabini-1">
 {% highlight ini %}
 [propel]
 ;
@@ -311,12 +311,12 @@ runtime.connections[0]    = bookstore
 
 ;
 ; Generator section
-; 
+;
 generator.defaultConnection = bookstore
 generator.connections[0] = bookstore
 {% endhighlight %}
 </div>
-<div id="tabxml1">
+<div id="tabxml-1">
 {% highlight xml %}
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <config>
@@ -400,13 +400,13 @@ Sample configuration file for `pdo_dblib`:
 
 <div class="conftabs">
 <ul>
-<li><a href="#tabyaml2">propel.yaml</a></li>
-<li><a href="#tabphp2">propel.php</a></li>
-<li><a href="#tabjson2">propel.json</a></li>
-<li><a href="#tabini2">propel.ini</a></li>
-<li><a href="#tabxml2">propel.xml</a></li>
+<li><a href="#tabyaml-2">propel.yaml</a></li>
+<li><a href="#tabphp-2">propel.php</a></li>
+<li><a href="#tabjson-2">propel.json</a></li>
+<li><a href="#tabini-2">propel.ini</a></li>
+<li><a href="#tabxml-2">propel.xml</a></li>
 </ul>
-<div id="tabyaml2">
+<div id="tabyaml-2">
 {% highlight yaml %}
 propel:
   database:
@@ -428,7 +428,7 @@ propel:
           - bookstore
 {% endhighlight %}
 </div>
-<div id="tabphp2">
+<div id="tabphp-2">
 {% highlight php %}
 <?php
 
@@ -454,11 +454,11 @@ return [
             'defaultConnection' => 'bookstore',
             'connections' => ['bookstore']
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>
-<div id="tabjson2">
+<div id="tabjson-2">
 {% highlight json %}
 {
     "propel": {
@@ -486,7 +486,7 @@ return [
 }
 {% endhighlight %}
 </div>
-<div id="tabini2">
+<div id="tabini-2">
 {% highlight ini %}
 [propel]
 ;
@@ -507,12 +507,12 @@ runtime.connections[0]    = bookstore
 
 ;
 ; Generator section
-; 
+;
 generator.defaultConnection = bookstore
 generator.connections[0] = bookstore
 {% endhighlight %}
 </div>
-<div id="tabxml2">
+<div id="tabxml-2">
 {% highlight xml %}
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <config>
