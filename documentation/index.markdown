@@ -77,6 +77,12 @@ You can also look at [user contributed behaviors](../documentation/cookbook/user
 
 * [Working with Silex](../documentation/cookbook/silex/working-with-silex.html)
 
+### Working with Symfony2 ###
+
+* [Working with Symfony2 (Introduction)](../documentation/cookbook/symfony2/working-with-symfony2.html)
+* [Mastering Symfony2 Forms With Propel](../documentation/cookbook/symfony2/mastering-symfony2-forms-with-propel.html)
+* [The Symfony2 Security Component And Propel](../documentation/cookbook/symfony2/the-symfony2-security-component-and-propel.html)
+
 >**Tip**This is the up-to-date documentation for the last Propel version.
 > To access the old documentation, please visit
 [trac.propelorm.org](http://trac.propelorm.org) or
