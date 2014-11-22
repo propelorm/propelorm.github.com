@@ -19,7 +19,7 @@ providers:
             property: username
 ```
 
-Your User class have to implement the [UserInterface](https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/User/UserInterface.php):
+Your `User` class have to implement the [UserInterface](https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Security/Core/User/UserInterface.php):
 
 ``` php
 <?php

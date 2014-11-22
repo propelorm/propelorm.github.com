@@ -417,7 +417,7 @@ view. You have to write some JavaScript for that.
 In the previous example, you always create new objects.
 
 If you want to select existing authors when you create new books, you'll have to
-use a *Model* type. You can change the text wich will be displayed by passing the
+use a *Model* type. You can change the text which will be displayed by passing the
 property argument. If left blank, the `__toString()` method will be used.
 
 ``` php
@@ -497,6 +497,7 @@ framework:
 
 <div id="tabphp">
 {% highlight php %}
+<?php
 // in app/config/config.php
 $container->loadFromExtension('framework', array('validation' => array(
     'enabled' => true,

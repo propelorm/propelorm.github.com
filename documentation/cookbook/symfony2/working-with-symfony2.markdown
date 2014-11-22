@@ -224,7 +224,7 @@ $ php app/console propel:database:drop [--connection[=""]] [--force]
 
 Note that the `--force` option is needed to actually execute the SQL statements.
 
-### From Types ###
+### Form Types ###
 
 You can generate stub classes based on your `schema.xml` in a given bundle:
 
@@ -277,7 +277,7 @@ Executes the previous migration down:
 $ php app/console propel:migration:migrate --down
 ```
 
-Lists the migrations yet to be executed:
+Lists the pending migrations:
 
 ```bash
 $ php app/console propel:migration:status
@@ -291,7 +291,7 @@ You can drop one or several tables:
 $ php app/console propel:table:drop [--force] [--connection[="..."]] [table1] ... [tableN]
 ```
 
-The table arguments define which table will be deleted, by default all tables
+The table arguments define which tables will be deleted, by default all tables
 are deleted.
 
 Note that the `--force` option is needed to actually execute the deletion.
@@ -316,8 +316,8 @@ move/copy it to the corresponding bundle config directory. For example: `src/Acm
 ## The Fixtures ##
 
 Fixtures are data you usually write to populate your database during the
-development, or static content like menus, labels, ... you need by default in
-your database in production.
+development, or static content like menus, labels, etc. you need by default in
+your production database.
 
 ### Loading Fixtures ###
 
@@ -338,8 +338,8 @@ allows you to load only SQL fixtures. The `--yml` parameter allows you to load
 only YAML fixtures.
 
 You can mix `--xml`, `--yml` and `--sql` parameters to load XML, YAML and SQL
-fixtures at the same time. If none of this parameter are set all YAML, XML and
-SQL files in the directory will be loaded.
+fixtures at the same time. If none of these parameters are set, all YAML, XML
+and SQL files in the directory will be loaded.
 
 You can pass a bundle name to load fixtures from it. A bundle's name starts
 with *@* like *@AcmeDemoBundle*.
@@ -421,7 +421,7 @@ Dumped files will be written in the fixtures directory: `app/propel/fixtures/`
 with the following name: `fixtures_99999.yml` where 99999 is a timestamp.
 
 Once done, you will be able to load these files by using the
-`propel:fixtures:load command`.
+`propel:fixtures:load` command.
 
 ## The PropelParamConverter ##
 
@@ -442,8 +442,8 @@ public function myAction(Post $post)
 }
 ```
 
-Your request needs to have an id parameter or any field as parameter (slug,
-title, ...).
+Your request needs to have an id parameter or any field as parameter (e.g. slug,
+title).
 
 The *Annotation* is optional if your parameter is typed you could only have this:
 
@@ -528,8 +528,8 @@ public function myAction(Post $post)
 
 You can set multiple with `"with"={"Comments", "Author", "RelatedPosts"}`.
 
-The default join is an "*inner join*" but you can configure it to be a left join,
-right join or inner join :
+The default join is an "*inner join*" but you can configure it to be a left join
+or right join instead:
 
 ``` php
 <?php
@@ -542,7 +542,7 @@ public function myAction(Post $post)
 }
 ```
 
-Accepted parameters for join :
+Accepted parameters for join:
 
 * left, LEFT, left join, LEFT JOIN, left_join, LEFT_JOIN
 * right, RIGHT, right join, RIGHT JOIN, right_join, RIGHT_JOIN
