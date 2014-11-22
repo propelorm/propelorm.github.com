@@ -1,5 +1,11 @@
 /* Override jQuery UI style */
 
+/* Fix display bug with the left nav */
+.conftabs {
+    float: left;
+    width: 100%;
+}
+
 /* Main container */
 .ui-tabs {
     border-radius: 0px;
