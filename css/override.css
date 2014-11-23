@@ -1,0 +1,67 @@
+/* Override jQuery UI style */
+
+/* Fix display bug with the left nav */
+.conftabs {
+    float: left;
+    width: 100%;
+}
+
+/* Main container */
+.ui-tabs {
+    border-radius: 0px;
+    border: 0px;
+    background: transparent;
+}
+
+.ui-tabs .ui-tabs-nav {
+    border-width: 0px;
+    border-radius: 0px;
+    border-bottom: 1px solid #C3DCEB;
+    background: transparent;
+    padding: 0px;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    border: 0px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background: white;
+    margin: 0 5px -1px 0;
+    padding: 0px;
+}
+
+.ui-tabs .ui-tabs-nav li a {
+    background: #E7EFF5;
+    border: 0px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #222;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: "Open Sans", sans-serif;
+    padding: 0.2em 0.7em;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+    border: 1px solid #C3DCEB;
+    border-bottom-width: 0px;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active a {
+    background: white;
+}
+
+.ui-tabs .ui-tabs-nav li a:active,
+.ui-tabs .ui-tabs-nav li a:focus {
+    outline: none;
+}
+
+/* Content of the tabs */
+.ui-tabs .ui-tabs-panel {
+    border-radius: 0px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: 1px solid #C3DCEB;
+    border-top-width: 0px;
+    background-color: white;
+}
