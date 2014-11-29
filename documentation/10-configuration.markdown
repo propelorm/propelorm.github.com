@@ -7,7 +7,7 @@ title: Configuration
 Propel asks you to define some data to work properly, for instance: connection parameters, working directories, flags to take decisions and so on.
 You can pass these data via a *configuration file*.
 
-Propel configuration file simply describes an associative array of properties, with a well defined hierarchy. See [Configuration reference](../reference/configuration-file.html) for the complete list.
+Propel configuration file simply describes an associative array of properties, with a well defined hierarchy. See [Configuration reference](/documentation/reference/configuration-file.html) for the complete list.
 
 Propel configuration sub-system is based on [Symfony Config Component](http://symfony.com/doc/current/components/config/index.html).
 
@@ -15,13 +15,13 @@ Propel configuration sub-system is based on [Symfony Config Component](http://sy
 
 The name of the configuration file is `propel`, with one of the supported extensions (see [Supported formats paragraph](#supported-formats)). E.g. `propel.yaml` or `propel.json`.
 
-> **Note** <br /> Throughout this document, when we'll write `.ext` we intend "one of the supported extensions". 
+> **Note** <br /> Throughout this document, when we'll write `.ext` we intend "one of the supported extensions".
 
 Propel looks for its configuration file in the current directory or in a sub-directory named *conf* or *config*.
 Alternatively, you can choose a directory at your choiche and pass it to the command line as `--config-dir` parameter. For instance:
 
 ```bash
-# Propel looks for its configuration file in the current directory or 
+# Propel looks for its configuration file in the current directory or
 # in a subdir named 'conf' or 'config'
 vendor/bin/propel sql:build
 
@@ -84,7 +84,7 @@ return [
             'defaultConnection' => 'yoursource',
             'connections' => ['yoursource']
         ]
-    ]          
+    ]
 ];
 ```
 
@@ -168,7 +168,7 @@ runtime.connections[1]    = yoursource
 
 ;
 ; Generator section
-; 
+;
 generator.defaultConnection = yoursource
 generator.connections[0] = yoursource
 ```
@@ -340,13 +340,13 @@ propel:
 
 ### Special parameters: environment variables ###
 
-The parameter `env` is used to specify an environment variable. Many hosts give services or credentials via environment variables and you can use them in your configuration file via `env.variable` syntax. 
+The parameter `env` is used to specify an environment variable. Many hosts give services or credentials via environment variables and you can use them in your configuration file via `env.variable` syntax.
 In example, let's suppose to have the following environment variables:
 
 ```php
 <?php
 
-$_ENV['host']   = '192.168.0.54'; //Database host name 
+$_ENV['host']   = '192.168.0.54'; //Database host name
 $_ENV['dbName'] = 'myDB'; //Database name
 ```
 
@@ -381,7 +381,7 @@ Some properties are often overwritten by others with the same name, so we need t
 
 1. Default values are overwritten by `propel.ext.dist` values
 2. `propel.ext.dist` values are overwritten by `propel.ext` values
-3. `propel.ext` values are overwritten by *console* values 
+3. `propel.ext` values are overwritten by *console* values
 
 
 ## Internals ##
@@ -392,7 +392,7 @@ This class loads the configuration file, replace parameters and processes it, by
 `ConfigurationManager` class exposes three public methods to access the configuration properties:
 
 - `ConfigurationManager::get()` method returns the whole array of properties.
-- `ConfigurationManager::getSection($section)` method returns all the properties defined in `$section` section. **Note**: *$section* is a first level only section. 
+- `ConfigurationManager::getSection($section)` method returns all the properties defined in `$section` section. **Note**: *$section* is a first level only section.
 - `ConfigurationManager::getConfigProperty($name)` returns the value of the property named `$name`.
 
 `ConfigurationManager::get()` returns the whole array of configuration properties, and you can access them via the usual array syntax:
@@ -467,7 +467,7 @@ function getUcaseGeneralValue($name)
 //Exists! Return '2.0.0-DEV'
 echo getUcaseGeneralValue('version');
 
-//Doesn't exist: 
+//Doesn't exist:
 //raises an E_NOTICE 'Notice: Undefined index Barbapapa in .... line ....'
 echo getUcaseGeneralValue('Barbapapa');
 ```

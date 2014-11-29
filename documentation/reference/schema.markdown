@@ -145,7 +145,7 @@ According to the schema, `name` is the only required attribute.  Also, the `idMe
 * `baseClass` allows you to specify a class that the generated Propel objects should extend (in place of `propel.om.BaseObject`).
 * `heavyIndexing` adds indexes for each component of the primary key (when using composite primary keys).
 * `readOnly` suppresses the mutator/setter methods, save() and delete() methods.
-* `treeMode` is used to indicate that this table is part of a node tree. Currently the only supported values are `NestedSet` (see the [NestedSet behavior section](../documentation/behaviors/nested-set.html)) and `MaterializedPath` (deprecated).
+* `treeMode` is used to indicate that this table is part of a node tree. Currently the only supported values are `NestedSet` (see the [NestedSet behavior section](/documentation/behaviors/nested-set.html)) and `MaterializedPath` (deprecated).
 * `reloadOnInsert` is used to indicate that the object should be reloaded from the database when an INSERT is performed.  This is useful if you have triggers (or other server-side functionality like column default expressions) that alters the database row on INSERT.
 * `reloadOnUpdate` is used to indicate that the object should be reloaded from the database when an UPDATE is performed.  This is useful if you have triggers (or other server-side functionality like column default expressions) that alters the database row on UPDATE.
 * `allowPkInsert` can be used if you want to define the primary key of a new object being inserted. By default if idMethod is "native", Propel would throw an exception. However, in some cases this feature is useful, for example if you do some replication of data in an master-master environment. It defaults to false.
@@ -385,7 +385,7 @@ parameters in your `<table>` element.
    <vendor type="mysql">
       <parameter name="Engine" value="InnoDB"/>
    </vendor>
-   
+
    <table name="book">
       <!-- ... -->
    </table>

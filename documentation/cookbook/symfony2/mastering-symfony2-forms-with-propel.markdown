@@ -119,7 +119,7 @@ To render the form, you'll need to create a Twig template like below:
 
 You'll get this result:
 
-![Basic Form](../../../images/documentation/basic_form.png)
+![Basic Form](/images/documentation/basic_form.png)
 
 As such, the topic of persisting the Book object to the database is entirely
 unrelated to the topic of forms. But, if you've created a Book class with
@@ -244,7 +244,7 @@ class AuthorType extends AbstractType
 
 If you refresh your page, you'll now get the following result:
 
-![One to many Form](../../../images/documentation/one_to_many_form.png)
+![One to many Form](/images/documentation/one_to_many_form.png)
 
 When the user submits the form, the submitted data for the *Author* fields are
 used to construct an instance of *Author*, which is then set on the author field
@@ -410,7 +410,7 @@ to configure. Use the *BookClubListType* as you previously did with the *BookTyp
 Note the Symfony2 Form Component doesn't handle the add/remove abilities in the
 view. You have to write some JavaScript for that.
 
-![Many to many Form](../../../images/documentation/many_to_many_form.png)
+![Many to many Form](/images/documentation/many_to_many_form.png)
 
 ## The ModelType ##
 
@@ -461,7 +461,7 @@ class BookType extends AbstractType
 
 You'll obtain the following result:
 
-![Model type](../../../images/documentation/many_to_many_form_with_existing_objects.png)
+![Model type](/images/documentation/many_to_many_form_with_existing_objects.png)
 
 ## Validation ##
 

@@ -168,8 +168,8 @@ propel:
                     queries:        { query: 'INSERT INTO BAR ('hey', 'there')' }
 ```
 
-See the [configuration reference](../../reference/configuration-file.html) for further
-details.
+See the [configuration reference](/documentation/reference/configuration-file.html)
+for further details.
 
 ## XML Schema ##
 

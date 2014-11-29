@@ -9,7 +9,7 @@ Here is a list of properties that can be set to affect Propel behavior: how it b
 
 ## Where and how to Specify Properties ##
 
-You can specify configuration properties in a file, in the main directory of your project, named `propel.ext`, where `.ext` means: one of the supported extensions. See [Configuration chapter](../10-configuration.html) for further information.
+You can specify configuration properties in a file, in the main directory of your project, named `propel.ext`, where `.ext` means: one of the supported extensions. See [Configuration chapter](/documentation/10-configuration.html) for further information.
 
 First, some conventions:
 
@@ -193,7 +193,7 @@ Specifies any SQL statements to run when the database connection is initialized.
 
 #### Master/Slaves ####
 
-The `slaves` properties groups lists slave `connection` elements which provide support for configuring slave db servers -- when using Propel in a master-slave replication environment. See the [Master-Slave documentation](../cookbook/replication.html) for more information.
+The `slaves` properties groups lists slave `connection` elements which provide support for configuring slave db servers -- when using Propel in a master-slave replication environment. See the [Master-Slave documentation](/documentation/cookbook/replication.html) for more information.
 
 
 ```yaml

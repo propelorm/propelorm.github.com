@@ -9,7 +9,7 @@ The following topics are targeted for developers who already have a working data
 
 ## Working with Database Structures ##
 
-Propel uses an abstract XML schema file to represent databases (the [schema](../documentation/reference/schema)). Propel builds the SQL specific to a database based on this schema. Propel also provides a way to reverse-engineer the generic schema file based on database metadata.
+Propel uses an abstract XML schema file to represent databases (the [schema](/documentation/reference/schema.html)). Propel builds the SQL specific to a database based on this schema. Propel also provides a way to reverse-engineer the generic schema file based on database metadata.
 
 ### Creating an XML Schema from a DB Structure ###
 
@@ -27,7 +27,7 @@ To generate a schema file, create a new directory for your project & specify the
   $ propel reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
   ```
 
-  The given string is a DSN which will be passed to a PDO object. See the [Configuration reference](../reference/configuration-file.html#dsn) for further information.
+  The given string is a DSN which will be passed to a PDO object. See the [Configuration reference](/documentation/reference/configuration-file.html#dsn) for further information.
 
  3. Pay attention to any errors/warnings issued during the task execution and then examine the generated `schema.xml` file to make any corrections needed.
 
@@ -44,7 +44,7 @@ Because Propel has both the ability to create XML schema files based on existing
 To do this you would simply:
 
  1. Follow the steps above to create the `schema.xml` file from existing db.
- 2. Then you would change the target database type and specify connection URL for new database in the project's configuration file (see [configuration](../documentation/10-configuration.html) document)
+ 2. Then you would change the target database type and specify connection URL for new database in the project's configuration file (see [configuration](/documentation/10-configuration.html) document)
 
  3. And then run the `sql:build` task to generate the new DDL:
 

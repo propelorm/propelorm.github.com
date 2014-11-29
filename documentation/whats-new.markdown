@@ -183,7 +183,7 @@ include $configFilePath;
 
 ## Configuration ##
 
-The way of configuring Propel is changed. Now there's only one configuration file and more formats are supported. You can write your configuration file in plain php, ini, json, yaml or xml format. Read the [Configuration chapter](10-configuration.html) of the documetation and [configuration reference](../reference/configuration-file.html) chapter for a complete explanation of configuration properties.
+The way of configuring Propel is changed. Now there's only one configuration file and more formats are supported. You can write your configuration file in plain php, ini, json, yaml or xml format. Read the [Configuration chapter](10-configuration.html) of the documetation and [configuration reference](/documentation/reference/configuration-file.html) chapter for a complete explanation of configuration properties.
 
 ## Migrations and reverse engineering ##
 

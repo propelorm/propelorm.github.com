@@ -12,8 +12,7 @@ From this schema, Propel generates PHP classes, called "model classes", made of 
 
 The XML schema can also be used to generate SQL code to setup your database.
 Alternatively, you can generate the schema from an existing database (see the
-[Working with existing databases guide](../cookbook/working-with-existing-databases.html)
-for more details).
+[Working with existing databases guide](/documentation/cookbook/working-with-existing-databases.html) for more details).
 
 During build time, a developer also defines the connection settings for communicating with the database.
 
@@ -289,7 +288,7 @@ generator.connections[0] = bookstore
 
 Use your own database vendor driver, chosen among pgsql, mysql, sqlite, mssql, and oracle.
 
-You can learn more about the available build settings and their possible values in the  [configuration reference](../reference/configuration-file.html).
+You can learn more about the available build settings and their possible values in the  [configuration reference](/documentation/reference/configuration-file.html).
 
 
 ### Setup UTF-8 ###

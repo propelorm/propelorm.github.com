@@ -300,7 +300,7 @@ Multiple delegation also allows to implement a deep inheritance hierarchy. For i
 
 That way, you can call `setPoints()` as well as `setFirstName()` directly on `ProBasketballer`.
 
-The `delegate` behavior offers much more than just simulating Class Table Inheritance. Discover other use cases and complete reference in the [delegate behavior documentation](../documentation/behaviors/delegate.html).
+The `delegate` behavior offers much more than just simulating Class Table Inheritance. Discover other use cases and complete reference in the [delegate behavior documentation](/documentation/behaviors/delegate.html).
 
 ## Concrete Table Inheritance ##
 

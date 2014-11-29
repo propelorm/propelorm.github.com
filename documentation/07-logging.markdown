@@ -90,13 +90,13 @@ return [
                 ]
             ]
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>
 <div id="tabjson">
 {% highlight json %}
-{ 
+{
     "propel": {
         "runtime": {
             "log": {
@@ -204,7 +204,7 @@ $con->useDebug(true);
 
 You can also disable the debug mode at runtime, by calling `PropelPDO::useDebug(false)`. Using this method, you can choose to enable the debug mode for only one particular query, or for all queries.
 
-Alternatively, you can ask Propel to always enable the debug mode for a particular connection by using the `Propel\Runtime\Connection\DebugPDO` class instead of the default `ConnectionWrapper` class. This is accomplished in the configuration file, in the `classname` node of a given datasource connection (see the [configuration reference](../reference/config-file.html) for more details).
+Alternatively, you can ask Propel to always enable the debug mode for a particular connection by using the `Propel\Runtime\Connection\DebugPDO` class instead of the default `ConnectionWrapper` class. This is accomplished in the configuration file, in the `classname` node of a given datasource connection (see the [configuration reference](/documentation/reference/configuration-file.html) for more details).
 
 <div class="conftabs">
 <ul>
@@ -238,7 +238,7 @@ return [
                 ]
             ]
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>
@@ -390,13 +390,13 @@ return [
                 ]
             ]
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>
 <div id="tabjson-2">
 {% highlight json %}
-{ 
+{
     "propel": {
         "runtime": {
             "log": {
@@ -508,7 +508,7 @@ return [
                 ]
             ]
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>
@@ -615,7 +615,7 @@ return [
                 ]
             ]
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>
@@ -648,9 +648,9 @@ return [
 [propel]
 runtime.profiler.classname = "\Propel\Runtime\Util\Profiler"
 runtime.profiler.slowTreshold = 0.1
-runtime.profiler.details.time.precision = 3 
+runtime.profiler.details.time.precision = 3
 runtime.profiler.details.time.pad = 8
-runtime.profiler.details.memory.precision = 3 
+runtime.profiler.details.memory.precision = 3
 runtime.profiler.details.memory.pad = 8
 {% endhighlight %}
 </div>
@@ -716,7 +716,7 @@ return [
                 ]
             ]
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>

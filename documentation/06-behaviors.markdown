@@ -130,21 +130,21 @@ Then rebuild your model, and there you go: two columns, `created_at` and `update
 
 Propel currently bundles several behaviors. Check the behavior documentation for details on usage:
 
-* [aggregate_column](../behaviors/aggregate-column.html)
-* [archivable](../behaviors/archivable.html) (Replace the deprecated `soft-delete` behavior)
-* [auto_add_pk](../behaviors/auto-add-pk.html)
-* [delegate](../behaviors/delegate.html)
-* [i18n](../behaviors/i18n.html)
-* [nested_set](../behaviors/nested-set.html)
-* [query_cache](../behaviors/query-cache.html)
-* [sluggable](../behaviors/sluggable.html)
-* [sortable](../behaviors/sortable.html)
-* [timestampable](../behaviors/timestampable.html)
-* [validate](../behaviors/validate.html)
-* [versionable](../behaviors/versionable.html)
+* [aggregate_column](/documentation/behaviors/aggregate-column.html)
+* [archivable](/documentation/behaviors/archivable.html) (Replace the deprecated `soft-delete` behavior)
+* [auto_add_pk](/documentation/behaviors/auto-add-pk.html)
+* [delegate](/documentation/behaviors/delegate.html)
+* [i18n](/documentation/behaviors/i18n.html)
+* [nested_set](/documentation/behaviors/nested-set.html)
+* [query_cache](/documentation/behaviors/query-cache.html)
+* [sluggable](/documentation/behaviors/sluggable.html)
+* [sortable](/documentation/behaviors/sortable.html)
+* [timestampable](/documentation/behaviors/timestampable.html)
+* [validate](/documentation/behaviors/validate.html)
+* [versionable](/documentation/behaviors/versionable.html)
 * And [concrete_inheritance](./08-inheritance.html), documented in the Inheritance Chapter even if it's a behavior
 
-You can also look at [user contributed behaviors](../cookbook/user-contributed-behaviors.html).
+You can also look at [user contributed behaviors](/documentation/cookbook/user-contributed-behaviors.html).
 
 Behaviors bundled with Propel require no further installation and work out of the box.
 
@@ -361,7 +361,7 @@ You can set the additional class to be generated in a subfolder by implementing 
 ### Providing Behaviors Through Composer ###
 
 The normal way of having behaviors available in your tables is to tell Propel explicitly which name is for which class (see
-[Using Behaviors](./06-behaviors.html#using-behaviors)) or by using the full FQCN as name.
+[Using Behaviors](#using-behaviors)) or by using the full FQCN as name.
 
 For behaviors you install through composer there's a third method by just using the behavior name defined in the external behavior composer.json file.
 This is only possible for behaviors that do support this kind of feature.

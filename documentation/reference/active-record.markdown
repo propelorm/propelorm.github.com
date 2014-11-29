@@ -104,7 +104,7 @@ class Book extends BaseBook
 }
 ```
 
->**Tip**See the [PHP 5.3 Namespaces](../documentation/cookbook/namespaces) chapter for more information on namespace usage in Propel.
+>**Tip**See the [PHP 5.3 Namespaces](/documentation/cookbook/namespaces.html) chapter for more information on namespace usage in Propel.
 
 ## Generated Getter and Setter ##
 
@@ -221,7 +221,8 @@ Based on this schema, Propel defines:
 * A many-to-one relationship from the `Book` class to the `Author` class
 * A one-to-many relationship from the `Author` class to the `Book` class
 
-See the [Relationships documentation](/documentation/04-relationships) for more details.
+See the [Relationships documentation](/documentation/04-relationships.html)
+for more details.
 
 For each relationship, Propel generates additional getters and setters.
 
@@ -423,7 +424,7 @@ class GeographicCoordinates
 }
 ```
 
->**Tip**OBJECT columns are searchable, given an object as the search value. See the [ColumnFilterMethods Query reference](./model-criteria#column-filter-methods) for more details.
+>**Tip**OBJECT columns are searchable, given an object as the search value. See the [ColumnFilterMethods Query reference](model-criteria.html#column-filter-methods) for more details.
 
 ### ARRAY columns ###
 
@@ -449,7 +450,7 @@ $book->removeTag('russian');
 print_r($book->getTags()); // array('novel', 'romantic')
 ```
 
->**Tip**ARRAY columns are searchable, given an array or a scalar as the search value. See the [ColumnFilterMethods Query reference](./model-criteria#column-filter-methods) for more details.
+>**Tip**ARRAY columns are searchable, given an array or a scalar as the search value. See the [ColumnFilterMethods Query reference](model-criteria.html#column-filter-methods) for more details.
 
 ## Generic Getters and Setters ##
 
@@ -540,7 +541,7 @@ if ($book->validate()) {
 }
 ```
 
-See the [Validate behavior documentation](../documentation/behaviors/validate.html) for more details.
+See the [Validate behavior documentation](/documentation/behaviors/validate.html) for more details.
 
 ## Import and Export Capabilities ##
 
@@ -642,7 +643,7 @@ echo $author->getVirtualColumn('AuthorName'); // Tolstoi
 echo $author->getAuthorName(); // Tolstoi
 ```
 
-See the [Query API reference](./model-criteria) for more details.
+See the [Query API reference](model-criteria.html) for more details.
 
 ## Lifecycle Events ##
 

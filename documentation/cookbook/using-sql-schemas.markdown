@@ -82,8 +82,8 @@ Of course, you can make queries spanning across several schemas.
 
 Propel provides other features to organize your model:
 
-* _Packages_ are subdirectories in which Model classes get generated (see [Multi-Component Data Model](./multi-component-data-model.html))
-* _Namespaces_ are actual PHP5.3 namespaces for generated Model classes (see [PHP 5.3 Namespaces](./namespaces.html))
+* _Packages_ are subdirectories in which Model classes get generated (see [Multi-Component Data Model](multi-component-data-model.html))
+* _Namespaces_ are actual PHP5.3 namespaces for generated Model classes (see [PHP 5.3 Namespaces](namespaces.html))
 
 You can easily tell Propel to copy the `schema` attribute to both the `package` and the `namespace` attributes, in order to reproduce the SQL organization at the PHP level. To that extent, modify the following settings in your *configuration file*:
 
@@ -116,7 +116,7 @@ return [
                 'autoNamespace' => true,
             ]
         ]
-    ]          
+    ]
 ];
 {% endhighlight %}
 </div>
@@ -137,7 +137,7 @@ return [
 [propel]
 ;
 ; Generator section
-; 
+;
 generator.schema.autoPackage = true
 generator.schema.autoNamespace = true
 {% endhighlight %}
