@@ -324,27 +324,27 @@ To get the old behavior use `Propel\Runtime\Util\PropelModelPager::getNbResults(
 
 #### But also... ####
 
-The following methods have been removed:
+The following methods have been removed (under the `Propel` namespace):
 
-* `Propel\Generator\Model\Table::containsColumn`
-* `Propel\Generator\Model\VendorInfo::addParameter`
-* `Propel\Generator\Model\Column::setTypeFromString`
-* `Propel\Generator\Model\Column::getPropelType`
-* `Propel\Generator\Model\Column::getDefaultSetting`
-* `Propel\Generator\Model\Column::makeList`
-* `Propel\Generator\Model\ForeignKey::getLocalColumnNames`
-* `Propel\Generator\Model\ForeignKey::getForeignColumnNames`
-* `Propel\Generator\Model\Table::printPrimaryKey`
-* `Propel\Generator\Model\Table::printList`
-* `Propel\Generator\Model\PropelTypes::getCreoleTypes`
-* `Propel\Runtime\Om\BaseObject`
+* `Generator\Model\Table::containsColumn`
+* `Generator\Model\VendorInfo::addParameter`
+* `Generator\Model\Column::setTypeFromString`
+* `Generator\Model\Column::getPropelType`
+* `Generator\Model\Column::getDefaultSetting`
+* `Generator\Model\Column::makeList`
+* `Generator\Model\ForeignKey::getLocalColumnNames`
+* `Generator\Model\ForeignKey::getForeignColumnNames`
+* `Generator\Model\Table::printPrimaryKey`
+* `Generator\Model\Table::printList`
+* `Generator\Model\PropelTypes::getCreoleTypes`
+* `Runtime\Om\BaseObject`
 
-The following methods have been renamed:
+The following methods and classes have been renamed (under the `Propel` namespace):
 
-| Replace....                                     | With...          |
-| ----------------------------------------------- | ---------------- |
-| `Propel\Generator\Model\ScopedElement`          | `Propel\Generator\Model\ScopedMappingModel` |
-| `Propel\Generator\Model\XmlElement`             | `Propel\Generator\Model\MappingModel` |
-| `Propel\Generator\Model\XmlElement::loadFromXml`| `Propel\Generator\Model\MappingModel::loadMapping` |
-| `Propel\Generator\Model\Column::printSize`      | `Propel\Generator\Model\Column::getSizeDefinition` |
-| `Propel\Generator\Model\Domain::printSize`      | `Propel\Generator\Model\Domain::getSizeDefinition` |
+| Replace....                               | With...                                     |
+| ----------------------------------------- | ------------------------------------------- |
+| `Generator\Model\ScopedElement`           | `Generator\Model\ScopedMappingModel`        |
+| `Generator\Model\XmlElement`              | `Generator\Model\MappingModel`              |
+| `Generator\Model\XmlElement::loadFromXml` | `Generator\Model\MappingModel::loadMapping` |
+| `Generator\Model\Column::printSize`       | `Generator\Model\Column::getSizeDefinition` |
+| `Generator\Model\Domain::printSize`       | `Generator\Model\Domain::getSizeDefinition` |
