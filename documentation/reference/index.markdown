@@ -1,14 +1,16 @@
 ---
 layout: default
-title: The Reference Guide
+title: The Reference Guides
 ---
 
-# The Reference Guide #
+# The Reference Guides #
 
-[Active Record Reference](active-record.html)
+* [Active Record Reference](active-record.html)
 
-[Propel Query Reference](model-criteria.html)
+* [Propel Query Reference](model-criteria.html)
 
-[Configuration File](configuration-file.html)
+* [Configuration File](configuration-file.html)
 
-[Database Schema](schema.html)
+* [Database Schema](schema.html)
+
+* [Compatibility Index](compatibility-index.html)
