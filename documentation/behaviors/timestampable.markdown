@@ -90,3 +90,11 @@ $b->save();
 echo $b->getMyCreateDate(); // 2009-10-02 18:14:23
 echo $b->getMyUpdateDate(); // 2009-10-02 18:14:25
 ```
+
+It is also possible to to completely skip the update column.
+
+```xml
+<behavior name="timestampable">
+  <parameter name="disable_updated_at" value="true" />
+</behavior>
+```
