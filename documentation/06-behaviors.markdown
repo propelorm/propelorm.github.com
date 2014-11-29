@@ -176,6 +176,13 @@ If the columns already exist in your schema, a behavior is smart enough not to a
 </table>
 ```
 
+It is also possible to skip update column.
+```xml
+  <behavior name="timestampable">
+    <parameter name="disable_updated_at" value="true" />
+  </behavior>
+```
+
 ## Using Behaviors ##
 
 Propel installs third-part behaviors via **Composer**.
