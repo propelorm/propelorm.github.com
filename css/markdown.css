@@ -146,3 +146,9 @@
     margin: 0 0.5em;
     border: none;
 }
+
+.markdown hr {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+}
