@@ -347,4 +347,5 @@ The following methods and classes have been renamed (under the `Propel` namespac
 | `Generator\Model\XmlElement`              | `Generator\Model\MappingModel`              |
 | `Generator\Model\XmlElement::loadFromXml` | `Generator\Model\MappingModel::loadMapping` |
 | `Generator\Model\Column::printSize`       | `Generator\Model\Column::getSizeDefinition` |
+| `Generator\Model\Column::getStudlyPhpName`| `Generator\Model\Column::getCamelCaseName`  |
 | `Generator\Model\Domain::printSize`       | `Generator\Model\Domain::getSizeDefinition` |
