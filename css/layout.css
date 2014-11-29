@@ -13,7 +13,6 @@ b, strong {
 }
 
 header {
-    height: 100px;
     line-height: 100px;
     background: #f7f5f4;
     background: -moz-linear-gradient(top,  #f7f5f4 0%, #ededed 100%);
