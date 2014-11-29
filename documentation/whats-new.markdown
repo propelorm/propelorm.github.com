@@ -339,12 +339,12 @@ The following methods have been removed:
 * `Propel\Generator\Model\PropelTypes::getCreoleTypes`
 * `Propel\Runtime\Om\BaseObject`
 
-The following methods have been renamend:
+The following methods have been renamed:
 
-    Replace....                                    With...
-
-    Propel\Generator\Model\ScopedElement             Propel\Generator\Model\ScopedMappingModel
-    Propel\Generator\Model\XmlElement                Propel\Generator\Model\MappingModel
-    Propel\Generator\Model\XmlElement::loadFromXml   Propel\Generator\Model\MappingModel::loadMapping
-    Propel\Generator\Model\Column::printSize         Propel\Generator\Model\Column::getSizeDefinition
-    Propel\Generator\Model\Domain::printSize         Propel\Generator\Model\Domain::getSizeDefinition
+| Replace....                                     | With...          |
+| ----------------------------------------------- | ---------------- |
+| `Propel\Generator\Model\ScopedElement`          | `Propel\Generator\Model\ScopedMappingModel` |
+| `Propel\Generator\Model\XmlElement`             | `Propel\Generator\Model\MappingModel` |
+| `Propel\Generator\Model\XmlElement::loadFromXml`| `Propel\Generator\Model\MappingModel::loadMapping` |
+| `Propel\Generator\Model\Column::printSize`      | `Propel\Generator\Model\Column::getSizeDefinition` |
+| `Propel\Generator\Model\Domain::printSize`      | `Propel\Generator\Model\Domain::getSizeDefinition` |
