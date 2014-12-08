@@ -23,7 +23,7 @@ You need to install the following PHP modules:
 Increase the memory_limit in your php.ini to something very high:
 
 ```
-memoy_limit = 512M
+memory_limit = 512M
 ```
 
 Set a default timezone in your `php.ini`:
