@@ -50,7 +50,7 @@ Parameters
 * **propel.config_file** (optional): The name of Propel configuration file
 with full path. Default is `/full/project/path/generated-conf/config.php`.
 
-> **Tip**<br>It's strongly recommanded to use absolute paths for previous option.
+> **Tip**<br>It's strongly recommended to use absolute paths for previous option.
 
 
 Services
