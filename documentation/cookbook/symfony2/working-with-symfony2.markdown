@@ -234,7 +234,7 @@ $ php app/console propel:form:generate [-f|--force] bundle [models1] ... [models
 
 It will write Form Type classes in `src/YourVendor/YourBundle/Form/Type`.
 
-You can choose which Form Type to build by specifing Model names:
+You can choose which Form Type to build by specifying Model names:
 
 ```bash
 $ php app/console propel:form:generate @AcmeDemoBundle Book Author
