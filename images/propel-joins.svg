@@ -1,0 +1,140 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1400px" height="850px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-miterlimit:1.5;">
+    <g>
+        <g id="left excluding Join">
+            <g>
+                <path d="M171.236,476.316C226.464,476.316 271.236,521.087 271.236,576.316C271.236,631.544 226.464,676.316 171.236,676.316C116.007,676.316 71.2356,631.544 71.2356,576.316C71.2356,521.087 116.007,476.316 171.236,476.316Z" style="fill:rgb(173,0,0);stroke-width:2px;stroke:black;"/>
+            </g>
+            <g id="(Ellipse)">
+                <path d="M275.586,477.278C330.814,477.278 375.586,522.049 375.586,577.278C375.586,632.506 330.814,677.278 275.586,677.278C220.357,677.278 175.586,632.506 175.586,577.278C175.586,522.049 220.357,477.278 275.586,477.278Z" style="fill:white;stroke-width:2px;stroke:black;"/>
+            </g>
+            <g id="(Ellipse)1">
+                <path d="M171.236,476.316C226.464,476.316 271.236,521.087 271.236,576.316C271.236,631.544 226.464,676.316 171.236,676.316C116.007,676.316 71.2356,631.544 71.2356,576.316C71.2356,521.087 116.007,476.316 171.236,476.316Z" style="fill:none;stroke-width:2px;stroke:black;"/>
+            </g>
+            <g>
+                <text x="127.317px" y="592.717px" style="font-family:Source Code Pro;font-size:48px;font-weight:700;fill:black;">A</text>
+            </g>
+            <g>
+                <text x="285.014px" y="591.368px" style="font-family:Source Code Pro;font-size:48px;font-weight:700;fill:black;">B</text>
+            </g>
+            <g>
+                <text x="74.4682px" y="707.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">AQuery::create() </text>
+                <text x="74.4682px" y="727.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">  -&gt;useBQuery(Criteri</text>
+                <text x="326.468px" y="727.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">a</text>
+                <text x="339.668px" y="727.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">::LEFT_JOIN) </text>
+                <text x="74.4682px" y="747.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">    -&gt;ﬁlterById(null, Criteria::ISNULL) </text>
+                <text x="74.4682px" y="767.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">  -&gt;endUse() </text>
+                <text x="74.4682px" y="787.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">  -&gt;ﬁnd();</text>
+            </g>
+            <g>
+                <g>
+                    <text x="101.628px" y="452.815px" style="font-family:Source Code Pro;font-size:21.3333px;font-weight:600;fill:black;">Left excluding JOIN</text>
+                </g>
+            </g>
+        </g>
+        <g id="right excluding Join">
+            <g id="(Ellipse)2">
+                <path d="M1105.59,477.278C1160.81,477.278 1205.59,522.049 1205.59,577.278C1205.59,632.506 1160.81,677.278 1105.59,677.278C1050.36,677.278 1005.59,632.506 1005.59,577.278C1005.59,522.049 1050.36,477.278 1105.59,477.278Z" style="fill:rgb(173,0,0);stroke-width:2px;stroke:black;"/>
+            </g>
+            <g>
+                <path d="M1001.24,476.316C1056.46,476.316 1101.24,521.087 1101.24,576.316C1101.24,631.544 1056.46,676.316 1001.24,676.316C946.007,676.316 901.236,631.544 901.236,576.316C901.236,521.087 946.007,476.316 1001.24,476.316Z" style="fill:white;stroke-width:2px;stroke:black;"/>
+            </g>
+            <g id="(Ellipse)3">
+                <path d="M1105.24,477.316C1160.46,477.316 1205.24,522.087 1205.24,577.316C1205.24,632.544 1160.46,677.316 1105.24,677.316C1050.01,677.316 1005.24,632.544 1005.24,577.316C1005.24,522.087 1050.01,477.316 1105.24,477.316Z" style="fill:none;stroke-width:2px;stroke:black;"/>
+            </g>
+            <g>
+                <text x="957.317px" y="592.717px" style="font-family:Source Code Pro;font-size:48px;font-weight:700;fill:black;">A</text>
+            </g>
+            <g>
+                <text x="1115.01px" y="591.368px" style="font-family:Source Code Pro;font-size:48px;font-weight:700;fill:black;">B</text>
+            </g>
+            <g>
+                <text x="904.468px" y="707.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">AQuery::create() </text>
+                <text x="904.468px" y="727.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">  -&gt;rightJoinB() </text>
+                <text x="904.468px" y="747.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">  -&gt;ﬁlterById(null, Criteria::ISNULL) </text>
+                <text x="904.468px" y="767.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">  -&gt;ﬁnd();</text>
+            </g>
+            <g>
+                <g>
+                    <text x="925.228px" y="452.815px" style="font-family:Source Code Pro;font-size:21.3333px;font-weight:600;fill:black;">Right excluding JOIN</text>
+                </g>
+            </g>
+        </g>
+        <g id="inner Join">
+            <g id="(Ellipse)4">
+                <image x="478" y="323" width="309px" height="205px" xlink:href="data:image/png;base64,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"/>
+            </g>
+            <g>
+                <path d="M580.325,324.878C635.553,324.878 680.325,369.65 680.325,424.878C680.325,480.107 635.553,524.878 580.325,524.878C525.096,524.878 480.325,480.107 480.325,424.878C480.325,369.65 525.096,324.878 580.325,324.878Z" style="fill:none;stroke-width:2px;stroke:black;"/>
+            </g>
+            <g id="(Ellipse)5">
+                <path d="M684.675,325.841C739.904,325.841 784.675,370.612 784.675,425.841C784.675,481.069 739.904,525.841 684.675,525.841C629.447,525.841 584.675,481.069 584.675,425.841C584.675,370.612 629.447,325.841 684.675,325.841Z" style="fill:none;stroke-width:2px;stroke:black;"/>
+            </g>
+            <g>
+                <text x="536.406px" y="441.279px" style="font-family:Source Code Pro;font-size:48px;font-weight:700;fill:black;">A</text>
+            </g>
+            <g>
+                <text x="694.103px" y="439.931px" style="font-family:Source Code Pro;font-size:48px;font-weight:700;fill:black;">B</text>
+            </g>
+            <g>
+                <text x="526.557px" y="556.242px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">AQuery::create() </text>
+                <text x="526.557px" y="576.242px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">  -&gt;innerJoinB() </text>
+                <text x="526.557px" y="596.242px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">  -&gt;ﬁnd();</text>
+            </g>
+            <g>
+                <g>
+                    <text x="568.318px" y="301.377px" style="font-family:Source Code Pro;font-size:21.3333px;font-weight:600;fill:black;">Inner JOIN</text>
+                </g>
+            </g>
+        </g>
+        <g id="left Join">
+            <g>
+                <path d="M171.236,96.3158C226.464,96.3158 271.236,141.087 271.236,196.316C271.236,251.544 226.464,296.316 171.236,296.316C116.007,296.316 71.2356,251.544 71.2356,196.316C71.2356,141.087 116.007,96.3158 171.236,96.3158Z" style="fill:rgb(173,0,0);stroke-width:2px;stroke:black;"/>
+            </g>
+            <g id="(Ellipse)6">
+                <path d="M275.586,97.278C330.814,97.278 375.586,142.049 375.586,197.278C375.586,252.506 330.814,297.278 275.586,297.278C220.357,297.278 175.586,252.506 175.586,197.278C175.586,142.049 220.357,97.278 275.586,97.278Z" style="fill:none;stroke-width:2px;stroke:black;"/>
+            </g>
+            <g>
+                <text x="127.317px" y="212.717px" style="font-family:Source Code Pro;font-size:48px;font-weight:700;fill:black;">A</text>
+            </g>
+            <g>
+                <text x="285.014px" y="211.368px" style="font-family:Source Code Pro;font-size:48px;font-weight:700;fill:black;">B</text>
+            </g>
+            <g>
+                <text x="114.468px" y="333.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">AQuery::create() </text>
+                <text x="114.468px" y="353.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">  -&gt;leftJoinB() </text>
+                <text x="114.468px" y="373.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">  -&gt;ﬁnd();</text>
+            </g>
+            <g>
+                <g>
+                    <text x="168.689px" y="72.8146px" style="font-family:Source Code Pro;font-size:21.3333px;font-weight:600;fill:black;">Left JOIN</text>
+                </g>
+            </g>
+        </g>
+        <g id="right join">
+            <g>
+                <path d="M1105.59,97.278C1160.81,97.278 1205.59,142.049 1205.59,197.278C1205.59,252.506 1160.81,297.278 1105.59,297.278C1050.36,297.278 1005.59,252.506 1005.59,197.278C1005.59,142.049 1050.36,97.278 1105.59,97.278Z" style="fill:rgb(173,0,0);stroke-width:2px;stroke:black;"/>
+            </g>
+            <g>
+                <path d="M1001.24,96.3158C1056.46,96.3158 1101.24,141.087 1101.24,196.316C1101.24,251.544 1056.46,296.316 1001.24,296.316C946.007,296.316 901.236,251.544 901.236,196.316C901.236,141.087 946.007,96.3158 1001.24,96.3158Z" style="fill:none;stroke-width:2px;stroke:black;"/>
+            </g>
+            <g>
+                <text x="957.317px" y="212.717px" style="font-family:Source Code Pro;font-size:48px;font-weight:700;fill:black;">A</text>
+            </g>
+            <g>
+                <text x="1115.01px" y="211.368px" style="font-family:Source Code Pro;font-size:48px;font-weight:700;fill:black;">B</text>
+            </g>
+            <g>
+                <text x="944.468px" y="327.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">AQuery::create() </text>
+                <text x="944.468px" y="347.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">    -&gt;rightJoinB() </text>
+                <text x="944.468px" y="367.68px" style="font-family:Source Code Pro;font-size:20px;font-weight:300;fill:black;">    -&gt;ﬁnd();</text>
+            </g>
+            <g>
+                <g>
+                    <text x="988.713px" y="72.7436px" style="font-family:Source Code Pro;font-size:21.3333px;font-weight:600;fill:black;">Right JOIN</text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
