@@ -22,7 +22,7 @@ Then touch a `composer.json` file with the following content
 ```json
 {
     "require": {
-        "propel/propel": ">= 2.0"
+        "propel/propel": "~2.0@dev"
     }
 }
 ```
