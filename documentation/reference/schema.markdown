@@ -314,7 +314,7 @@ Here are the Propel column types with some example mappings to native database a
 |-----------|---------------------------------------|-------------------------------|-----------------------
 |DATE       |Date (e.g. YYYY-MM-DD)                 |DATE                           |DateTime object
 |TIME       |Time (e.g. HH:MM:SS)                   |TIME                           |DateTime object
-|TIMESTAMP  |Date + time (e.g. YYYY-MM-DD HH:MM:SS) |TIMESTAMP                      |DateTime object
+|TIMESTAMP  |Date + time (e.g. YYYY-MM-DD HH:MM:SS) |DATETIME                       |DateTime object
 
 ### Other Types ###
 
