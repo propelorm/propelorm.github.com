@@ -4,8 +4,8 @@ body, html {
     font-weight: 300;
     padding: 0;
     margin: 0;
-    color: #444;
-    font-size: 14px;
+    color: #1A1A1A;
+    font-size: 15px;
 }
 
 b, strong {
@@ -94,15 +94,15 @@ header ul li {
 }
 
 header li a {
-    padding: 2px 8px;
+    padding: 3px 10px;
 }
 
 header li a.current {
     display: inline-block;
     background-color: #57b8ee;
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
     line-height: 25px;
     color: white;
 }
@@ -132,11 +132,11 @@ h3 {
 }
 
 a, a:link {
-    color: #4498CE;
+    color: #2382BE;
 }
 
 a:hover {
-    color: #14374D;
+    color: #838383;
 }
 
 
@@ -156,7 +156,7 @@ a:hover {
 .header-line > .wrapper {
     text-align: right;
     line-height: 35px;
-    padding-right: 15px;
+    padding-right: 50px;
 }
 
 .header-line-big {
@@ -165,15 +165,15 @@ a:hover {
 
 .header-line a,
 .header-line a:link {
-    padding: 2px 8px;
+    padding: 4px 10px;
     display: inline-block;
     background-color: #57b8ee;
     color: white;
     text-decoration: none;
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    font-size: 14px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    font-size: 15px;
     line-height: 20px;
 }
 
@@ -221,9 +221,7 @@ a:hover {
 
 .home-features {
     position: relative;
-    background-color: #b0dfa5;
     background-color: #C3DCEB;
-    color: #275e1a;
     color: #333;
     font-size: 14px;
     line-height: 20px;
@@ -251,8 +249,8 @@ a:hover {
 
 .home-features-item h3,
 .home-features-item-last h3 {
-    color: white;
-    text-shadow: 0 1px 2px #6091ae;
+    color: #095F93;
+    text-shadow: 0 1px 2px #E4E4E4;
     font-size: 30px;
     font-weight: 300;
     padding-bottom: 10px;
@@ -377,6 +375,11 @@ footer a:link {
     color: #376e90;
 }
 
+
+footer a:hover {
+    color: #838383;
+}
+
 footer ul li {
     line-height: 80px;
 }
@@ -413,6 +416,7 @@ footer ul li {
 .documentation-navigation li.current a,
 .documentation-navigation li.current a:link {
     color: #3D922A;
+    text-decoration: underline;
 }
 
 .documentation-navigation li.current a:hover {
@@ -438,10 +442,12 @@ footer ul li {
 .documentation-content ul.toc a,
 .documentation-content ul.toc a:link {
     color: #2B6B96;
+    text-decoration: none;
 }
 
 .documentation-content ul.toc a:hover {
     color: black;
+    text-decoration: underline;
 }
 
 .documentation-content {
