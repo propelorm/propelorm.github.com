@@ -15,7 +15,7 @@ The recommended way to install this bundle is to rely on
 
 ``` json
 "require": {
-    "propel/propel": "2.0.*@dev"
+    "propel/propel": "2.0.*@dev",
     "propel/propel-bundle": "~2.0@dev"
 }
 ```
