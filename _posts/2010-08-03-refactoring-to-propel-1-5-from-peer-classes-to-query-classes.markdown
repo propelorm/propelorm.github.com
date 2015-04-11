@@ -172,7 +172,7 @@ class PluginsfSimpleForumTopicQuery extends BasesfSimpleForumTopicQuery
 
   public function getForUserCriteria($user_id)
   {
-    return this
+    return $this
       -&gt;filterByUserId($user_id)
       -&gt;orderByUpdatedAt('desc')
       -&gt;joinWith('sfSimpleForumForum');
@@ -219,7 +219,7 @@ class PluginsfSimpleForumTopicQuery extends BasesfSimpleForumTopicQuery
 
   public function getForUserCriteria($user)
   {
-    return this
+    return $this
       -&gt;filterByUser($user)
       -&gt;orderByUpdatedAt('desc')
       -&gt;joinWith('sfSimpleForumForum');
@@ -239,7 +239,7 @@ class PluginsfSimpleForumTopicQuery extends BasesfSimpleForumTopicQuery
 
   public function getForUserCriteria($user)
   {
-    return this
+    return $this
       -&gt;filterByUser($user)
       -&gt;lastUpdatedFirst()
       -&gt;joinWith('sfSimpleForumForum');
@@ -247,7 +247,7 @@ class PluginsfSimpleForumTopicQuery extends BasesfSimpleForumTopicQuery
 
   public function lastUpdatedFirst()
   {
-    return this-&gt;orderByUpdatedAt('desc');
+    return $this-&gt;orderByUpdatedAt('desc');
   } 
 }</pre></div>
 </div>
@@ -262,7 +262,7 @@ class PluginsfSimpleForumTopicQuery extends BasesfSimpleForumTopicQuery
 
   public function latestForUser($user)
   {
-    return this
+    return $this
       -&gt;filterByUser($user)
       -&gt;lastUpdatedFirst()
       -&gt;joinWith('sfSimpleForumForum');
@@ -270,7 +270,7 @@ class PluginsfSimpleForumTopicQuery extends BasesfSimpleForumTopicQuery
 
   public function lastUpdatedFirst()
   {
-    return this-&gt;orderByUpdatedAt('desc');
+    return $this-&gt;orderByUpdatedAt('desc');
   } 
 }</pre></div>
 </div>
