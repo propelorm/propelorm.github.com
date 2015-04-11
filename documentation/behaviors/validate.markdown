@@ -252,7 +252,7 @@ As we mentioned earlier, the `value` property contains a string, representing an
 The `options` key, inside the value array, is an array too and it can contain other arrays (i.e. see [Choice constraint](http://symfony.com/doc/current/reference/constraints/Choice.html), in which the `choices` option is also an array) and with YAML there's no problem.
 
 There is only one case we suggest to be careful.
-Any respectable validation library (also Symfony Validator Components) allows validations against regular expressions, by using the constraint [Regex](http://symfony.com/doc/current/reference/constraints/Regex.html).
+Any respectable validation library (also the Symfony Validator Component) allows validations against regular expressions, by using the constraint [Regex](http://symfony.com/doc/current/reference/constraints/Regex.html).
 As you can see in the Regex constraint documentation, the `options` parameter contains a `pattern` key, defining the pattern for validation.
 
 Usually however, a regular expression pattern contains a lot of special and escape characters so, in YAML definition, we need to include the pattern string in a pair of double-quotes (").
@@ -357,7 +357,7 @@ And if you want to specify an error message:
   </behavior>
 ```
 
->**Tip** Do you store date-times as strings? Use the `Date`, `Time` and `DateTime` constraints to prevent invalid PHP date-times from raising exceptions before any validations are performed. 
+>**Tip** Do you store date-times as strings? Use the `Date`, `Time` and `DateTime` constraints to prevent invalid PHP date-times from raising exceptions before any validations are performed.
 
 
 ## Custom validation constraints ##
@@ -444,7 +444,7 @@ Done! Now you can use your custom validator constraint in your `schema.xml` file
 ```
 
 **Note**: if you think your custom constraint is generic enough for community use, please submit it to the Propel team
-to include it in our bundled constraints (see [http://dotheweb.posterous.com/open-source-is-a-gift](http://www.redotheweb.com/2011/11/13/open-source-is-a-gift.html)).
+to include it in our bundled constraints (see <http://www.redotheweb.com/2011/11/13/open-source-is-a-gift.html>).
 
 ## Inside Symfony2 ##
 
