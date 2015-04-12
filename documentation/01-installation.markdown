@@ -87,7 +87,6 @@ The root directory of the Propel library includes the following folders:
 |Folders        |Explanations
 |---------------|----------------------------------------------------------------------
 |bin            |Contains three scripts that manage propel command line tool (depending of your operating system)
-|documentation  |The Propel documentation source
 |features       |Tests written with the Behat framework
 |resources      |Contains some files such as the database XSD or DTD
 |src            |The Propel source code. Pass over if you just want to use Propel, not to contribute.
