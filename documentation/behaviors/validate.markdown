@@ -9,12 +9,11 @@ The `validate` behavior provides validating capabilities to ActiveRecord objects
 Using this behavior, you can perform validation of an ActiveRecord and its related objects, checking if properties meet certain conditions.
 
 This behavior is based on [Symfony2 Validator Component](http://symfony.com/doc/current/book/validation.html).
-We recommend to read Symfony2 Validator Component documentation, in particular [Validator Constraints](http://symfony.com/doc/current/reference/constraints.html) chapter, before to start using this behavior.
+We recommend reading Symfony2 Validator Component documentation, in particular [Validator Constraints](http://symfony.com/doc/current/reference/constraints.html) chapter, before starting to use this behavior.
 
 ## Basic Usage ##
 
-In the `schema.xml`, use the `<behavior>` tag to add the `validate` behavior to a table.
-Then add validation rules via `<parameter>` tag.
+In the `schema.xml`, use the `<behavior>` tag to add the `validate` behavior and then add validation rules via the `<parameter>` tag to the table.
 
 ```xml
 <table name="author" description="Author Table">
@@ -33,17 +32,17 @@ Then add validation rules via `<parameter>` tag.
 </table>
 ```
 
-Let's now see the properties of `<parameter>` tag:
+Let's see the properties of `<parameter>` tag:
 
-* The `name` of each parameter is arbitrary.
-* The `value` of the parameters is an array in YAML format, in which we need to specify 3 values:
+* The `name` of each parameter doesn't relate to a column, just make sure it is unique.
+* The `value` of a parameter is an array in YAML format, in which we need to specify 3 values:
   * `column`: the column to validate
-  * `validator`: the name of [Validator Constraint](http://symfony.com/doc/current/reference/constraints.html)
+  * `validator`: the [Validator Constraint](http://symfony.com/doc/current/reference/constraints.html) you are using
   * `options`: (optional) an array of optional values to pass to the validator constraint class, according to its reference documentation
 
 
 
-Rebuild your model and you're ready to go. The ActiveRecord object now exposes two public methods:
+After rebuilding your model, the ActiveRecord object now exposes two additional public methods:
 * `validate()`: this method performs validation on the ActiveRecord object itself and on all related objects. If the validation is successful it returns true, otherwise false.
 * `getValidationFailures()`: this method returns a [ConstraintViolationList](http://api.symfony.com/2.0/Symfony/Component/Validator/ConstraintViolationList.html) object. If validate() is false, it returns a list of [ConstraintViolation](http://api.symfony.com/2.0/Symfony/Component/Validator/ConstraintViolation.html) objects, if validate() is true, it returns an empty `ConstraintViolationList` object.
 
@@ -74,7 +73,7 @@ else {
 ## Related objects validation ##
 
 
-When we use ActiveRecord `validate()` method, we perform validation on the object itself and on all related objects. It's a great possibility but we need to know how this method works, to avoid unpleasant surprises.
+When using the ActiveRecord `validate()` method, we perform validation on the object itself and on all related objects. As an incredibly powerful function, we need to know what it does to avoid unpleasant surprises.
 
 
 The `validate()` method follows these steps:
@@ -181,14 +180,14 @@ The steps of validation are the following:
 
 1.    search the author and publisher objects, related to our book
 2.    author and publisher objects have the validate behavior tag in its schema definition, so `$author->validate()` and `$publisher->validate()` are called
-3.    perform validation on *book* object itself
-4.    search all reader objects associated to this book object, by using `reader_book` table
+3.    perform validation on the *book* object itself
+4.    search all reader objects associated to this book object, using the `reader_book` table
 5.    the reader_book table has *no* validate behavior tag so no other validation will be performed
 
 
 In this case, no reader object will be validated because the cross reference table has no validate behavior, even if reader table has the validate behavior properly configured. No error message will be raised, because the behavior gives you the possibility to configure validations on a table but not on related ones. It's your choice.
 
-In previous example, if you want to perform validations also on reader objects, you need to configure the behavior also on reader_book table:
+Continuing with the previous example, you can also perform validations on reader objects, but we need to configure the behavior on the `reader_book` table as well:
 
 ```xml
 <!-- previous schema -->
@@ -211,16 +210,16 @@ In previous example, if you want to perform validations also on reader objects, 
      </table>
 ```
 
-And now the validation flow will be the following:
+And now the validation process will be the following:
 
 1.    search the author and publisher objects
 2.    author and publisher objects have the validate behavior tag in its schema definition, so `$author->validate()` and `$publisher->validate()` are called
 3.    perform validation on $book itself
-4.    search all readers associated to this book object, by using reader_book table
-5.    reader_book table now has the behavior, so `$reader_book->validate()` is called
-6.    inside the `$reader_book->validate()` all related reader objects will be searched and validated
+4.    search all readers associated to this book object, by using the `reader_book` table
+5.    the `reader_book` table now has the behavior, so `$reader_book->validate()` is called
+6.    inside `$reader_book->validate()` all related reader objects will be searched and validated
 
->**Tip**If you configure the behavior on all related objects, every object will be ALWAYS validated, no matter if you call `validate()` method of the one or the other.
+>**Tip**If you configure the behavior on all related objects, every object will *ALWAYS* be validated, no matter if you call the `validate()` method of one or the other.
 
 
 
@@ -249,16 +248,16 @@ In the following example, only the third and the fourth rules will be considered
 
 ## Parameter tag: value ##
 
-As we mentioned earlier, the `value` property contains a string, representing an array in YAML format. We've chosen this format because, in YAML array definition, there is no special xml character, so we have no need to escape anything and no need to change standard Propel xsd and xsl files.
-`options` key, inside the value array, is an array too, and it can contain other arrays (i.e. see [Choice constraint](http://symfony.com/doc/current/reference/constraints/Choice.html), in wich the `choices` option is an array, too) and with YAML there's no problem.
+As we mentioned earlier, the `value` property contains a string, representing an array in YAML format. We've chosen this format because, in the YAML array definition, there is no special xml character, so we don't need to escape anything and there's no need to change standard Propel xsd and xsl files.
+The `options` key, inside the value array, is an array too and it can contain other arrays (i.e. see [Choice constraint](http://symfony.com/doc/current/reference/constraints/Choice.html), in which the `choices` option is also an array) and with YAML there's no problem.
 
-Only in one case we suggest to be careful.
-As each respectable validation library, also Symfony Validator Component allows validations against regular expressions, by using the constraint [Regex](http://symfony.com/doc/current/reference/constraints/Regex.html).
-As you can see in Regex constraint documentation, `options` parameter contains a `pattern` key, defining the pattern for validation.
+There is only one case we suggest to be careful.
+Any respectable validation library (also the Symfony Validator Component) allows validations against regular expressions, by using the constraint [Regex](http://symfony.com/doc/current/reference/constraints/Regex.html).
+As you can see in the Regex constraint documentation, the `options` parameter contains a `pattern` key, defining the pattern for validation.
 
-But usually, a regular expression pattern contains a lot of special and escape characters so, in YAML definition, we need to include the pattern string in a couple of double-quote (").
+Usually however, a regular expression pattern contains a lot of special and escape characters so, in YAML definition, we need to include the pattern string in a pair of double-quotes (").
 
-In the following example, we add a constraint to validate ISBN. It's very complicated to check if an ISBN is valid, but a first check could be to disallow every character that's not a digit or minus, using the pattern  `/[^\d-]+/`:
+In the following example, we add a constraint to validate ISBN. It's very complicated to check if an ISBN is valid, but an initial check could be to disallow every character that's not a digit or minus, using the pattern  `/[^\d-]+/`:
 
 ```xml
 <!-- ATTENTION PLEASE: THIS EXAMPLE DOES NOT WORK -->
@@ -272,7 +271,7 @@ In the following example, we add a constraint to validate ISBN. It's very compli
 <!-- end of your schema -->
 ```
 
-But inside an xml string the double-quote characters should be escaped, so replace them with `&quot;`:
+Remember that inside an xml string the double-quote characters should be escaped, so replace them with `&quot;`:
 
 
 ```xml
@@ -290,7 +289,7 @@ But inside an xml string the double-quote characters should be escaped, so repla
 
 ## Automatic validation ##
 
-You can automatic validate an ActiveRecord, before saving it into your database, thanks to `preSave()` hook (see [behaviors documentation](/documentation/06-behaviors.html)).
+You can automatically validate an ActiveRecord before saving it into your database, thanks to the `preSave()` hook (see [behaviors documentation](/documentation/06-behaviors.html)).
 For example, let's suppose we wish to add automatic validation capability to our `Book` class. Open `Book.php`, in your model path, and add the following code:
 
 ```php
@@ -304,7 +303,7 @@ public function preSave(ConnectionInterface $con = null)
 }
 ```
 
-If validation failed, `preSave()` returns false and the saving operation stops. No error is raised but the `save()` method of your ActiveRecord returns the integer `0`, because no object was affected. So, we can check the returned value of `save()` method to see what was happened and to get any error messages:
+If validation failed, `preSave()` returns false and the saving operation stops. No error is raised but the `save()` method of your ActiveRecord returns the integer `0`, because no object was affected. So, we can check the returned value of the `save()` method to see what has happened and to get any error messages:
 
 ```php
 <?php
@@ -337,8 +336,10 @@ if ($ret <= 0) {
 ## Supported constraints ##
 
 The behavior supports all Symfony Validator Constraints (see [Symfony documentation] (http://symfony.com/doc/current/reference/constraints.html) for details), except `UniqueEntity` which is not compatible with Propel.
-Propel has its own unique validator: `Unique` constraint.
-This constraint checks if a certain value is already stored in the database. You can use it in the same way:
+Propel has its own unique validator: the `Unique` constraint.
+This constraint checks if a certain value is already stored in the database.
+
+You can use it in the same way:
 
 ```xml
 <!-- your schema -->
@@ -356,26 +357,25 @@ And if you want to specify an error message:
   </behavior>
 ```
 
->**Tip**`Date`, `Time` and `DateTime` constraints are useful if you store a date-time value inside a string. If you use a php `DateTime` object, if a value isn't valid, the `DateTime` object itself raises an exception, before performing any validations.
+>**Tip** Do you store date-times as strings? Use the `Date`, `Time` and `DateTime` constraints to prevent invalid PHP date-times from raising exceptions before any validations are performed.
 
 
 ## Custom validation constraints ##
 
-Propel and Symfony 2 Validator component come with many bundled constraints and that gives the possibility to perform almost all validations you could need.
-But sometimes, you could think that a custom validation constraint is a better choice for you.
+Together, Propel and the Symfony 2 Validator component come with many bundled constraints which should cover most validation needs.
 
-Adding a custom validation constraint to your project is very easy and it can be considered a two-step process:
+For cases that the inbuilt constraints do not cover, you will need to create your own. Fortunately, this is very easy and can be considered a two-step process:
 
 1.    Write your custom constraint: please refer to [this document](http://symfony.com/doc/current/cookbook/validation/custom_constraint.html) and see the example below.
 2.    Set up Propel to work with it: simply adjust your autoload class or function, to correctly map `Propel\Runtime\Validator\Constraints` namespace to the directory in which your constraint scripts reside.
 
->**Tip** Propel expects to find custom constraints under `Propel\Runtime\Validator\Constraints` namespace.
+>**Tip** Propel expects to find custom constraints under the `Propel\Runtime\Validator\Constraints` namespace.
 
 
 For example, let's suppose we want to write a custom constraint, called *PropelDomain*, that checks if an url belongs to *propelorm.org* domain.
-Let's also suppose to put our files in a subdir of our project root, called `/myConstraints`, and to manage the dependencies of our project via [Composer](http://getcomposer.org).
+Let's put our files in a subdir of our project root, called `/myConstraints`, and we'll manage the dependencies of our project with [Composer](http://getcomposer.org).
 
-Under `/myConstraints` dir, let's create the subdir `Propel/Runtime/Validator/Constraints`, in which we'll put the two following scripts:
+Under the `/myConstraints` dir, let's create a subdir `Propel/Runtime/Validator/Constraints`, in which we'll put the two following scripts:
 
 `PropelDomain.php`
 
@@ -421,7 +421,7 @@ class PropelDomain extends Constraint
  }
 ```
 
-Now, open `composer.json` file, in your project root and add the namespace `Propel\Runtime\Validator\Constraints` to the autoload directive:
+Now, open the `composer.json` file in your project root and add the namespace `Propel\Runtime\Validator\Constraints` to the autoload directive:
 
 ```json
 "autoload": {
@@ -443,12 +443,12 @@ Done! Now you can use your custom validator constraint in your `schema.xml` file
 <!-- end of your schema -->
 ```
 
-**Note**: if you think your custom constraint could be generic enough to be useful for the community, please submit it to Propel team,
-to include it in Propel bundled constraints (see [http://dotheweb.posterous.com/open-source-is-a-gift](http://dotheweb.posterous.com/open-source-is-a-gift)).
+**Note**: if you think your custom constraint is generic enough for community use, please submit it to the Propel team
+to include it in our bundled constraints (see <http://www.redotheweb.com/2011/11/13/open-source-is-a-gift.html>).
 
 ## Inside Symfony2 ##
 
-The behavior adds to ActiveRecord objects the static `loadValidatorMetadata()` method, which contains all validation rules. So, inside your Symfony projects, you can perform "usual" Symfony validations:
+This behavior adds to ActiveRecord objects the static `loadValidatorMetadata()` method, which contains all validation rules. So, inside your Symfony projects, you can perform the "usual" Symfony validations:
 
 ```php
 <?php
@@ -475,7 +475,7 @@ public function indexAction()
 }
 ```
 
-But if you wish to automatically validate also related objects, you can use the ActiveRecord `validate()` method, passing to it an instance of registered validator object:
+But if you also want automatic validation of related objects, you can use the ActiveRecord `validate()` method, passing to it an instance of the registered validator object:
 
 ```php
 <?php
@@ -507,7 +507,7 @@ public function indexAction()
 
 ## Inside Silex ##
 
-Using the behavior inside a Silex project, is about the same as we've seen for Symfony:
+Using the behavior inside a Silex project is very similar to Symfony:
 
 ```php
 <?php
@@ -529,7 +529,7 @@ $app->post('/authors/new', function () use ($app) {
 }
 ```
 
-and if you wish to automatically validate also related objects:
+and if you also want automatic validation of related objects:
 
 ```php
 <?php
@@ -556,12 +556,12 @@ $app->post('/authors/new', function () use ($app) {
 
 The behavior adds the following properties to your ActiveRecord:
 
-*   `alreadyInValidation`:  this *protected* property is a flag to prevent endless validation loop, if this object is referenced by another object on which we're performing a validation.
+*   `alreadyInValidation`:  this *protected* property is a flag to prevent an endless validation loop in case this object is referenced by another we're already performing a validation on.
 *   `validationFailures`:   this *protected* property contains the ConstraintViolationList object.
 
 
 The behavior adds the following methods to your ActiveRecord:
 
 *   `validate`:  this *public* method validates the object and all objects related to it.
-*   `getValidationFailures`:  this *public* method gets the ConstraintViolationList object, that contains all ConstraintViolation objects resulted from last call to `validate()` method.
+*   `getValidationFailures`:  this *public* method gets the ConstraintViolationList object, which contains all ConstraintViolation objects resulted from the last call to `validate()` method.
 *   `loadValidatorMetadata`:  this *public static* method contains all the Constraint objects.
