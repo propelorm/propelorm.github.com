@@ -47,15 +47,19 @@ The root tag of the XML schema is the `<database>` tag:
 </database>
 ```
 
-The `name` attribute defines the name of the connection that Propel uses for the tables in this schema. It is not necessarily the name of the actual database. In fact, Propel uses some configuration properties to link a connection name with real connection settings (like database name, user and password). This configuration file will be explained later in this chapter.
+The `name` attribute defines the name of the connection that Propel uses for the
+tables in this schema. It is not necessarily the name of the actual database. In
+fact, Propel uses some configuration properties to link a connection name with real
+connection settings (like the database name, user and password).
 
 The `defaultIdMethod` attribute indicates that the tables in this schema use the database's "native" auto-increment/sequence features to handle id columns that are set to auto-increment.
 
->**Tip**<br />You can define several schemas for a single project. Just make sure that each of the schema filenames end with `schema.xml`.
+> **Tip** You can define several schemas for a single project. Just make sure
+> that each of the schema filenames end with `schema.xml`.
 
 #### Tables And Columns ####
 
-Within the `<database>` tag, Propel expects one `<table>` tag for each table:
+Within the `<database>` tag, Propel expects a `<table>` tag for each table:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -100,11 +104,16 @@ Within each set of `<table>` tags, define the columns that belong to that table:
 
 Each column has a `name` (the one used by the database), and an optional `phpName` attribute. Once again, the Propel default behavior is to use a CamelCase version of the `name` as `phpName` when not specified.
 
-Each column also requires a `type`. The XML schema is database agnostic, so the column types and attributes are probably not exactly the same as the one you use in your own database. But Propel knows how to map the schema types with SQL types for many database vendors. Existing Propel column types are `boolean`, `tinyint`, `smallint`, `integer`, `bigint`, `double`, `float`, `real`, `decimal`, `char`, `varchar`, `longvarchar`, `date`, `time`, `timestamp`, `blob`, `clob`, `object`, and `array`. Some column types use a `size` (like `varchar` and `int`), some have unlimited size (`longvarchar`, `clob`, `blob`). Check the [schema reference](../reference/schema.html) for more details on each column type.
+Each column also requires a `type`. The XML schema is database agnostic, so the
+column types and attributes are probably not exactly the same as the ones you
+use in your own database. But Propel knows how to map the schema types with SQL
+types for many database vendors. Check the [schema reference][schema] for more
+details on each column type.
 
 As for the other column attributes, `required`, `primaryKey`, and `autoIncrement`, they mean exactly what their names imply.
 
->**Tip**<br />If you specify a `namespace` attribute in a `<table>` element, the generated PHP classes for this table will use this namespace.
+> **Tip** If you specify a `namespace` attribute in a `<table>` element, the
+> generated PHP classes for this table will use this namespace.
 
 #### Foreign Keys ####
 
@@ -140,7 +149,9 @@ A table can have several `<foreign-key>` tags, describing foreign keys to foreig
 
 A foreign key represents a relationship. Just like a table or a column, a relationship has a `phpName`. By default, Propel uses the `phpName` of the foreign table as the `phpName` of the relation. The `refPhpName` defines the name of the relation as seen from the foreign table.
 
-There are many more attributes and elements available to describe a datamodel. Propel's documentation provides a complete [Schema of the schema syntax](../reference/schema.html), together with a [DTD](https://github.com/propelorm/Propel2/blob/master/resources/dtd/database.dtd) and a [XSD](https://github.com/propelorm/Propel2/blob/master/resources/xsd/database.xsd) schema for its validation.
+There are many more attributes and elements available to describe a datamodel.
+Propel's documentation provides a complete [reference of the schema syntax][schema],
+together with a [DTD][DTD] and a [XSD][XSD] schema for its validation.
 
 ### Building The Model ###
 
@@ -296,10 +307,11 @@ generator.connections[0] = bookstore
 </div>
 </div>
 
-Use your own database vendor driver, chosen among pgsql, mysql, sqlite, mssql, and oracle.
+Use your own database vendor driver, chosen among pgsql, mysql, sqlite, mssql
+and oracle.
 
-You can learn more about the available build settings and their possible values in the  [configuration reference](/documentation/reference/configuration-file.html).
-
+You can learn more about the available build settings and their possible values in
+the [configuration reference](/documentation/reference/configuration-file.html).
 
 #### Setup UTF-8 ####
 
@@ -376,12 +388,14 @@ propel:
 
 #### Using the `propel` Script To Build The SQL Code ####
 
-As seen in the previous chapter, Propel ships with a script that allows you to realise different actions such as schemas generation.
+As seen in the previous chapter, Propel ships with a script that allows you to
+realize different actions such as schema generation.
 
-Open a terminal and browse to your project's directory (here `bookstore/`), where you saved the two previous files (`schema.xml`, and `propel.ext`). Then use the `propel` script to generate the SQL code of your schema:
+Open a terminal inside your project's directory (here `bookstore/`), where you
+saved the two previous files (`schema.xml` and `propel.ext`). Then use the `propel`
+script to generate the SQL code of your schema:
 
 ```bash
-$ cd /path/to/bookstore
 $ propel sql:build
 ```
 
@@ -413,88 +427,60 @@ All these classes are empty, but they inherit from `Base` classes that you will 
  */
 class Book extends BaseBook
 {
+
 }
 ```
 
 These empty classes are called _stub_ classes. This is where you will add your own model code. These classes are generated only once by Propel ; on the other hand, the _base_ classes they extend are overwritten every time you call the `model:build` command, and that happens a lot in the course of a project, because the schema evolves with your needs.
 
 
-In addition to these classes, Propel generates one `TableMap` class for each table under the `Map/` directory. You will probably never use the map classes directly, but Propel needs them to get metadata information about the table structure at runtime.
+Propel also generates one `TableMap` class for each table under the `Map/`
+directory. You will probably never use the map classes directly, but Propel needs
+them to get metadata information about the table structure at runtime.
 
->**Tip**<br />Never add any code of your own to the classes generated by Propel in the `Map/` directory; this code would be lost next time you call the `model:build` command.
+> **Tip** Never add any code of your own to the classes generated by Propel in the
+> `Map/` directory; this code would be lost next time you call the `model:build`
+> command.
 
 Basically, all that means is that despite the fact that Propel generates _five_ classes for each table, you should only care about two of them: the model class and the query class.
 
 
->**Warning**<br />After generating the classes, you have to autoload them. For example, with composer this can be achieved with
+> **Warning** After generating the classes, you have to autoload them. For example,
+> with composer this can be achieved with:
 >
->```json
+> ```json
 > {
 >   ...
 >   "autoload": {
 >     "classmap": ["generated-classes/"]
 >   }
 > }
->```
-> and then executing the command `composer dump-autoload`.
-> See also [namespaces recipe](../cookbook/namespaces.html) if you prefer to autoload your model classes following PSR-0
+> ```
+>
+> and then executing the command `composer dump-autoload`. See also
+> [namespaces recipe](../cookbook/namespaces.html) if you prefer to autoload
+> your model classes following PSR-0.
 
 ### Runtime Connection Settings ###
 
-The database and PHP classes are now ready to be used. But they don't know yet how to communicate with each other at runtime. You must tell Propel which database connection settings should be used to finish the setup.
+The database and PHP classes are now ready to be used. But they don't know yet
+how to communicate with each other at runtime. You must tell Propel which database
+connection settings should be used to finish the setup.
 
-Propel stores the runtime settings in a service container, available from everywhere using `\Propel\Runtime\Propel::getServiceContainer()`. The service container uses lazy-loading to initiate connections only when necessary.
-
-Here is a sample setup file:
-
-```php
-<?php
-
-// setup the autoloading
-require_once '/path/to/vendor/autoload.php';
-use Propel\Runtime\Propel;
-use Propel\Runtime\Connection\ConnectionManagerSingle;
-$serviceContainer = Propel::getServiceContainer();
-$serviceContainer->setAdapterClass('bookstore', 'mysql');
-$manager = new ConnectionManagerSingle();
-$manager->setConfiguration(array (
-  'dsn'      => 'mysql:host=localhost;dbname=my_db_name',
-  'user'     => 'my_db_user',
-  'password' => 's3cr3t',
-));
-$serviceContainer->setConnectionManager('bookstore', $manager);
-```
-
-Notice how the "bookstore" name passed to `setAdapterClass()` and `setConnectionManager()` matches the connection name defined in the `<database>` tag of the `schema.xml`. This is how Propel maps a database description to a connection.
-
-It's a good practice to add a logger to the service container, so that Propel can log warnings and errors. You can do so by adding the following code to the setup script:
-
-```php
-<?php
-
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-$defaultLogger = new Logger('defaultLogger');
-$defaultLogger->pushHandler(new StreamHandler('/var/log/propel.log', Logger::WARNING));
-$serviceContainer->setLogger('defaultLogger', $defaultLogger);
-```
-
->**Tip**<br/>: You may wish to write the setup code in a standalone script that is included at the beginning of your PHP scripts.
-
-Is this code too long and boring to write? Don't worry: Propel can generate it for you!
-
-For performance reasons, Propel prefers to use a PHP version of the connection settings rather than read it from the configuration file every time. So you must use the `propel` script one last time to build the PHP version of the runtime configuration:
+For performance reasons, Propel prefers to use a PHP version of the connection
+settings rather than read it from the configuration file every time. So you must
+use the `propel` script one last time to build the PHP version of the runtime
+configuration:
 
 ```bash
-$ cd /path/to/bookstore
 $ propel config:convert
 ```
 
 The `config:convert` command reads the `runtime` section of the configuration file
-and generates the relative php script. The resulting file can be found under
+and generates the relative PHP script. The resulting file can be found under
 `generated-conf/config.php`.
 
-This simplifies the setup of Propel to the following script:
+You can now setup Propel with the following script:
 
 ```php
 <?php
@@ -505,6 +491,26 @@ require_once '/path/to/vendor/autoload.php';
 // setup Propel
 require_once '/generated-conf/config.php';
 ```
+
+It's also a good practice to add a logger to the service container, so that Propel
+can log warnings and errors. You can do so by adding the following code to the
+setup script:
+
+```php
+<?php
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+$defaultLogger = new Logger('defaultLogger');
+$defaultLogger->pushHandler(new StreamHandler('/var/log/propel.log', Logger::WARNING));
+
+$serviceContainer->setLogger('defaultLogger', $defaultLogger);
+```
+
+> **Tip** You may wish to write the setup code in a standalone script that is
+included at the beginning of your PHP files.
+
 Now you are ready to start using your model classes!
 
 #### Create the Database Schema ####
@@ -512,7 +518,7 @@ Now you are ready to start using your model classes!
 Now that your project is fully set up, you have to create the generated schema
 in your database.
 
-Before insert it, you should create a database, let's say we want to call it
+Before inserting it, you should create a database, let's say we want to call it
 `bookstore`. If you are using MySQL for instance, just run:
 
 ```bash
@@ -520,6 +526,7 @@ $ mysqladmin -u root -p create bookstore
 ```
 
 Then insert the SQL into your database:
+
 ```bash
 $ propel sql:insert
 ```
@@ -537,7 +544,7 @@ attempting to DROP it (MySQL is a notable exception). It is safe to disregard
 these errors, and you can always run the script a second time to make sure that
 the errors are no longer present.
 
->**Warning**<br />The `schema.sql` file will DROP any existing table before
+> **Warning** The `schema.sql` file will DROP any existing table before
 creating them, which will effectively erase your database.
 
 ## The easy way ##
@@ -564,3 +571,7 @@ modify if you want to. Propel is now ready to be used!
 
 ---
 <span class="next">[Next: Basic CRUD &rarr;](03-basic-crud.html)</span>
+
+[schema]: /documentation/reference/schema.html
+[DTD]: https://github.com/propelorm/Propel2/blob/master/resources/dtd/database.dtd
+[XSD]: https://github.com/propelorm/Propel2/blob/master/resources/xsd/database.xsd
