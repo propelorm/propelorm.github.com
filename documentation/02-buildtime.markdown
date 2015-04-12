@@ -18,13 +18,23 @@ During build time, a developer also defines the connection settings for communic
 
 To illustrate Propel's build abilities, this chapter uses the data structure of a bookstore as an example. It is made of three tables: a `book` table, with a foreign key to two other tables, `author` and `publisher`.
 
-## Describing Your Database as XML Schema ##
+Create a `bookstore` directory then setup Propel into it as covered in the previous
+chapter. This will be the root of the bookstore project.
 
-Propel generates PHP classes based on a _relational_ description of your data model. This "schema" uses XML to describe tables, columns and relationships. The schema syntax closely follows the actual structure of the database.
+There's actually two ways to setup the build configuration ; the hard one (manually)
+and the easy one (through the command line). This chapter explains both. Consider
+that the command line approach is just here to simplify the process. You will
+learn more about the Propel structure and API setting up your project the hard way.
 
-Create a `bookstore` directory then setup Propel into it as covered in the previous chapter. This will be the root of the bookstore project.
+## The Hard Way ##
 
-### Database Connection Name ###
+### Describing Your Database as XML Schema ###
+
+Propel generates PHP classes based on a _relational_ description of your data
+model. This "schema" uses XML to describe tables, columns and relationships. The
+schema syntax closely follows the actual structure of the database.
+
+#### Database Connection Name ####
 
 Create a file called `schema.xml` in the new `bookstore/` directory.
 
@@ -43,7 +53,7 @@ The `defaultIdMethod` attribute indicates that the tables in this schema use the
 
 >**Tip**<br />You can define several schemas for a single project. Just make sure that each of the schema filenames end with `schema.xml`.
 
-### Tables And Columns ###
+#### Tables And Columns ####
 
 Within the `<database>` tag, Propel expects one `<table>` tag for each table:
 
@@ -96,7 +106,7 @@ As for the other column attributes, `required`, `primaryKey`, and `autoIncrement
 
 >**Tip**<br />If you specify a `namespace` attribute in a `<table>` element, the generated PHP classes for this table will use this namespace.
 
-### Foreign Keys ###
+#### Foreign Keys ####
 
 A table can have several `<foreign-key>` tags, describing foreign keys to foreign tables. Each `<foreign-key>` tag consists of one or more mappings between a local column and a foreign column.
 
@@ -132,9 +142,9 @@ A foreign key represents a relationship. Just like a table or a column, a relati
 
 There are many more attributes and elements available to describe a datamodel. Propel's documentation provides a complete [Schema of the schema syntax](../reference/schema.html), together with a [DTD](https://github.com/propelorm/Propel2/blob/master/resources/dtd/database.dtd) and a [XSD](https://github.com/propelorm/Propel2/blob/master/resources/xsd/database.xsd) schema for its validation.
 
-## Building The Model ##
+### Building The Model ###
 
-### Setting Up Configuration ###
+#### Setting Up Configuration ####
 
 The build process is highly customizable. Whether you need the generated classes to inherit one of your classes rather than Propel's base classes, or to enable/disable some methods in the generated classes, pretty much every customization is possible. Of course, Propel provides sensible defaults, so that you actually need to define only two settings for the build process to start: the RDBMS you are going to use, and a name for your project.
 
@@ -291,7 +301,7 @@ Use your own database vendor driver, chosen among pgsql, mysql, sqlite, mssql, a
 You can learn more about the available build settings and their possible values in the  [configuration reference](/documentation/reference/configuration-file.html).
 
 
-### Setup UTF-8 ###
+#### Setup UTF-8 ####
 
 If you want to save anything in UTF-8 in your database then depending on your database you have to set some extra configuration values.
 
@@ -364,7 +374,7 @@ propel:
 </div>
 </div>
 
-### Using the `propel` Script To Build The SQL Code ###
+#### Using the `propel` Script To Build The SQL Code ####
 
 As seen in the previous chapter, Propel ships with a script that allows you to realise different actions such as schemas generation.
 
@@ -375,7 +385,7 @@ $ cd /path/to/bookstore
 $ propel sql:build
 ```
 
-### Generate Model Classes ###
+#### Generate Model Classes ####
 
 Now that your database is ready, we are going to generate our model files. These files are just classes that allows you to interact easily with your different tables. To generate these tables, just run:
 
@@ -429,7 +439,7 @@ Basically, all that means is that despite the fact that Propel generates _five_ 
 > and then executing the command `composer dump-autoload`.
 > See also [namespaces recipe](../cookbook/namespaces.html) if you prefer to autoload your model classes following PSR-0
 
-## Runtime Connection Settings ##
+### Runtime Connection Settings ###
 
 The database and PHP classes are now ready to be used. But they don't know yet how to communicate with each other at runtime. You must tell Propel which database connection settings should be used to finish the setup.
 
@@ -497,7 +507,7 @@ require_once '/generated-conf/config.php';
 ```
 Now you are ready to start using your model classes!
 
-### Create the Database Schema ###
+#### Create the Database Schema ####
 
 Now that your project is fully set up, you have to create the generated schema
 in your database.
@@ -529,6 +539,28 @@ the errors are no longer present.
 
 >**Warning**<br />The `schema.sql` file will DROP any existing table before
 creating them, which will effectively erase your database.
+
+## The easy way ##
+
+To ease the setup of your build configuration, Propel ships with an `init` command
+that will guide you through this process. Just type, in a terminal:
+
+```bash
+$ propel init
+```
+
+Propel will ask first for your database driver and then your database credentials.
+It will ask you again if it's not able to establish a connection to the database.
+
+Then, Propel will ask you if you want to import an existing database into your
+project and where to store the different Propel specific files like the schema.
+
+Finally, you need to specify the format of you configuration file. YAML is a
+good default but you can pick the format you want ; the documentation explains
+each one.
+
+The command will also output a summary of your current configuration that you can
+modify if you want to. Propel is now ready to be used!
 
 ---
 <span class="next">[Next: Basic CRUD &rarr;](03-basic-crud.html)</span>
