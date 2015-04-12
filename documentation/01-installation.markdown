@@ -103,28 +103,29 @@ $ vendor/bin/propel
 
 The command should output the propel version following by a list of the options and the available commands. We will learn to use these commands later.
 
->**Tip**In order to allow an easier execution of the script, you can also add the propel generator's `bin/` directory to your PATH, or create a symlink. For example:
-
-```bash
-$ cd myproject
-$ ln -s vendor/bin/propel propel
-```
-
-Or simply edit your .bashrc or .zshrc file:
-
-```bash
-export PATH=$PATH:/path/to/vendor/bin/
-```
-
-On Windows you could set the PATH for the opened command with:
-
-```
-set PATH=%PATH%;C:/path/to/vendor/bin/
-```
-
-To globally define the PATH adjust it inside the "Environment Variables", which
-you can find in your system advanced settings panel.
-
+> **Tip**In order to allow an easier execution of the script, you can also add the
+> propel generator's `bin/` directory to your PATH, or create a symlink. For
+> example:
+>
+> ```bash
+> $ cd myproject
+> $ ln -s vendor/bin/propel propel
+> ```
+>
+> Or simply edit your .bashrc or .zshrc file:
+>
+> ```bash
+> export PATH=$PATH:/path/to/vendor/bin/
+> ```
+>
+> On Windows you could set the PATH for the opened command with:
+>
+> ```
+> set PATH=%PATH%;C:/path/to/vendor/bin/
+> ```
+>
+> To globally define the PATH adjust it inside the "Environment Variables", which
+> you can find in your system advanced settings panel.
 
 At this point, Propel should be setup and ready to use. You can follow the steps in the [Build Guide](02-buildtime.html) to try it out.
 
