@@ -69,6 +69,7 @@ Starting with the `<database>` element. The _attributes_ and _elements_ availabl
   [baseClass="/baseClassName/"]
   [defaultPhpNamingMethod="nochange|{underscore}|phpname|clean"
   [heavyIndexing="true|false"]
+  [identifierQuoting="true|{false}"]
   [tablePrefix="/tablePrefix/"]
 >
   <table>
@@ -90,6 +91,7 @@ A Database element may include an `<external-schema>` element, or multiple `<tab
 * `baseClass` allows you to specify a default base class that all generated Propel objects should extend (in place of `propel.om.BaseObject`).
 * `defaultPhpNamingMethod` the default naming method to use for tables of this database. Defaults to `underscore`, which transforms table names into CamelCase phpNames.
 * `heavyIndexing` adds indexes for each component of the primary key (when using composite primary keys).
+* `identifierQuoting` quotes all identifiers (table name, column names) in DDL and SQL queries. This is necessary if you use reserved words as table or column name.
 * `tablePrefix` adds a prefix to all the SQL table names.
 
 ### table element ###
@@ -110,6 +112,7 @@ The `<table>` element is the most complicated of the usable elements. Its defini
   [baseClass = "/baseClassName/"]
   [description="/A text description of the table/"]
   [heavyIndexing = "true|false"]
+  [identifierQuoting = "true|{false}"]
   [readOnly = "true|false"]
   [treeMode = "NestedSet|MaterializedPath"]
   [reloadOnInsert = "true|false"]
@@ -144,6 +147,7 @@ According to the schema, `name` is the only required attribute.  Also, the `idMe
 * `phpNamingMethod` the naming method to use. Defaults to `underscore`, which transforms the table name into a CamelCase phpName.
 * `baseClass` allows you to specify a class that the generated Propel objects should extend (in place of `propel.om.BaseObject`).
 * `heavyIndexing` adds indexes for each component of the primary key (when using composite primary keys).
+* `identifierQuoting` quotes all identifiers (table name, column names) in DDL and SQL queries. This is necessary if you use reserved words as table or column name.
 * `readOnly` suppresses the mutator/setter methods, save() and delete() methods.
 * `treeMode` is used to indicate that this table is part of a node tree. Currently the only supported values are `NestedSet` (see the [NestedSet behavior section](/documentation/behaviors/nested-set.html)) and `MaterializedPath` (deprecated).
 * `reloadOnInsert` is used to indicate that the object should be reloaded from the database when an INSERT is performed.  This is useful if you have triggers (or other server-side functionality like column default expressions) that alters the database row on INSERT.
