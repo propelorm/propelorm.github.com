@@ -234,6 +234,23 @@ The audit log abilities need to be enabled in the schema as well:
 </table>
 ```
 
+Sometimes it is necessary to have indices from the origin table also in your version table, maybe
+to fire queries against it. To achieve this you can either completely describe the `<tableName>_version` in your
+schema with all its necessary indices so the behavior won't overwrite/re-add it or you use the parameter `indices`.
+
+```xml
+<table name="book">
+  <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
+  <column name="title" type="varchar" required="true" />
+  <index>
+    <index-column name="title"/>
+  </index>
+  <behavior name="versionable">
+    <parameter name="indices" value="true" />
+  </behavior>
+</table>
+```
+
 ## Public API ##
 
 ### ActiveRecord class ###
