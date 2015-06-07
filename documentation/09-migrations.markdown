@@ -324,7 +324,7 @@ ALTER TABLE `book` ADD
 	{
 		// post-migration code
 		$sql = "INSERT INTO author (first_name,last_name) values('Leo','Tolstoi')";
-		$pdo = $manager->getPdoConnection('bookstore');
+		$pdo = $manager->getAdapterConnection('bookstore');
 		$stmt = $pdo->prepare($sql);
 		$stmt->execute();
 	}
@@ -349,7 +349,7 @@ class PropelMigration_1286483354
 	public function postUp($manager)
 	{
 		// add the post-migration code here
-		$pdo = $manager->getPdoConnection('bookstore');
+		$pdo = $manager->getAdapterConnection('bookstore');
 		$author = new Author();
 		$author->setFirstName('Leo');
 		$author->setLastname('Tolstoi');
