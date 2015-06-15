@@ -5,6 +5,9 @@ title: Download Propel
 
 # Download Propel #
 
+**Note**: The version 2 of Propel is still under development. Please visit
+<http://propelorm.org/Propel/> if you want to use a stable version.
+
 For a full installation tutorial, check the [Installation documentation](documentation/01-installation). The following options allow you to download the Propel code and documentation.
 
 ## Composer ##
