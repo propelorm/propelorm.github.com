@@ -523,7 +523,7 @@ propel:
 
           ## Sqlite ##
           sqlite:
-              foreigKey: {empty}|string
+              foreignKey: {empty}|string
               tableAlteringWorkaround: {empty}|boolean
 
           ## Oracle ##
