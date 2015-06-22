@@ -579,12 +579,19 @@ propel:
       profiler:
         classname: {\Propel\Runtime\Util\Profiler}|string
         slowTreshold: 0.1
-        time:
-          precision: {3}|integer
-          pad: {8}|integer
-        memory:
-          precision: {3}|integer
-          pad: {8}|integer
+        details:
+          time:
+            precision: {3}|integer
+            pad: {8}|integer
+          memory:
+            precision: {3}|integer
+            pad: {8}|integer          
+          memDelta:
+            precision: {3}|integer
+            pad: {8}|integer          
+          memPeak:
+            precision: {3}|integer
+            pad: {8}|integer          
         innerGlue: {":"}|integer
         outerGlue: {"|"}|integer
 
