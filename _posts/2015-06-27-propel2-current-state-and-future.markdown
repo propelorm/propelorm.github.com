@@ -99,7 +99,7 @@ What brings this PR now in detail?
 * Repositories. Active getters like relation getter (`$author->getBooks()`), behavior logic and your own business logic is no longer in the entity, but in the repository or
 your own service using the built-in event-dispatcher.
 * Active-Record optional. `<entity name="Author" activeRecord="true"` activates the good old (good for prototyping) active-record using a generated PHP trait which is used in your model
-and proxies active-record methods directly to the Session or Repository. Methods are `save`, `delete`, `isNew`, `isDeleted` and all relation getters/counters method.
+and proxies active-record methods directly to the Session or Repository. Methods are `save`, `delete`, `isNew`, `isDeleted` and all active relation getters/counters method.
 * Opens the ability to support noSQL. Since we split the persisting logic and SQL related stuff into separated classes its now easier to support noSQL databases.
 * [OOP PHP code generator](https://github.com/gossi/php-code-generator) and "Code Components" allowed us to split huge ObjectBuilder, QueryBuilder, EntityMapBuilder
 et cetera into little very handy code classes. This was much work as we split those huge classes into over 100 components, but it was worth the work since its maintenance
@@ -140,7 +140,7 @@ $session->persist($car);
 $session->commit();
 ```
 
-Since `persist` does not result in a database operation we can save now all changes in one batch. Our unit-of-work is
+Since `persist` does not result in a database operation we can save now all changes in one batch (`commit()`). Our unit-of-work is
 optimized to execute inserts in bulk inserts and updates in a more optimized way, which results basically in a
 faster Propel for bigger change-sets.
 
@@ -161,9 +161,12 @@ What needs to be done:
 * Make more tests green. A lot of tests are based on `Map\*TableMap::getTableMap()` which is not available anymore. `$configuration->getEntityMap(FooEntity::class)` is now the new way.
 * Make PostgreSQL support working
 
-You can check-out my [current branch](https://github.com/marcj/Propel2) if you want to play around with it, but take care: Its far from being perfect, its slower than old versions and generated look may look ugly.
+You can check-out my [current branch](https://github.com/marcj/Propel2) if you want to play around with it, but take care: Its far from being perfect, its slower than old versions and generated code look may look ugly.
 
-I'm planing now to write ever ~two weeks a blog post about what has been done in that data-mapper development, so you're up to date. Please don't judge badly about the slow development, if it is not as fast as you want
-to see - the contribution to this new approach is rather low since it is very complicated to build a big library like this and costs much time.
+I'm planing now to write every ~two weeks a blog post about what has been done in that data-mapper development, so you're up to date.
+Please don't judge badly about the slow development,
+if it is not as fast as you want to see - the contribution to this new approach is rather low since it is very complicated to build a big
+library like this and costs much time. But I really believe we all are more than happy when we have finally an alternative, full features data-mapper ORM to doctrine, which
+is on top faster, easier to use and uses less magic.
 
 Next plan is to implement the l18n and nested_set behavior, which both a pretty big. Hope to provide you more updates soon. 
