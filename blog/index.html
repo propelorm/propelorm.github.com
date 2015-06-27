@@ -4,7 +4,7 @@ layout: blog
 
 {% for post in site.posts limit: 5 %}
 <article class="blog-tease">
-    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
     <p class="author">
         {% if post.author %}
         {{ post.author }}
@@ -22,7 +22,7 @@ layout: blog
 
 {% for post in site.posts offset: 5 %}
 <article class="blog-tease">
-    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
     <p class="author">
         {% if post.author %}
         {{ post.author }}

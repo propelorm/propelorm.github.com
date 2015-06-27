@@ -9,6 +9,8 @@ Three years ago, I became the lead developer of the Propel ORM project, a decisi
 my life, and, for sure, literally propelled me out of my comfortable zone. This was not easy. I was young,
 inexperienced, and a sort of "outsider".
 
+<!-- more -->
+
 While Propel was a "one-man project" thanks to the awesome [François](https://twitter.com/francoisz), I decided
 not to follow such path. I rather created an [organization](https://github.com/propelorm), gathering [skilled
 people](https://github.com/orgs/propelorm/members), and new projects, with a long-term vision in mind. That

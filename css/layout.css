@@ -1,11 +1,13 @@
 body, html {
     background-color: #f2f2f2;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     padding: 0;
     margin: 0;
-    color: #1A1A1A;
-    font-size: 15px;
+    color: #454545;
+    font-size: 14px;
 }
 
 b, strong {
@@ -86,7 +88,7 @@ footer li a,
 header li a {
     text-decoration: none;
     font-size: 16px;
-    font-weight: 300;
+
 }
 
 header ul li {
@@ -120,7 +122,6 @@ h1 {
 }
 
 h2 {
-    font-weight: 300;
     font-size: 22px;
     padding-bottom: 15px;
 }
@@ -135,10 +136,17 @@ a, a:link {
     color: #2382BE;
 }
 
+h1 a, h2 a, h3 a {
+    text-decoration: none;
+}
+
 a:hover {
     color: #838383;
 }
 
+.read-more a {
+    color: gray;
+}
 
 .home-banner {
     height: 400px;
@@ -196,9 +204,9 @@ a:hover {
     max-width: 530px;
     margin: auto;
     line-height: 38px;
-    font-weight: 100;
     padding-top: 50px;
     font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
     overflow: hidden;
 }
 
@@ -407,9 +415,8 @@ footer ul li {
 }
 
 .documentation-navigation li a {
-    font-size: 14px;
+    font-size: 13px;
     text-decoration: none;
-    font-weight: 300;
 }
 
 

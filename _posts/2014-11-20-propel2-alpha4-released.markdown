@@ -7,6 +7,8 @@ published: true
 We just released [Propel2 Alpha4](https://github.com/propelorm/Propel2/releases/tag/2.0.0-alpha4) with lot of bug fixes
 and some new major features.
 
+<!-- more -->
+
 ## What's new in this release
 
 

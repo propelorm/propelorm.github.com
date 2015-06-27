@@ -42,17 +42,17 @@
 }
 
 .markdown ul li {
-    list-style: disc inside;
+    list-style: disc;
     line-height: 22px;
 }
 
 .markdown ul li li {
-    list-style: circle inside;
+    list-style: circle;
     margin-left: 1em;
 }
 
 .markdown ol li {
-    list-style: decimal inside;
+    list-style: decimal;
     margin-bottom: 1em;
 }
 

@@ -15,7 +15,6 @@
 
 .highlight code {
     font-family: 'Source Code Pro', monospace;
-    font-weight: 300;
     font-size: 14px;
 }
 
@@ -25,7 +24,6 @@ code {
     padding: 1px 3px;
     background-color: rgba(249, 249, 249, 0.47);
     font-size: 13px;
-    font-weight: 300;
     border-radius: 3px;
     color: #333;
     display: inline-block;
@@ -34,7 +32,7 @@ code {
 
 .highlight code {
     display: inline;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .highlight code {
