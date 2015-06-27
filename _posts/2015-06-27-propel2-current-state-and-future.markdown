@@ -166,7 +166,7 @@ You can check-out my [current branch](https://github.com/marcj/Propel2) if you w
 I'm planing now to write every ~two weeks a blog post about what has been done in that data-mapper development, so you're up to date.
 Please don't judge badly about the slow development,
 if it is not as fast as you want to see - the contribution to this new approach is rather low since it is very complicated to build a big
-library like this and costs much time. But I really believe we all are more than happy when we have finally an alternative, full features data-mapper ORM to doctrine, which
+library like this and costs much time. But I really believe we all are more than happy when we have finally an alternative, full featured data-mapper ORM to doctrine, which
 is on top faster, easier to use and uses less magic.
 
 Next plan is to implement the l18n and nested_set behavior, which both a pretty big. Hope to provide you more updates soon. 
