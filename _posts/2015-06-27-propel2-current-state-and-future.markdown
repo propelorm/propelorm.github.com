@@ -27,7 +27,7 @@ A good use case is for example `<column name="dummy_object" type="object" typeHi
 * polymorphic relations are now supported. Long wished, now supported. You can use polymorphic relations to place a relation
 to another entity [with additional conditions](https://github.com/propelorm/Propel2/blob/f20146a696ba5f9684fbc27d642e431286415b15/tests/Fixtures/bookstore/schema.xml#L392-L395).
 
-* exclude tables using new configuration entry `exclude_tables` under root node. Thanks goes out to Alexander Zhuravlev](github.com/SCIF).
+* exclude tables using new configuration entry `exclude_tables` under root node. Thanks goes out to [Alexander Zhuravlev](https://github.com/SCIF).
 
 This is only a limited set of fixes and features. Please see [the change log](https://github.com/propelorm/Propel2/compare/2.0.0-alpha4...2.0.0-alpha5) to see all changes.
 
