@@ -82,7 +82,7 @@ its worth the time.
 
 ## Future
 
-The current roadmap is visible in our Github wiki: [github.com/propelorm/Propel2/wiki](https://github.com/propelorm/Propel2/wik).
+The current roadmap is visible in our Github wiki: [github.com/propelorm/Propel2/wiki](https://github.com/propelorm/Propel2/wiki).
 
 You can see there two big points still opened, concentrated in one big pull-request: [PR #795](https://github.com/propelorm/Propel2/pull/795).
 
