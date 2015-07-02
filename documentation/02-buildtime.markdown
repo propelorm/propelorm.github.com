@@ -32,7 +32,9 @@ learn more about the Propel structure and API setting up your project the hard w
 
 Propel generates PHP classes based on a _relational_ description of your data
 model. This "schema" uses XML to describe tables, columns and relationships. The
-schema syntax closely follows the actual structure of the database.
+schema syntax closely follows the actual structure of the database (you have
+to describe any excluded tables inside your 
+[configuration file](/documentation/reference/configuration-file.html#exclude-tables)).
 
 #### Database Connection Name ####
 
