@@ -37,6 +37,22 @@ propel:
       version: /propel version/
 ```
 
+### Exclude tables ###
+
+```yaml
+  exclude_tables:
+      # you can use wildcard as you wish
+      - /name of table to ignore/|string
+      - /name of other table to ignore/|string
+```
+
+There are two Propel actions which reverse the database structure: diff and
+reverse schema creation. For better interoperability Propel provides a feature
+to ignore tables by whole name or pattern. For example, if you have Wordpress
+installed in your database and you don't want to maintain or work with
+its tables — just add `wp_*`. You can skip some tables by pattern and use
+wildcard at any position, for example: `module_*_cache*` is also valid.
+
 ### Directories and Filenames ###
 
 ```yaml
@@ -457,6 +473,10 @@ propel:
       # The name of your project.
       project: /Your-Project-Name/
       version: /propel version/
+
+  exclude_tables:
+      # you can use wildcard as you wish
+      - /name of table to ignore/|string
 
   ### Directories and Filenames ###
   paths:
