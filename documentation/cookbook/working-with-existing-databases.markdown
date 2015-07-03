@@ -19,20 +19,26 @@ To generate a schema file, create a new directory for your project & specify the
 
 2. Go to the `legacyapp` project directory anywhere on your filesystem:
 
-   ```bash
-   $ cd legacyapp
-   ```
-3. Run the `reverse` task to generate the `schema.xml` specifying your database credentials:
+    ```bash
+    $ cd legacyapp
+    ```
 
-   ```bash
-   $ propel reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
-   ```
-  
-   The given string is a DSN which will be passed to a PDO object. See the [Configuration reference](/documentation/reference/configuration-file.html#dsn) for further information.
+3. Run the `reverse` task to generate the `schema.xml` specifying your database
+   credentials:
 
-4. Pay attention to any errors/warnings issued during the task execution and then examine the generated `schema.xml` file to make any corrections needed.
+    ```bash
+    $ propel reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
+    ```
 
-5. _You're done!_ Now you have a `schema.xml` file in the `legacyapp/` project directory. You can now run the default Propel build to generate all the classes.
+    The given string is a DSN which will be passed to a PDO object. See the
+    [Configuration reference](/documentation/reference/configuration-file.html#dsn)
+    for further information.
+
+4. Pay attention to any errors/warnings issued during the task execution and then
+   examine the generated `schema.xml` file to make any corrections needed.
+
+5. _You're done!_ Now you have a `schema.xml` file in the `legacyapp/` project
+  directory. You can now run the default Propel build to generate all the classes.
 
 The generated `schema.xml` file should be used as a guide, not a final answer. There are some datatypes that Propel may not be familiar with; also some datatypes are simply not supported by Propel (e.g. arrays in PostgreSQL). Unfamiliar datatypes will be reported as warnings and substituted with a default VARCHAR datatype.
 
@@ -44,15 +50,20 @@ Because Propel has both the ability to create XML schema files based on existing
 
 To do this you would simply:
 
- 1. Follow the steps above to create the `schema.xml` file from existing db.
- 2. Then you would change the target database type and specify connection URL for new database in the project's configuration file (see [configuration](/documentation/10-configuration.html) document)
- 3. And then run the `sql:build` task to generate the new DDL:
+1. Follow the steps above to create the `schema.xml` file from existing db.
 
-  ```bash
-  $ propel sql:build
-  ```
- 4. And (optionally) the `sql:insert` task to create the new database:
+2. Then you would change the target database type and specify connection URL for new
+   database in the project's configuration file (for further information, see the
+   [configuration](/documentation/10-configuration.html) documentation)
 
-  ```bash
-  $ propel sql:insert
-  ```
+3. And then run the `sql:build` task to generate the new DDL:
+
+    ```bash
+    $ propel sql:build
+    ```
+
+4. And (optionally) the `sql:insert` task to create the new database:
+
+    ```bash
+    $ propel sql:insert
+    ```
