@@ -108,15 +108,15 @@ and here are the statuses of our master branches:
 
 <table width="100%" class="ecg">
     <tr>
-        <td><a href="https://github.com/propelorm/Propel">Propel 1.7</a></td><td width="70"><img src="https://travis-ci.org/propelorm/Propel.png" /></td>
+        <td><a href="https://github.com/propelorm/Propel">Propel 1.7</a></td><td width="70"><img src="https://travis-ci.org/propelorm/Propel.svg" /></td>
     </tr><tr>
-        <td><a href="https://github.com/propelorm/Propel2">Propel2</a></td><td><img src="https://circleci.com/gh/propelorm/Propel2/tree/master.png?style=shield" /></td>
+        <td><a href="https://github.com/propelorm/Propel2">Propel2</a></td><td><img src="https://circleci.com/gh/propelorm/Propel2/tree/master.svg?style=shield" /></td>
     </tr><tr>
-        <td><a href="https://github.com/propelorm/sfPropelORMPlugin">sfPropelORMPlugin</a></td><td><img src="https://travis-ci.org/propelorm/sfPropelORMPlugin.png" /></td>
+        <td><a href="https://github.com/propelorm/sfPropelORMPlugin">sfPropelORMPlugin</a></td><td><img src="https://travis-ci.org/propelorm/sfPropelORMPlugin.svg" /></td>
     </tr><tr>
-        <td><a href="https://github.com/propelorm/PropelBundle">PropelBundle</a></td><td><img src="https://travis-ci.org/propelorm/PropelBundle.png" /></td>
+        <td><a href="https://github.com/propelorm/PropelBundle">PropelBundle</a></td><td><img src="https://travis-ci.org/propelorm/PropelBundle.svg" /></td>
     </tr><tr>
-        <td><a href="https://github.com/propelorm/PropelServiceProvider">PropelServiceProvider</a></td><td><img src="https://travis-ci.org/propelorm/PropelServiceProvider.png" /></td>
+        <td><a href="https://github.com/propelorm/PropelServiceProvider">PropelServiceProvider</a></td><td><img src="https://travis-ci.org/propelorm/PropelServiceProvider.svg" /></td>
     </tr>
 </table>
 
