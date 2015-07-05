@@ -1,9 +1,9 @@
 /* Override jQuery UI style */
 
 /* Fix display bug with the left nav */
-.conftabs {
-    float: left;
-    width: 100%;
+.ui-tabs .ui-helper-clearfix::before,
+.ui-tabs .ui-helper-clearfix::after {
+    display: inline-block!important;
 }
 
 /* Main container */
@@ -11,6 +11,7 @@
     border-radius: 0px;
     border: 0px;
     background: transparent;
+    margin-top: 30px;
 }
 
 .ui-tabs .ui-tabs-nav {
@@ -26,7 +27,7 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background: white;
-    margin: 0 5px -1px 0;
+    margin: -17px 5px -1px 0;
     padding: 0px;
 }
 
@@ -64,4 +65,8 @@
     border: 1px solid #C3DCEB;
     border-top-width: 0px;
     background-color: white;
+}
+
+.ui-tabs .ui-tabs-panel .highlight {
+    margin: 10px 0;
 }
