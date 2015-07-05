@@ -42,3 +42,11 @@ title: The Cookbook
 ### Working with Silex ###
 
 * [Working with Silex](silex/working-with-silex.html)
+
+### Working with Symfony2 ###
+
+* [Working with Symfony2 (Introduction)](symfony2/working-with-symfony2.html)
+
+* [Mastering Symfony2 Forms With Propel](symfony2/mastering-symfony2-forms-with-propel.html)
+
+* [The Symfony2 Security Component And Propel](symfony2/the-symfony2-security-component-and-propel.html)
