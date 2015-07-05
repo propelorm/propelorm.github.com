@@ -1,15 +1,20 @@
 ---
 layout: documentation
-title: How to Use PHP 5.3 Namespaces
+title: How to Use Namespaces
+configuration: true
 ---
 
-# How to Use PHP 5.3 Namespaces #
+# How to Use Namespaces #
 
-The generated model classes can use a namespace. It eases the management of large database models, and makes the Propel model classes integrate with PHP 5.3 applications in a clean way.
+The generated model classes can use a namespace. It eases the management of
+large database models, and makes the Propel model classes integrate with PHP
+applications in a clean way.
 
 ## Namespace Declaration And Inheritance ##
 
-To define a namespace for a model class, you just need to specify it in a `namespace` attribute of the `<table>` element for a single table, or in the `<database>` element to set the same namespace to all the tables.
+To define a namespace for a model class, you just need to specify it in the
+`namespace` attribute of a `<table>` element for a single table, or in the
+`<database>` element to set the same namespace for all the tables.
 
 Here is an example schema using namespaces:
 
@@ -18,36 +23,19 @@ Here is an example schema using namespaces:
 <database name="bookstore" defaultIdMethod="native" namespace="Bookstore">
 
   <table name="book">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
-    <column name="title" type="varchar" required="true" primaryString="true" />
-    <column name="isbn" required="true" type="varchar" size="24" phpName="ISBN" />
-    <column name="price" required="false" type="FLOAT" />
-    <column name="publisher_id" required="false" type="integer" description="Foreign Key Publisher" />
-    <column name="author_id" required="false" type="integer" description="Foreign Key Author" />
-    <foreign-key foreignTable="publisher" onDelete="setnull">
-      <reference local="publisher_id" foreign="id" />
-    </foreign-key>
-    <foreign-key foreignTable="author" onDelete="setnull" onUpdate="cascade">
-      <reference local="author_id" foreign="id" />
-    </foreign-key>
+    <!-- ... -->
   </table>
 
   <table name="author">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer"/>
-    <column name="first_name" required="true" type="varchar" size="128" />
-    <column name="last_name" required="true" type="varchar" size="128" />
-    <column name="email" type="varchar" size="128" />
+    <!-- ... -->
   </table>
 
   <table name="publisher" namespace="Book">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer" />
-    <column name="name" required="true" type="varchar" size="128" default="Penguin" />
+    <!-- ... -->
   </table>
 
   <table name="user" namespace="\Admin">
-    <column name="id" required="true" primaryKey="true" autoIncrement="true" type="integer"/>
-    <column name="login" required="true" type="varchar" size="128" />
-    <column name="email" type="varchar" size="128" />
+    <!-- ... -->
   </table>
 
 </database>
@@ -59,7 +47,8 @@ The `publisher` table defines a `namespace` attribute on its own, which _extends
 
 As for the `user` table, it defines an absolute namespace (starting with a backslash), which _overrides_ the database namespace. The generated class for the `user` table will be `Admin\User`.
 
->**Tip**You can use subnamespaces (i.e. namespaces containing backslashes) in the `namespace` attribute.
+> **Tip** You can use subnamespaces (i.e. namespaces containing backslashes) in
+> the `namespace` attribute.
 
 ## Using Namespaced Models ##
 
@@ -85,7 +74,9 @@ $book->setAuthor($author);
 $book->save();
 ```
 
-The namespace is used for the ActiveRecord class, but also for the Query classes. Just remember that when you use relation names ina query, the namespace should not appear:
+The namespace is used for the ActiveRecord class, but also for the Query classes.
+Just remember that when you use relation names in a query, the namespace should
+not appear:
 
 ```php
 <?php
@@ -106,8 +97,6 @@ echo get_class($book->getPublisher());
 // \Bookstore\Book\Publisher
 ```
 
->**Tip**Using namespaces make generated model code incompatible with versions of PHP less than 5.3. Beware that you will not be able to use your model classes in an older PHP application.
-
 ## Using Namespaces As A Directory Structure ##
 
 In a schema, you can define a `package` attribute on a `<database>` or a `<table>` tag to generate model classes in a subdirectory (see [Multi-Component](multi-component-data-model.html)). If you use namespaces to autoload your classes based on a SplClassAutoloader (see [http://groups.google.com/group/php-standards](http://groups.google.com/group/php-standards)), then you may find yourself repeating the `namespace` data in the `package` attribute:
@@ -117,11 +106,75 @@ In a schema, you can define a `package` attribute on a `<database>` or a `<table
   namespace="Foo\Bar" package="Foo.Bar">
 ```
 
-To avoid such repetitions, just set the `propel.generator.schema.autoPackage` setting to `true` in your configuration file:
+To avoid such repetitions, just set the schema's `autoPackage` setting to `true`
+in your configuration file:
 
-```ini
-propel.namespace.autoPackage = true
-```
+<div class="conftabs">
+<ul>
+<li><a href="#tabyaml">propel.yaml</a></li>
+<li><a href="#tabphp">propel.php</a></li>
+<li><a href="#tabjson">propel.json</a></li>
+<li><a href="#tabini">propel.ini</a></li>
+<li><a href="#tabxml">propel.xml</a></li>
+</ul>
+<div id="tabyaml">
+{% highlight yaml %}
+propel:
+    generator:
+        schema:
+            autoPackage: true
+{% endhighlight %}
+</div>
+<div id="tabphp">
+{% highlight php %}
+<?php
+
+return [
+    'propel' => [
+        'generator' => [
+            'schema' => [
+                'autoPackage' => true
+            ]
+        ]
+    ]
+];
+{% endhighlight %}
+</div>
+<div id="tabjson">
+{% highlight json %}
+{
+    "propel": {
+        "generator": {
+            "schema": {
+                "autoPackage": true
+            }
+        }
+    }
+}
+{% endhighlight %}
+</div>
+<div id="tabini">
+{% highlight ini %}
+[propel]
+
+generator.schema.autoPackage = true
+{% endhighlight %}
+</div>
+<div id="tabxml">
+{% highlight xml %}
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<config>
+    <propel>
+        <generator>
+          <schema>
+            <autoPackage>true</autoPackage>
+          </schema>
+        </generator>
+    </propel>
+</config>
+{% endhighlight %}
+</div>
+
 
 Now Propel will automatically create a `package` attribute, and therefore distribute model classes in subdirectories, based on the `namespace` attribute, and you can  omit the manual `package` attribute in the schema:
 

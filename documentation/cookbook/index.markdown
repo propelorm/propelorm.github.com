@@ -13,7 +13,7 @@ title: The Cookbook
 
 * [Customizing build](customizing-build.html)
 
-* [How to Use PHP 5.3 Namespaces](namespaces.html)
+* [How to Use Namespaces](namespaces.html)
 
 * [Model Introspection At Runtime](runtime-introspection.html)
 

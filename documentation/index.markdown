@@ -60,7 +60,7 @@ You can also look at [user contributed behaviors](../documentation/cookbook/user
 
 * [Additional SQL Files](/documentation/cookbook/adding-additional-sql-files.html) How to execute custom SQL statements at buildtime
 * [Advanced Column Types](/documentation/cookbook/working-with-advanced-column-types.html) How to work with BLOBs, serialized PHP objects, ENUM, and ARRAY column types.
-* [How to Use PHP 5.3 Namespaces](/documentation/cookbook/namespaces.html) How to generate model classes with namespaces, and how to use them.
+* [How to Use Namespaces](/documentation/cookbook/namespaces.html) How to generate model classes with namespaces, and how to use them.
 * [Model Introspection At Runtime](/documentation/cookbook/runtime-introspection.html) How to use the Map classes to discover table properties at runtime.
 * [Multi-Component Data Model](/documentation/cookbook/multi-component-data-model.html) How to generate model classes in subdirectories, and organize your model into independent packages / modules.
 * [Object Copy](/documentation/cookbook/copying-persisted-objects.html) How to clone and copy persisted objects.
