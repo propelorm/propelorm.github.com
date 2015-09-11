@@ -45,4 +45,4 @@ $groups = GroupQuery::create()
 &nbsp;&nbsp;-&gt;filterByUser($user)
 &nbsp;&nbsp;-&gt;find();
 </pre></div></div>
-<p>So besides the `isCrossRef` attribute, there is nothing to learn - Propel avoids to introduce new conventions when existing ones fit a new use case.</p>
+<p>So besides the `isCrossRef` attribute, there is nothing to learn - Propel avoids introducing new conventions when existing ones fit a new use case.</p>
