@@ -588,7 +588,7 @@ propel:
         time:
           precision: 3
           pad: 8
-        memory:
+        mem:
           precision: 3
           pad: 8
 {% endhighlight %}
@@ -608,7 +608,7 @@ return [
                         'precision' => 3,
                         'pad' => 8
                     ],
-                    'memory'    => [
+                    'mem'    => [
                         'precision' => 3,
                         'pad' => 8
                     ]
@@ -632,7 +632,7 @@ return [
                         "precision": 3,
                         "pad": 8
                     },
-                    "memory": {
+                    "mem": {
                         "precision": 3,
                         "pad": 8
                     }
@@ -650,8 +650,8 @@ runtime.profiler.classname = "\Propel\Runtime\Util\Profiler"
 runtime.profiler.slowTreshold = 0.1
 runtime.profiler.details.time.precision = 3
 runtime.profiler.details.time.pad = 8
-runtime.profiler.details.memory.precision = 3
-runtime.profiler.details.memory.pad = 8
+runtime.profiler.details.mem.precision = 3
+runtime.profiler.details.mem.pad = 8
 {% endhighlight %}
 </div>
 <div id="tabxml-4">
@@ -665,7 +665,7 @@ runtime.profiler.details.memory.pad = 8
                 <slowTreshold>0.1</slowTreshold>
                 <details>
                     <time precision="3" pad="8" />
-                    <memory precision="3" pad="8" />
+                    <mem precision="3" pad="8" />
                 </details>
             </profiler>
         </runtime>
@@ -792,7 +792,7 @@ $serviceContainer->setProfilerConfiguration(array(
            'precision' => '3',
            'pad' => '8',
         ),
-        'memory' => array(
+        'mem' => array(
             'name' => 'Memory',
             'precision' => '3',
             'pad' => '8',
