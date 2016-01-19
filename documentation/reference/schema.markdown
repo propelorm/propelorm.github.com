@@ -163,7 +163,7 @@ According to the schema, `name` is the only required attribute.  Also, the `idMe
   [tableMapName = "/TABLEMAPNAME/"]
   [primaryKey = "true|{false}"]
   [required = "true|{false}"]
-  [type = "BOOLEAN|TINYINT|SMALLINT|INTEGER|BIGINT|DOUBLE|FLOAT|REAL|DECIMAL|CHAR|{VARCHAR}|LONGVARCHAR|DATE|TIME|TIMESTAMP|BLOB|CLOB|OBJECT|ARRAY"]
+  [type = "BOOLEAN|TINYINT|SMALLINT|INTEGER|BIGINT|DOUBLE|FLOAT|REAL|DECIMAL|CHAR|{VARCHAR}|LONGVARCHAR|DATE|TIME|TIMESTAMP|BLOB|CLOB|OBJECT|ARRAY|ENUM"]
   [phpType = "boolean|int|integer|double|float|string|/BuiltInClassName/|/UserDefinedClassName/"]
   [sqlType = "/NativeDatabaseColumnType/"
   [size = "/NumericLengthOfColumn/"]
