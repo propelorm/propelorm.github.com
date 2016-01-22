@@ -11,7 +11,7 @@ Propel is available as a clone from the official [Github repository](http://gith
 
 Propel just requires:
 
-* [PHP 5.4](http://www.php.net/) or newer, with the DOM (libxml2) module enabled
+* [PHP 5.5](http://www.php.net/) or newer, with the DOM (libxml2) module enabled
 * A supported database (MySQL, MS SQL Server, PostgreSQL, SQLite, Oracle)
 
 Propel also uses some Symfony2 components to work properly:

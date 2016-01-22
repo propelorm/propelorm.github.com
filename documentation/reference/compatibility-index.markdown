@@ -17,7 +17,7 @@ At the moment we list only MySQL, SQLite and Postgres since only those are unit 
 
 |  Functionality   |  MySQL |   SQLite    | Postgres
 |------------------|--------|-------------|---------
-| General          |   Yes  |  Partial(1) |    Yes 
+| General          |   Yes  |  Partial(1) |    Yes
 | `name` attribute |   Yes  |  No(2)      |    Yes
 
 1) As of version 3.6.19, SQLite supports foreign key constraints.
@@ -43,12 +43,4 @@ we're setting primaryKey=false and create a unique constraint instead, which is 
 
 ## PHP Versions
 
-### < 5.4.9 with PostgreSQL
-
-If you're using < 5.4.9 and PostgreSQL you can't use `ATTR_EMULATE_PREPARES` due to a [bug in PHP's PDO](https://bugs.php.net/bug.php?id=62593) that throws errors like:
-
-```
-column COLUMN is of type boolean but expression is of type integer
-```
-
-Update PHP to a newer version or disable `ATTR_EMULATE_PREPARES`.
+Update PHP to version 5.5 or upper.
