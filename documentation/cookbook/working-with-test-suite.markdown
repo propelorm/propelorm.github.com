@@ -191,7 +191,7 @@ tests/bin/
 ├── phpunit.agnostic.sh
 ├── phpunit.mysql.sh
 ├── phpunit.pgsql.sh
-├── phpunit.sqlite.sh
+└── phpunit.sqlite.sh
 ```
 
 You can see there that we filter by those groups:
@@ -199,13 +199,13 @@ You can see there that we filter by those groups:
 ```bash
 $ cat tests/bin/phpunit.agnostic.sh
 #!/bin/sh
-./vendor/bin/phpunit --exclude-group database;
+./vendor/bin/phpunit -c tests/agnostic.phpunit.xml
 ```
 
 ```bash
 $ cat tests/bin/phpunit.pgsql.sh
 #!/bin/sh
-./vendor/bin/phpunit --group database --exclude-group mysql;
+./vendor/bin/phpunit -c tests/pgsql.phpunit.xml
 ```
 
 and so on.
@@ -214,7 +214,7 @@ The actual Travis build server is configured like this:
 
 ```yaml
 script:
-    - ./tests/bin/phpunit.$DB.sh;
+    - ./vendor/bin/phpunit -v -c tests/$DB.phpunit.xml;
 ```
 
 To group our tests we have basically only two `@group` annotation values that
