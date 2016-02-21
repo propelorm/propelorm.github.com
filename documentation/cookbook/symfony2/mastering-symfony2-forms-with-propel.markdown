@@ -105,7 +105,7 @@ class BookController extends Controller
 
 To render the form, you'll need to create a Twig template like below:
 
-```html+jinja
+```liquid
 {% raw %}
 {# src/Acme/LibraryBundle/Resources/views/Book/new.html.twig #}
 
