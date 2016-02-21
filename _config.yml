@@ -1,9 +1,12 @@
-highlighter: pygments
+highlighter: rouge
 permalink: /blog/:year/:month/:day/:title.html
-markdown:  redcarpet
-exclude:   [ README.md, Gemfile ]
-redcarpet:
-    extensions: ["tables", "no_intra_emphasis"]
+markdown: kramdown
+kramdown:
+   input: GFM
+   auto_ids: true
+   entity_output: numeric
+   hard_wrap: false
+exclude: [ README.md, Gemfile, psd ]
 navigation:
  - title: Documentation
    url: /documentation/
