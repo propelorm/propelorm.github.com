@@ -18,7 +18,7 @@ The name of the configuration file is `propel`, with one of the supported extens
 > **Note** <br /> Throughout this document, when we'll write `.ext` we intend "one of the supported extensions".
 
 Propel looks for its configuration file in the current directory or in a sub-directory named *conf* or *config*.
-Alternatively, you can choose a directory at your choiche and pass it to the command line as `--config-dir` parameter. For instance:
+Alternatively, you can choose a directory at your choice and pass it to the command line as `--config-dir` parameter. For instance:
 
 ```bash
 # Propel looks for its configuration file in the current directory or
