@@ -16,4 +16,5 @@ Here is a list of Propel behaviors contributed by users. Feel free to use them o
 
 * [DefaultOrderBehavior](https://github.com/gharlan/propel-default-order-behavior) Adds support for user defined order for tables.
 
-* [PropelL10nBehavior](https://github.com/gossi/propel-l10n-behavior) Let's you globally define your locales and dependencies. Seemless localization into propel.
+* [PropelL10nBehavior](https://github.com/gossi/propel-l10n-behavior) Lets you
+  globally define your locales and dependencies. Seamless localization for Propel.
