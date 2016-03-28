@@ -163,7 +163,7 @@ According to the schema, `name` is the only required attribute.  Also, the `idMe
   [tableMapName = "/TABLEMAPNAME/"]
   [primaryKey = "true|{false}"]
   [required = "true|{false}"]
-  [type = "BOOLEAN|TINYINT|SMALLINT|INTEGER|BIGINT|DOUBLE|FLOAT|REAL|DECIMAL|CHAR|{VARCHAR}|LONGVARCHAR|DATE|TIME|TIMESTAMP|BLOB|CLOB|OBJECT|ARRAY|ENUM"]
+  [type = "BOOLEAN|TINYINT|SMALLINT|INTEGER|BIGINT|DOUBLE|FLOAT|REAL|DECIMAL|NUMERIC|CHAR|VARCHAR|LONGVARCHAR|DATE|TIME|TIMESTAMP|BLOB|CLOB|OBJECT|ARRAY|ENUM|SET|GEOMETRY|BU_DATE|BU_TIMESTAMP|BOOLEAN_EMU|BINARY|VARBINARY|LONGVARBINARY"]
   [phpType = "boolean|int|integer|double|float|string|/BuiltInClassName/|/UserDefinedClassName/"]
   [sqlType = "/NativeDatabaseColumnType/"
   [size = "/NumericLengthOfColumn/"]
@@ -324,6 +324,7 @@ Here are the Propel column types with some example mappings to native database a
 
 * `BOOLEAN` columns map to a boolean in PHP. Depending on the native support for this type, they are stored in SQL as `BOOLEAN` or `TINYINT`.
 * `ENUM` columns accept values among a list of predefined ones. Set the value set using the `valueSet` attribute, separated by commas.
+* `SET` columns accept multiple values among a list of predefined ones. Set the value set using the `valueSet` attribute, separated by commas.
 * `OBJECT` columns map to PHP objects and are stored as binary.
 * `ARRAY` columns map to PHP arrays and are stored as strings.
 
