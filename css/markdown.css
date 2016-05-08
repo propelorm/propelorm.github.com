@@ -64,7 +64,6 @@
     font-family: "Bitstream Vera Sans Mono", monospace;
     padding: 5px;
     max-width: 100%;
-    overflow-y: auto;
 }
 
 .markdown blockquote {
