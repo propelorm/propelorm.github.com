@@ -218,6 +218,17 @@ The `slaves` properties groups lists slave `connection` elements which provide s
                   - ......
 ```
 
+#### Model path
+
+`model_paths` specifies the folders where the models are located. This can help improve some operations. The default folders are `srv` and `vendor`.
+
+```yaml
+              model_paths:
+                  - srv
+                  - vendor
+                  - ......
+```
+
 ### Specific adapter settings ###
 
 In this section you can define some settings for specific DBMS.
@@ -529,6 +540,10 @@ propel:
               slaves:
                   - dsn: mysql:host=slave-host-1;dbname=bookstore
                   - ......
+              # Array of folders which includes the models
+              model_paths:
+                  - src
+                  - vendor
 
       ## Specific adapter settings
       adapters:
