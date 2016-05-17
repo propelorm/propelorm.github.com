@@ -220,11 +220,11 @@ The `slaves` properties groups lists slave `connection` elements which provide s
 
 #### Model path
 
-`model_paths` specifies the folders where the models are located. This can help improve some operations. The default folders are `srv` and `vendor`.
+`model_paths` specifies the folders where the models are located. This can help improve some operations. The default folders are `src` and `vendor`.
 
 ```yaml
               model_paths:
-                  - srv
+                  - src
                   - vendor
                   - ......
 ```
