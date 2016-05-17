@@ -220,7 +220,7 @@ The `slaves` properties groups lists slave `connection` elements which provide s
 
 #### Model path
 
-`model_paths` specifies the folders where the models are located. This can help improve some operations. The default folders are `src` and `vendor`.
+`model_paths` specifies the folders where the models are located. Removing unneeded files can improve the performance of fixture creation. The default folders are `src` and `vendor`.
 
 ```yaml
               model_paths:
