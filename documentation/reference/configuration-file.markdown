@@ -361,6 +361,10 @@ This section configures the reverse engineering, to create an xml schema from an
       # namespace attribute for the package. Consequently, the namespace attribute
       # will also stipulate the subdirectory in which model classes get generated.
       namespaceAutoPackage: {true}|false
+      
+      # If you have multiple schema files in multiple subdirectories, this setting
+      # tells propel to look recursively in `schemaDir` for XML files.
+      recursive: {false}|true
 
       schema:
           # The schema base name
@@ -648,6 +652,10 @@ propel:
       # namespace attribute for the package. Consequently, the namespace attribute
       # will also stipulate the subdirectory in which model classes get generated.
       namespaceAutoPackage: {true}|false
+
+      # If you have multiple schema files in multiple subdirectories, this setting
+      # tells propel to look recursively in `schemaDir` for XML files.
+      recursive: {false}|true
 
       schema:
           # The schema base name
