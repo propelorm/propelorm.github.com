@@ -218,9 +218,11 @@ The `slaves` properties groups lists slave `connection` elements which provide s
                   - ......
 ```
 
-#### Model path
+#### Model paths ####
 
-`model_paths` specifies the folders where the models are located. Removing unneeded folders can improve the performance of fixture creation. The default folders are `src` and `vendor`.
+`model_paths` specifies the folders where the models are located. Removing unneeded
+folders can improve the performance of fixture creation. The default folders are
+`src` and `vendor`.
 
 ```yaml
               model_paths:
@@ -372,9 +374,9 @@ This section configures the reverse engineering, to create an xml schema from an
       # namespace attribute for the package. Consequently, the namespace attribute
       # will also stipulate the subdirectory in which model classes get generated.
       namespaceAutoPackage: {true}|false
-      
+
       # If you have multiple schema files in multiple subdirectories, this setting
-      # tells propel to look recursively in `schemaDir` for XML files.
+      # tells Propel to look recursively in `schemaDir` for XML files.
       recursive: {false}|true
 
       schema:
@@ -544,7 +546,7 @@ propel:
               slaves:
                   - dsn: mysql:host=slave-host-1;dbname=bookstore
                   - ......
-              # Array of folders which includes the models
+              # Array of folders which include the models
               model_paths:
                   - src
                   - vendor
@@ -624,13 +626,13 @@ propel:
             pad: {8}|integer
           memory:
             precision: {3}|integer
-            pad: {8}|integer          
+            pad: {8}|integer
           memDelta:
             precision: {3}|integer
-            pad: {8}|integer          
+            pad: {8}|integer
           memPeak:
             precision: {3}|integer
-            pad: {8}|integer          
+            pad: {8}|integer
         innerGlue: {":"}|integer
         outerGlue: {"|"}|integer
 
@@ -669,7 +671,7 @@ propel:
       namespaceAutoPackage: {true}|false
 
       # If you have multiple schema files in multiple subdirectories, this setting
-      # tells propel to look recursively in `schemaDir` for XML files.
+      # tells Propel to look recursively in `schemaDir` for XML files.
       recursive: {false}|true
 
       schema:
