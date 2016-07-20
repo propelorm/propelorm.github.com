@@ -42,7 +42,7 @@ propel:
   database:
       connections:
           bookstore:
-              adapter: mysql
+              adapter: mssql
               classname: Propel\Runtime\Connection\ConnectionWrapper
               dsn: sqlsrv:server=localhost,1433;Database=propel
               user: my_db_user
@@ -67,7 +67,7 @@ return [
         'database' => [
             'connections' => [
                 'bookstore' => [
-                    'adapter'    => 'mysql',
+                    'adapter'    => 'mssql',
                     'classname'  => 'Propel\Runtime\Connection\ConnectionWrapper',
                     'dsn'        => 'sqlsrv:server=localhost,1433;Database=propel',
                     'user'       => 'my_db_user',
@@ -95,7 +95,7 @@ return [
         "database": {
             "connections": {
                 "bookstore": {
-                    "adapter": "mysql",
+                    "adapter": "mssql",
                     "classname": "Propel\Runtime\Connection\ConnectionWrapper",
                     "dsn": "sqlsrv:server=localhost,1433;Database=propel",
                     "user": "my_db_user",
@@ -122,7 +122,7 @@ return [
 ;
 ; Database section
 ;
-database.connections.bookstore.adapter    = mysql
+database.connections.bookstore.adapter    = mssql
 database.connections.bookstore.classname  = Propel\Runtime\Connection\ConnectionWrapper
 database.connections.bookstore.dsn        = sqlsrv:server=localhost,1433;Database=propel
 database.connections.bookstore.user       = my_db_user
@@ -150,7 +150,7 @@ generator.connections[0] = bookstore
         <database>
             <connections>
                 <connection id="bookstore">
-                    <adapter>mysql</adapter>
+                    <adapter>mssql</adapter>
                     <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
                     <dsn>sqlsrv:server=localhost,1433;Database=propel</dsn>
                     <user>my_db_user</user>
@@ -216,7 +216,7 @@ propel:
   database:
       connections:
           bookstore:
-              adapter: mysql
+              adapter: mssql
               classname: Propel\Runtime\Connection\ConnectionWrapper
               dsn: sybase:host=localhost:1433;Database=propel
               user: my_db_user
@@ -241,7 +241,7 @@ return [
         'database' => [
             'connections' => [
                 'bookstore' => [
-                    'adapter'    => 'mysql',
+                    'adapter'    => 'mssql',
                     'classname'  => 'Propel\Runtime\Connection\ConnectionWrapper',
                     'dsn'        => 'sybase:host=localhost:1433;Database=propel',
                     'user'       => 'my_db_user',
@@ -269,7 +269,7 @@ return [
         "database": {
             "connections": {
                 "bookstore": {
-                    "adapter": "mysql",
+                    "adapter": "mssql",
                     "classname": "Propel\Runtime\Connection\ConnectionWrapper",
                     "dsn": "sybase:host=localhost:1433;Database=propel",
                     "user": "my_db_user",
@@ -296,7 +296,7 @@ return [
 ;
 ; Database section
 ;
-database.connections.bookstore.adapter    = mysql
+database.connections.bookstore.adapter    = mssql
 database.connections.bookstore.classname  = Propel\Runtime\Connection\ConnectionWrapper
 database.connections.bookstore.dsn        = sybase:host=localhost:1433;Database=propel
 database.connections.bookstore.user       = my_db_user
@@ -324,7 +324,7 @@ generator.connections[0] = bookstore
         <database>
             <connections>
                 <connection id="bookstore">
-                    <adapter>mysql</adapter>
+                    <adapter>mssql</adapter>
                     <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
                     <dsn>sybase:host=localhost:1433;Database=propel</dsn>
                     <user>my_db_user</user>
@@ -412,7 +412,7 @@ propel:
   database:
       connections:
           bookstore:
-              adapter: mysql
+              adapter: mssql
               classname: Propel\Runtime\Connection\ConnectionWrapper
               dsn: dblib:host=localhost:1433;dbname=propel
               user: my_db_user
@@ -437,7 +437,7 @@ return [
         'database' => [
             'connections' => [
                 'bookstore' => [
-                    'adapter'    => 'mysql',
+                    'adapter'    => 'mssql',
                     'classname'  => 'Propel\Runtime\Connection\ConnectionWrapper',
                     'dsn'        => 'dblib:host=localhost:1433;dbname=propel',
                     'user'       => 'my_db_user',
@@ -465,7 +465,7 @@ return [
         "database": {
             "connections": {
                 "bookstore": {
-                    "adapter": "mysql",
+                    "adapter": "mssql",
                     "classname": "Propel\Runtime\Connection\ConnectionWrapper",
                     "dsn": "dblib:host=localhost:1433;dbname=propel",
                     "user": "my_db_user",
@@ -492,7 +492,7 @@ return [
 ;
 ; Database section
 ;
-database.connections.bookstore.adapter    = mysql
+database.connections.bookstore.adapter    = mssql
 database.connections.bookstore.classname  = Propel\Runtime\Connection\ConnectionWrapper
 database.connections.bookstore.dsn        = dblib:host=localhost:1433;dbname=propel
 database.connections.bookstore.user       = my_db_user
@@ -520,7 +520,7 @@ generator.connections[0] = bookstore
         <database>
             <connections>
                 <connection id="bookstore">
-                    <adapter>mysql</adapter>
+                    <adapter>mssql</adapter>
                     <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
                     <dsn>dblib:host=localhost:1433;dbname=propel</dsn>
                     <user>my_db_user</user>
