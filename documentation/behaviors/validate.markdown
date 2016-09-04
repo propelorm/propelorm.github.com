@@ -99,10 +99,10 @@ Consider the following model:
         <column name="price" required="false" type="FLOAT" />
         <column name="publisher_id" required="false" type="INTEGER" />
         <column name="author_id" required="false" type="INTEGER" />
-        <foreign-key foreignTable="validate_publisher" onDelete="setnull">
+        <foreign-key foreignTable="publisher" onDelete="setnull">
             <reference local="publisher_id" foreign="id" />
         </foreign-key>
-        <foreign-key foreignTable="validate_author" onDelete="setnull" onUpdate="cascade">
+        <foreign-key foreignTable="author" onDelete="setnull" onUpdate="cascade">
             <reference local="author_id" foreign="id" />
         </foreign-key>
         <behavior name="validate">
@@ -151,10 +151,10 @@ Consider the following model:
     <table name="reader_book" isCrossRef="true">
          <column name="reader_id" type="INTEGER" primaryKey="true"/>
          <column name="book_id" type="INTEGER" primaryKey="true"/>
-         <foreign-key foreignTable="validate_reader">
+         <foreign-key foreignTable="reader">
               <reference local="reader_id" foreign="id"/>
          </foreign-key>
-         <foreign-key foreignTable="validate_book">
+         <foreign-key foreignTable="book">
               <reference local="book_id" foreign="id"/>
          </foreign-key>
      </table>
@@ -192,13 +192,13 @@ Continuing with the previous example, you can also perform validations on reader
 ```xml
 <!-- previous schema -->
 
-<table name="validate_reader_book" isCrossRef="true">
+<table name="reader_book" isCrossRef="true">
          <column name="reader_id" type="INTEGER" primaryKey="true"/>
          <column name="book_id" type="INTEGER" primaryKey="true"/>
-         <foreign-key foreignTable="validate_reader">
+         <foreign-key foreignTable="reader">
               <reference local="reader_id" foreign="id"/>
          </foreign-key>
-         <foreign-key foreignTable="validate_book">
+         <foreign-key foreignTable="book">
               <reference local="book_id" foreign="id"/>
          </foreign-key>
          <behavior name="validate">
