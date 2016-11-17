@@ -26,12 +26,12 @@ Rebuild your model, insert the table creation sql again, and you're ready to go.
 $b = new Book();
 $b->setTitle('War And Peace');
 $b->save();
-echo $b->getCreatedAt(); // 2009-10-02 18:14:23
-echo $b->getUpdatedAt(); // 2009-10-02 18:14:23
+echo $b->getCreatedAt('Y-m-d H:i:s'); // 2009-10-02 18:14:23
+echo $b->getUpdatedAt('Y-m-d H:i:s'); // 2009-10-02 18:14:23
 $b->setTitle('Anna Karenina');
 $b->save();
-echo $b->getCreatedAt(); // 2009-10-02 18:14:23
-echo $b->getUpdatedAt(); // 2009-10-02 18:14:25
+echo $b->getCreatedAt('Y-m-d H:i:s'); // 2009-10-02 18:14:23
+echo $b->getUpdatedAt('Y-m-d H:i:s'); // 2009-10-02 18:14:25
 ```
 
 The object query also has specific methods to retrieve recent objects and order them according to their update date:
@@ -83,12 +83,12 @@ You can change the name of the columns added by the behavior by setting the `cre
 $b = new Book();
 $b->setTitle('War And Peace');
 $b->save();
-echo $b->getMyCreateDate(); // 2009-10-02 18:14:23
-echo $b->getMyUpdateDate(); // 2009-10-02 18:14:23
+echo $b->getMyCreateDate('Y-m-d H:i:s'); // 2009-10-02 18:14:23
+echo $b->getMyUpdateDate('Y-m-d H:i:s'); // 2009-10-02 18:14:23
 $b->setTitle('Anna Karenina');
 $b->save();
-echo $b->getMyCreateDate(); // 2009-10-02 18:14:23
-echo $b->getMyUpdateDate(); // 2009-10-02 18:14:25
+echo $b->getMyCreateDate('Y-m-d H:i:s'); // 2009-10-02 18:14:23
+echo $b->getMyUpdateDate('Y-m-d H:i:s'); // 2009-10-02 18:14:25
 ```
 
 It is also possible to to completely skip the update column.
