@@ -287,7 +287,7 @@ You can override this setting if you wish to default to another engine for all t
       parserClass: {empty}|string
 ```
 
-### Reverse engeneering ###
+### Reverse engineering ###
 
 This section configures the reverse engineering, to create an xml schema from an existing database.
 
