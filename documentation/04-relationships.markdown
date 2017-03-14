@@ -187,7 +187,7 @@ Databases typically use a cross-reference table, or junction table, to materiali
   <column name="name" type="varchar" size="32"/>
 </table>
 
-<table name="group">
+<table name="group" identifierQuoting="true">
   <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
   <column name="name" type="varchar" size="32"/>
 </table>
