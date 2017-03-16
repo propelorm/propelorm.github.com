@@ -402,8 +402,8 @@ methods like:
 
 ```php
 <?php
-$user->addGroup(User $group, Type $type):$this;
-$user->removeGroup(User $group, Type $type):$this;
+$user->addGroup(Group $group, Type $type):$this;
+$user->removeGroup(Group $group, Type $type):$this;
 $user->countGroups(Type $type = null):int;
 $user->getGroups(Type $type = null, ...):Group[];
 
@@ -435,8 +435,8 @@ Generates methods like:
 <?php
 $user->addType(Type $type, User $group);
 $user->removeType(Type $type, User $group);
-$user->countTypes(User $group = null, ...);
-$user->getTypes(User $group = null, ...);
+$user->countTypes(Group $group = null, ...);
+$user->getTypes(Group $group = null, ...);
 ```
 
 
