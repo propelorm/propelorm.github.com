@@ -1,20 +1,26 @@
 ---
 layout: documentation
-title: Installing Propel
+title: 安装 Propel
 ---
 
-# Installing Propel #
+# 安装 Propel #
 
-Propel is available as a clone from the official [Github repository](http://github.com/propelorm/Propel2), as a checkout from Subversion through Github and as a "traditional" [tgz](https://github.com/propelorm/Propel2/tarball/master) or [zip](https://github.com/propelorm/Propel2/zipball/master) package. Whatever installation method you may choose, getting Propel to work is pretty straightforward.
+你可以通过以下途径获取 Propel：
 
-## Prerequisites ##
+* 从 [官方 Github 仓库](http://github.com/propelorm/Propel2) 克隆。
+* 通过Github，用 Subversion 检出分支。
+* 下载 "传统的" [tgz](https://github.com/propelorm/Propel2/tarball/master) 或者 [zip](https://github.com/propelorm/Propel2/zipball/master) 压缩包。
 
-Propel just requires:
+无论你选择哪一种安装方式，获取Propel并进行工作都是非常简单的。
 
-* [PHP 5.5](http://www.php.net/) or newer, with the DOM (libxml2) module enabled
-* A supported database (MySQL, MS SQL Server, PostgreSQL, SQLite, Oracle)
+## 预备条件 ##
 
-Propel also uses some Symfony2 components to work properly:
+Propel 只需要依赖如下项:
+
+* [PHP 5.5](http://www.php.net/) 或者更高版本, 同时开启 `libxml2` 扩展。
+* 被Propel支持的数据库 (MySQL, MS SQL Server, PostgreSQL, SQLite, Oracle)
+
+为了保证正确运行，Propel也使用了一部分 Symfony2 的组件，
 
 * [Config](https://github.com/symfony/Config) : uses in the source code to manage and validate configuration.
 * [Console](https://github.com/symfony/Console) : which manage the generators propel uses.
