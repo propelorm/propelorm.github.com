@@ -19,4 +19,4 @@ Here is a list of Propel behaviors contributed by users. Feel free to use them o
 * [PropelL10nBehavior](https://github.com/gossi/propel-l10n-behavior) Lets you
   globally define your locales and dependencies. Seamless localization for Propel.
 
-* [UuidBehavior](https://github.com/donkeycode/propel-uuid-behavior) Lets you add a column with uuid automatically setted
+* [UuidBehavior](https://github.com/donkeycode/propel-uuid-behavior) Lets you add a column with UUID automatically set.
