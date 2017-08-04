@@ -274,7 +274,7 @@ And the following is the same example in json format:
             "connections": {
                 "mysource": {
                     "adapter": "mysql",
-                    "classname": "Propel\Runtime\Connection\DebugPDO",
+                    "classname": "Propel\\Runtime\\Connection\\DebugPDO",
                     "dsn": "mysql:host=localhost;dbname=mydb",
                     "user": "root",
                     "password": "",
@@ -282,7 +282,7 @@ And the following is the same example in json format:
                 },
                 "yoursource": {
                     "adapter": "mysql",
-                    "classname": "Propel\Runtime\Connection\DebugPDO",
+                    "classname": "Propel\\Runtime\\Connection\\DebugPDO",
                     "dsn": "mysql:host=localhost;dbname=yourdb",
                     "user": "root",
                     "password": "",
