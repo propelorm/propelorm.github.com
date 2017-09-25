@@ -20,3 +20,5 @@ Here is a list of Propel behaviors contributed by users. Feel free to use them o
   globally define your locales and dependencies. Seamless localization for Propel.
 
 * [UuidBehavior](https://github.com/donkeycode/propel-uuid-behavior) Lets you add a column with UUID automatically set.
+
+* [OverridableBehavior](https://github.com/donkeycode/propel-overridable-behavior) Override of data made easy.
