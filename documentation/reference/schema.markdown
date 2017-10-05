@@ -458,6 +458,18 @@ PCTIncrease      | 0
 Tablespace       | L_128K
 ```
 
+#### PostgreSQL Cendor Info ####
+
+Propel supports the following vendor parameters for PostgreSQL (vendor type is `pgsql`):
+
+```
+Name             | Example values
+-----------------|---------------
+// in <foreign-key> element
+deferrable       | true
+initiallyDeferred| false
+```
+
 ### Using Custom Platform ###
 
 For overriding the mapping between Propel types and native SQL types, you can create your own Platform class and override the mapping.
