@@ -266,7 +266,6 @@ schema with all its necessary indices so the behavior won't overwrite/re-add it 
 * `Version getOneVersion(integer $versionNumber PropelPDO $con)`: Returns a given version object
 * `array compareVersions(integer $version1, integer $version2)`: Returns an array of differences showing which parts of a resource changed between two versions
 * `BaseObject populateFromVersion(Version $version, PropelPDO $con)`: Populates an ActiveRecord object based on a Version object
-* `array compareVersions(integer $version1, integer $version2)`: Returns an array of differences showing which parts of a resource changed between two versions
 
 * `BaseObject setVersionCreatedBy(string $createdBy)`: Defines the author name for the revision
 * `string getVersionCreatedBy()`: Gets the author name for the revision
