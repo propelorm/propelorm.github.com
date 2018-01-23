@@ -233,6 +233,14 @@ You can change the name of the archive table added by the behavior by setting th
 
 >**Tip**The `archive_table` and `archive_class` parameters are mutually exclusive. You can only use either one of the two.
 
+If you only want to change the resulting PHP class name, you can use the `archive_phpname` parameter.
+
+```xml
+<behavior name="archivable">
+  <parameter name="archive_phpname" value="MySpecialBookArchive" />
+</behavior>
+```
+
 You can also change the name of the column storing the archive date:
 
 ```xml
