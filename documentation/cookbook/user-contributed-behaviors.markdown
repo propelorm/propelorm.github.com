@@ -15,3 +15,10 @@ Here is a list of Propel behaviors contributed by users. Feel free to use them o
 * [ArrayAccessBehavior](http://github.com/nnarhinen/propel-arrayaccess) Adds ArrayAccess implementations to the BaseObjects
 
 * [DefaultOrderBehavior](https://github.com/gharlan/propel-default-order-behavior) Adds support for user defined order for tables.
+
+* [PropelL10nBehavior](https://github.com/gossi/propel-l10n-behavior) Lets you
+  globally define your locales and dependencies. Seamless localization for Propel.
+
+* [UuidBehavior](https://github.com/donkeycode/propel-uuid-behavior) Lets you add a column with UUID automatically set.
+
+* [OverridableBehavior](https://github.com/donkeycode/propel-overridable-behavior) Override of data made easy.

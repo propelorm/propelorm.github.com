@@ -28,7 +28,7 @@ All releases at github.com: [github.com/propelorm/Propel2/releases](https://gith
 
 ### What is Propel exactly? ###
 
-Propel is an open-source Object-Relational Mapping (ORM) for SQL-Databases in PHP 5.4.
+Propel is an open-source Object-Relational Mapping (ORM) for SQL-Databases in PHP 5.5.
 It allows you to access your database using a set of objects, providing a simple API for storing and retrieving data.
 
 Additional to its ORM capabilities it does provide a **query-builder**, **database schema migration**, **reverse engineering** of existing database and much more.
@@ -41,7 +41,7 @@ other classes and objects in PHP without writing SQL.
 * Propel is blazing fast
 * Query-Builder
 * IDE friendly thanks to code-generation
-* Generation of methods for all columns and **relations** 
+* Generation of methods for all columns and **relations**
 * Database schema migration
 * Schema reverse engineering
 * Customizable
@@ -50,7 +50,7 @@ other classes and objects in PHP without writing SQL.
 
 ### How? ###
 
-You need to write the definition of your tables as xml, export it from your existing database through our 'database:reverse' command or 
+You need to write the definition of your tables as xml, export it from your existing database through our 'database:reverse' command or
 build it via a tool like ORM-Designer.
 
 ```xml

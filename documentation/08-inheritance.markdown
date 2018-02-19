@@ -181,7 +181,7 @@ Using the previous schema, here is how you create a `Basketballer` and set his s
 
 ```php
 <?php
-basketballer = new Basketballer();
+$basketballer = new Basketballer();
 $basketballer->setPoints(101);
 $basketballer->setFieldGoals(47);
 $basketballer->setThreePointsFieldGoals(7);
@@ -390,13 +390,13 @@ $cat->save();
 $art = new Article();
 $art->setTitle('Avatar Makes Best Opening Weekend in the History');
 $art->setCategory($cat);
-$art->setContent('With $232.2 million worldwide total, Avatar had one of the best-opening weekends in the history of cinema.');
+$art->setBody('With $232.2 million worldwide total, Avatar had one of the best-opening weekends in the history of cinema.');
 $art->save();
 // create a new Video
 $vid = new Video();
 $vid->setTitle('Avatar Trailer');
 $vid->setCategory($cat);
-$vid->setResourceLink('http://www.avatarmovie.com/index.html')
+$vid->setResourceLink('http://www.avatarmovie.com/index.html');
 $vid->save();
 ```
 

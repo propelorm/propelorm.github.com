@@ -99,7 +99,7 @@ class Book extends BaseBook
 }
 ```
 
-The `BaseBook::save()` method wraps the actual database INSERT/UPDATE query inside a transaction, together with any other query registered in a pre- or post- save hook. That means that when you save a book, the `postSave()` code is executed in the same transaction as the actual `$book->save()` method. Everything happens as is the code was the following:
+The `BaseBook::save()` method wraps the actual database INSERT/UPDATE query inside a transaction, together with any other query registered in a pre- or post- save hook. That means that when you save a book, the `postSave()` code is executed in the same transaction as the actual `$book->save()` method. Everything happens as if the code was the following:
 
 ```php
 <?php
@@ -128,7 +128,7 @@ class Book extends BaseBook
 }
 ```
 
-In this example, the `nb_books` column of the `author` table will always we synchronized with the number of books. If anything happens during the transaction, the saving of the book is rolled back, as well as the `nb_books` column update. The transaction serves to preserve data consistency in a denormalized schema ("Consistency" stands for the C in ACID).
+In this example, the `nb_books` column of the `author` table will always be synchronized with the number of books. If anything happens during the transaction, the saving of the book is rolled back, as well as the `nb_books` column update. The transaction serves to preserve data consistency in a denormalized schema ("Consistency" stands for the C in ACID).
 
 >**Tip**Check the [behaviors documentation](/documentation/06-behaviors.html#pre-and-post-hooks-for-save-and-delete-methods) for details about the pre- and post- hooks in Propel model objects.
 
@@ -184,7 +184,7 @@ All three functions alter data in a transaction, ensuring data integrity for eac
 
 Propel deals with this case by seeing only the outermost transaction, and ignoring the `beginTransaction()`, `commit()` and `rollback()` statements of nested transactions. If nothing wrong happens, then the last `commit()` call (after both `deleteBooksWithNoPrice()` and `deleteAuthorsWithNoEmail()` end) triggers the actual database commit. However, if an exception is thrown in either one of these nested transactions, it is escalated to the main `catch` statement in `cleanup()` so that the entire transaction (starting at the main `beginTransaction()`) is rolled back.
 
-So you can use transactions everywhere it's necessary in your code, without worrying about nesting them. Propel will always commit or rollback everything altogether, whether the RDBMS supports nested transactions or not.
+So you can use transactions everywhere it's necessary in your code, without worrying about nesting them, Propel will always commit or rollback everything altogether, whether the RDBMS supports nested transactions or not.
 
 >**Tip**This allows you to wrap all your application code inside one big transaction for a better integrity.
 

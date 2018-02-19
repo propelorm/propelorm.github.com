@@ -74,18 +74,6 @@ $query = 'SELECT book.* from `book`
 WHERE book.TITLE = :p1'; // :p1 => 'War And Peace'
 ```
 
-* For string columns, `filterByXXX()` translates to a SQL `WHERE ... LIKE` if the value contains wildcards:
-
-```php
-<?php
-$books = BookQuery::create()
-  ->filterByTitle('War%')
-  ->find();
-// example Query generated for a MySQL database
-$query = 'SELECT book.* from `book`
-WHERE book.TITLE LIKE :p1'; // :p1 => 'War%'
-```
-
 * For numeric and temporal columns, `filterByXXX()` translates into an interval condition if the value is an associative array using 'min' and/or 'max' as keys:
 
 ```php
@@ -996,7 +984,7 @@ finOneOrCreate($con = null)
 findBy($columnName, $value, $con = null)
 findByArray($conditions, $con = null)
 findOneBy($columnName, $value, $con = null)
-findByOneArray($conditions, $con = null)
+findOneByArray($conditions, $con = null)
 findPk($pk, $con = null)
 findPks($pks, $con = null)
 delete($con = null)

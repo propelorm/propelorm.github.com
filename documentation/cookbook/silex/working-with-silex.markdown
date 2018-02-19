@@ -17,7 +17,7 @@ Set up
 If you want to use *PropelServiceProvider*, you will need:
 
   * Silex 1.x
-  * PHP 5.4 or greater
+  * PHP 5.5 or greater
   * Composer
 
 To setup the project in your Silex application, you have to rely on composer ;

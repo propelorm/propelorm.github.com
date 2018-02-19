@@ -105,7 +105,7 @@ class BookController extends Controller
 
 To render the form, you'll need to create a Twig template like below:
 
-```html+jinja
+```liquid
 {% raw %}
 {# src/Acme/LibraryBundle/Resources/views/Book/new.html.twig #}
 
@@ -522,7 +522,7 @@ those few lines in your validation file:
 ``` yaml
 BundleNamespace\Model\User:
   constraints:
-    - Propel\PropelBundle\Validator\Constraints\UniqueObject:
+    - Propel\Bundle\PropelBundle\Validator\Constraints\UniqueObject:
         fields: username
         message: User already exists.
 ```
@@ -532,7 +532,7 @@ In order to validate the unicity of more than just one fields:
 ``` yaml
 BundleNamespace\Model\User:
   constraints:
-    - Propel\PropelBundle\Validator\Constraints\UniqueObject:
+    - Propel\Bundle\PropelBundle\Validator\Constraints\UniqueObject:
         fields: [username, login]
 ```
 

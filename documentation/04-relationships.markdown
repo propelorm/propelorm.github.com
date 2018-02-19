@@ -187,7 +187,7 @@ Databases typically use a cross-reference table, or junction table, to materiali
   <column name="name" type="varchar" size="32"/>
 </table>
 
-<table name="group">
+<table name="group" identifierQuoting="true">
   <column name="id" type="integer" primaryKey="true" autoIncrement="true"/>
   <column name="name" type="varchar" size="32"/>
 </table>
@@ -402,8 +402,8 @@ methods like:
 
 ```php
 <?php
-$user->addGroup(User $group, Type $type):$this;
-$user->removeGroup(User $group, Type $type):$this;
+$user->addGroup(Group $group, Type $type):$this;
+$user->removeGroup(Group $group, Type $type):$this;
 $user->countGroups(Type $type = null):int;
 $user->getGroups(Type $type = null, ...):Group[];
 
@@ -435,8 +435,8 @@ Generates methods like:
 <?php
 $user->addType(Type $type, User $group);
 $user->removeType(Type $type, User $group);
-$user->countTypes(User $group = null, ...);
-$user->getTypes(User $group = null, ...);
+$user->countTypes(Group $group = null, ...);
+$user->getTypes(Group $group = null, ...);
 ```
 
 

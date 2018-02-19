@@ -18,7 +18,8 @@ The name of the configuration file is `propel`, with one of the supported extens
 > **Note** <br /> Throughout this document, when we'll write `.ext` we intend "one of the supported extensions".
 
 Propel looks for its configuration file in the current directory or in a sub-directory named *conf* or *config*.
-Alternatively, you can choose a directory at your choiche and pass it to the command line as `--config-dir` parameter. For instance:
+Alternatively, you can choose a directory of your choice and pass it to the
+command line as the `--config-dir` parameter. For instance:
 
 ```bash
 # Propel looks for its configuration file in the current directory or
@@ -273,7 +274,7 @@ And the following is the same example in json format:
             "connections": {
                 "mysource": {
                     "adapter": "mysql",
-                    "classname": "Propel\Runtime\Connection\DebugPDO",
+                    "classname": "Propel\\Runtime\\Connection\\DebugPDO",
                     "dsn": "mysql:host=localhost;dbname=mydb",
                     "user": "root",
                     "password": "",
@@ -281,7 +282,7 @@ And the following is the same example in json format:
                 },
                 "yoursource": {
                     "adapter": "mysql",
-                    "classname": "Propel\Runtime\Connection\DebugPDO",
+                    "classname": "Propel\\Runtime\\Connection\\DebugPDO",
                     "dsn": "mysql:host=localhost;dbname=yourdb",
                     "user": "root",
                     "password": "",
