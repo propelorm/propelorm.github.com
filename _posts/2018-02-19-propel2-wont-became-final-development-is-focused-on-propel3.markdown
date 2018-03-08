@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Propel2 won't became final, the development is focused on Propel3
+title: Propel2 won't become final, the development is focused on Propel3
 published: true
 ---
 
