@@ -433,8 +433,8 @@ Generates methods like:
 
 ```php
 <?php
-$user->addType(Type $type, User $group);
-$user->removeType(Type $type, User $group);
+$user->addType(Type $type, Group $group);
+$user->removeType(Type $type, Group $group);
 $user->countTypes(Group $group = null, ...);
 $user->getTypes(Group $group = null, ...);
 ```
