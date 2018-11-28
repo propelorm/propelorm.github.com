@@ -72,7 +72,7 @@ You can also look at [user contributed behaviors](../documentation/cookbook/user
 ### Contribute to Propel ###
 
 * [Writing A Behavior](/documentation/cookbook/writing-behavior.html) How to write a custom behavior to reuse model code horizontally.
-* [Working Working with Propel's Test Suite](/documentation/cookbook/working-with-test-suite.html) How to work with Propel's test suite if you want to add a missing case or attach a regression test with your patch.
+* [Working with Propel's Test Suite](/documentation/cookbook/working-with-test-suite.html) How to work with Propel's test suite if you want to add a missing case or attach a regression test with your patch.
 
 ### Working with Silex ###
 
