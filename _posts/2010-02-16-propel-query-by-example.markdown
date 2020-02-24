@@ -105,7 +105,7 @@ $article = ArticlePeer::doSelect($c);
 // Propel 1.5 "Reverse Polish Notation" style
 $articles = ArticleQuery::create()
        ->condition('cond1', 'Title like ?', '%FooBar%')
-       ->condition('cond2', 'Summary' like ?', '%FooBar%')
+       ->condition('cond2', 'Summary like ?', '%FooBar%')
      ->combine(array('cond1', 'cond2'), 'or', 'cond3')
        ->condition('cond4', 'PublishedAt > ?', $begin)
        ->condition('cond5', 'PublishedAt &lt; ?', $end)
