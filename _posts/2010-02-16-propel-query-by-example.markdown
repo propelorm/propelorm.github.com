@@ -219,7 +219,7 @@ $conds = array(
   'PublishedAt' => array('min' => time() - (7 * 24 * 60 * 60))
  );
 $articles = ArticleQuery::create()
-  ->filterByArray($cond)
+  ->filterByArray($conds)
   ->find();
 
 /*
