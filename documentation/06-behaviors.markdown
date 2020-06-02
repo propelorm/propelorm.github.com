@@ -179,7 +179,7 @@ If the columns already exist in your schema, a behavior is smart enough not to a
 ## Using Behaviors ##
 
 Propel installs third-part behaviors via **Composer**.
-Simply add to your `composer.json` the behavior you whish to install:
+Simply add to your `composer.json` the behavior you wish to install:
 
 ```json
 {
