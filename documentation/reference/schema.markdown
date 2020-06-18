@@ -458,7 +458,7 @@ PCTIncrease      | 0
 Tablespace       | L_128K
 ```
 
-#### PostgreSQL Cendor Info ####
+#### PostgreSQL Vendor Info ####
 
 Propel supports the following vendor parameters for PostgreSQL (vendor type is `pgsql`):
 
