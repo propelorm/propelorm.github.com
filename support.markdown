@@ -29,10 +29,6 @@ Gitter is a instant messaging service allowing you to chat via web interface, [i
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/propelorm/Propel)
  [https://gitter.im/propelorm/Propel](https://gitter.im/propelorm/Propel)
 
-## IRC ##
-
-The [#propel](http://webchat.freenode.net/?channels=propel) channel on **irc.freenode.net** is an informal meeting place for discussing new ideas, asking support questions, or just airing general frustrations with the PHP5 engine :)
-
 ## Bug Reports ##
 
 You can look at the [Propel organization](https://github.com/propelorm) and to report bugs or to ask for new features to the [Propel ticketing system](https://github.com/propelorm/Propel2/issues).

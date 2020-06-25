@@ -15,10 +15,10 @@ You can find the unit test classes and support files in the `tests/` directory.
 
 You need to install the following PHP modules:
 
-* php5-mysql
-* php5-sqlite
-* php5-pgsql
-* php5-iconv
+* php7.*-mysql
+* php7.*-sqlite
+* php7.*-pgsql
+* php7.*-iconv
 
 Increase the memory_limit in your php.ini to something very high:
 

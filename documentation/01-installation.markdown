@@ -22,7 +22,7 @@ Propel also uses some Symfony2 components to work properly:
 * [Validator](https://github.com/symfony/Validator) : a way you manage validations with Propel.
 * [Finder](https://github.com/symfony/Finder) : uses in the source code to manage the files.
 
->**Tip**Propel uses the PDO and SPL components, which are bundled and enabled by default in PHP5.
+>**Tip**Propel uses the PDO and SPL components, which are bundled and enabled by default in PHP7.
 
 ## Setup ##
 
