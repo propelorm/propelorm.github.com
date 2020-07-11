@@ -501,4 +501,4 @@ class CustomMysqlPlatform extends MysqlPlatform
 
 You must then specify that mapping in the `build.properties` for your project:
 
-    propel.generator.platformClass = propel.engine.platform.${propel.database}Platform
+    propel.platform.class = CustomMysqlPlatform
