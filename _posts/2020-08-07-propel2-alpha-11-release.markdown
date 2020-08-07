@@ -30,7 +30,8 @@ Here are the changes:
 
 ### BC breaks
 
-* We don't expect any. Please create a new issue on guthub if you are facing any problems.
+* PHP7.1 is not supported anymore (EOL)
+* Symfony 2 is not supported anymore (EOL)
 
 ### Download
 
