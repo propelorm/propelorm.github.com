@@ -6,7 +6,7 @@ published: true
 
 With this release, we continue Alpha-version cleanups aiming API stabilization.
 
-Many thanks to our contributors. 👍
+Many thanks to our contributors!
 
 <!-- more -->
 
