@@ -84,7 +84,9 @@ You can also look at [user contributed behaviors](../documentation/cookbook/user
 * [Mastering Symfony2 Forms With Propel](/documentation/cookbook/symfony2/mastering-symfony2-forms-with-propel.html)
 * [The Symfony2 Security Component And Propel](/documentation/cookbook/symfony2/the-symfony2-security-component-and-propel.html)
 
+### Working with Symfony 4.0 ###
+* [Working with Symfony 4.0](/documentation/cookbook/symfony4/working-with-symfony4.html)
+
 >**Tip**This is the up-to-date documentation for the last Propel version.
 > To access the old documentation, please visit
-[trac.propelorm.org](http://trac.propelorm.org) or
 [propelorm.org/Propel](http://propelorm.org/Propel/).
