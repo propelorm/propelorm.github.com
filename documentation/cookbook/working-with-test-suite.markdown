@@ -349,11 +349,11 @@ again and again.
 
 ## Fix Coding Style ##
 
-You can fix your coding style __before creating your commit__ by using the Symfony2
-[php-cs-fixer](https://github.com/fabpot/PHP-CS-Fixer) script. You just need to install the script:
+You can fix your coding style __before creating your commit__ using [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
+and the provided project configuration.
 
-    $ wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
+    $ ./vendor/bin/phpcs -p -s --standard=config/phpcs.xml $(git ls-files -m)
+    
+CodeSniffer will try to fix errors when calling 
 
-Then use it on the file you have edited:
-
-    $ php php-cs-fixer.phar fix $(git ls-files -m)
+    $ ./vendor/bin/phpcbf -p -s --standard=config/phpcs.xml $(git ls-files -m)
