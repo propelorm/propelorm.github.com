@@ -5,7 +5,7 @@ title: "Active Record Reference"
 
 # Active Record Reference #
 
-Propel generates smart Active Record classes based on the schema definition of tables. Active Record objects offer a powerful API to manipulating database records in an intuitive way.
+Propel generates smart Active Record classes based on the schema definition of tables. Active Record objects offer a powerful API to manipulate database records in an intuitive way.
 
 ## Overview ##
 

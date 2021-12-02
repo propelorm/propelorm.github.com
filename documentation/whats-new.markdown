@@ -124,7 +124,7 @@ Please, refer to [Propel API](http://api.propelorm.org/2.0-master/) and read the
 
 ## Adapter, Connection and Statement classes ##
 
-Propel 2 introduces an its own abstraction layer, based on PDO interface, to overcome some PDO limitations. Besides, thanks to this feature, now it's possible to write a database adapter based on a non-PDO extension.
+Propel 2 introduces its own abstraction layer, based on PDO interface, to overcome some PDO limitations. Besides, thanks to this feature, now it's possible to write a database adapter based on a non-PDO extension.
 
 Propel abstraction layer is based on the following classes:
 
@@ -183,7 +183,7 @@ include $configFilePath;
 
 ## Configuration ##
 
-The way of configuring Propel is changed. Now there's only one configuration file and more formats are supported. You can write your configuration file in plain php, ini, json, yaml or xml format. Read the [Configuration chapter](10-configuration.html) of the documetation and [configuration reference](/documentation/reference/configuration-file.html) chapter for a complete explanation of configuration properties.
+The way of configuring Propel is changed. Now there's only one configuration file and more formats are supported. You can write your configuration file in plain php, ini, json, yaml or xml format. Read the [Configuration chapter](10-configuration.html) of the documentation and [configuration reference](/documentation/reference/configuration-file.html) chapter for a complete explanation of configuration properties.
 
 ## Migrations and reverse engineering ##
 
@@ -315,7 +315,7 @@ All base object methods have been merged in generated Base Object classes. This 
 #### Om\Persistent Interface replaced by Om\ActiveRecordInterface ####
 
 All methods from `Propel\Runtime\Om\Persistent` Interface have been removed.
-All Base Object classes now implements `Propel\Runtime\Om\ActiveRecordInterface` this could be use to identify a Propel Object.
+All Base Object classes now implements `Propel\Runtime\Om\ActiveRecordInterface` this could be used to identify a Propel Object.
 
 #### Util\PropelModelPager::count() ####
 
