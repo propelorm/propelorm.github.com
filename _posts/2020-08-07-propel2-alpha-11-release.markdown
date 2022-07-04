@@ -7,10 +7,6 @@ published: true
 With this release, we continue Alpha-version cleanups aiming API stabilization.
 Many thanks to our contributors, who made possible this release to come that fast. 👍
 
-See you soon!
-
-
-<!-- more -->
 
 ## 2.0.0-alpha11
 

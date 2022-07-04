@@ -8,7 +8,6 @@ With this release, we continue Alpha-version cleanups aiming API stabilization.
 
 Many thanks to our contributors!
 
-<!-- more -->
 
 ## 2.0.0-alpha12
 
