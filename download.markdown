@@ -25,7 +25,7 @@ Then touch a `composer.json` file with the following content
 ```json
 {
     "require": {
-        "propel/propel": "~2.0@dev"
+        "propel/propel": "~2.0@beta"
     }
 }
 ```
@@ -45,14 +45,6 @@ Or add it as a submodule:
 ```bash
 $ git submodule add git://github.com/propelorm/Propel2.git /path/to/propel
 ```
-
-## Subversion Checkout / Externals ##
-
-```bash
-$ svn co http://github.com/propelorm/Propel2
-```
-
->**Warning**<br />SVN is no more the default Source Code Management since 2011.
 
 ## Full Propel Package ##
 
