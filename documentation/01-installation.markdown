@@ -33,7 +33,7 @@ We advise you to rely on [Composer](http://getcomposer.org/) to manage your proj
 ```json
 {
     "require": {
-        "propel/propel": "~2.0@dev"
+        "propel/propel": "~2.0@beta"
     }
 }
 ```
@@ -67,19 +67,6 @@ $ cd myproject/vendor/propel
 $ git pull
 ```
 
-### Using a Tarball Or a Zipball ###
-
-Alternatively, to use a tarball, type the following commands on unix platforms:
-
-```bash
-$ cd myproject/vendor
-$ wget http://files.propelorm.org/propel-2.0.0.tar.gz
-$ tar zxvf propel-2.0.0.tar.gz
-$ mv propel-2.0.0 propel
-```
-
-Or, in Windows, download a ZIP from [files.propelorm.org](http://files.propelorm.org), unzip it under the `vendor/` directory, and rename it to `propel`.
-
 ## Propel Directory Structure ##
 
 The root directory of the Propel library includes the following folders:
@@ -101,7 +88,7 @@ $ cd myproject
 $ vendor/bin/propel
 ```
 
-The command should output the propel version following by a list of the options and the available commands. We will learn to use these commands later.
+The command should output the Propel version following by a list of the options and the available commands. We will learn to use these commands later.
 
 > **Tip**In order to allow an easier execution of the script, you can also add the
 > propel generator's `bin/` directory to your PATH, or create a symlink. For
