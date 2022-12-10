@@ -127,3 +127,29 @@ By default, the behavior adds one columns to the model. If this column is alread
   </behavior>
 </table>
 ```
+
+
+## Multiple Aggregations ##
+
+If a table aggregates multiple columns from the same foreign table, it is more efficient to bundle them together, so the aggregations can be performed in a single statement. This can be achieved using the `aggregate_multiple_columns` behavior:
+
+```xml
+<table>
+  <column name="number_of_communications" type="INTEGER" />
+  <column name="total_communication_time" type="INTEGER" />
+
+  <behavior name="aggregate_multiple_columns" id="partner_aggregations">
+      <parameter name="foreign_table" value="communication"/>
+
+      <parameter-list name="columns">
+          <parameter-list-item>
+              <parameter name="column_name" value="number_of_communications" />
+              <parameter name="expression" value="COUNT(id)" />
+          </parameter-list-item>
+          <parameter-list-item>
+              <parameter name="column_name" value="total_communication_time" />
+              <parameter name="expression" value="SUM(duration)" />
+          </parameter-list-item>
+  </behavior>
+</table>
+```
