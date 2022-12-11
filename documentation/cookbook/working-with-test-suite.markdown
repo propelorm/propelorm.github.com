@@ -9,24 +9,27 @@ Propel uses [PHPUnit](http://phpunit.de/) to test the build and runtime framewor
 
 You can find the unit test classes and support files in the `tests/` directory.
 
+Tests that need a database run on at least one of MySQL, Postgres or SQLite.
+
 ## Setup requirements ##
 
-### Setup the environment ###
+To run tests, the required PHP libraries need to be installed. Also, most tests will need access to at least one database system (out of MySQL, Postgres or SQLite) through PHP.
 
-You need to install the following PHP modules:
+### Setup PHP ###
 
-* php7.*-mysql
-* php7.*-sqlite
-* php7.*-pgsql
-* php7.*-iconv
+You need to install the following PHP extensions:
 
-Increase the memory_limit in your php.ini to something very high:
+* php-mysql
+* php-sqlite3
+* php-pgsql
+
+Running tests needs more memory than regular PHP scripts. If cli runs out of memory, increase `memory_limit` in your php.ini:
 
 ```
 memory_limit = 512M
 ```
 
-Set a default timezone in your `php.ini`:
+Set a default timezone in your php.ini:
 
 ```
 date.timezone = Europe/Berlin
@@ -34,46 +37,45 @@ date.timezone = Europe/Berlin
 
 >**Info**All following commands need to be executed in the propel root directory.
 
-### Install Dev Dependencies ###
+### Install Dependencies ###
 
-In order to run the tests, you must install the development dependencies. Propel
-uses [Composer](https://getcomposer.org/) to manage its dependencies. To install
-it, you are done with:
-
-    $ wget http://getcomposer.org/composer.phar
-
-Or if you don't have `wget` on your machine:
-
-    $ curl -s http://getcomposer.org/installer | php
-
-Then run Composer to install the necessary stuff:
-
-    $ php composer.phar install
+[Install composer](https://getcomposer.org/download/) and download dependencies with
 
 
-### Setup Database ###
+    $ composer install
 
-We provide three scripts that setup your database.
 
-Those scripts drop basically all required databases/schemas (`test`,
-`second_hand_books`, `contest`, `bookstore_schemas`, `migration`) and re-create it,
-so the test suite has an empty database.
+### Setup the Database ###
 
+To setup the database, call the script matching your DBMS in `./tests/bin/`:
 ```
 tests/bin
 ├── setup.mysql.sh
 ├── setup.pgsql.sh
 └── setup.sqlite.sh
 ```
-
-Call one of those scripts in your console:
-
+Call them like any shell script:
 ```bash
 ./tests/bin/setup.mysql.sh
 ```
 
-If your database is configured using a password or a different user than the
-default, you can configure it via environment variables.
+They will drop and recreate the required databases/schemas (`test`, `second_hand_books`, `contest`, `bookstore_schemas`, `migration`) and build Propel connection and model classes.
+
+
+
+For MySQL and Postgres, setup parameters are provided through environment variables:
+| Variable | Description | Default Value MySQL | Default Value Postgres |
+| --- |---| --- | --- |
+| DB_HOSTNAME | Database host | 127.0.0.1 | 127.0.0.1 |
+| DB_PORT | Database port | default port (3306))| default port (5432) |
+| DB_USER | Username | root | postgres |
+| DB_PW | Password | none | none |
+| DB_NAME | Database name | test | postgres |
+
+In MySQL `DB_NAME` only changes the name of the main database, the other databases (`second_hand_books`, `contest`, `bookstore_schemas`, `migration`) will always be created with default names.
+
+>**INFO** Username and password are used to both create the database and schemas and run the tests. Make sure the user can create and drop databases and schemas.
+
 
 Example:
 
@@ -83,242 +85,93 @@ DB_HOSTNAME=192.168.0.3 DB_USER=postgres DB_PW=secret ./tests/bin/setup.pgsql.sh
 ./tests/bin/setup.sqlite.sh #does not have any configuration ability
 ```
 
->**Info**./tests/bin/setup.sqlite.sh just removes the file at `tests/test.sq3` to trigger a re-creating by our test suite.
+The SQLite test database is located at `./tests/test.sq3`, running the setup script will delete that file.
+
+### Rebuilt Test Fixtures ###
+
+If you need to rebuild the test fixtures created during setup, delete the file `./tests/Fixtures/fixtures_built` and the classes will be created again next time a test is started.
+
+## Running Tests ##
+
+Run the test suits through the corresponding composer scripts: 
+
+```bash
+composer run-script test:agnostic
+composer run-script test:mysql
+composer run-script test:pgsql
+composer run-script test:sqlite
+```
+
+Composer passes on all arguments after a double dash (`--`) to phpunit. This allows you to run individual files:
+
+```bash
+composer run-script test:mysql -- --stop-on-failure tests/Propel/Tests/Runtime/ActiveQuery/CriteriaTest.php
+```
+
+
+### Agnostic Tests vs Database tests
+
+Simple unit tests do not require a database. These are called agnostic tests and are run on their own. Agnostic tests are not executed when running database tests and vice versa.
+
+Tests are considered agnostic tests unless they are annotated by the `@group database` annotation. If the test is intended for a specific database, add the `mysql` or `pgsql` group:
+```php
+/**
+ * @group database
+ * @group mysql
+ */
+class MyClassTest extends TestCase
+{
+```
+
+If you run a test class and phpunit reports `No tests executed!`, most likely it is an agnostic test run as a database test or the other way round:
+```bash
+$ composer run-script test:agnostic -- tests/Propel/Tests/Runtime/ActiveQuery/CriteriaTest.php
+Tests started in temp /tmp.
+PHPUnit 9.5.26 by Sebastian Bergmann and contributors.
+
+No tests executed!
+```
+
 
 ## Writing Tests ##
 
-### How the Tests Work ###
+### How Tests Work ###
 
-Every method in the test classes that begins with 'test' is run as a test case by
-PHPUnit. All tests are run in isolation; the `setUp()` method is called at the
-beginning of ''each'' test and the `tearDown()` method is called at the end.
+If you have not worked with tests before, now is the best time to look at a short introduction.
 
-The `BookstoreTestBase` class specifies `setUp()` and `tearDown()` methods which
-populate and depopulate, respectively, the database. This means that every unit
-test is run with a cleanly populated database. To see the sample data that is
-populated, take a look at the `BookstoreDataPopulator` class. You can also add
-data to this class, if needed by your tests; however, proceed cautiously when
-changing existing data in there as there may be unit tests that depend on it.
-More typically, you can simply create the data you need from within your test
-method. It will be deleted by the `tearDown()` method, so no need to clean up
-after yourself.
+- Test class names must end with "Test" and extend a TestCase class, i.e. `MyClassTest extends TestCase`.
+- Test functions must start with "test", i.e. `testMyClassBehavior()`.
+- `setUp()` and `tearDown()` methods run before and after each test function respectively.
+- Assertion functions test if an expected value matches the actual outcome (see [available assertions](https://phpunit.readthedocs.io/en/9.5/assertions.html)). 
+- [Data providers](https://phpunit.readthedocs.io/en/9.5/writing-tests-for-phpunit.html#data-providers) allow you to run test functions with different input.
 
+Also
+- Test cases should not depend on modifications made by a previous test.
+- A test function should validate exactly one condition.
+- Writing test cases should follow the same guidelines as writing other code. 
 
-### Write first test ###
+### Directory structure
 
-If you've made a change to a template or to Propel behavior, the right thing to do is write a unit test that ensures that it works properly -- and continues to work in the future.
+Test classes are located in `./tests/Propel/Tests/`. The precise location should mirror the location of the tested class, i.e. `./src/Propel/Runtime/ActiveQuery/Criteria.php` is tested in `./tests/Propel/Tests/Runtime/ActiveQuery/CriteriaTest.php`.
 
-Writing a unit test often means adding a method to one of the existing test classes. For example, let's test a feature in the Propel templates that supports saving of objects when only default values have been specified. Just add a `testSaveWithDefaultValues()` method to the `GeneratedObjectTest` class, as follows:
+If you have changed a class rather than created a new one, you most likely will not have to create a new test class, but add tests to the one at the expected location.
 
-```php
-<?php
-# tests/Propel/Tests/MyFirstTest.php
-
-namespace Propel\Tests;
-
-use Propel\Tests\TestCaseFixturesDatabase;
-
-/**
- * @group database
- */
-class MyFirstTest extends TestCaseFixturesDatabase
-{
-    /**
-     * Test saving object when only default values are set.
-     */
-    public function testSaveWithDefaultValues() {
-
-      // Relies on a default value of 'Penguin' specified in schema
-      // for publisher.name col.
-
-      $pub = new Publisher();
-      $pub->setName('Penguin');
-        // in the past this wouldn't have marked object as modified
-        // since 'Penguin' is the value that's already set for that attribute
-      $pub->save();
-
-      // if getId() returns the new ID, then we know save() worked.
-      $this->assertNotNull($pub->getId(), "Expect Publisher->save() to work with only default values.");
-    }
-}
-```
-
-Run the test again using the command line to check that it passes:
-
-    $ ./vendor/bin/phpunit GeneratedObjectTest
-
-
-You can also write additional unit test classes to any of the directories in `test/testsuite/` (or add new directories if needed). The `./vendor/bin/phpunit` command will find these files automatically and run them.
 
 ## Using the correct TestCase class ##
 
-Propel provides several test cases you can extend to have some additional functionalities.
+Depending on the functionality needed, a test class needs to extend the correct TestCase class. These classes will setup and tear down the environment and provide additional functionality.
 
+> **INFO** If the extended TestCase class uses the database, the test class has to be annotated with `@group database`.
 
-`Propel\Tests\TestCase`
+Most common classes are:
+| Class | needs @database | Description | Used for |
+|---|---| --- | --- |
+| \Propel\Tests\TestCase | no | Most general Propel test case with easy access to driver and platform data. | Agnostic tests without model access. |
+| \Propel\Tests\TestCaseFixtures | no | Guarantees that fixtures are available. | Agnostic tests which use models without reading from or writing to database. | 
+| \Propel\Tests\TestCaseFixturesDatabase | yes | Same as TestCaseFixtures but also initializes database tables. | Database access outside of model classes. |
+| \Propel\Tests\Helpers\Bookstore\BookstoreTestBase | yes | Initializes connection to bookstore test database. | Model classes with database access. 
 
-This class gives your some basic methods to see against which database the current suite is running at.
-
-### Automatically Build Fixtures ###
-
-`Propel\Tests\TestCaseFixtures`
-
-This test case class makes sure all fixtures in `tests/Fixtures/` have been build and are up to date.
-You have to use this class if you need built model loaded connection configurations.
-
-We place in `tests/Fixtures/fixtures_built` the current used settings/credentials used in the last running test suite.
-
-### Automatically Build Fixtures and Update Database ###
-
-`Propel\Tests\TestCaseFixturesDatabase`
-
-This test case class makes, in addition to the one above, sure that the database
-schema is up to date as well. You have to use this if you want to have, in addition
-to the one above, a communication with the database through your models.
-
-## Using the correct test group ##
-
-In our continuous integration setup we have four different builds running. One of those builds does execute tests
-that do not communicate with the database. So we need at each test class a `@group database` if that test does only work with
-configured database.
-
-![Builds](/images/documentation/cookbook-test-suite-builds.png)
-
-The following scripts are used to start phpunit in our build server.
-
-```
-tests/bin/
-├── phpunit.agnostic.sh
-├── phpunit.mysql.sh
-├── phpunit.pgsql.sh
-└── phpunit.sqlite.sh
-```
-
-You can see there that we filter by those groups:
-
-```bash
-$ cat tests/bin/phpunit.agnostic.sh
-#!/bin/sh
-./vendor/bin/phpunit -c tests/agnostic.phpunit.xml
-```
-
-```bash
-$ cat tests/bin/phpunit.pgsql.sh
-#!/bin/sh
-./vendor/bin/phpunit -c tests/pgsql.phpunit.xml
-```
-
-and so on.
-
-The actual Travis build server is configured like this:
-
-```yaml
-script:
-    - ./vendor/bin/phpunit -v -c tests/$DB.phpunit.xml;
-```
-
-To group our tests we have basically only two `@group` annotation values that
-PHPUnit is going to filter for us.
-
-Example:
-
-```php
-<?php
-# tests/Propel/Tests/Generator/Reverse/MysqlSchemaParserTest.php
-/**
- * Tests for Mysql database schema parser.
- *
- * @author William Durand
- *
- * @group database
- */
-class MysqlSchemaParserTest extends TestCaseFixturesDatabase
-{
-```
-
-`@group database` means this test requires a configured database.
-
-`@group mysql` means this test is mysql only.
-
-
-## Running Unit Tests ##
-
-You start the whole test suite with default configuration (mysql, root,
-non-password) by just calling `./vendor/bin/phpunit` in the Propel directory.
-
-### Start only one test case ###
-
-You can pass a file path to `phpunit` to execute only all tests within this file.
-
-```bash
-./vendor/bin/phpunit tests/Propel/Tests/Runtime/ActiveQuery/CriteriaTest.php
-```
-
-### Use custom configuration/credentials ###
-
-You can use again environment variables to tell propel's test suite which database credentials it should use
- to build the fixtures and thus all connections.
-
-Examples:
-
-```bash
-DB=pgsql DB_HOSTNAME=192.168.0.2 DB_USER=postgres DB_PW=topsecret ./vendor/bin/phpunit
-DB=sqlite ./vendor/bin/phpunit
-DB=mysql DB_HOSTNAME=192.168.0.2 DB_USER=nonroot DB_PW=topsecret ./vendor/bin/phpunit
-```
-
-The best way to execute the test suite is to use our phpunit scripts:
-
-```bash
-./tests/bin/phpunit.agnostic.sh # non database tests only
-DB_USER=postgres DB_PW=secret ./tests/bin/phpunit.pgsql.sh
-./tests/bin/phpunit.mysql.sh
-./tests/bin/phpunit.sqlite.sh
-```
-
-These scripts already filter by the required database.
-
-### Rebuild fixtures ###
-
-Since we're creating or updating fixtures based on your environment configuration you don't have to call something
- special anymore to build those fixtures by hand. But if you change some schemas you still need a way to tell
- the test suite it has to re-build the whole thing. To do so just remove the file `tests/Fixtures/fixtures_built`
- where we store our current used test suite configuration.
-
-```bash
-rm tests/Fixtures/fixtures_built
-```
-
-If you change your credentials or adapter it will be automatically detected and triggers a rebuild as well.
-
-### Specific tests only ###
-
-Since we're using test grouping we have some tests that work only with a configured database and tests
-that work only with mysql.
-
-To filter by those groups you can pass `--group` to the phpunit command.
-
-Only Non-MySQL database specific tests:
-
-```bash
-./vendor/bin/phpunit --group database --exclude-group mysql;
-```
-
-Only database specific tests. Won't work for SQLite and PostgreSQL since phpunit includes here mysql tests as well,
-which will naturally fail on a non-mysql database:
-
-```bash
-./vendor/bin/phpunit --group database;
-```
-
-Only non-database specific tests:
-
-```bash
-./vendor/bin/phpunit --exclude-group database;
-```
-
-See [Using the correct test group](#using-the-correct-testcase-class) at this page
-to get more information about this.
+>**INFO** Always extend the TestCase matching required functionality, as it will reduce execution time.
 
 ### More Tips ###
 
@@ -346,14 +199,34 @@ public function testWholeWorld(){}
 This is very handy if you're trying to fix or write one particular set of test methods and need to execute it
 again and again.
 
+## Automatic code checks ##
 
-## Fix Coding Style ##
+If you plan to create a pull request, your code must pass automatic code checks. 
 
-You can fix your coding style __before creating your commit__ using [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
-and the provided project configuration.
+### Stan and Psalm ###
 
-    $ ./vendor/bin/phpcs -p -s --standard=config/phpcs.xml $(git ls-files -m)
-    
-CodeSniffer will try to fix errors when calling 
+Run static analyzers [stan](https://phpstan.org/) and [psalm](https://psalm.dev/) through composer scripts:
+```bash
+composer run-script stan
+composer run-script psalm
+```
 
-    $ ./vendor/bin/phpcbf -p -s --standard=config/phpcs.xml $(git ls-files -m)
+### Code style ###
+
+You can fix code style before creating a PR using [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) and the provided project configuration.
+
+```bash
+composer run-script cs-fix # automatically adjusts formatting
+composer run-script cs-check # output remaining errors
+```
+
+Add `--` to process individual files:
+```bash
+composer run-script cs-fix -- src/Propel/Generator/
+```
+
+Combine with other commands for easy execution, i.e. lint all modified files with:
+```bash
+composer run-script cs-fix -- $(git ls-files -m)
+```
+
