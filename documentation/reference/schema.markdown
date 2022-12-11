@@ -305,7 +305,7 @@ Here are the Propel column types with some example mappings to native database a
 
 |Propel Type    |Desc                               |Example Default DB Type (MySQL)|Default PHP Native Type
 |---------------|-----------------------------------|-------------------------------|-----------------------
-|BINARY         |Fixed-length binary data           |BLOB                           |string
+|BINARY         |Fixed-length binary data           |BINARY                         |string
 |VARBINARY      |Variable-length binary data        |MEDIUMBLOB                     |stream or string
 |LONGVARBINARY  |Long variable-length binary data   |LONGBLOB                       |stream or string
 |BLOB           |Binary LOB (locator object)        |BLOB                           |stream or string
@@ -327,6 +327,8 @@ Here are the Propel column types with some example mappings to native database a
 * `SET` columns accept multiple values among a list of predefined ones. Set the value set using the `valueSet` attribute, separated by commas.
 * `OBJECT` columns map to PHP objects and are stored as binary.
 * `ARRAY` columns map to PHP arrays and are stored as strings.
+* `UUID` columns store uuids using the database's native UUID column type if it exists or the `UUID_BINARY` type 
+* `UUID_BINARY` columns store UUIDs in a binary format (see [UUID Binary Columns](documentation/reference/uuid-binary-columns.html)). 
 
 ### Legacy Temporal Types ###
 
