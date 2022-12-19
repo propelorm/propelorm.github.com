@@ -84,7 +84,7 @@ The Phing tasks that you used at buildtime are now refactored to Commands. They 
 
 ## PSR-0 and namespaces ##
 
-Propel 2 follows the [PSR-0](http://www.php-fig.org/psr/0/) standard, both for its internal and generated classes.
+Propel 2 follows the [PSR-0](https://www.php-fig.org/psr/psr-0/) standard, both for its internal and generated classes.
 
 If you've never worked with namespace before, please read the [PHP official documentation](http://www.php.net/manual/en/language.namespaces.php) about it.
 
