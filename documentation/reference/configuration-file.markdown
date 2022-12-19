@@ -266,6 +266,13 @@ You can override this setting if you wish to default to another engine for all t
               autoincrementSequencePattern: ${table}_SEQ
 ```
 
+#### UUID column type (MySQL/MariaDB only) ####
+
+Allows to enable the native UUID column type available in MariaDB (see [UUID_BINARY columns](/documentation/reference/uuid-binary-columns.html)):
+```yaml
+              uuidColumnType: native|off
+```
+
 ### Migrations settings ###
 
 ```yaml
