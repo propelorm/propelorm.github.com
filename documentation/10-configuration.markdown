@@ -7,7 +7,7 @@ title: Configuration
 Propel asks you to define some data to work properly, for instance: connection parameters, working directories, flags to take decisions and so on.
 You can pass these data via a *configuration file*.
 
-*Note* : Configuration files are used to generate a configuration class (```generated-conf/config.php``). Any changes made to the configuration file need to be pushed to this generated configuration file through the ```vendor/bin/propel config:convert``` propel command.
+*Note* : Configuration files are used to generate a configuration class (`generated-conf/config.php`). Any changes made to the configuration file need to be pushed to this generated configuration file through the `vendor/bin/propel config:convert` command.
 
 Propel configuration file simply describes an associative array of properties, with a well defined hierarchy. See [Configuration reference](/documentation/reference/configuration-file.html) for the complete list.
 
