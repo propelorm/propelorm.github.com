@@ -946,6 +946,78 @@ $books = BookQuery::create()
 
 The method calls enclosed between `_if($cond)` and `_endif()` will only be executed if the condition is true. To complete the list of tools available for fluid conditions, you can also use `_else()` and `_elseif($cond)`.
 
+### IN Queries ###
+
+Propel creates an `IN` statement if a query is passed to a `filterByXXX()` method. The inserted query has to use `select()` to return exactly one column:
+```php
+$authorNames = AuthorQuery::create()->select('first_name');
+
+BookQuery::create()
+  ->filterByTitle($authorNames)
+  ->find();
+```
+This generates an SQL statement like:
+```SQL
+SELECT * 
+FROM book 
+WHERE title IN (
+  SELECT first_name
+  FROM author
+)
+```
+
+For known relations, there are `useInQuery()` methods which work similar as the `useQuery()` methods:
+```php
+AuthorQuery::create()
+  ->useInQuery('Book')  // or useInBook()
+    ->filterByTitle('%Galaxy%', Criteria::LIKE)
+  ->endUse()
+  ->find();
+```
+
+To build a `NOT IN` query, pass the operator to any of the `IN` methods or use `useNotInQuery()` for known relations:
+```php
+$query->filterBy('my_column', $innerQuery, 'NOT IN');
+$authorQuery->useNotInBookQuery();
+```
+
+### EXISTS queries ###
+
+Use the `whereExists()` method to create SQL `EXISTS` statements:
+```php
+$existsQuery = BookQuery::create()
+  ->where('Book.Title = Author.FirstName');
+
+AuthorQuery::create()
+  ->whereExists($existsQuery)
+  ->find();
+```
+The generated SQL statement looks like this:
+```SQL
+SELECT *
+FROM author
+WHERE EXISTS (
+  SELECT 1
+  FROM book
+  WHERE author.first_name = book.title
+)
+```
+
+For known relations, there are `useExistsQuery()` methods which work similar as the `useQuery()` methods:
+```php
+AuthorQuery::create()
+  ->useExistsQuery('Book')
+    ->filterByIsGood()
+  ->endUse()
+  ->find()
+```
+
+To build a `NOT EXISTS` query, pass the operator to any of the `EXISTS` methods or use `useNotInQuery()` for known relations:
+```php
+$query->whereExists($existsQuery, 'NOT EXISTS');
+$authorQuery->useBookNotExistsQuery();
+```
+
 ### More Complex Queries ###
 
 The Propel Query objects have even more methods that allow you to write queries of any level of complexity. Check the API documentation for the `ModelCriteria` class to see all methods.
@@ -959,6 +1031,8 @@ offset($offset)
 where($clause, $value)
 where($clause, $value, $bindingType = PDO::PARAM_STR)
 where($conditions, $operator)
+whereExists($clause, $type = 'exists')
+whereIN($clause, $type = 'in')
 _or()
 filterBy($column, $value, $comparison)
 filterByArray($conditions)
