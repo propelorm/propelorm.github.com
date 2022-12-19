@@ -96,16 +96,16 @@ If you need to rebuild the test fixtures created during setup, delete the file `
 Run the test suits through the corresponding composer scripts: 
 
 ```bash
-composer run-script test:agnostic
-composer run-script test:mysql
-composer run-script test:pgsql
-composer run-script test:sqlite
+composer test:agnostic
+composer test:mysql
+composer test:pgsql
+composer test:sqlite
 ```
 
 Composer passes on all arguments after a double dash (`--`) to phpunit. This allows you to run individual files:
 
 ```bash
-composer run-script test:mysql -- --stop-on-failure tests/Propel/Tests/Runtime/ActiveQuery/CriteriaTest.php
+composer test:mysql -- --stop-on-failure tests/Propel/Tests/Runtime/ActiveQuery/CriteriaTest.php
 ```
 
 
@@ -125,7 +125,7 @@ class MyClassTest extends TestCase
 
 If you run a test class and phpunit reports `No tests executed!`, most likely it is an agnostic test run as a database test or the other way round:
 ```bash
-$ composer run-script test:agnostic -- tests/Propel/Tests/Runtime/ActiveQuery/CriteriaTest.php
+$ composer test:agnostic -- tests/Propel/Tests/Runtime/ActiveQuery/CriteriaTest.php
 Tests started in temp /tmp.
 PHPUnit 9.5.26 by Sebastian Bergmann and contributors.
 
@@ -207,8 +207,8 @@ If you plan to create a pull request, your code must pass automatic code checks.
 
 Run static analyzers [stan](https://phpstan.org/) and [psalm](https://psalm.dev/) through composer scripts:
 ```bash
-composer run-script stan
-composer run-script psalm
+composer stan
+composer psalm
 ```
 
 ### Code style ###
@@ -216,17 +216,17 @@ composer run-script psalm
 You can fix code style before creating a PR using [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) and the provided project configuration.
 
 ```bash
-composer run-script cs-fix # automatically adjusts formatting
-composer run-script cs-check # output remaining errors
+composer cs-fix # automatically adjusts formatting
+composer cs-check # output remaining errors
 ```
 
 Add `--` to process individual files:
 ```bash
-composer run-script cs-fix -- src/Propel/Generator/
+composer cs-fix -- src/Propel/Generator/
 ```
 
 Combine with other commands for easy execution, i.e. lint all modified files with:
 ```bash
-composer run-script cs-fix -- $(git ls-files -m)
+composer cs-fix -- $(git ls-files -m)
 ```
 
