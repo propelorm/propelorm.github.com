@@ -7,7 +7,20 @@ title: Support
 
 There are several ways to get help when you are having problems with Propel.
 
-## Mailing Lists ##
+
+## Gitter ##
+
+Gitter is a instant messaging service allowing you to chat via web interface, [iphone app, native app](https://gitter.im/apps) or [irc client](http://irc.gitter.im).
+
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/propelorm/Propel)
+ [https://gitter.im/propelorm/Propel](https://gitter.im/propelorm/Propel)
+
+The gitter channel is the preferred way of support requests.
+
+For anything more concrete please open up feature/bug tickets directly at the repository.
+
+
+## Mailing Lists (Deprecated) ##
 
 In order to ask for support or help other users, use the **Propel Users** mailing-list:
 
@@ -22,12 +35,6 @@ These lists were created in May 2009. A previous set mailing-lists were hosted b
 * [Users list archives](http://propel.tigris.org/ds/viewForumSummary.do?dsForumId=1097)
 * [Development list archives](http://propel.tigris.org/ds/viewForumSummary.do?dsForumId=1093)
 
-## Gitter ##
-
-Gitter is a instant messaging service allowing you to chat via web interface, [iphone app, native app](https://gitter.im/apps) or [irc client](http://irc.gitter.im).
-
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/propelorm/Propel)
- [https://gitter.im/propelorm/Propel](https://gitter.im/propelorm/Propel)
 
 ## Bug Reports ##
 
