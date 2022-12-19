@@ -64,13 +64,14 @@ They will drop and recreate the required databases/schemas (`test`, `second_hand
 
 
 For MySQL and Postgres, setup parameters are provided through environment variables:
-| Variable | Description | Default Value MySQL | Default Value Postgres |
-| --- |---| --- | --- |
-| DB_HOSTNAME | Database host | 127.0.0.1 | 127.0.0.1 |
-| DB_PORT | Database port | default port (3306))| default port (5432) |
-| DB_USER | Username | root | postgres |
-| DB_PW | Password | none | none |
-| DB_NAME | Database name | test | postgres |
+
+| Variable    | Description   | Default Value MySQL | Default Value Postgres |
+|-------------|---------------|---------------------|------------------------|
+| DB_HOSTNAME | Database host | 127.0.0.1           | 127.0.0.1              |
+| DB_PORT     | Database port | default port (3306) | default port (5432)    |
+| DB_USER     | Username      | root                | postgres               |
+| DB_PW       | Password      | none                | none                   |
+| DB_NAME     | Database name | test                | postgres               |
 
 In MySQL `DB_NAME` only changes the name of the main database, the other databases (`second_hand_books`, `contest`, `bookstore_schemas`, `migration`) will always be created with default names.
 
@@ -164,8 +165,9 @@ Depending on the functionality needed, a test class needs to extend the correct 
 > **INFO** If the extended TestCase class uses the database, the test class has to be annotated with `@group database`.
 
 Most common classes are:
+
 | Class | needs @database | Description | Used for |
-|---|---| --- | --- |
+|-------|-----------------|-------------|----------|
 | \Propel\Tests\TestCase | no | Most general Propel test case with easy access to driver and platform data. | Agnostic tests without model access. |
 | \Propel\Tests\TestCaseFixtures | no | Guarantees that fixtures are available. | Agnostic tests which use models without reading from or writing to database. | 
 | \Propel\Tests\TestCaseFixturesDatabase | yes | Same as TestCaseFixtures but also initializes database tables. | Database access outside of model classes. |
