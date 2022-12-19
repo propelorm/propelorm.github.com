@@ -1,9 +1,5 @@
-The Propel Website
-==================
+# The Propel Website
 
-[![Build
-Status](https://travis-ci.org/propelorm/propelorm.github.com.png?branch=master)](https://travis-ci.org/propelorm/propelorm.github.com)
+https://propelorm.org/
 
-http://propelorm.org/
-
-Written in Markdown, built using [Jekyll](http://jekyllrb.com).
+Written in Markdown, built using [Jekyll](https://jekyllrb.com).
