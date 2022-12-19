@@ -13,14 +13,14 @@ using the [PropelBundle](https://github.com/propelorm/PropelBundle).
 The recommended way to install this bundle is to rely on
 [Composer](http://getcomposer.org/):
 ```bash
-composer require propel/propel: ~2.0@dev
+composer require propel/propel: ~2.0@beta
 composer require propel/propel-bundle: ~4.0@dev
 ```
 or, if you prefer to manually edit your `composer.json` file: 
 
 ``` json
 "require": {
-    "propel/propel": "~2.0@dev",
+    "propel/propel": "~2.0@beta",
     "propel/propel-bundle": "~4.0@dev"
 }
 ```
