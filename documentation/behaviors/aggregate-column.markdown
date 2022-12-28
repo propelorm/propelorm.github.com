@@ -150,6 +150,7 @@ If a table aggregates multiple columns from the same foreign table, it is more e
               <parameter name="column_name" value="total_communication_time" />
               <parameter name="expression" value="SUM(duration)" />
           </parameter-list-item>
+      </parameter-list>
   </behavior>
 </table>
 ```
