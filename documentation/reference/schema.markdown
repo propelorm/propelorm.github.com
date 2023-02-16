@@ -328,7 +328,7 @@ Here are the Propel column types with some example mappings to native database a
 * `OBJECT` columns map to PHP objects and are stored as binary.
 * `ARRAY` columns map to PHP arrays and are stored as strings.
 * `UUID` columns store uuids using the database's native UUID column type if it exists or the `UUID_BINARY` type 
-* `UUID_BINARY` columns store UUIDs in a binary format (see [UUID Binary Columns](documentation/reference/uuid-binary-columns.html)). 
+* `UUID_BINARY` columns store UUIDs in a binary format (see [UUID Binary Columns](uuid-binary-columns.html)). 
 
 ### Legacy Temporal Types ###
 
