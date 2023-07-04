@@ -7,7 +7,6 @@ title: Support
 
 There are several ways to get help when you are having problems with Propel.
 
-
 ## Gitter ##
 
 Gitter is a instant messaging service allowing you to chat via web interface, [iphone app, native app](https://gitter.im/apps) or [irc client](http://irc.gitter.im).
@@ -19,21 +18,11 @@ The gitter channel is the preferred way of support requests.
 
 For anything more concrete please open up feature/bug tickets directly at the repository.
 
+## CommerceVerse Propel ORM ##
 
-## Mailing Lists (Deprecated) ##
+A community portal with active responses and search, discussing Propel 2 ORM topics and issues.
 
-In order to ask for support or help other users, use the **Propel Users** mailing-list:
-
-[http://groups.google.com/group/propel-users](http://groups.google.com/group/propel-users)
-
-If you want to help with the development of Propel, or if you want to be informed of the upcoming features, subscribe to the **Propel Development** mailing-list:
-
-[http://groups.google.com/group/propel-development](http://groups.google.com/group/propel-development)
-
-These lists were created in May 2009. A previous set mailing-lists were hosted by tigris.org, you can still consult the archives:
-
-* [Users list archives](http://propel.tigris.org/ds/viewForumSummary.do?dsForumId=1097)
-* [Development list archives](http://propel.tigris.org/ds/viewForumSummary.do?dsForumId=1093)
+[CommerceVerse](https://commerceverse.space/categories/propel-orm?utm_campaign=propel&utm_medium=website&utm_source=propelorm-org)
 
 
 ## Bug Reports ##
