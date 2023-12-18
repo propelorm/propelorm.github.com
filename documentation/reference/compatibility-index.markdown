@@ -43,4 +43,4 @@ we're setting primaryKey=false and create a unique constraint instead, which is 
 
 ## PHP Versions
 
-Update PHP to version 5.5 or upper.
+Update PHP to version 7.4 or upper.
