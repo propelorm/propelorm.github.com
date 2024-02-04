@@ -108,22 +108,21 @@ and here are the statuses of our master branches:
 
 <table width="100%" class="ecg">
     <tr>
-        <td><a href="https://github.com/propelorm/Propel">Propel 1.7</a></td><td width="70"><img src="https://travis-ci.org/propelorm/Propel.svg" /></td>
-    </tr><tr>
-        <td><a href="https://github.com/propelorm/Propel2">Propel2</a></td><td><img src="https://circleci.com/gh/propelorm/Propel2/tree/master.svg?style=shield" /></td>
-    </tr><tr>
+        <td><a href="https://github.com/propelorm/Propel2">Propel2</a></td><td><img src="https://github.com/propelorm/Propel2/workflows/CI/badge.svg?branch=master" /></td>
+    </tr>
+    <tr>
+        <td><a href="https://github.com/SkyFoxvn/PropelBundle">PropelBundle (by SkyFoxvn)</a></td><td><img src="https://github.com/SkyFoxvn/PropelBundle/actions/workflows/CI%206.0.yml/badge.svg?branch=6.0" /></td>
+    </tr>
+    <tr>
         <td><a href="https://github.com/propelorm/sfPropelORMPlugin">sfPropelORMPlugin</a></td><td><img src="https://travis-ci.org/propelorm/sfPropelORMPlugin.svg" /></td>
-    </tr><tr>
-        <td><a href="https://github.com/propelorm/PropelBundle">PropelBundle</a></td><td><img src="https://travis-ci.org/propelorm/PropelBundle.svg" /></td>
-    </tr><tr>
-        <td><a href="https://github.com/propelorm/PropelServiceProvider">PropelServiceProvider</a></td><td><img src="https://travis-ci.org/propelorm/PropelServiceProvider.svg" /></td>
     </tr>
 </table>
 
 Propel2's code climate:
 
-[![Code Climate](https://codeclimate.com/github/propelorm/Propel2/badges/gpa.svg)](https://codeclimate.com/github/propelorm/Propel2)
-<a href="https://codeclimate.com/github/propelorm/Propel2"><img src="https://codeclimate.com/github/propelorm/Propel2/badges/coverage.svg" /></a>
+<img src="https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat" alt="PHPStan">
+<a href="https://app.codecov.io/gh/propelorm/Propel2"><img src="https://codecov.io/gh/propelorm/Propel2/branch/master/graph/badge.svg?token=L1thFB9nOG" alt="codecov"></a>
+<a href="https://codeclimate.com/github/propelorm/Propel2"><img src="https://codeclimate.com/github/propelorm/Propel2/badges/gpa.svg" alt="codecov"></a>
 
 {% endcapture %}
 
