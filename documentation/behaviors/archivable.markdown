@@ -26,8 +26,8 @@ These parameters are available:
 |--------------------------------|-----------------|-------------|-------------|
 |archive_table                   | literal         | Name of the table storing archive data. Will be created if it does not exist. Cannot be combined with the `archive_class` parameter. |  Original table name with suffix `_archive`| |
 | archive_phpname                | literal         | Sets the name of the generated PHP model and query classes. | Pascal-case version of `archive_table` |
-| sync                           | `true`/`false`  | If true, changes to the source table will also be applied to the `archive_table`. | `false` |
-| archive_class                  | literal         | Name of an existing Model class. The underlying table will be used to store the archive. Cannot be combined with the `archive_class` parameter. | none |
+| sync                           | `true`/`false`  | If true, changes to the source table definition will also be applied to the `archive_table`. | `false` |
+| archive_class                  | literal         | Name of an existing Model class. The underlying table will be used to store the archive. Cannot be combined with the `archive_table` parameter. | none |
 | log_archived_at                | `true`/`false`  | Enables or disables additional archival timestamp column. | `true` |
 | archived_at_column             | literal         | Sets the name of the column storing the archival datetime. | `archived_at` |
 | archive_on_insert              | `true`/`false`  | Archive row data on insert. | `false` |
