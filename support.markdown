@@ -18,11 +18,11 @@ The gitter channel is the preferred way of support requests.
 
 For anything more concrete please open up feature/bug tickets directly at the repository.
 
-## CommerceVerse Propel ORM ##
+## Community Forum @ CommerceQuest ##
 
 A community portal with active responses and search, discussing Propel 2 ORM topics and issues.
 
-[CommerceVerse](https://commerceverse.space/categories/propel-orm?utm_campaign=propel&utm_medium=website&utm_source=propelorm-org)
+[CommerceQuest](https://commercequest.space/categories/propel-orm?utm_campaign=propel&utm_medium=website&utm_source=propelorm-org)
 
 
 ## Bug Reports ##
