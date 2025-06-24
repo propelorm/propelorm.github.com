@@ -3,7 +3,7 @@ layout: documentation
 title: Working With Existing Databases
 ---
 
-# Working With Existing Databases
+# Working With Existing Databases #
 
 The following topics are targeted for developers who already have a working database solution in place, but would like to use Propel to work with the data. Propel provides command-line utilities to help migrate database structures into Propel's abstract schema format, enabling model generation and cross-database support.
 
