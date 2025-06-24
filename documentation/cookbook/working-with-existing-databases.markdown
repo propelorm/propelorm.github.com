@@ -7,11 +7,11 @@ title: Working With Existing Databases
 
 The following topics are targeted for developers who already have a working database solution in place, but would like to use Propel to work with the data. Propel provides command-line utilities to help migrate database structures into Propel's abstract schema format, enabling model generation and cross-database support.
 
-## Working with Database Structures
+## Working with Database Structures ##
 
 Propel uses an abstract XML schema file to represent databases (see the [XML Schema Format](/documentation/reference/schema.html)). Propel builds SQL for your target database based on this schema — and can also reverse-engineer the schema file based on existing database metadata.
 
-### Creating an XML Schema from a DB Structure
+### Creating an XML Schema from a DB Structure ###
 
 Propel provides the `database:reverse` command to reverse-engineer your database into a `schema.xml` file. This is useful when integrating with a legacy database or starting a project based on an existing schema.
 
@@ -19,10 +19,10 @@ To generate the schema:
 
 1. If your database includes tables you don’t want to include (e.g. third-party ones), [exclude them](/documentation/reference/configuration-file.html#exclude-tables) in the configuration using `exclude_tables`.
 
-2. Create a working directory for your project:
+2. Go to the `legacyapp` project directory anywhere on your filesystem:
 
     ```bash
-    mkdir legacyapp && cd legacyapp
+    $ cd legacyapp
     ```
 
 3. Run the `database:reverse` command with your DSN or connection name:
@@ -41,7 +41,7 @@ To generate the schema:
     propel model:build
     ```
 
-#### Additional Options
+#### Additional Options ####
 
 You can customize the behavior using the following options:
 
@@ -62,7 +62,7 @@ propel database:reverse "mysql:host=localhost;dbname=db;user=root;password=pwd" 
   --namespace="Legacy\Models"
 ```
 
-#### Limitations
+#### Limitations ####
 
 `database:reverse` does not reverse-engineer views, materialized views, or enum types in PostgreSQL. These structures are not currently supported by Propel as first-class schema objects. If you want to use a view within Propel, you can manually define it as a `<table>` with `skipSql="true"` to generate read-only model/query classes.
 
