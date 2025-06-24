@@ -5,17 +5,19 @@ title: Working With Existing Databases
 
 # Working With Existing Databases #
 
-The following topics are targeted for developers who already have a working database solution in place, but would like to use Propel to work with the data. For this case, Propel provides a number of command-line utilities helping with migrations of data and data structures.
+The following topics are targeted for developers who already have a working database solution in place, but would like to use Propel to work with the data. Propel provides command-line utilities to help migrate database structures into Propel's abstract schema format, enabling model generation and cross-database support.
 
 ## Working with Database Structures ##
 
-Propel uses an abstract XML schema file to represent databases (the [schema](/documentation/reference/schema.html)). Propel builds the SQL specific to a database based on this schema. Propel also provides a way to reverse-engineer the generic schema file based on database metadata.
+Propel uses an abstract XML schema file to represent databases (see the [XML Schema Format](/documentation/reference/schema.html)). Propel builds SQL for your target database based on this schema — and can also reverse-engineer the schema file based on existing database metadata.
 
 ### Creating an XML Schema from a DB Structure ###
 
-To generate a schema file, create a new directory for your project & specify the connection information in your *configuration file* for that project. For example, to create a new project, `legacyapp`, follow these steps:
+Propel provides the `database:reverse` command to reverse-engineer your database into a `schema.xml` file. This is useful when integrating with a legacy database or starting a project based on an existing schema.
 
-1. If your database has some third party application tables, you can [add](/documentation/reference/configuration-file.html#exclude-tables) them to the `exclude_tables` configuration node.
+To generate the schema:
+
+1. If your database includes tables you don’t want to include (e.g. third-party ones), [exclude them](/documentation/reference/configuration-file.html#exclude-tables) in the configuration using `exclude_tables`.
 
 2. Go to the `legacyapp` project directory anywhere on your filesystem:
 
@@ -23,24 +25,49 @@ To generate a schema file, create a new directory for your project & specify the
     $ cd legacyapp
     ```
 
-3. Run the `reverse` task to generate the `schema.xml` specifying your database
-   credentials:
+3. Run the `database:reverse` command with your DSN or connection name:
 
     ```bash
-    $ propel reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
+    propel database:reverse "mysql:host=localhost;dbname=db;user=root;password=pwd"
     ```
 
-    The given string is a DSN which will be passed to a PDO object. See the
-    [Configuration reference](/documentation/reference/configuration-file.html#dsn)
-    for further information.
+    The argument is a [PDO DSN](/documentation/reference/configuration-file.html#dsn), quoted to preserve special characters.
 
-4. Pay attention to any errors/warnings issued during the task execution and then
-   examine the generated `schema.xml` file to make any corrections needed.
+4. Review the console output for any errors or warnings, then inspect the generated `schema.xml` file.
 
-5. _You're done!_ Now you have a `schema.xml` file in the `legacyapp/generated-reversed-database` project
-  directory. You can now run the default Propel build to generate all the classes.
+5. The schema file will be located in the `generated-reversed-database/` directory by default. You can now proceed with model generation:
 
-The generated `schema.xml` file should be used as a guide, not a final answer. There are some datatypes that Propel may not be familiar with; also some datatypes are simply not supported by Propel (e.g. arrays in PostgreSQL). Unfamiliar datatypes will be reported as warnings and substituted with a default VARCHAR datatype.
+    ```bash
+    propel model:build
+    ```
+
+#### Additional Options ####
+
+You can customize the behavior using the following options:
+
+| Option             | Description                                                                                 | Default                        |
+|--------------------|---------------------------------------------------------------------------------------------|--------------------------------|
+| `--output-dir`     | Where to write the generated `schema.xml`                                                  | `generated-reversed-database` |
+| `--database-name`  | Name to use in the schema XML `<database name="...">`                                      | `default` or connection name   |
+| `--schema-name`    | Logical schema name used inside the generated file (helpful for multi-schema setups)       | `schema`                       |
+| `--namespace`      | PHP namespace to use for generated model classes (optional)                                | —                              |
+
+Example using options:
+
+```bash
+propel database:reverse "mysql:host=localhost;dbname=db;user=root;password=pwd" \
+  --output-dir=app/schema \
+  --database-name=legacy \
+  --schema-name=core \
+  --namespace="Legacy\Models"
+```
+
+#### Limitations ####
+
+`database:reverse` does not reverse-engineer views, materialized views, or enum types in PostgreSQL. These structures are not currently supported by Propel as first-class schema objects. If you want to use a view within Propel, you can manually define it as a `<table>` with `skipSql="true"` to generate read-only model/query classes.
+
+
+Note: database:reverse replaces the old reverse command in Propel 2.x. The alias reverse is still available but may be deprecated in future versions.
 
 >**Tip**The reverse engineering classes may not be able to provide the same level of detail for all databases. In particular, metadata information for SQLite is often very basic since SQLite is a typeless database.
 
